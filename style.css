@@ -337,28 +337,66 @@ button:hover{
 /* Bridal */
 
 
+/* Bridal */
+
+
 .bridal{
 
     width:90%;
-    margin:100px auto;
 
-    padding:60px 20px;
+    margin:120px auto;
+
+    padding:90px 30px;
 
     text-align:center;
 
-    border-radius:40px;
 
-    background:#f6e1dd;
+    border-radius:50px;
+
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #f8e8e3,
+    #fff8f6
+    );
+
+
+    box-shadow:
+
+    0 25px 60px rgba(180,120,120,.15);
+
 
 }
+
+
+
+.bridal h2{
+
+    font-size:42px;
+
+    color:#b77b7f;
+
+    margin-bottom:25px;
+
+}
+
 
 
 .bridal p{
 
-    margin:25px;
+    margin:25px auto 35px;
+
+    max-width:600px;
+
+    line-height:2.2;
+
+    color:#76565b;
+
+    font-size:17px;
 
 }
-
 
 
 
