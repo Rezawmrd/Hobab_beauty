@@ -608,3 +608,154 @@ nav{
 }
 
 }
+
+/* Mobile Optimization */
+
+
+@media(max-width:800px){
+
+
+.header{
+
+    width:94%;
+
+    padding:20px;
+
+}
+
+
+.logo span{
+
+    font-size:24px;
+
+}
+
+
+
+nav{
+
+    gap:15px;
+
+}
+
+
+
+nav a{
+
+    font-size:14px;
+
+}
+
+
+
+.menu-btn{
+
+    padding:12px 22px;
+
+}
+
+
+
+.hero{
+
+    width:90%;
+
+    margin:50px auto;
+
+    text-align:center;
+
+}
+
+
+
+.hero-text h1{
+
+    font-size:48px;
+
+}
+
+
+
+.hero-text h2{
+
+    font-size:28px;
+
+}
+
+
+
+.hero-text p{
+
+    font-size:15px;
+
+}
+
+
+
+.image-placeholder{
+
+    height:350px;
+
+}
+
+
+
+.service-box{
+
+    grid-template-columns:1fr;
+
+}
+
+
+
+.card{
+
+    padding:35px 20px;
+
+}
+
+
+
+.bridal{
+
+    padding:60px 20px;
+
+}
+
+
+
+.bridal h2{
+
+    font-size:32px;
+
+}
+
+
+
+.gallery-grid{
+
+    grid-template-columns:1fr 1fr;
+
+}
+
+
+
+.gallery-grid div{
+
+    height:180px;
+
+}
+
+
+
+.footer-links{
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+
+
+}
