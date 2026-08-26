@@ -18,18 +18,36 @@ body{
 /* Header */
 
 .header{
-    width:90%;
-    margin:20px auto;
-    padding:18px 30px;
+
+    width:92%;
+
+    margin:25px auto;
+
+    padding:20px 35px;
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
 
-    background:rgba(255,255,255,.7);
-    backdrop-filter:blur(10px);
 
-    border-radius:30px;
-    box-shadow:0 10px 30px rgba(180,120,120,.12);
+    background:rgba(255,255,255,0.65);
+
+    backdrop-filter:blur(18px);
+
+
+    border-radius:35px;
+
+
+    border:1px solid rgba(190,140,140,.15);
+
+
+    box-shadow:
+
+    0 15px 45px rgba(180,120,120,.15);
+
+
 }
 
 
@@ -43,14 +61,26 @@ body{
 
 
 .logo span{
-    font-size:25px;
-    letter-spacing:3px;
+
+    font-size:28px;
+
+    letter-spacing:5px;
+
+    font-weight:700;
+
 }
 
 
 .logo small{
-    font-size:12px;
-    letter-spacing:5px;
+
+    font-size:11px;
+
+    letter-spacing:7px;
+
+    margin-top:3px;
+
+    opacity:.8;
+
 }
 
 
