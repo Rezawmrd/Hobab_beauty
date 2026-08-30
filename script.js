@@ -1,139 +1,89 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     // ==============================
-    // خدمات ما
+    // SERVICES
     // ==============================
 
-    const servicesButton =
-        document.querySelector(".services-toggle");
-
-    const servicesContent =
-        document.querySelector(".services-content");
-
+    const servicesButton = document.querySelector(".services-toggle");
+    const servicesContent = document.querySelector(".services-content");
 
     if (servicesButton && servicesContent) {
 
-        servicesButton.addEventListener("click", function () {
+        servicesButton.onclick = function () {
 
-            const isOpen =
+            servicesContent.classList.toggle("open");
+            servicesButton.classList.toggle("active");
+
+            const opened =
                 servicesContent.classList.contains("open");
 
-
-            if (isOpen) {
-
-                servicesContent.classList.remove("open");
-                servicesButton.classList.remove("active");
-
-                servicesButton.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-            } else {
-
-                servicesContent.classList.add("open");
-                servicesButton.classList.add("active");
-
-                servicesButton.setAttribute(
-                    "aria-expanded",
-                    "true"
-                );
-
-            }
-
-        });
-
+            servicesButton.setAttribute(
+                "aria-expanded",
+                opened ? "true" : "false"
+            );
+        };
     }
 
 
     // ==============================
-    // پکیج عروس
+    // BRIDAL
     // ==============================
 
-    const bridalButton =
-        document.querySelector(".bridal-toggle");
-
-    const bridalContent =
-        document.querySelector(".bridal-content");
-
+    const bridalButton = document.querySelector(".bridal-toggle");
+    const bridalContent = document.querySelector(".bridal-content");
 
     if (bridalButton && bridalContent) {
 
-        bridalButton.addEventListener("click", function () {
+        bridalButton.onclick = function () {
 
-            const isOpen =
+            bridalContent.classList.toggle("open");
+            bridalButton.classList.toggle("active");
+
+            const opened =
                 bridalContent.classList.contains("open");
 
-
-            if (isOpen) {
-
-                bridalContent.classList.remove("open");
-                bridalButton.classList.remove("active");
-
-                bridalButton.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-            } else {
-
-                bridalContent.classList.add("open");
-                bridalButton.classList.add("active");
-
-                bridalButton.setAttribute(
-                    "aria-expanded",
-                    "true"
-                );
-
-            }
-
-        });
-
+            bridalButton.setAttribute(
+                "aria-expanded",
+                opened ? "true" : "false"
+            );
+        };
     }
 
 
     // ==============================
-    // انتخاب ساعت
+    // TIME SELECTION
     // ==============================
 
     const timeButtons =
         document.querySelectorAll(".time-grid button");
 
-
     timeButtons.forEach(function (button) {
 
-        button.addEventListener("click", function () {
+        button.onclick = function () {
 
             timeButtons.forEach(function (item) {
-
                 item.classList.remove("selected");
-
             });
 
             button.classList.add("selected");
-
-        });
+        };
 
     });
 
 
     // ==============================
-    // رزرو از منوی بالا
+    // BRIDAL BOOKING BUTTON
     // ==============================
 
-    const bookingLink =
-        document.querySelector('nav a[href="#booking"]');
+    const bridalBookingButton =
+        document.querySelector(".bridal-booking-button");
 
+    if (bridalBookingButton) {
 
-    if (bookingLink) {
-
-        bookingLink.addEventListener("click", function (event) {
-
-            event.preventDefault();
+        bridalBookingButton.onclick = function () {
 
             const booking =
                 document.querySelector("#booking");
-
 
             if (booking) {
 
@@ -143,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             }
 
-        });
+        };
 
     }
 
