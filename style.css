@@ -332,10 +332,187 @@ button:hover{
 
 
 
+/* Booking */
 
 
-/* Bridal */
+.booking{
 
+    width:90%;
+
+    margin:120px auto;
+
+    padding:80px 30px;
+
+    border-radius:50px;
+
+    background:
+    linear-gradient(
+    135deg,
+    #fffaf8,
+    #f7e4df
+    );
+
+    box-shadow:
+    0 25px 60px rgba(180,120,120,.12);
+
+}
+
+
+
+.booking-title{
+
+    text-align:center;
+
+    margin-bottom:55px;
+
+}
+
+
+
+.booking-title span{
+
+    color:#b77b7f;
+
+    font-size:14px;
+
+    letter-spacing:2px;
+
+}
+
+
+
+.booking-title h2{
+
+    margin:15px 0;
+
+    font-size:42px;
+
+    color:#4b3035;
+
+}
+
+
+
+.booking-title p{
+
+    color:#76565b;
+
+    font-size:16px;
+
+}
+
+
+
+.booking-box{
+
+    max-width:700px;
+
+    margin:auto;
+
+    display:grid;
+
+    gap:25px;
+
+}
+
+
+
+.booking-step{
+
+    background:rgba(255,255,255,.8);
+
+    padding:28px;
+
+    border-radius:25px;
+
+    border:1px solid rgba(190,140,140,.12);
+
+}
+
+
+
+.step-number{
+
+    font-size:13px;
+
+    color:#b77b7f;
+
+    letter-spacing:2px;
+
+}
+
+
+
+.booking-step h3{
+
+    margin:10px 0 20px;
+
+    color:#4b3035;
+
+    font-size:20px;
+
+}
+
+
+
+.booking-step select,
+
+.booking-step input{
+
+    width:100%;
+
+    padding:16px;
+
+    border-radius:15px;
+
+    border:1px solid #ead4d0;
+
+    background:#fffdfc;
+
+    font-family:inherit;
+
+    font-size:15px;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+
+
+.booking-step input{
+
+    margin-bottom:12px;
+
+}
+
+
+
+.booking-step select:focus,
+
+.booking-step input:focus{
+
+    border-color:#b77b7f;
+
+    box-shadow:
+    0 0 0 4px rgba(183,123,127,.08);
+
+}
+
+
+
+.booking-button{
+
+    width:100%;
+
+    padding:18px;
+
+    font-size:16px;
+
+    margin-top:10px;
+
+}
 
 /* Bridal */
 
