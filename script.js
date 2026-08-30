@@ -1,55 +1,25 @@
 // HOBAB BEAUTY
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function () {
 
+    const button = document.querySelector(".services-toggle");
+    const content = document.querySelector(".services-content");
 
-    console.log("HABAB BEAUTY loaded");
-
-
-    // Services Accordion
-
-    const servicesToggle =
-        document.querySelector(".services-toggle");
-
-    const servicesContent =
-        document.querySelector(".services-content");
-
-
-    if(servicesToggle && servicesContent){
-
-        servicesToggle.addEventListener("click", function(){
-
-            const isOpen =
-                servicesContent.classList.contains("open");
-
-
-            if(isOpen){
-
-                servicesContent.classList.remove("open");
-
-                servicesToggle.classList.remove("active");
-
-                servicesToggle.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-            }else{
-
-                servicesContent.classList.add("open");
-
-                servicesToggle.classList.add("active");
-
-                servicesToggle.setAttribute(
-                    "aria-expanded",
-                    "true"
-                );
-
-            }
-
-        });
-
+    if (!button || !content) {
+        return;
     }
 
+    button.addEventListener("click", function () {
+
+        const open = content.classList.toggle("open");
+
+        button.classList.toggle("active", open);
+
+        button.setAttribute(
+            "aria-expanded",
+            open ? "true" : "false"
+        );
+
+    });
 
 });
