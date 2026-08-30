@@ -9,10 +9,9 @@ html{
 }
 
 body{
-    font-family:'Vazirmatn',sans-serif;
+    font-family:'Vazirmatn', sans-serif;
     background:#fff8f6;
     color:#4b3035;
-    min-height:100vh;
 }
 
 
@@ -22,21 +21,22 @@ body{
 
 .header{
     width:92%;
-    margin:18px auto 35px;
-    padding:16px 22px;
+    margin:25px auto;
+    padding:20px 35px;
 
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    gap:20px;
+    align-items:center;
 
-    background:rgba(255,255,255,.78);
+    background:rgba(255,255,255,.65);
     backdrop-filter:blur(18px);
 
-    border:1px solid rgba(190,140,140,.15);
-    border-radius:28px;
+    border-radius:35px;
 
-    box-shadow:0 12px 35px rgba(180,120,120,.10);
+    border:1px solid rgba(190,140,140,.15);
+
+    box-shadow:
+        0 15px 45px rgba(180,120,120,.15);
 }
 
 
@@ -44,43 +44,76 @@ body{
     display:flex;
     flex-direction:column;
     align-items:center;
+
     color:#b77b7f;
-    flex-shrink:0;
+    font-weight:700;
 }
 
 
 .logo span{
-    font-size:25px;
-    font-weight:700;
-    letter-spacing:4px;
+    font-size:28px;
+    letter-spacing:5px;
 }
 
 
 .logo small{
-    margin-top:2px;
-    font-size:10px;
-    letter-spacing:5px;
+    font-size:11px;
+    letter-spacing:7px;
+    margin-top:3px;
     opacity:.8;
 }
 
 
 nav{
     display:flex;
-    align-items:center;
-    gap:22px;
+    gap:25px;
 }
 
 
 nav a{
-    color:#6b4b50;
     text-decoration:none;
-    font-size:14px;
+    color:#6b4b50;
     transition:.3s;
 }
 
 
 nav a:hover{
-    color:#b77b7f;
+    color:#c28b8f;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+button{
+    border:none;
+
+    padding:14px 30px;
+
+    border-radius:30px;
+
+    background:linear-gradient(
+        135deg,
+        #d99b9f,
+        #b77b7f
+    );
+
+    color:white;
+
+    font-family:inherit;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 20px rgba(190,130,130,.25);
+
+    transition:.3s;
+}
+
+
+button:hover{
+    transform:translateY(-3px);
 }
 
 
@@ -89,51 +122,55 @@ nav a:hover{
 ========================= */
 
 .services{
-    width:92%;
-    max-width:850px;
-    margin:0 auto 22px;
+    width:90%;
+    margin:55px auto 35px;
+    text-align:center;
 }
 
 
-.services-toggle,
-.bridal-toggle{
+.services-toggle{
 
     width:100%;
+    max-width:900px;
+
+    padding:20px 25px;
 
     display:flex;
     align-items:center;
     justify-content:space-between;
 
-    padding:19px 22px;
+    margin:auto;
 
-    background:rgba(255,255,255,.82);
+    background:rgba(255,255,255,.75);
+
     color:#4b3035;
 
-    border:1px solid rgba(190,140,140,.16);
-    border-radius:22px;
+    border:1px solid rgba(190,140,140,.18);
+
+    border-radius:25px;
+
+    box-shadow:
+        0 15px 35px rgba(180,120,120,.10);
 
     font-family:inherit;
-    font-size:17px;
+    font-size:20px;
     font-weight:500;
 
     cursor:pointer;
 
-    box-shadow:0 12px 30px rgba(180,120,120,.08);
-
-    transition:.3s;
+    transition:.3s ease;
 }
 
 
-.services-toggle:hover,
-.bridal-toggle:hover{
+.services-toggle:hover{
     transform:translateY(-2px);
 }
 
 
-.services-arrow,
-.bridal-arrow{
-    width:30px;
-    height:30px;
+.services-arrow{
+
+    width:32px;
+    height:32px;
 
     display:flex;
     align-items:center;
@@ -142,47 +179,44 @@ nav a:hover{
     border-radius:50%;
 
     color:#b77b7f;
-    font-size:24px;
 
-    transition:.35s;
+    font-size:25px;
+
+    transition:.4s ease;
 }
 
 
-.services-toggle.active .services-arrow,
-.bridal-toggle.active .bridal-arrow{
+.services-toggle.active .services-arrow{
     transform:rotate(45deg);
 }
 
 
-/* =========================
-   SERVICES CONTENT
-========================= */
+.services-content{
 
-.services-content,
-.bridal-content{
+    max-width:900px;
+
+    margin:0 auto;
 
     max-height:0;
+
     overflow:hidden;
 
     opacity:0;
 
-    margin-top:0;
-
     transition:
-        max-height .45s ease,
+        max-height .5s ease,
         opacity .3s ease,
-        margin-top .45s ease;
+        margin-top .5s ease;
 }
 
 
-.services-content.open,
-.bridal-content.open{
+.services-content.open{
 
-    max-height:650px;
+    max-height:900px;
 
     opacity:1;
 
-    margin-top:12px;
+    margin-top:20px;
 }
 
 
@@ -191,51 +225,60 @@ nav a:hover{
     display:grid;
 
     grid-template-columns:
-        repeat(2,1fr);
+        repeat(auto-fit,minmax(220px,1fr));
 
-    gap:12px;
+    gap:18px;
 }
 
 
+/* SERVICE CARDS */
+
 .card{
 
-    padding:20px 16px;
+    background:rgba(255,255,255,.75);
 
-    background:rgba(255,255,255,.82);
+    padding:28px 22px;
 
-    border:1px solid rgba(190,140,140,.13);
+    border-radius:28px;
 
-    border-radius:20px;
+    border:1px solid rgba(190,140,140,.15);
 
     box-shadow:
-        0 10px 25px rgba(180,120,120,.07);
+        0 15px 35px rgba(180,120,120,.10);
 
-    text-align:center;
+    backdrop-filter:blur(12px);
 
-    transition:.3s;
+    transition:.35s ease;
 }
 
 
 .card:hover{
-    transform:translateY(-3px);
+    transform:translateY(-7px);
+
+    box-shadow:
+        0 22px 45px rgba(180,120,120,.18);
 }
 
 
 .card h3{
-    margin-bottom:8px;
+
+    margin-bottom:12px;
 
     color:#b77b7f;
 
-    font-size:18px;
+    font-size:21px;
+
+    font-weight:600;
 }
 
 
 .card p{
+
+    line-height:2;
+
     color:#76565b;
 
-    font-size:13px;
-
-    line-height:1.9;
+    font-size:14px;
 }
 
 
@@ -245,30 +288,128 @@ nav a:hover{
 
 .bridal-section{
 
-    width:92%;
-    max-width:850px;
+    width:90%;
 
-    margin:0 auto 22px;
+    margin:20px auto 60px;
+
+    text-align:center;
+}
+
+
+.bridal-toggle{
+
+    width:100%;
+    max-width:900px;
+
+    padding:20px 25px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin:auto;
+
+    background:rgba(255,255,255,.75);
+
+    color:#4b3035;
+
+    border:1px solid rgba(190,140,140,.18);
+
+    border-radius:25px;
+
+    box-shadow:
+        0 15px 35px rgba(180,120,120,.10);
+
+    font-family:inherit;
+
+    font-size:20px;
+
+    font-weight:500;
+
+    cursor:pointer;
+
+    transition:.3s ease;
+}
+
+
+.bridal-toggle:hover{
+    transform:translateY(-2px);
+}
+
+
+.bridal-arrow{
+
+    width:32px;
+    height:32px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    color:#b77b7f;
+
+    font-size:25px;
+
+    transition:.4s ease;
+}
+
+
+.bridal-toggle.active .bridal-arrow{
+    transform:rotate(45deg);
+}
+
+
+.bridal-content{
+
+    max-width:900px;
+
+    margin:0 auto;
+
+    max-height:0;
+
+    overflow:hidden;
+
+    opacity:0;
+
+    transition:
+        max-height .6s ease,
+        opacity .4s ease,
+        margin-top .6s ease;
+}
+
+
+.bridal-content.open{
+
+    max-height:700px;
+
+    opacity:1;
+
+    margin-top:20px;
 }
 
 
 .bridal-box{
 
-    padding:24px 18px;
+    padding:35px 25px;
 
-    text-align:center;
+    border-radius:35px;
 
     background:
         linear-gradient(
             135deg,
             #f8e8e3,
-            #fffaf8
+            #fff8f6
         );
 
-    border-radius:22px;
-
     box-shadow:
-        0 12px 30px rgba(180,120,120,.08);
+        0 20px 50px rgba(180,120,120,.12);
+
+    border:1px solid rgba(190,140,140,.12);
 }
 
 
@@ -276,47 +417,52 @@ nav a:hover{
 
     color:#b77b7f;
 
-    font-size:24px;
+    font-size:30px;
 
-    margin-bottom:10px;
+    margin-bottom:15px;
 }
 
 
 .bridal-box p{
 
-    color:#76565b;
+    max-width:600px;
 
-    font-size:14px;
+    margin:0 auto 25px;
 
     line-height:2;
 
-    margin-bottom:18px;
+    color:#76565b;
+
+    font-size:15px;
 }
 
 
 .bridal-services{
 
-    display:grid;
+    display:flex;
 
-    grid-template-columns:1fr 1fr;
+    flex-wrap:wrap;
 
-    gap:9px;
+    justify-content:center;
+
+    gap:10px;
+
 }
 
 
 .bridal-services span{
 
-    padding:10px 8px;
+    padding:9px 16px;
 
-    background:rgba(255,255,255,.7);
+    border-radius:20px;
 
-    border-radius:13px;
+    background:rgba(255,255,255,.75);
+
+    border:1px solid rgba(190,140,140,.15);
 
     color:#6b4b50;
 
     font-size:13px;
-
-    border:1px solid rgba(190,140,140,.10);
 }
 
 
@@ -326,12 +472,13 @@ nav a:hover{
 
 .booking{
 
-    width:92%;
-    max-width:850px;
+    width:90%;
 
-    margin:35px auto;
+    margin:60px auto 100px;
 
-    padding:35px 18px;
+    padding:70px 30px;
+
+    border-radius:50px;
 
     background:
         linear-gradient(
@@ -340,10 +487,8 @@ nav a:hover{
             #f7e4df
         );
 
-    border-radius:28px;
-
     box-shadow:
-        0 18px 45px rgba(180,120,120,.10);
+        0 25px 60px rgba(180,120,120,.12);
 }
 
 
@@ -351,7 +496,7 @@ nav a:hover{
 
     text-align:center;
 
-    margin-bottom:28px;
+    margin-bottom:45px;
 }
 
 
@@ -359,15 +504,17 @@ nav a:hover{
 
     color:#b77b7f;
 
-    font-size:13px;
+    font-size:14px;
+
+    letter-spacing:2px;
 }
 
 
 .booking-title h2{
 
-    margin:8px 0;
+    margin:12px 0;
 
-    font-size:28px;
+    font-size:38px;
 
     color:#4b3035;
 }
@@ -377,37 +524,39 @@ nav a:hover{
 
     color:#76565b;
 
-    font-size:13px;
-
-    line-height:2;
+    font-size:15px;
 }
 
 
 .booking-box{
 
+    max-width:700px;
+
+    margin:auto;
+
     display:grid;
 
-    gap:14px;
+    gap:20px;
 }
 
 
 .booking-step{
 
-    padding:20px;
+    background:rgba(255,255,255,.8);
 
-    background:rgba(255,255,255,.82);
+    padding:25px;
+
+    border-radius:25px;
 
     border:1px solid rgba(190,140,140,.12);
-
-    border-radius:20px;
 }
 
 
 .step-number{
 
-    color:#b77b7f;
+    font-size:13px;
 
-    font-size:12px;
+    color:#b77b7f;
 
     letter-spacing:2px;
 }
@@ -415,11 +564,11 @@ nav a:hover{
 
 .booking-step h3{
 
-    margin:8px 0 14px;
+    margin:8px 0 16px;
 
     color:#4b3035;
 
-    font-size:17px;
+    font-size:18px;
 }
 
 
@@ -428,9 +577,9 @@ nav a:hover{
 
     width:100%;
 
-    padding:13px 14px;
+    padding:15px;
 
-    border-radius:13px;
+    border-radius:15px;
 
     border:1px solid #ead4d0;
 
@@ -438,17 +587,16 @@ nav a:hover{
 
     font-family:inherit;
 
-    font-size:14px;
-
-    color:#4b3035;
+    font-size:15px;
 
     outline:none;
+
+    transition:.3s;
 }
 
 
 .booking-step input{
-
-    margin-bottom:9px;
+    margin-bottom:10px;
 }
 
 
@@ -458,13 +606,11 @@ nav a:hover{
     border-color:#b77b7f;
 
     box-shadow:
-        0 0 0 3px rgba(183,123,127,.08);
+        0 0 0 4px rgba(183,123,127,.08);
 }
 
 
-/* =========================
-   TIME
-========================= */
+/* TIME */
 
 .time-grid{
 
@@ -473,15 +619,17 @@ nav a:hover{
     grid-template-columns:
         repeat(3,1fr);
 
-    gap:9px;
+    gap:10px;
 }
 
 
 .time-grid button{
 
-    padding:11px 6px;
+    width:100%;
 
-    border-radius:12px;
+    padding:12px 8px;
+
+    border-radius:15px;
 
     background:#fffdfc;
 
@@ -493,11 +641,9 @@ nav a:hover{
 
     font-family:inherit;
 
-    font-size:13px;
+    font-size:14px;
 
-    cursor:pointer;
-
-    transition:.25s;
+    transition:.3s;
 }
 
 
@@ -508,6 +654,8 @@ nav a:hover{
     color:#b77b7f;
 
     border-color:#d8a1a5;
+
+    transform:translateY(-2px);
 }
 
 
@@ -520,61 +668,31 @@ nav a:hover{
     border-color:#b77b7f;
 
     box-shadow:
-        0 6px 15px rgba(183,123,127,.20);
+        0 8px 20px rgba(183,123,127,.2);
 }
 
-
-/* =========================
-   BOOKING BUTTON
-========================= */
 
 .booking-button{
 
     width:100%;
 
-    padding:15px;
+    padding:17px;
 
-    border:none;
+    font-size:16px;
 
-    border-radius:16px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #d99b9f,
-            #b77b7f
-        );
-
-    color:white;
-
-    font-family:inherit;
-
-    font-size:15px;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 10px 20px rgba(190,130,130,.20);
-
-    transition:.3s;
-}
-
-
-.booking-button:hover{
-
-    transform:translateY(-2px);
+    margin-top:5px;
 }
 
 
 /* =========================
-   FOOTER / CONTACT
+   FOOTER
 ========================= */
 
 .footer{
 
-    margin-top:55px;
+    margin-top:80px;
 
-    padding:45px 20px 25px;
+    padding:60px 30px 25px;
 
     text-align:center;
 
@@ -586,17 +704,19 @@ nav a:hover{
 
 .footer-logo h2{
 
-    font-size:27px;
+    font-size:32px;
 
-    letter-spacing:6px;
+    letter-spacing:8px;
+
+    margin-bottom:5px;
 }
 
 
 .footer-logo span{
 
-    font-size:10px;
+    font-size:12px;
 
-    letter-spacing:5px;
+    letter-spacing:6px;
 
     opacity:.8;
 }
@@ -604,23 +724,21 @@ nav a:hover{
 
 .footer p{
 
-    margin:10px 0;
+    margin:12px 0;
 
     color:#f3dcd7;
-
-    font-size:13px;
 }
 
 
 .footer-links{
 
-    margin:25px 0;
+    margin:30px 0;
 
     display:flex;
 
     justify-content:center;
 
-    gap:20px;
+    gap:30px;
 }
 
 
@@ -630,29 +748,26 @@ nav a:hover{
 
     text-decoration:none;
 
-    font-size:13px;
-
     transition:.3s;
 }
 
 
 .footer-links a:hover{
-
     color:#d99b9f;
 }
 
 
 .copyright{
 
-    margin-top:25px;
+    margin-top:35px;
 
     padding-top:18px;
 
-    border-top:1px solid rgba(255,255,255,.12);
+    border-top:1px solid rgba(255,255,255,.15);
 
-    font-size:11px;
+    font-size:13px;
 
-    opacity:.7;
+    opacity:.8;
 }
 
 
@@ -666,399 +781,176 @@ nav a:hover{
 
         width:94%;
 
-        margin:12px auto 25px;
+        margin:15px auto;
 
-        padding:14px 16px;
+        padding:16px;
 
         flex-direction:column;
 
-        gap:13px;
-
-        border-radius:24px;
+        gap:14px;
     }
 
 
     .logo span{
-
-        font-size:23px;
+        font-size:24px;
     }
 
 
     nav{
 
-        width:100%;
+        gap:12px;
 
         justify-content:center;
-
-        gap:15px;
 
         flex-wrap:wrap;
     }
 
 
     nav a{
-
-        font-size:12px;
+        font-size:13px;
     }
 
 
-    .services,
-    .bridal-section,
-    .booking{
+    .services{
 
         width:92%;
+
+        margin:45px auto 20px;
     }
 
 
-    .services-toggle,
-    .bridal-toggle{
+    .services-toggle{
 
-        padding:17px 18px;
+        padding:18px 20px;
 
-        border-radius:19px;
+        font-size:17px;
 
-        font-size:16px;
+        border-radius:22px;
     }
 
 
-    .service-box{
+    .services-content .service-box{
 
-        grid-template-columns:1fr 1fr;
-
-        gap:10px;
+        grid-template-columns:1fr;
     }
 
 
     .card{
 
-        padding:18px 12px;
-
-        border-radius:17px;
+        padding:25px 18px;
     }
 
 
-    .card h3{
+    .bridal-section{
 
-        font-size:16px;
+        width:92%;
+
+        margin:15px auto 45px;
     }
 
 
-    .card p{
+    .bridal-toggle{
 
-        font-size:12px;
+        padding:18px 20px;
 
-        line-height:1.8;
+        font-size:17px;
+
+        border-radius:22px;
     }
 
 
     .bridal-box{
 
-        padding:20px 14px;
+        padding:28px 18px;
+
+        border-radius:28px;
     }
 
 
     .bridal-box h2{
 
-        font-size:21px;
+        font-size:27px;
     }
 
 
     .bridal-box p{
 
-        font-size:12px;
+        font-size:14px;
     }
 
 
     .bridal-services{
 
-        grid-template-columns:1fr 1fr;
+        gap:8px;
     }
 
 
     .bridal-services span{
 
-        font-size:11px;
+        font-size:12px;
 
-        padding:9px 5px;
+        padding:8px 12px;
     }
 
 
     .booking{
 
-        padding:30px 14px;
+        width:92%;
 
-        border-radius:25px;
+        margin:45px auto 70px;
+
+        padding:45px 18px;
+
+        border-radius:35px;
+    }
+
+
+    .booking-title{
+
+        margin-bottom:30px;
     }
 
 
     .booking-title h2{
 
-        font-size:25px;
+        font-size:30px;
     }
 
 
     .booking-title p{
 
-        font-size:12px;
+        font-size:14px;
+
+        line-height:2;
     }
 
 
     .booking-step{
 
-        padding:17px;
+        padding:20px;
     }
 
 
-    .booking-step h3{
+    .time-grid{
 
-        font-size:16px;
+        grid-template-columns:
+            repeat(3,1fr);
     }
 
 
     .footer{
 
-        margin-top:45px;
+        margin-top:50px;
 
-        padding:40px 15px 22px;
+        padding:50px 20px 25px;
     }
 
 
     .footer-links{
 
+        flex-direction:column;
+
         gap:15px;
-
-        flex-wrap:wrap;
-    }
-
-}
-
-/* Bridal Booking */
-
-.bridal-section{
-    width:90%;
-    margin:70px auto;
-    text-align:center;
-}
-
-.bridal-toggle{
-    width:100%;
-    max-width:900px;
-    padding:22px 28px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin:auto;
-
-    background:rgba(255,255,255,.75);
-    color:#4b3035;
-
-    border:1px solid rgba(190,140,140,.18);
-    border-radius:25px;
-
-    box-shadow:0 15px 35px rgba(180,120,120,.10);
-
-    font-family:inherit;
-    font-size:20px;
-    font-weight:500;
-
-    cursor:pointer;
-    transition:.3s ease;
-}
-
-.bridal-arrow{
-    width:32px;
-    height:32px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:50%;
-
-    color:#b77b7f;
-    font-size:25px;
-
-    transition:.4s ease;
-}
-
-.bridal-toggle.active .bridal-arrow{
-    transform:rotate(45deg);
-}
-
-.bridal-content{
-    max-width:900px;
-    margin:0 auto;
-
-    max-height:0;
-    overflow:hidden;
-    opacity:0;
-
-    transition:
-        max-height .5s ease,
-        opacity .3s ease,
-        margin-top .5s ease;
-}
-
-.bridal-content.open{
-    max-height:900px;
-    opacity:1;
-    margin-top:20px;
-}
-
-.bridal-box{
-    padding:35px 25px;
-
-    background:linear-gradient(
-        135deg,
-        #fffaf8,
-        #f7e4df
-    );
-
-    border-radius:30px;
-
-    box-shadow:
-        0 20px 45px rgba(180,120,120,.12);
-}
-
-.bridal-box h2{
-    color:#b77b7f;
-    font-size:30px;
-    margin-bottom:15px;
-}
-
-.bridal-box > p{
-    color:#76565b;
-    line-height:2;
-    margin-bottom:25px;
-}
-
-.bridal-services{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:10px;
-    margin-bottom:30px;
-}
-
-.bridal-services span{
-    padding:10px 16px;
-
-    background:white;
-
-    border:1px solid #ead4d0;
-
-    border-radius:20px;
-
-    color:#6b4b50;
-
-    font-size:14px;
-}
-
-.bridal-booking{
-    padding:25px;
-
-    background:rgba(255,255,255,.8);
-
-    border-radius:25px;
-
-    text-align:right;
-}
-
-.bridal-booking-title{
-    text-align:center;
-    margin-bottom:25px;
-}
-
-.bridal-booking-title span{
-    color:#b77b7f;
-    font-size:13px;
-}
-
-.bridal-booking-title h3{
-    margin-top:8px;
-    color:#4b3035;
-    font-size:21px;
-}
-
-.bridal-booking-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-}
-
-.bridal-booking label{
-    display:block;
-    margin-bottom:8px;
-    color:#6b4b50;
-    font-size:14px;
-}
-
-.bridal-booking input,
-.bridal-booking select{
-    width:100%;
-    padding:15px;
-
-    border-radius:15px;
-
-    border:1px solid #ead4d0;
-
-    background:#fffdfc;
-
-    font-family:inherit;
-    font-size:14px;
-
-    outline:none;
-}
-
-#bridal-name,
-#bridal-phone{
-    margin-top:15px;
-}
-
-.bridal-submit{
-    width:100%;
-    margin-top:20px;
-    padding:16px;
-    font-size:15px;
-}
-
-
-@media(max-width:800px){
-
-    .bridal-section{
-        width:92%;
-        margin:55px auto;
-    }
-
-    .bridal-toggle{
-        padding:19px 20px;
-        font-size:17px;
-        border-radius:22px;
-    }
-
-    .bridal-box{
-        padding:28px 18px;
-    }
-
-    .bridal-box h2{
-        font-size:25px;
-    }
-
-    .bridal-services{
-        gap:8px;
-    }
-
-    .bridal-services span{
-        font-size:13px;
-        padding:8px 12px;
-    }
-
-    .bridal-booking{
-        padding:20px 15px;
-    }
-
-    .bridal-booking-grid{
-        grid-template-columns:1fr;
     }
 
 }
