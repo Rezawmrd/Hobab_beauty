@@ -619,7 +619,11 @@ nav{
 
     width:94%;
 
-    padding:20px;
+    margin:15px auto;
+
+    padding:16px;
+
+    gap:14px;
 
 }
 
@@ -634,7 +638,9 @@ nav{
 
 nav{
 
-    gap:15px;
+    gap:12px;
+
+    justify-content:center;
 
 }
 
@@ -642,7 +648,7 @@ nav{
 
 nav a{
 
-    font-size:14px;
+    font-size:13px;
 
 }
 
@@ -650,7 +656,9 @@ nav a{
 
 .menu-btn{
 
-    padding:12px 22px;
+    padding:10px 20px;
+
+    font-size:14px;
 
 }
 
@@ -658,11 +666,7 @@ nav a{
 
 .hero{
 
-    width:90%;
-
-    margin:50px auto;
-
-    text-align:center;
+    margin:35px auto 60px;
 
 }
 
