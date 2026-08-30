@@ -1097,3 +1097,59 @@ body{
     }
 
 }
+
+/* =========================
+   COMPACT SERVICES
+========================= */
+
+.services-content.open{
+    max-height:600px;
+    margin-top:12px;
+}
+
+.services-content .service-box{
+    grid-template-columns:repeat(2, 1fr);
+    gap:10px;
+}
+
+.services-content .card{
+    padding:18px 15px;
+    border-radius:20px;
+}
+
+.services-content .card h3{
+    font-size:17px;
+    margin-bottom:7px;
+}
+
+.services-content .card p{
+    font-size:12px;
+    line-height:1.8;
+}
+
+
+/* موبایل */
+
+@media(max-width:800px){
+
+    .services-content .service-box{
+        grid-template-columns:1fr 1fr;
+        gap:8px;
+    }
+
+    .services-content .card{
+        padding:16px 10px;
+        border-radius:18px;
+    }
+
+    .services-content .card h3{
+        font-size:15px;
+        margin-bottom:5px;
+    }
+
+    .services-content .card p{
+        font-size:11px;
+        line-height:1.7;
+    }
+
+}
