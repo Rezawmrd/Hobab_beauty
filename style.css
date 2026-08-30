@@ -940,3 +940,70 @@ nav a{
 
 
 }
+
+/* Time Selection */
+
+.time-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3, 1fr);
+
+    gap:12px;
+
+}
+
+
+.time-grid button{
+
+    width:100%;
+
+    padding:14px 10px;
+
+    border-radius:16px;
+
+    background:#fffdfc;
+
+    color:#6b4b50;
+
+    border:1px solid #ead4d0;
+
+    box-shadow:none;
+
+    font-family:inherit;
+
+    font-size:14px;
+
+    cursor:pointer;
+
+    transition:all .3s ease;
+
+}
+
+
+.time-grid button:hover{
+
+    background:#f7e4df;
+
+    color:#b77b7f;
+
+    border-color:#d8a1a5;
+
+    transform:translateY(-2px);
+
+}
+
+
+.time-grid button.selected{
+
+    background:#b77b7f;
+
+    color:white;
+
+    border-color:#b77b7f;
+
+    box-shadow:
+    0 8px 20px rgba(183,123,127,.2);
+
+}
