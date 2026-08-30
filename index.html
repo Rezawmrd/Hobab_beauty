@@ -1,418 +1,459 @@
-<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
 
-<title>حباب بیوتی | سالن زیبایی</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link
-    href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
->
+    <title>HOBAB BEAUTY | سالن زیبایی</title>
 
-</head><body><!-- Header --><header class="header"><div class="logo">
+    <link rel="stylesheet" href="style.css">
 
-    <span>HOBAB</span>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
-    <small>BEAUTY</small>
-
-</div>
-
-
-<nav>
-
-    <a href="#">
-        خانه
-    </a>
-
-    <a href="#services">
-        خدمات
-    </a>
-
-    <a href="#booking">
-        رزرو
-    </a>
-
-    <a href="#bridal">
-        عروس
-    </a>
-
-    <a href="#contact">
-        تماس
-    </a>
-
-</nav>
+</head>
 
 
-<button class="menu-btn" type="button">
+<body>
 
-    رزرو نوبت
 
-</button>
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="header">
+
+    <div class="logo">
+
+        <span>HOBAB</span>
+
+        <small>BEAUTY</small>
+
+    </div>
+
+
+    <nav>
+
+        <a href="#services">
+            خدمات
+        </a>
+
+        <a href="#bridal">
+            پکیج عروس
+        </a>
+
+        <a href="#booking">
+            رزرو
+        </a>
+
+        <a href="#contact">
+            ارتباط با ما
+        </a>
+
+    </nav>
 
 </header>
-    
-    
-    
-    <!-- Services --><section id="services" class="services"><button
-    class="services-toggle"
-    type="button"
-    aria-expanded="false"
->
 
-    <span>
-        خدمات ما
-    </span>
 
 
-    <span class="services-arrow">
-        +
-    </span>
+<!-- =========================
+     SERVICES
+========================= -->
 
-</button>
-
-
-
-<div class="services-content">
-
-
-    <div class="service-box">
-
-
-        <div class="card">
-
-            <h3>
-                مو
-            </h3>
-
-            <p>
-                رنگ، مش، کراتین، احیا، کوتاهی و شینیون تخصصی
-            </p>
-
-        </div>
-
-
-
-        <div class="card">
-
-            <h3>
-                میکاپ
-            </h3>
-
-            <p>
-                آرایش تخصصی روز، مجلسی و میکاپ عروس با سبک‌های مدرن
-            </p>
-
-        </div>
-
-
-
-        <div class="card">
-
-            <h3>
-                ناخن
-            </h3>
-
-            <p>
-                کاشت، ترمیم، ژل و طراحی‌های ظریف و اختصاصی
-            </p>
-
-        </div>
-
-
-
-        <div class="card">
-
-            <h3>
-                مژه و ابرو
-            </h3>
-
-            <p>
-                اکستنشن، لیفت، لمینت و طراحی فرم ابرو
-            </p>
-
-        </div>
-
-
-
-        <div class="card">
-
-            <h3>
-                مراقبت پوست
-            </h3>
-
-            <p>
-                فیشال و خدمات تخصصی مراقبت و جوانسازی پوست
-            </p>
-
-        </div>
-
-
-    </div>
-
-</div>
-
-</section><!-- Booking --><section id="booking" class="booking"><div class="booking-title">
-
-
-    <span>
-        رزرو آنلاین
-    </span>
-
-
-    <h2>
-        نوبت خود را رزرو کنید
-    </h2>
-
-
-    <p>
-        خدمت مورد نظر، تاریخ و ساعت مناسب خود را انتخاب کنید
-    </p>
-
-
-</div>
-
-
-
-<div class="booking-box">
-
-
-    <!-- Service -->
-
-    <div class="booking-step">
-
-        <span class="step-number">
-            01
-        </span>
-
-
-        <h3>
-            انتخاب خدمت
-        </h3>
-
-
-        <select id="service">
-
-            <option value="">
-                انتخاب کنید
-            </option>
-
-            <option>
-                خدمات مو
-            </option>
-
-            <option>
-                میکاپ
-            </option>
-
-            <option>
-                خدمات ناخن
-            </option>
-
-            <option>
-                مژه و ابرو
-            </option>
-
-            <option>
-                مراقبت پوست
-            </option>
-
-            <option>
-                خدمات عروس
-            </option>
-
-        </select>
-
-    </div>
-
-
-
-    <!-- Date -->
-
-    <div class="booking-step">
-
-        <span class="step-number">
-            02
-        </span>
-
-
-        <h3>
-            انتخاب تاریخ
-        </h3>
-
-
-        <input
-            type="date"
-            id="date"
-        >
-
-    </div>
-
-
-
-    <!-- Time -->
-
-    <div class="booking-step">
-
-        <span class="step-number">
-            03
-        </span>
-
-
-        <h3>
-            انتخاب ساعت
-        </h3>
-
-
-        <div class="time-grid">
-
-            <button type="button">
-                10:00
-            </button>
-
-            <button type="button">
-                11:00
-            </button>
-
-            <button type="button">
-                12:00
-            </button>
-
-            <button type="button">
-                13:00
-            </button>
-
-            <button type="button">
-                14:00
-            </button>
-
-            <button type="button">
-                15:00
-            </button>
-
-            <button type="button">
-                16:00
-            </button>
-
-            <button type="button">
-                17:00
-            </button>
-
-            <button type="button">
-                18:00
-            </button>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- Customer Information -->
-
-    <div class="booking-step">
-
-        <span class="step-number">
-            04
-        </span>
-
-
-        <h3>
-            اطلاعات شما
-        </h3>
-
-
-        <input
-            type="text"
-            id="name"
-            placeholder="نام و نام خانوادگی"
-        >
-
-
-        <input
-            type="tel"
-            id="phone"
-            placeholder="شماره تماس"
-        >
-
-    </div>
-
+<section id="services" class="services">
 
 
     <button
-        class="booking-button"
+        class="services-toggle"
         type="button"
+        aria-expanded="false"
     >
-        ثبت درخواست رزرو
+
+        <span>
+            خدمات ما
+        </span>
+
+        <span class="services-arrow">
+            +
+        </span>
+
     </button>
 
 
-</div>
 
-</section><!-- Bridal --><section id="bridal" class="bridal"><h2>
-    پکیج ویژه عروس
-</h2>
+    <div class="services-content">
 
 
-<p>
-    زیباترین لحظه زندگی شما با خدمات اختصاصی عروس حباب بیوتی
-</p>
+        <div class="service-box">
 
 
-<button type="button">
-    مشاهده پکیج عروس
-</button>
+            <div class="card">
 
-</section><!-- Footer --><footer id="contact" class="footer"><div class="footer-logo">
+                <h3>مو</h3>
 
-    <h2>
-        HOBAB
-    </h2>
+                <p>
+                    رنگ، مش، کراتین، احیا، کوتاهی و شینیون
+                </p>
 
-    <span>
-        BEAUTY
-    </span>
-
-</div>
+            </div>
 
 
-<p>
-    سالن زیبایی حباب
-</p>
+            <div class="card">
+
+                <h3>میکاپ</h3>
+
+                <p>
+                    آرایش روز، مجلسی و میکاپ تخصصی
+                </p>
+
+            </div>
 
 
-<p>
-    رزرو و مشاوره خدمات زیبایی
-</p>
+            <div class="card">
+
+                <h3>ناخن</h3>
+
+                <p>
+                    کاشت، ترمیم، ژل و طراحی ناخن
+                </p>
+
+            </div>
 
 
-<div class="footer-links">
+            <div class="card">
 
-    <a href="#">
-        اینستاگرام
-    </a>
+                <h3>مژه و ابرو</h3>
 
+                <p>
+                    اکستنشن، لیفت، لمینت و طراحی ابرو
+                </p>
 
-    <a href="#">
-        تماس با ما
-    </a>
-
-
-    <a href="#">
-        آدرس سالن
-    </a>
-
-</div>
+            </div>
 
 
-<div class="copyright">
+            <div class="card">
 
-    © تمامی حقوق برای حباب بیوتی محفوظ است
+                <h3>مراقبت پوست</h3>
 
-</div>
+                <p>
+                    فیشال و خدمات مراقبت تخصصی پوست
+                </p>
 
-</footer><script src="script.js"></script>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     BRIDAL
+========================= -->
+
+<section id="bridal" class="bridal-section">
+
+
+    <button
+        class="bridal-toggle"
+        type="button"
+        aria-expanded="false"
+    >
+
+        <span>
+            پکیج عروس
+        </span>
+
+        <span class="bridal-arrow">
+            +
+        </span>
+
+    </button>
+
+
+
+    <div class="bridal-content">
+
+
+        <div class="bridal-box">
+
+
+            <h2>
+                پکیج ویژه عروس
+            </h2>
+
+
+            <p>
+                خدمات تخصصی و اختصاصی عروس
+                برای زیباترین روز زندگی شما
+            </p>
+
+
+            <div class="bridal-services">
+
+                <span>میکاپ عروس</span>
+
+                <span>شینیون عروس</span>
+
+                <span>خدمات ناخن</span>
+
+                <span>خدمات مژه و ابرو</span>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     BOOKING
+========================= -->
+
+<section id="booking" class="booking">
+
+
+    <div class="booking-title">
+
+        <span>
+            رزرو آنلاین
+        </span>
+
+
+        <h2>
+            رزرو نوبت
+        </h2>
+
+
+        <p>
+            خدمت، تاریخ و ساعت مورد نظر خود را انتخاب کنید
+        </p>
+
+    </div>
+
+
+
+    <div class="booking-box">
+
+
+        <div class="booking-step">
+
+            <span class="step-number">
+                01
+            </span>
+
+
+            <h3>
+                انتخاب خدمت
+            </h3>
+
+
+            <select id="service">
+
+                <option value="">
+                    انتخاب کنید
+                </option>
+
+                <option>
+                    خدمات مو
+                </option>
+
+                <option>
+                    میکاپ
+                </option>
+
+                <option>
+                    خدمات ناخن
+                </option>
+
+                <option>
+                    مژه و ابرو
+                </option>
+
+                <option>
+                    مراقبت پوست
+                </option>
+
+                <option>
+                    خدمات عروس
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <div class="booking-step">
+
+            <span class="step-number">
+                02
+            </span>
+
+
+            <h3>
+                انتخاب تاریخ
+            </h3>
+
+
+            <input
+                type="date"
+                id="date"
+            >
+
+        </div>
+
+
+
+        <div class="booking-step">
+
+            <span class="step-number">
+                03
+            </span>
+
+
+            <h3>
+                انتخاب ساعت
+            </h3>
+
+
+            <div class="time-grid">
+
+                <button type="button">10:00</button>
+                <button type="button">11:00</button>
+                <button type="button">12:00</button>
+                <button type="button">13:00</button>
+                <button type="button">14:00</button>
+                <button type="button">15:00</button>
+                <button type="button">16:00</button>
+                <button type="button">17:00</button>
+                <button type="button">18:00</button>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="booking-step">
+
+            <span class="step-number">
+                04
+            </span>
+
+
+            <h3>
+                اطلاعات شما
+            </h3>
+
+
+            <input
+                type="text"
+                id="name"
+                placeholder="نام و نام خانوادگی"
+            >
+
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="شماره تماس"
+            >
+
+        </div>
+
+
+
+        <button
+            class="booking-button"
+            type="button"
+        >
+            ثبت درخواست رزرو
+        </button>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     CONTACT
+========================= -->
+
+<footer
+    id="contact"
+    class="footer"
+>
+
+
+    <div class="footer-logo">
+
+        <h2>
+            HOBAB
+        </h2>
+
+        <span>
+            BEAUTY
+        </span>
+
+    </div>
+
+
+    <p>
+        سالن زیبایی حباب
+    </p>
+
+
+    <p>
+        رزرو و مشاوره خدمات زیبایی
+    </p>
+
+
+    <div class="footer-links">
+
+        <a href="#">
+            اینستاگرام
+        </a>
+
+
+        <a href="#">
+            تماس با ما
+        </a>
+
+
+        <a href="#">
+            آدرس سالن
+        </a>
+
+    </div>
+
+
+    <div class="copyright">
+
+        © تمامی حقوق برای حباب بیوتی محفوظ است
+
+    </div>
+
+
+</footer>
+
+
+
+<script src="script.js"></script>
 
 </body>
 
