@@ -954,3 +954,124 @@ button:hover{
     }
 
 }
+
+
+/* =========================
+   TOP BUTTONS
+========================= */
+
+.top-buttons{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+
+.top-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:10px 18px;
+
+    border-radius:22px;
+
+    text-decoration:none;
+
+    color:#6b4b50;
+
+    background:rgba(255,255,255,.55);
+
+    border:1px solid rgba(190,140,140,.18);
+
+    box-shadow:
+        0 8px 22px rgba(180,120,120,.10);
+
+    backdrop-filter:blur(12px);
+
+    font-family:inherit;
+
+    font-size:14px;
+
+    transition:.3s ease;
+
+}
+
+
+.top-btn:hover{
+
+    transform:translateY(-2px);
+
+    color:#b77b7f;
+
+    background:rgba(255,255,255,.8);
+
+}
+
+
+.booking-top{
+
+    background:linear-gradient(
+        135deg,
+        #d99b9f,
+        #b77b7f
+    );
+
+    color:white;
+
+    border:none;
+
+    box-shadow:
+        0 8px 20px rgba(190,130,130,.22);
+
+}
+
+
+.booking-top:hover{
+
+    color:white;
+
+    background:linear-gradient(
+        135deg,
+        #d99b9f,
+        #b77b7f
+    );
+
+}
+
+
+/* =========================
+   MOBILE TOP BUTTONS
+========================= */
+
+@media(max-width:800px){
+
+    .top-buttons{
+
+        width:100%;
+
+        justify-content:center;
+
+        gap:7px;
+
+    }
+
+
+    .top-btn{
+
+        padding:9px 13px;
+
+        font-size:12px;
+
+        border-radius:18px;
+
+    }
+
+}
