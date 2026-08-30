@@ -831,3 +831,234 @@ nav a:hover{
     }
 
 }
+
+/* Bridal Booking */
+
+.bridal-section{
+    width:90%;
+    margin:70px auto;
+    text-align:center;
+}
+
+.bridal-toggle{
+    width:100%;
+    max-width:900px;
+    padding:22px 28px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:auto;
+
+    background:rgba(255,255,255,.75);
+    color:#4b3035;
+
+    border:1px solid rgba(190,140,140,.18);
+    border-radius:25px;
+
+    box-shadow:0 15px 35px rgba(180,120,120,.10);
+
+    font-family:inherit;
+    font-size:20px;
+    font-weight:500;
+
+    cursor:pointer;
+    transition:.3s ease;
+}
+
+.bridal-arrow{
+    width:32px;
+    height:32px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    color:#b77b7f;
+    font-size:25px;
+
+    transition:.4s ease;
+}
+
+.bridal-toggle.active .bridal-arrow{
+    transform:rotate(45deg);
+}
+
+.bridal-content{
+    max-width:900px;
+    margin:0 auto;
+
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+
+    transition:
+        max-height .5s ease,
+        opacity .3s ease,
+        margin-top .5s ease;
+}
+
+.bridal-content.open{
+    max-height:900px;
+    opacity:1;
+    margin-top:20px;
+}
+
+.bridal-box{
+    padding:35px 25px;
+
+    background:linear-gradient(
+        135deg,
+        #fffaf8,
+        #f7e4df
+    );
+
+    border-radius:30px;
+
+    box-shadow:
+        0 20px 45px rgba(180,120,120,.12);
+}
+
+.bridal-box h2{
+    color:#b77b7f;
+    font-size:30px;
+    margin-bottom:15px;
+}
+
+.bridal-box > p{
+    color:#76565b;
+    line-height:2;
+    margin-bottom:25px;
+}
+
+.bridal-services{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:30px;
+}
+
+.bridal-services span{
+    padding:10px 16px;
+
+    background:white;
+
+    border:1px solid #ead4d0;
+
+    border-radius:20px;
+
+    color:#6b4b50;
+
+    font-size:14px;
+}
+
+.bridal-booking{
+    padding:25px;
+
+    background:rgba(255,255,255,.8);
+
+    border-radius:25px;
+
+    text-align:right;
+}
+
+.bridal-booking-title{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.bridal-booking-title span{
+    color:#b77b7f;
+    font-size:13px;
+}
+
+.bridal-booking-title h3{
+    margin-top:8px;
+    color:#4b3035;
+    font-size:21px;
+}
+
+.bridal-booking-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.bridal-booking label{
+    display:block;
+    margin-bottom:8px;
+    color:#6b4b50;
+    font-size:14px;
+}
+
+.bridal-booking input,
+.bridal-booking select{
+    width:100%;
+    padding:15px;
+
+    border-radius:15px;
+
+    border:1px solid #ead4d0;
+
+    background:#fffdfc;
+
+    font-family:inherit;
+    font-size:14px;
+
+    outline:none;
+}
+
+#bridal-name,
+#bridal-phone{
+    margin-top:15px;
+}
+
+.bridal-submit{
+    width:100%;
+    margin-top:20px;
+    padding:16px;
+    font-size:15px;
+}
+
+
+@media(max-width:800px){
+
+    .bridal-section{
+        width:92%;
+        margin:55px auto;
+    }
+
+    .bridal-toggle{
+        padding:19px 20px;
+        font-size:17px;
+        border-radius:22px;
+    }
+
+    .bridal-box{
+        padding:28px 18px;
+    }
+
+    .bridal-box h2{
+        font-size:25px;
+    }
+
+    .bridal-services{
+        gap:8px;
+    }
+
+    .bridal-services span{
+        font-size:13px;
+        padding:8px 12px;
+    }
+
+    .bridal-booking{
+        padding:20px 15px;
+    }
+
+    .bridal-booking-grid{
+        grid-template-columns:1fr;
+    }
+
+}
