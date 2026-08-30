@@ -1,35 +1,55 @@
-
-// شروع سایت حباب بیوتی
+// HOBAB BEAUTY
 
 document.addEventListener("DOMContentLoaded", function(){
 
-    console.log("HABAB BEAUTY loaded ✨");
+
+    console.log("HABAB BEAUTY loaded");
 
 
-    // افکت ظاهر شدن کارت‌ها
+    // Services Accordion
 
-    const cards = document.querySelectorAll(".card");
+    const servicesToggle =
+        document.querySelector(".services-toggle");
 
-
-    cards.forEach((card,index)=>{
-
-        card.style.opacity = "0";
-        card.style.transform = "translateY(30px)";
+    const servicesContent =
+        document.querySelector(".services-content");
 
 
-        setTimeout(()=>{
+    if(servicesToggle && servicesContent){
 
-            card.style.transition = "0.7s";
+        servicesToggle.addEventListener("click", function(){
 
-            card.style.opacity = "1";
-
-            card.style.transform = "translateY(0)";
-
-
-        }, index * 150);
+            const isOpen =
+                servicesContent.classList.contains("open");
 
 
-    });
+            if(isOpen){
+
+                servicesContent.classList.remove("open");
+
+                servicesToggle.classList.remove("active");
+
+                servicesToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }else{
+
+                servicesContent.classList.add("open");
+
+                servicesToggle.classList.add("active");
+
+                servicesToggle.setAttribute(
+                    "aria-expanded",
+                    "true"
+                );
+
+            }
+
+        });
+
+    }
 
 
 });
