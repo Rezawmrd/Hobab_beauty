@@ -1,23 +1,14 @@
-// ========================================
-// HOBAB BEAUTY
-// Main JavaScript
-// ========================================
-
 document.addEventListener("DOMContentLoaded", function () {
 
-
-    // ========================================
-    // SERVICES ACCORDION
-    // ========================================
+    // ==============================
+    // خدمات ما
+    // ==============================
 
     const servicesButton =
         document.querySelector(".services-toggle");
 
     const servicesContent =
         document.querySelector(".services-content");
-
-    const servicesArrow =
-        document.querySelector(".services-arrow");
 
 
     if (servicesButton && servicesContent) {
@@ -30,10 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (isOpen) {
 
-                // بستن خدمات
-
                 servicesContent.classList.remove("open");
-
                 servicesButton.classList.remove("active");
 
                 servicesButton.setAttribute(
@@ -41,13 +29,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     "false"
                 );
 
-
             } else {
 
-                // باز کردن خدمات
-
                 servicesContent.classList.add("open");
-
                 servicesButton.classList.add("active");
 
                 servicesButton.setAttribute(
@@ -62,9 +46,55 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // ========================================
-    // TIME SELECTION
-    // ========================================
+    // ==============================
+    // پکیج عروس
+    // ==============================
+
+    const bridalButton =
+        document.querySelector(".bridal-toggle");
+
+    const bridalContent =
+        document.querySelector(".bridal-content");
+
+
+    if (bridalButton && bridalContent) {
+
+        bridalButton.addEventListener("click", function () {
+
+            const isOpen =
+                bridalContent.classList.contains("open");
+
+
+            if (isOpen) {
+
+                bridalContent.classList.remove("open");
+                bridalButton.classList.remove("active");
+
+                bridalButton.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            } else {
+
+                bridalContent.classList.add("open");
+                bridalButton.classList.add("active");
+
+                bridalButton.setAttribute(
+                    "aria-expanded",
+                    "true"
+                );
+
+            }
+
+        });
+
+    }
+
+
+    // ==============================
+    // انتخاب ساعت
+    // ==============================
 
     const timeButtons =
         document.querySelectorAll(".time-grid button");
@@ -74,16 +104,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         button.addEventListener("click", function () {
 
-            // حذف انتخاب قبلی
-
             timeButtons.forEach(function (item) {
 
                 item.classList.remove("selected");
 
             });
-
-
-            // انتخاب ساعت جدید
 
             button.classList.add("selected");
 
@@ -92,70 +117,34 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    // ========================================
-    // HEADER BOOKING BUTTON
-    // ========================================
+    // ==============================
+    // رزرو از منوی بالا
+    // ==============================
 
-    const headerBookingButton =
-        document.querySelector(".menu-btn");
-
-
-    if (headerBookingButton) {
-
-        headerBookingButton.addEventListener(
-            "click",
-            function () {
-
-                const bookingSection =
-                    document.querySelector("#booking");
+    const bookingLink =
+        document.querySelector('nav a[href="#booking"]');
 
 
-                if (bookingSection) {
+    if (bookingLink) {
 
-                    bookingSection.scrollIntoView({
-                        behavior: "smooth"
-                    });
+        bookingLink.addEventListener("click", function (event) {
 
-                }
+            event.preventDefault();
+
+            const booking =
+                document.querySelector("#booking");
+
+
+            if (booking) {
+
+                booking.scrollIntoView({
+                    behavior: "smooth"
+                });
 
             }
-        );
+
+        });
 
     }
-
-
-    // ========================================
-    // HERO / BOOKING BUTTON
-    // ========================================
-
-    const bookingButtons =
-        document.querySelectorAll(
-            ".hero button, .bridal button"
-        );
-
-
-    bookingButtons.forEach(function (button) {
-
-        button.addEventListener(
-            "click",
-            function () {
-
-                const bookingSection =
-                    document.querySelector("#booking");
-
-
-                if (bookingSection) {
-
-                    bookingSection.scrollIntoView({
-                        behavior: "smooth"
-                    });
-
-                }
-
-            }
-        );
-
-    });
-
 
 });
