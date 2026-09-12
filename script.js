@@ -92,36 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         });
 
-    });
+    }
 
-
-    /* =========================
-       SPLASH SCREEN
-    ========================= */
-
-    window.addEventListener("load", function () {
-
-        setTimeout(function () {
-
-            const splash =
-                document.getElementById("splash-screen");
-
-
-            if (splash) {
-
-                splash.classList.add("hide");
-
-
-                setTimeout(function () {
-
-                    splash.remove();
-
-                }, 700);
-
-            }
-
-        }, 2400);
-
-    });
 
 });
