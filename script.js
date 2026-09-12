@@ -1,17 +1,23 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    // ==============================
-    // SERVICES
-    // ==============================
 
-    const servicesButton = document.querySelector(".services-toggle");
-    const servicesContent = document.querySelector(".services-content");
+    /* =========================
+       SERVICES ACCORDION
+    ========================= */
+
+    const servicesButton =
+        document.querySelector(".services-toggle");
+
+    const servicesContent =
+        document.querySelector(".services-content");
+
 
     if (servicesButton && servicesContent) {
 
-        servicesButton.onclick = function () {
+        servicesButton.addEventListener("click", function () {
 
             servicesContent.classList.toggle("open");
+
             servicesButton.classList.toggle("active");
 
             const opened =
@@ -21,22 +27,29 @@ document.addEventListener("DOMContentLoaded", function () {
                 "aria-expanded",
                 opened ? "true" : "false"
             );
-        };
+
+        });
+
     }
 
 
-    // ==============================
-    // BRIDAL
-    // ==============================
+    /* =========================
+       BRIDAL ACCORDION
+    ========================= */
 
-    const bridalButton = document.querySelector(".bridal-toggle");
-    const bridalContent = document.querySelector(".bridal-content");
+    const bridalButton =
+        document.querySelector(".bridal-toggle");
+
+    const bridalContent =
+        document.querySelector(".bridal-content");
+
 
     if (bridalButton && bridalContent) {
 
-        bridalButton.onclick = function () {
+        bridalButton.addEventListener("click", function () {
 
             bridalContent.classList.toggle("open");
+
             bridalButton.classList.toggle("active");
 
             const opened =
@@ -46,55 +59,64 @@ document.addEventListener("DOMContentLoaded", function () {
                 "aria-expanded",
                 opened ? "true" : "false"
             );
-        };
+
+        });
+
     }
 
 
-    // ==============================
-    // TIME SELECTION
-    // ==============================
+    /* =========================
+       TIME SELECTION
+    ========================= */
 
     const timeButtons =
         document.querySelectorAll(".time-grid button");
 
+
     timeButtons.forEach(function (button) {
 
-        button.onclick = function () {
+        button.addEventListener("click", function () {
 
             timeButtons.forEach(function (item) {
+
                 item.classList.remove("selected");
+
             });
 
             button.classList.add("selected");
-        };
+
+        });
 
     });
 
 
-    // ==============================
-    // BRIDAL BOOKING BUTTON
-    // ==============================
+    /* =========================
+       SPLASH SCREEN
+    ========================= */
 
-    const bridalBookingButton =
-        document.querySelector(".bridal-booking-button");
+    window.addEventListener("load", function () {
 
-    if (bridalBookingButton) {
+        setTimeout(function () {
 
-        bridalBookingButton.onclick = function () {
+            const splash =
+                document.getElementById("splash-screen");
 
-            const booking =
-                document.querySelector("#booking");
 
-            if (booking) {
+            if (splash) {
 
-                booking.scrollIntoView({
-                    behavior: "smooth"
-                });
+                splash.classList.add("hide");
+
+
+                setTimeout(function () {
+
+                    splash.remove();
+
+                }, 600);
 
             }
 
-        };
+        }, 1800);
 
-    }
+    });
 
 });
