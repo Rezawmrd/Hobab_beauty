@@ -88,44 +88,7 @@ body{
 }
 
 
-/* نام زیر لوگو */
 
-.splash-name{
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    margin-top:10px;
-
-    color:#b77b7f;
-
-    opacity:0;
-
-    animation:
-        nameAppear .8s ease 0.65s forwards;
-}
-
-.splash-name span{
-    font-size:24px;
-
-    font-weight:700;
-
-    letter-spacing:5px;
-}
-
-.splash-name small{
-    margin-top:2px;
-
-    font-size:9px;
-
-    font-weight:500;
-
-    letter-spacing:7px;
-
-    opacity:.8;
-}
 
 
 /* =========================
