@@ -1350,31 +1350,3 @@ body{
 }
 
 
-/* قاب ظریف برای لوگوی HOBAB */
-.logo{
-    padding:8px 14px;
-    background:rgba(255,255,255,.72);
-    border:1px solid rgba(183,123,127,.35);
-    border-radius:18px;
-    box-shadow:
-        0 6px 18px rgba(183,123,127,.10),
-        inset 0 1px 0 rgba(255,255,255,.9);
-}
-
-.logo img{
-    width:145px;
-    height:auto;
-    display:block;
-    object-fit:contain;
-}
-
-@media(max-width:800px){
-    .logo{
-        padding:7px 12px;
-        border-radius:16px;
-    }
-
-    .logo img{
-        width:125px;
-    }
-}
