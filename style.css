@@ -1291,3 +1291,21 @@ body{
 .copyright{
     border-top-color:rgba(66,96,82,.35);
 }
+
+.logo{
+    display:flex;
+    align-items:center;
+}
+
+.logo img{
+    width:120px;
+    height:auto;
+    display:block;
+    object-fit:contain;
+}
+
+@media(max-width:800px){
+    .logo img{
+        width:95px;
+    }
+}
