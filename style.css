@@ -1292,20 +1292,33 @@ body{
     border-top-color:rgba(66,96,82,.35);
 }
 
+/* =========================
+   LOGO
+========================= */
+
 .logo{
     display:flex;
     align-items:center;
+    justify-content:center;
+    flex-shrink:0;
 }
 
 .logo img{
-    width:90px;
+    width:70px;
+    max-width:70px;
     height:auto;
     display:block;
     object-fit:contain;
 }
 
+
+/* MOBILE LOGO */
+
 @media(max-width:800px){
+
     .logo img{
-        width:72px;
+        width:58px;
+        max-width:58px;
     }
+
 }
