@@ -1185,3 +1185,68 @@ body{
     }
 
 }
+
+/* =========================
+   ELEGANT GREEN BORDERS
+========================= */
+
+/* باکس خدمات */
+
+.services-toggle{
+    border:1px solid rgba(66,96,82,.35);
+}
+
+
+/* کارت‌های خدمات */
+
+.services-content .card{
+    border:1px solid rgba(66,96,82,.28);
+}
+
+
+/* باکس پکیج عروس */
+
+.bridal-toggle{
+    border:1px solid rgba(66,96,82,.35);
+}
+
+
+.bridal-box{
+    border:1px solid rgba(66,96,82,.28);
+}
+
+
+/* باکس اصلی رزرو */
+
+.booking{
+    border:1px solid rgba(66,96,82,.25);
+}
+
+
+/* مراحل رزرو */
+
+.booking-step{
+    border:1px solid rgba(66,96,82,.22);
+}
+
+
+/* ورودی‌ها */
+
+.booking-step select,
+.booking-step input{
+    border-color:rgba(66,96,82,.25);
+}
+
+
+/* ساعت‌ها */
+
+.time-grid button{
+    border-color:rgba(66,96,82,.22);
+}
+
+
+/* دکمه‌های بالای صفحه */
+
+.header .top-buttons .top-btn{
+    border-color:rgba(66,96,82,.28);
+}
