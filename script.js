@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================
-       SERVICES ACCORDION
+       SERVICES
     ========================= */
 
     const servicesButton =
@@ -20,8 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             servicesButton.classList.toggle("active");
 
+
             const opened =
                 servicesContent.classList.contains("open");
+
 
             servicesButton.setAttribute(
                 "aria-expanded",
@@ -34,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================
-       BRIDAL ACCORDION
+       BRIDAL
     ========================= */
 
     const bridalButton =
@@ -52,8 +54,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             bridalButton.classList.toggle("active");
 
+
             const opened =
                 bridalContent.classList.contains("open");
+
 
             bridalButton.setAttribute(
                 "aria-expanded",
@@ -83,6 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             });
 
+
             button.classList.add("selected");
 
         });
@@ -111,11 +116,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     splash.remove();
 
-                }, 600);
+                }, 700);
 
             }
 
-        }, 1800);
+        }, 2400);
 
     });
 
