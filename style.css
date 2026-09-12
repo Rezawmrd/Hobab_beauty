@@ -59,10 +59,20 @@ body{
 .logo img{
     width:145px;
     height:auto;
-
     display:block;
-
     object-fit:contain;
+
+    filter:
+        drop-shadow(1px 0 0 rgba(201,149,155,.75))
+        drop-shadow(-1px 0 0 rgba(201,149,155,.75))
+        drop-shadow(0 1px 0 rgba(201,149,155,.75))
+        drop-shadow(0 -1px 0 rgba(201,149,155,.75));
+}
+
+@media(max-width:800px){
+    .logo img{
+        width:125px;
+    }
 }
 
 
