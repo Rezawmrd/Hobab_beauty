@@ -68,9 +68,9 @@ body{
 }
 
 .splash-content img{
-    width:220px;
+    width:300px;
 
-    max-width:65vw;
+    max-width:80vw;
 
     height:auto;
 
@@ -1182,8 +1182,9 @@ body{
 
 
     #splash-screen img{
-        width:190px;
-    }
+    width:250px;
+    max-width:82vw;
+}
 
 
     .services{
