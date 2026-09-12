@@ -1250,3 +1250,68 @@ body{
 .header .top-buttons .top-btn{
     border-color:rgba(66,96,82,.28);
 }
+
+
+/* =========================
+   SUBTLE DARK GREEN DETAILS
+========================= */
+
+:root{
+    --elegant-green:#426052;
+}
+
+/* خطوط و حاشیه‌های ظریف */
+.services-toggle,
+.bridal-toggle,
+.booking{
+    border-color:rgba(66,96,82,.22);
+}
+
+/* کارت‌های خدمات */
+.services-content .card,
+.bridal-box,
+.booking-step{
+    border-color:rgba(66,96,82,.16);
+}
+
+/* جزئیات داخلی */
+.booking-step .step-number{
+    color:rgba(66,96,82,.85);
+}
+
+/* ورودی‌ها */
+.booking-step select,
+.booking-step input{
+    border-color:rgba(66,96,82,.18);
+}
+
+.booking-step select:focus,
+.booking-step input:focus{
+    border-color:rgba(66,96,82,.45);
+    box-shadow:0 0 0 3px rgba(66,96,82,.06);
+}
+
+/* دکمه‌های ساعت */
+.time-grid button{
+    border-color:rgba(66,96,82,.16);
+}
+
+.time-grid button:hover{
+    border-color:rgba(66,96,82,.38);
+    color:var(--elegant-green);
+}
+
+/* ساعت انتخاب‌شده */
+.time-grid button.selected,
+.time-grid button.active{
+    border-color:rgba(66,96,82,.55);
+    color:var(--elegant-green);
+}
+
+/* فلش آکاردئون‌ها */
+.services-arrow,
+.bridal-arrow{
+    color:rgba(66,96,82,.75);
+}
+
+/* د
