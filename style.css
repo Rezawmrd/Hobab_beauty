@@ -22,11 +22,12 @@ body{
 .header{
     width:92%;
     margin:20px auto;
-    padding:18px 28px;
+    padding:22px 28px;
 
     display:flex;
-    justify-content:space-between;
+    flex-direction:column;
     align-items:center;
+    gap:18px;
 
     background:rgba(255,255,255,.48);
 
@@ -35,7 +36,7 @@ body{
 
     border-radius:30px;
 
-    border:1px solid rgba(255,255,255,.75);
+    border:1px solid rgba(66,96,82,.25);
 
     box-shadow:
         0 15px 45px rgba(180,120,120,.12),
@@ -43,39 +44,37 @@ body{
 }
 
 
-/* LOGO */
+/* =========================
+   LOGO
+========================= */
 
 .logo{
     display:flex;
-    flex-direction:column;
     align-items:center;
+    justify-content:center;
 
-    color:#b77b7f;
-    font-weight:700;
+    width:100%;
 }
 
+.logo img{
+    width:145px;
+    height:auto;
 
-.logo span{
-    font-size:27px;
-    letter-spacing:5px;
-}
+    display:block;
 
-
-.logo small{
-    font-size:10px;
-    letter-spacing:7px;
-    margin-top:3px;
-    opacity:.8;
+    object-fit:contain;
 }
 
 
 /* =========================
-   TOP GLASS BUTTONS
+   TOP BUTTONS
 ========================= */
 
 .top-buttons{
     display:flex;
     align-items:center;
+    justify-content:center;
+
     gap:10px;
 }
 
@@ -99,7 +98,7 @@ body{
 
     background:rgba(255,255,255,.42);
 
-    border:1px solid rgba(255,255,255,.8);
+    border:1px solid rgba(66,96,82,.35);
 
     box-shadow:
         0 8px 25px rgba(150,100,100,.10),
@@ -123,7 +122,9 @@ body{
 
     background:rgba(255,255,255,.7);
 
-    color:#b77b7f;
+    color:#426052;
+
+    border-color:rgba(66,96,82,.65);
 
     box-shadow:
         0 12px 30px rgba(150,100,100,.17),
@@ -131,7 +132,9 @@ body{
 }
 
 
-/* RESERVATION */
+/* =========================
+   RESERVATION BUTTON
+========================= */
 
 .header .top-buttons .booking-top{
 
@@ -144,7 +147,7 @@ body{
             rgba(183,123,127,.95)
         );
 
-    border:1px solid rgba(255,255,255,.4);
+    border:1px solid rgba(66,96,82,.25);
 
     box-shadow:
         0 10px 25px rgba(183,123,127,.22);
@@ -165,6 +168,60 @@ body{
         );
 }
 
+
+/* =========================
+   MOBILE HEADER
+========================= */
+
+@media(max-width:800px){
+
+    .header{
+
+        width:94%;
+
+        margin:12px auto;
+
+        padding:18px 12px 15px;
+
+        gap:14px;
+
+        border-radius:25px;
+    }
+
+
+    .logo img{
+
+        width:125px;
+
+    }
+
+
+    .top-buttons{
+
+        width:100%;
+
+        gap:6px;
+
+    }
+
+
+    .header .top-buttons .top-btn{
+
+        flex:1;
+
+        min-width:0;
+
+        height:38px;
+
+        padding:0 8px;
+
+        border-radius:15px;
+
+        font-size:11px;
+
+    }
+
+}
 
 /* =========================
    SERVICES
@@ -1292,26 +1349,3 @@ body{
     border-top-color:rgba(66,96,82,.35);
 }
 
-/* =========================
-   LOGO
-========================= */
-
-.logo{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-shrink:0;
-}
-
-.logo img{
-    width:125px;
-    height:auto;
-    display:block;
-    object-fit:contain;
-}
-
-@media(max-width:805px){
-    .logo img{
-        width:115px;
-    }
-}
