@@ -1187,131 +1187,107 @@ body{
 }
 
 /* =========================
-   ELEGANT GREEN BORDERS
-========================= */
-
-/* باکس خدمات */
-
-.services-toggle{
-    border:1px solid rgba(66,96,82,.35);
-}
-
-
-/* کارت‌های خدمات */
-
-.services-content .card{
-    border:1px solid rgba(66,96,82,.28);
-}
-
-
-/* باکس پکیج عروس */
-
-.bridal-toggle{
-    border:1px solid rgba(66,96,82,.35);
-}
-
-
-.bridal-box{
-    border:1px solid rgba(66,96,82,.28);
-}
-
-
-/* باکس اصلی رزرو */
-
-.booking{
-    border:1px solid rgba(66,96,82,.25);
-}
-
-
-/* مراحل رزرو */
-
-.booking-step{
-    border:1px solid rgba(66,96,82,.22);
-}
-
-
-/* ورودی‌ها */
-
-.booking-step select,
-.booking-step input{
-    border-color:rgba(66,96,82,.25);
-}
-
-
-/* ساعت‌ها */
-
-.time-grid button{
-    border-color:rgba(66,96,82,.22);
-}
-
-
-/* دکمه‌های بالای صفحه */
-
-.header .top-buttons .top-btn{
-    border-color:rgba(66,96,82,.28);
-}
-
-
-/* =========================
-   SUBTLE DARK GREEN DETAILS
+   ELEGANT GREEN DETAILS
 ========================= */
 
 :root{
     --elegant-green:#426052;
 }
 
-/* خطوط و حاشیه‌های ظریف */
+/* باکس‌های اصلی */
 .services-toggle,
 .bridal-toggle,
 .booking{
-    border-color:rgba(66,96,82,.22);
+    border:1px solid rgba(66,96,82,.50);
 }
 
-/* کارت‌های خدمات */
+/* کارت‌ها */
 .services-content .card,
 .bridal-box,
 .booking-step{
-    border-color:rgba(66,96,82,.16);
+    border:1px solid rgba(66,96,82,.38);
 }
 
-/* جزئیات داخلی */
+/* شماره مراحل رزرو */
 .booking-step .step-number{
-    color:rgba(66,96,82,.85);
+    color:var(--elegant-green);
+    font-weight:600;
 }
 
 /* ورودی‌ها */
 .booking-step select,
 .booking-step input{
-    border-color:rgba(66,96,82,.18);
+    border-color:rgba(66,96,82,.38);
 }
 
 .booking-step select:focus,
 .booking-step input:focus{
-    border-color:rgba(66,96,82,.45);
-    box-shadow:0 0 0 3px rgba(66,96,82,.06);
+    border-color:rgba(66,96,82,.70);
+    box-shadow:0 0 0 3px rgba(66,96,82,.10);
 }
 
-/* دکمه‌های ساعت */
+/* ساعت‌ها */
 .time-grid button{
-    border-color:rgba(66,96,82,.16);
+    border-color:rgba(66,96,82,.35);
 }
 
 .time-grid button:hover{
-    border-color:rgba(66,96,82,.38);
+    border-color:var(--elegant-green);
     color:var(--elegant-green);
 }
 
-/* ساعت انتخاب‌شده */
+/* ساعت انتخاب شده */
 .time-grid button.selected,
 .time-grid button.active{
-    border-color:rgba(66,96,82,.55);
+    background:rgba(66,96,82,.10);
+    border-color:var(--elegant-green);
     color:var(--elegant-green);
 }
 
-/* فلش آکاردئون‌ها */
+/* فلش آکاردئون */
 .services-arrow,
 .bridal-arrow{
-    color:rgba(66,96,82,.75);
+    color:var(--elegant-green);
 }
 
-/* د
+/* دکمه‌های بالای صفحه */
+.header .top-buttons .top-btn{
+    border-color:rgba(66,96,82,.38);
+}
+
+.header .top-buttons .top-btn:hover{
+    border-color:var(--elegant-green);
+    color:var(--elegant-green);
+}
+
+/* خط ظریف زیر عنوان رزرو */
+.booking-title::after{
+    content:"";
+    display:block;
+    width:35px;
+    height:2px;
+    margin:10px auto 0;
+    background:var(--elegant-green);
+    opacity:.65;
+    border-radius:10px;
+}
+
+/* هاور کارت خدمات */
+.services-content .card:hover{
+    border-color:rgba(66,96,82,.65);
+}
+
+/* آیتم‌های پکیج عروس */
+.bridal-services span{
+    border-color:rgba(66,96,82,.35);
+}
+
+.bridal-services span:hover{
+    border-color:var(--elegant-green);
+    color:var(--elegant-green);
+}
+
+/* خط بالای فوتر */
+.copyright{
+    border-top-color:rgba(66,96,82,.35);
+}
