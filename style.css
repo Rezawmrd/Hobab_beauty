@@ -1304,14 +1304,14 @@ body{
 }
 
 .logo img{
-    width:120px;
+    width:125px;
     height:auto;
     display:block;
     object-fit:contain;
 }
 
-@media(max-width:800px){
+@media(max-width:805px){
     .logo img{
-        width:105px;
+        width:115px;
     }
 }
