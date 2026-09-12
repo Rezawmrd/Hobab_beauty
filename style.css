@@ -1298,7 +1298,7 @@ body{
 }
 
 .logo img{
-    width:120px;
+    width:90px;
     height:auto;
     display:block;
     object-fit:contain;
@@ -1306,6 +1306,6 @@ body{
 
 @media(max-width:800px){
     .logo img{
-        width:95px;
+        width:72px;
     }
 }
