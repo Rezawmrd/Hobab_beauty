@@ -16,6 +16,43 @@ body{
 
 
 /* =========================
+   SPLASH SCREEN
+========================= */
+
+#splash-screen{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#fff8f6;
+
+    opacity:1;
+    visibility:visible;
+
+    transition:
+        opacity .6s ease,
+        visibility .6s ease;
+}
+
+#splash-screen img{
+    width:220px;
+    max-width:65%;
+    height:auto;
+    display:block;
+}
+
+#splash-screen.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+
+/* =========================
    HEADER
 ========================= */
 
@@ -27,6 +64,7 @@ body{
     display:flex;
     flex-direction:column;
     align-items:center;
+
     gap:18px;
 
     background:rgba(255,255,255,.48);
@@ -45,34 +83,39 @@ body{
 
 
 /* =========================
-   LOGO
+   TEXT LOGO
 ========================= */
 
 .logo{
     display:flex;
+    flex-direction:column;
+
     align-items:center;
     justify-content:center;
 
     width:100%;
+
+    color:#b77b7f;
 }
 
-.logo img{
-    width:145px;
-    height:auto;
-    display:block;
-    object-fit:contain;
+.logo span{
+    font-size:27px;
 
-    filter:
-        drop-shadow(1px 0 0 rgba(201,149,155,.75))
-        drop-shadow(-1px 0 0 rgba(201,149,155,.75))
-        drop-shadow(0 1px 0 rgba(201,149,155,.75))
-        drop-shadow(0 -1px 0 rgba(201,149,155,.75));
+    font-weight:700;
+
+    letter-spacing:5px;
 }
 
-@media(max-width:800px){
-    .logo img{
-        width:125px;
-    }
+.logo small{
+    font-size:10px;
+
+    font-weight:500;
+
+    letter-spacing:7px;
+
+    margin-top:3px;
+
+    opacity:.8;
 }
 
 
@@ -82,16 +125,16 @@ body{
 
 .top-buttons{
     display:flex;
+
     align-items:center;
     justify-content:center;
 
     gap:10px;
 }
 
-
 .header .top-buttons .top-btn{
-
     display:flex;
+
     align-items:center;
     justify-content:center;
 
@@ -125,9 +168,7 @@ body{
     transition:.3s ease;
 }
 
-
 .header .top-buttons .top-btn:hover{
-
     transform:translateY(-3px);
 
     background:rgba(255,255,255,.7);
@@ -147,7 +188,6 @@ body{
 ========================= */
 
 .header .top-buttons .booking-top{
-
     color:white;
 
     background:
@@ -163,9 +203,7 @@ body{
         0 10px 25px rgba(183,123,127,.22);
 }
 
-
 .header .top-buttons .booking-top:hover{
-
     color:white;
 
     transform:translateY(-3px);
@@ -180,65 +218,10 @@ body{
 
 
 /* =========================
-   MOBILE HEADER
-========================= */
-
-@media(max-width:800px){
-
-    .header{
-
-        width:94%;
-
-        margin:12px auto;
-
-        padding:18px 12px 15px;
-
-        gap:14px;
-
-        border-radius:25px;
-    }
-
-
-    .logo img{
-
-        width:125px;
-
-    }
-
-
-    .top-buttons{
-
-        width:100%;
-
-        gap:6px;
-
-    }
-
-
-    .header .top-buttons .top-btn{
-
-        flex:1;
-
-        min-width:0;
-
-        height:38px;
-
-        padding:0 8px;
-
-        border-radius:15px;
-
-        font-size:11px;
-
-    }
-
-}
-
-/* =========================
    SERVICES
 ========================= */
 
 .services{
-
     width:90%;
 
     margin:45px auto 18px;
@@ -246,15 +229,14 @@ body{
     text-align:center;
 }
 
-
 .services-toggle{
-
     width:100%;
     max-width:900px;
 
     padding:19px 24px;
 
     display:flex;
+
     align-items:center;
     justify-content:space-between;
 
@@ -264,7 +246,7 @@ body{
 
     color:#4b3035;
 
-    border:1px solid rgba(255,255,255,.8);
+    border:1px solid rgba(66,96,82,.50);
 
     border-radius:23px;
 
@@ -285,40 +267,38 @@ body{
     transition:.3s ease;
 }
 
-
 .services-toggle:hover{
     transform:translateY(-2px);
 }
 
-
 .services-arrow{
-
     width:30px;
     height:30px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
     border-radius:50%;
 
-    color:#b77b7f;
+    color:#426052;
 
     font-size:23px;
 
     transition:.4s ease;
 }
 
-
 .services-toggle.active .services-arrow{
     transform:rotate(45deg);
 }
 
 
-/* SERVICES CONTENT */
+/* =========================
+   SERVICES CONTENT
+========================= */
 
 .services-content{
-
     max-width:900px;
 
     margin:0 auto;
@@ -335,39 +315,36 @@ body{
         margin-top .5s ease;
 }
 
-
 .services-content.open{
-
-    max-height:900px;
+    max-height:600px;
 
     opacity:1;
 
-    margin-top:16px;
+    margin-top:12px;
 }
 
 
-/* SERVICE CARDS */
+/* =========================
+   SERVICE CARDS
+========================= */
 
 .service-box{
-
     display:grid;
 
     grid-template-columns:
-        repeat(auto-fit,minmax(220px,1fr));
+        repeat(2,1fr);
 
-    gap:16px;
+    gap:10px;
 }
 
-
 .card{
-
     background:rgba(255,255,255,.65);
 
-    padding:27px 20px;
+    padding:18px 15px;
 
-    border-radius:27px;
+    border-radius:20px;
 
-    border:1px solid rgba(255,255,255,.75);
+    border:1px solid rgba(66,96,82,.38);
 
     box-shadow:
         0 15px 35px rgba(180,120,120,.10),
@@ -379,35 +356,31 @@ body{
     transition:.35s ease;
 }
 
-
 .card:hover{
+    transform:translateY(-5px);
 
-    transform:translateY(-6px);
+    border-color:rgba(66,96,82,.65);
 
     box-shadow:
         0 22px 45px rgba(180,120,120,.17);
 }
 
-
 .card h3{
-
-    margin-bottom:10px;
+    margin-bottom:7px;
 
     color:#b77b7f;
 
-    font-size:20px;
+    font-size:17px;
 
     font-weight:600;
 }
 
-
 .card p{
-
-    line-height:2;
+    line-height:1.8;
 
     color:#76565b;
 
-    font-size:14px;
+    font-size:12px;
 }
 
 
@@ -416,7 +389,6 @@ body{
 ========================= */
 
 .bridal-section{
-
     width:90%;
 
     margin:15px auto 50px;
@@ -424,15 +396,14 @@ body{
     text-align:center;
 }
 
-
 .bridal-toggle{
-
     width:100%;
     max-width:900px;
 
     padding:19px 24px;
 
     display:flex;
+
     align-items:center;
     justify-content:space-between;
 
@@ -442,7 +413,7 @@ body{
 
     color:#4b3035;
 
-    border:1px solid rgba(255,255,255,.8);
+    border:1px solid rgba(66,96,82,.50);
 
     border-radius:23px;
 
@@ -463,38 +434,36 @@ body{
     transition:.3s ease;
 }
 
-
 .bridal-toggle:hover{
     transform:translateY(-2px);
 }
 
-
 .bridal-arrow{
-
     width:30px;
     height:30px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
-    color:#b77b7f;
+    color:#426052;
 
     font-size:23px;
 
     transition:.4s ease;
 }
 
-
 .bridal-toggle.active .bridal-arrow{
     transform:rotate(45deg);
 }
 
 
-/* BRIDAL CONTENT */
+/* =========================
+   BRIDAL CONTENT
+========================= */
 
 .bridal-content{
-
     max-width:900px;
 
     margin:0 auto;
@@ -511,19 +480,15 @@ body{
         margin-top .5s ease;
 }
 
-
 .bridal-content.open{
-
     max-height:500px;
 
     opacity:1;
 
-    margin-top:16px;
+    margin-top:12px;
 }
 
-
 .bridal-box{
-
     padding:32px 22px;
 
     border-radius:30px;
@@ -535,15 +500,13 @@ body{
             #fff8f6
         );
 
-    border:1px solid rgba(255,255,255,.8);
+    border:1px solid rgba(66,96,82,.38);
 
     box-shadow:
         0 20px 50px rgba(180,120,120,.12);
 }
 
-
 .bridal-box h2{
-
     color:#b77b7f;
 
     font-size:29px;
@@ -551,9 +514,7 @@ body{
     margin-bottom:13px;
 }
 
-
 .bridal-box p{
-
     max-width:600px;
 
     margin:0 auto 22px;
@@ -565,9 +526,7 @@ body{
     font-size:14px;
 }
 
-
 .bridal-services{
-
     display:flex;
 
     flex-wrap:wrap;
@@ -577,20 +536,26 @@ body{
     gap:9px;
 }
 
-
 .bridal-services span{
-
     padding:8px 14px;
 
     border-radius:18px;
 
     background:rgba(255,255,255,.65);
 
-    border:1px solid rgba(255,255,255,.8);
+    border:1px solid rgba(66,96,82,.35);
 
     color:#6b4b50;
 
     font-size:12px;
+
+    transition:.3s ease;
+}
+
+.bridal-services span:hover{
+    border-color:#426052;
+
+    color:#426052;
 }
 
 
@@ -599,7 +564,6 @@ body{
 ========================= */
 
 .booking{
-
     width:90%;
 
     margin:50px auto 80px;
@@ -615,21 +579,19 @@ body{
             #f7e4df
         );
 
+    border:1px solid rgba(66,96,82,.50);
+
     box-shadow:
         0 25px 60px rgba(180,120,120,.12);
 }
 
-
 .booking-title{
-
     text-align:center;
 
     margin-bottom:40px;
 }
 
-
 .booking-title span{
-
     color:#b77b7f;
 
     font-size:13px;
@@ -637,9 +599,7 @@ body{
     letter-spacing:2px;
 }
 
-
 .booking-title h2{
-
     margin:12px 0;
 
     font-size:37px;
@@ -647,17 +607,30 @@ body{
     color:#4b3035;
 }
 
-
 .booking-title p{
-
     color:#76565b;
 
     font-size:14px;
 }
 
+.booking-title::after{
+    content:"";
+
+    display:block;
+
+    width:35px;
+    height:2px;
+
+    margin:10px auto 0;
+
+    background:#426052;
+
+    opacity:.65;
+
+    border-radius:10px;
+}
 
 .booking-box{
-
     max-width:700px;
 
     margin:auto;
@@ -667,34 +640,30 @@ body{
     gap:18px;
 }
 
-
 .booking-step{
-
     background:rgba(255,255,255,.75);
 
     padding:23px;
 
     border-radius:23px;
 
-    border:1px solid rgba(255,255,255,.8);
+    border:1px solid rgba(66,96,82,.38);
 
     box-shadow:
         0 10px 25px rgba(180,120,120,.07);
 }
 
-
 .step-number{
-
     font-size:12px;
 
-    color:#b77b7f;
+    color:#426052;
 
     letter-spacing:2px;
+
+    font-weight:600;
 }
 
-
 .booking-step h3{
-
     margin:8px 0 15px;
 
     color:#4b3035;
@@ -702,17 +671,15 @@ body{
     font-size:18px;
 }
 
-
 .booking-step select,
 .booking-step input{
-
     width:100%;
 
     padding:14px;
 
     border-radius:14px;
 
-    border:1px solid #ead4d0;
+    border:1px solid rgba(66,96,82,.38);
 
     background:#fffdfc;
 
@@ -725,26 +692,24 @@ body{
     transition:.3s;
 }
 
-
 .booking-step input{
     margin-bottom:9px;
 }
 
-
 .booking-step select:focus,
 .booking-step input:focus{
-
-    border-color:#b77b7f;
+    border-color:rgba(66,96,82,.70);
 
     box-shadow:
-        0 0 0 4px rgba(183,123,127,.08);
+        0 0 0 3px rgba(66,96,82,.10);
 }
 
 
-/* TIME */
+/* =========================
+   TIME
+========================= */
 
 .time-grid{
-
     display:grid;
 
     grid-template-columns:
@@ -753,9 +718,7 @@ body{
     gap:9px;
 }
 
-
 .time-grid button{
-
     width:100%;
 
     padding:11px 7px;
@@ -766,7 +729,7 @@ body{
 
     color:#6b4b50;
 
-    border:1px solid #ead4d0;
+    border:1px solid rgba(66,96,82,.35);
 
     box-shadow:none;
 
@@ -777,34 +740,33 @@ body{
     transition:.3s;
 }
 
-
 .time-grid button:hover{
+    background:rgba(66,96,82,.07);
 
-    background:#f7e4df;
+    color:#426052;
 
-    color:#b77b7f;
-
-    border-color:#d8a1a5;
+    border-color:#426052;
 
     transform:translateY(-2px);
 }
 
-
 .time-grid button.selected{
+    background:rgba(66,96,82,.10);
 
-    background:#b77b7f;
+    color:#426052;
 
-    color:white;
-
-    border-color:#b77b7f;
+    border-color:#426052;
 
     box-shadow:
-        0 8px 20px rgba(183,123,127,.2);
+        0 8px 20px rgba(66,96,82,.12);
 }
 
 
-.booking-button{
+/* =========================
+   BOOKING BUTTON
+========================= */
 
+.booking-button{
     width:100%;
 
     padding:16px;
@@ -836,13 +798,19 @@ body{
     transition:.3s;
 }
 
+.booking-button:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 14px 25px rgba(190,130,130,.28);
+}
+
 
 /* =========================
-   SIMPLE & ELEGANT FOOTER
+   FOOTER
 ========================= */
 
 .footer{
-
     margin-top:35px;
 
     padding:28px 20px 16px;
@@ -854,9 +822,7 @@ body{
     color:white;
 }
 
-
 .footer-logo h2{
-
     font-size:24px;
 
     letter-spacing:6px;
@@ -866,9 +832,7 @@ body{
     font-weight:600;
 }
 
-
 .footer-logo span{
-
     font-size:9px;
 
     letter-spacing:5px;
@@ -876,9 +840,7 @@ body{
     opacity:.75;
 }
 
-
 .footer p{
-
     margin:8px 0 0;
 
     color:#f3dcd7;
@@ -886,73 +848,18 @@ body{
     font-size:12px;
 }
 
-
 .copyright{
-
     margin-top:18px;
 
     padding-top:12px;
 
-    border-top:1px solid rgba(255,255,255,.12);
+    border-top:1px solid rgba(66,96,82,.35);
 
     font-size:10px;
 
     color:#f3dcd7;
 
     opacity:.7;
-}
-
-
-/* موبایل */
-
-@media(max-width:800px){
-
-    .footer{
-
-        margin-top:25px;
-
-        padding:25px 15px 13px;
-
-    }
-
-
-    .footer-logo h2{
-
-        font-size:21px;
-
-        letter-spacing:5px;
-
-    }
-
-
-    .footer-logo span{
-
-        font-size:8px;
-
-        letter-spacing:4px;
-
-    }
-
-
-    .footer p{
-
-        font-size:11px;
-
-        margin-top:7px;
-
-    }
-
-
-    .copyright{
-
-        margin-top:14px;
-
-        padding-top:10px;
-
-        font-size:9px;
-
-    }
-
 }
 
 
@@ -963,33 +870,26 @@ body{
 @media(max-width:800px){
 
     .header{
-
         width:94%;
 
         margin:12px auto;
 
         padding:14px 12px;
 
-        flex-direction:column;
-
         gap:13px;
 
         border-radius:25px;
     }
 
-
     .logo span{
         font-size:23px;
     }
-
 
     .logo small{
         font-size:9px;
     }
 
-
     .top-buttons{
-
         width:100%;
 
         justify-content:center;
@@ -997,10 +897,10 @@ body{
         gap:6px;
     }
 
-
     .header .top-buttons .top-btn{
+        flex:1;
 
-        min-width:auto;
+        min-width:0;
 
         height:37px;
 
@@ -1011,17 +911,17 @@ body{
         font-size:11px;
     }
 
+    #splash-screen img{
+        width:190px;
+    }
 
     .services{
-
         width:92%;
 
         margin:35px auto 14px;
     }
 
-
     .services-toggle{
-
         padding:17px 18px;
 
         font-size:16px;
@@ -1029,49 +929,41 @@ body{
         border-radius:20px;
     }
 
-
     .services-content.open{
-
         margin-top:12px;
     }
 
-
     .service-box{
+        grid-template-columns:1fr 1fr;
 
-        grid-template-columns:1fr;
-
-        gap:12px;
+        gap:8px;
     }
-
 
     .card{
+        padding:16px 10px;
 
-        padding:22px 17px;
-
-        border-radius:23px;
+        border-radius:18px;
     }
-
 
     .card h3{
-        font-size:18px;
-    }
+        font-size:15px;
 
+        margin-bottom:5px;
+    }
 
     .card p{
-        font-size:13px;
+        font-size:11px;
+
+        line-height:1.7;
     }
 
-
     .bridal-section{
-
         width:92%;
 
         margin:10px auto 35px;
     }
 
-
     .bridal-toggle{
-
         padding:17px 18px;
 
         font-size:16px;
@@ -1079,43 +971,31 @@ body{
         border-radius:20px;
     }
 
-
     .bridal-content.open{
-
         margin-top:12px;
     }
 
-
     .bridal-box{
-
         padding:26px 17px;
 
         border-radius:25px;
     }
 
-
     .bridal-box h2{
-
         font-size:25px;
     }
 
-
     .bridal-box p{
-
         font-size:13px;
     }
 
-
     .bridal-services span{
-
         font-size:11px;
 
         padding:7px 10px;
     }
 
-
     .booking{
-
         width:92%;
 
         margin:35px auto 60px;
@@ -1125,238 +1005,73 @@ body{
         border-radius:32px;
     }
 
-
     .booking-title{
-
         margin-bottom:28px;
     }
 
-
     .booking-title h2{
-
         font-size:29px;
     }
 
-
     .booking-title p{
-
         font-size:13px;
 
         line-height:2;
     }
 
-
     .booking-box{
-
         gap:14px;
     }
 
-
     .booking-step{
-
         padding:19px;
 
         border-radius:21px;
     }
 
-
     .booking-step h3{
-
         font-size:16px;
     }
 
-
     .time-grid{
-
         gap:7px;
     }
 
-
     .time-grid button{
-
         padding:10px 5px;
 
         font-size:12px;
     }
 
-
     .footer{
+        padding:25px 15px 13px;
 
-        padding:45px 18px 22px;
-
-        margin-top:40px;
+        margin-top:25px;
     }
 
+    .footer-logo h2{
+        font-size:21px;
 
-    .footer-links{
-
-        flex-direction:column;
-
-        gap:13px;
+        letter-spacing:5px;
     }
 
-}
+    .footer-logo span{
+        font-size:8px;
 
-/* =========================
-   COMPACT SERVICES
-========================= */
-
-.services-content.open{
-    max-height:600px;
-    margin-top:12px;
-}
-
-.services-content .service-box{
-    grid-template-columns:repeat(2, 1fr);
-    gap:10px;
-}
-
-.services-content .card{
-    padding:18px 15px;
-    border-radius:20px;
-}
-
-.services-content .card h3{
-    font-size:17px;
-    margin-bottom:7px;
-}
-
-.services-content .card p{
-    font-size:12px;
-    line-height:1.8;
-}
-
-
-/* موبایل */
-
-@media(max-width:800px){
-
-    .services-content .service-box{
-        grid-template-columns:1fr 1fr;
-        gap:8px;
+        letter-spacing:4px;
     }
 
-    .services-content .card{
-        padding:16px 10px;
-        border-radius:18px;
-    }
-
-    .services-content .card h3{
-        font-size:15px;
-        margin-bottom:5px;
-    }
-
-    .services-content .card p{
+    .footer p{
         font-size:11px;
-        line-height:1.7;
+
+        margin-top:7px;
     }
 
+    .copyright{
+        margin-top:14px;
+
+        padding-top:10px;
+
+        font-size:9px;
+    }
 }
-
-/* =========================
-   ELEGANT GREEN DETAILS
-========================= */
-
-:root{
-    --elegant-green:#426052;
-}
-
-/* باکس‌های اصلی */
-.services-toggle,
-.bridal-toggle,
-.booking{
-    border:1px solid rgba(66,96,82,.50);
-}
-
-/* کارت‌ها */
-.services-content .card,
-.bridal-box,
-.booking-step{
-    border:1px solid rgba(66,96,82,.38);
-}
-
-/* شماره مراحل رزرو */
-.booking-step .step-number{
-    color:var(--elegant-green);
-    font-weight:600;
-}
-
-/* ورودی‌ها */
-.booking-step select,
-.booking-step input{
-    border-color:rgba(66,96,82,.38);
-}
-
-.booking-step select:focus,
-.booking-step input:focus{
-    border-color:rgba(66,96,82,.70);
-    box-shadow:0 0 0 3px rgba(66,96,82,.10);
-}
-
-/* ساعت‌ها */
-.time-grid button{
-    border-color:rgba(66,96,82,.35);
-}
-
-.time-grid button:hover{
-    border-color:var(--elegant-green);
-    color:var(--elegant-green);
-}
-
-/* ساعت انتخاب شده */
-.time-grid button.selected,
-.time-grid button.active{
-    background:rgba(66,96,82,.10);
-    border-color:var(--elegant-green);
-    color:var(--elegant-green);
-}
-
-/* فلش آکاردئون */
-.services-arrow,
-.bridal-arrow{
-    color:var(--elegant-green);
-}
-
-/* دکمه‌های بالای صفحه */
-.header .top-buttons .top-btn{
-    border-color:rgba(66,96,82,.38);
-}
-
-.header .top-buttons .top-btn:hover{
-    border-color:var(--elegant-green);
-    color:var(--elegant-green);
-}
-
-/* خط ظریف زیر عنوان رزرو */
-.booking-title::after{
-    content:"";
-    display:block;
-    width:35px;
-    height:2px;
-    margin:10px auto 0;
-    background:var(--elegant-green);
-    opacity:.65;
-    border-radius:10px;
-}
-
-/* هاور کارت خدمات */
-.services-content .card:hover{
-    border-color:rgba(66,96,82,.65);
-}
-
-/* آیتم‌های پکیج عروس */
-.bridal-services span{
-    border-color:rgba(66,96,82,.35);
-}
-
-.bridal-services span:hover{
-    border-color:var(--elegant-green);
-    color:var(--elegant-green);
-}
-
-/* خط بالای فوتر */
-.copyright{
-    border-top-color:rgba(66,96,82,.35);
-}
-
-
