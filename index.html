@@ -18,12 +18,6 @@
         rel="stylesheet"
     >
 
-    <!-- Persian Datepicker CSS -->
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css"
-    >
-
 </head>
 
 
@@ -594,88 +588,11 @@
 
 
 
-<!-- =========================
-     JAVASCRIPT LIBRARIES
-========================= -->
-
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/persian-date@1.1.0/dist/persian-date.min.js"></script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
-
-
-
 <!-- Main JavaScript -->
 
 <script src="script.js"></script>
 
 
-
-<!-- =========================
-     PERSIAN DATEPICKER
-========================= -->
-
-<script>
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const dateInput = document.getElementById("date");
-
-
-    if (dateInput && typeof $ !== "undefined" && $.fn.pDatepicker) {
-
-        $(dateInput).pDatepicker({
-
-            format: "YYYY/MM/DD",
-
-            calendarType: "persian",
-
-            autoClose: true,
-
-            initialValue: false,
-
-            observer: false,
-
-            toolbox: {
-
-                enabled: true,
-
-                todayButton: {
-
-                    enabled: true
-
-                },
-
-                submitButton: {
-
-                    enabled: false
-
-                },
-
-                calendarSwitch: {
-
-                    enabled: false
-
-                }
-
-            },
-
-            navigator: {
-
-                enabled: true
-
-            }
-
-        });
-
-    }
-
-});
-
-</script>
 
 
 </body>
