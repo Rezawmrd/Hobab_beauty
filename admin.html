@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>پنل مدیریت | Hobab Beauty</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Vazirmatn',sans-serif;
+            background:#fff8f6;
+            color:#4b3035;
+            min-height:100vh;
+        }
+
+        .admin-header{
+            padding:22px 18px;
+            text-align:center;
+            border-bottom:1px solid rgba(150,110,110,.15);
+            background:rgba(255,255,255,.7);
+            backdrop-filter:blur(15px);
+        }
+
+        .admin-header h1{
+            font-size:22px;
+            font-weight:700;
+        }
+
+        .admin-header p{
+            margin-top:5px;
+            font-size:13px;
+            color:#94777c;
+        }
+
+        .container{
+            width:min(1100px,92%);
+            margin:25px auto;
+        }
+
+        .stats{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:14px;
+            margin-bottom:22px;
+        }
+
+        .stat{
+            background:rgba(255,255,255,.75);
+            border:1px solid rgba(150,110,110,.13);
+            border-radius:20px;
+            padding:20px;
+            text-align:center;
+            box-shadow:0 10px 30px rgba(100,60,60,.06);
+        }
+
+        .stat span{
+            display:block;
+            font-size:28px;
+            font-weight:700;
+            margin-bottom:5px;
+        }
+
+        .stat small{
+            color:#94777c;
+            font-size:12px;
+        }
+
+        .panel{
+            background:rgba(255,255,255,.8);
+            border:1px solid rgba(150,110,110,.13);
+            border-radius:24px;
+            padding:20px;
+            box-shadow:0 10px 35px rgba(100,60,60,.06);
+        }
+
+        .panel-top{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:12px;
+            margin-bottom:18px;
+        }
+
+        .panel-top h2{
+            font-size:18px;
+        }
+
+        .refresh-btn{
+            border:none;
+            background:#7d555d;
+            color:white;
+            padding:10px 16px;
+            border-radius:12px;
+            font-family:inherit;
+            cursor:pointer;
+        }
+
+        .filters{
+            display:flex;
+            gap:10px;
+            flex-wrap:wrap;
+            margin-bottom:18px;
+        }
+
+        .filters select,
+        .filters input{
+            flex:1;
+            min-width:150px;
+            padding:11px 13px;
+            border:1px solid #e2d5d5;
+            border-radius:12px;
+            background:#fff;
+            color:#4b3035;
+            font-family:inherit;
+            outline:none;
+        }
+
+        .appointments{
+            display:grid;
+            gap:12px;
+        }
+
+        .appointment{
+            border:1px solid #eadede;
+            border-radius:17px;
+            padding:16px;
+            background:#fff;
+        }
+
+        .appointment-head{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:10px;
+            margin-bottom:12px;
+        }
+
+        .appointment-name{
+            font-weight:700;
+        }
+
+        .appointment-time{
+            background:#f5e8e8;
+            color:#704b53;
+            padding:6px 10px;
+            border-radius:10px;
+            font-size:12px;
+            white-space:nowrap;
+        }
+
+        .appointment-info{
+            display:grid;
+            gap:7px;
+            font-size:13px;
+            color:#725b60;
+        }
+
+        .appointment-info strong{
+            color:#4b3035;
+        }
+
+        .description{
+            margin-top:12px;
+            padding-top:12px;
+            border-top:1px solid #eee4e4;
+            font-size:13px;
+            line-height:1.8;
+            color:#765f64;
+        }
+
+        .empty{
+            text-align:center;
+            padding:45px 15px;
+            color:#a48d91;
+            font-size:14px;
+        }
+
+        .loading{
+            text-align:center;
+            padding:35px;
+            color:#94777c;
+        }
+
+        @media(max-width:650px){
+
+            .stats{
+                grid-template-columns:1fr;
+            }
+
+            .stat{
+                padding:15px;
+            }
+
+            .panel{
+                padding:14px;
+            }
+
+            .panel-top{
+                align-items:flex-start;
+            }
+
+            .appointment-head{
+                align-items:flex-start;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="admin-header">
+    <h1>Hobab Beauty</h1>
+    <p>پنل مدیریت نوبت‌ها</p>
+</header>
+
+<main class="container">
+
+    <section class="stats">
+
+        <div class="stat">
+            <span id="todayCount">۰</span>
+            <small>نوبت‌های امروز</small>
+        </div>
+
+        <div class="stat">
+            <span id="futureCount">۰</span>
+            <small>نوبت‌های آینده</small>
+        </div>
+
+        <div class="stat">
+            <span id="totalCount">۰</span>
+            <small>کل نوبت‌ها</small>
+        </div>
+
+    </section>
+
+    <section class="panel">
+
+        <div class="panel-top">
+            <h2>نوبت‌ها</h2>
+
+            <button class="refresh-btn" id="refreshBtn">
+                بروزرسانی
+            </button>
+        </div>
+
+        <div class="filters">
+
+            <select id="filter">
+                <option value="all">همه نوبت‌ها</option>
+                <option value="today">امروز</option>
+                <option value="future">آینده</option>
+            </select>
+
+            <input
+                type="text"
+                id="search"
+                placeholder="جستجوی نام یا شماره..."
+            >
+
+        </div>
+
+        <div id="appointments" class="appointments">
+            <div class="loading">
+                در حال دریافت نوبت‌ها...
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+    "https://oeadtawmcbzblkmfqmbd.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_1t6kJsgr3IwQkWptFgJ1Iw_Fj1FB4U2";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+const appointmentsEl =
+    document.getElementById("appointments");
+
+const todayCount =
+    document.getElementById("todayCount");
+
+const futureCount =
+    document.getElementById("futureCount");
+
+const totalCount =
+    document.getElementById("totalCount");
+
+const filter =
+    document.getElementById("filter");
+
+const search =
+    document.getElementById("search");
+
+const refreshBtn =
+    document.getElementById("refreshBtn");
+
+
+let appointments = [];
+
+
+function todayJalali(){
+
+    const now = new Date();
+
+    const formatter =
+        new Intl.DateTimeFormat(
+            "fa-IR-u-ca-persian",
+            {
+                year:"numeric",
+                month:"2-digit",
+                day:"2-digit"
+            }
+        );
+
+    return formatter.format(now)
+        .replace(/[۰-۹]/g, d =>
+            "۰۱۲۳۴۵۶۷۸۹".indexOf(d)
+        );
+
+}
+
+
+async function loadAppointments(){
+
+    appointmentsEl.innerHTML =
+        `<div class="loading">در حال دریافت نوبت‌ها...</div>`;
+
+    const { data, error } =
+        await supabaseClient
+            .from("appointments")
+            .select("*")
+            .order("date", { ascending:true })
+            .order("time", { ascending:true });
+
+    if(error){
+
+        console.error(error);
+
+        appointmentsEl.innerHTML =
+            `<div class="empty">
+                دریافت نوبت‌ها با خطا مواجه شد.
+            </div>`;
+
+        return;
+    }
+
+    appointments = data || [];
+
+    updateStats();
+
+    renderAppointments();
+
+}
+
+
+function updateStats(){
+
+    const today =
+        todayJalali();
+
+    const todayAppointments =
+        appointments.filter(a =>
+            a.date === today
+        );
+
+    const futureAppointments =
+        appointments.filter(a =>
+            a.date >= today
+        );
+
+    todayCount.textContent =
+        toPersianDigits(todayAppointments.length);
+
+    futureCount.textContent =
+        toPersianDigits(futureAppointments.length);
+
+    totalCount.textContent =
+        toPersianDigits(appointments.length);
+
+}
+
+
+function renderAppointments(){
+
+    let list =
+        [...appointments];
+
+    const selectedFilter =
+        filter.value;
+
+    const today =
+        todayJalali();
+
+    if(selectedFilter === "today"){
+
+        list =
+            list.filter(a =>
+                a.date === today
+            );
+
+    }
+
+    if(selectedFilter === "future"){
+
+        list =
+            list.filter(a =>
+                a.date >= today
+            );
+
+    }
+
+
+    const query =
+        search.value.trim().toLowerCase();
+
+    if(query){
+
+        list =
+            list.filter(a =>
+                String(a.name || "")
+                    .toLowerCase()
+                    .includes(query)
+                ||
+                String(a.phone || "")
+                    .toLowerCase()
+                    .includes(query)
+            );
+
+    }
+
+
+    if(!list.length){
+
+        appointmentsEl.innerHTML =
+            `<div class="empty">
+                نوبتی پیدا نشد.
+            </div>`;
+
+        return;
+    }
+
+
+    appointmentsEl.innerHTML =
+        list.map(a => `
+
+            <article class="appointment">
+
+                <div class="appointment-head">
+
+                    <div class="appointment-name">
+                        ${escapeHtml(a.name || "بدون نام")}
+                    </div>
+
+                    <div class="appointment-time">
+                        ${escapeHtml(a.date || "")}
+                        -
+                        ${escapeHtml(a.time || "")}
+                    </div>
+
+                </div>
+
+
+                <div class="appointment-info">
+
+                    <div>
+                        <strong>خدمت:</strong>
+                        ${escapeHtml(a.service || "-")}
+                    </div>
+
+                    <div>
+                        <strong>تلفن:</strong>
+                        ${escapeHtml(a.phone || "-")}
+                    </div>
+
+                </div>
+
+
+                <div class="description">
+
+                    <strong>توضیحات:</strong><br>
+
+                    ${escapeHtml(a.description || "-")}
+
+                </div>
+
+            </article>
+
+        `).join("");
+
+}
+
+
+function escapeHtml(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function toPersianDigits(value){
+
+    return String(value)
+        .replace(/\d/g, d =>
+            "۰۱۲۳۴۵۶۷۸۹"[d]
+        );
+
+}
+
+
+filter.addEventListener(
+    "change",
+    renderAppointments
+);
+
+search.addEventListener(
+    "input",
+    renderAppointments
+);
+
+refreshBtn.addEventListener(
+    "click",
+    loadAppointments
+);
+
+
+loadAppointments();
+
+</script>
+
+</body>
+</html>
