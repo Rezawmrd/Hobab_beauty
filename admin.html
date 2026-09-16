@@ -32,7 +32,6 @@
             min-height:100vh;
         }
 
-
         /* =========================
            LOGIN
         ========================= */
@@ -97,7 +96,6 @@
             min-height:18px;
         }
 
-
         /* =========================
            ADMIN
         ========================= */
@@ -146,12 +144,10 @@
             cursor:pointer;
         }
 
-
         .container{
             width:min(1100px,94%);
             margin:25px auto 50px;
         }
-
 
         /* =========================
            CATEGORIES
@@ -164,8 +160,7 @@
 
         .categories{
             display:grid;
-            grid-template-columns:
-                repeat(4,1fr);
+            grid-template-columns:repeat(4,1fr);
             gap:12px;
         }
 
@@ -204,7 +199,6 @@
             font-size:11px;
             opacity:.7;
         }
-
 
         /* =========================
            APPOINTMENTS
@@ -294,6 +288,55 @@
             color:#755f64;
         }
 
+        /* =========================
+           ACTIONS
+        ========================= */
+
+        .appointment-actions{
+            display:flex;
+            gap:9px;
+            margin-top:15px;
+            padding-top:14px;
+            border-top:1px solid #eee4e4;
+        }
+
+        .call-btn,
+        .delete-btn{
+            flex:1;
+            border:none;
+            border-radius:11px;
+            padding:11px 12px;
+            font-family:inherit;
+            font-size:13px;
+            cursor:pointer;
+            text-decoration:none;
+            text-align:center;
+            transition:.2s;
+        }
+
+        .call-btn{
+            background:#f1e8e8;
+            color:#6f4b53;
+        }
+
+        .call-btn:hover{
+            background:#e9dddd;
+        }
+
+        .delete-btn{
+            background:#f7e5e5;
+            color:#b04f5b;
+        }
+
+        .delete-btn:hover{
+            background:#f0d8d8;
+        }
+
+        .delete-btn:disabled{
+            opacity:.6;
+            cursor:not-allowed;
+        }
+
         .empty{
             text-align:center;
             padding:45px 10px;
@@ -308,16 +351,18 @@
             font-size:13px;
         }
 
-
         @media(max-width:700px){
 
             .categories{
-                grid-template-columns:
-                    repeat(2,1fr);
+                grid-template-columns:repeat(2,1fr);
             }
 
             .appointments-panel{
                 padding:15px;
+            }
+
+            .appointment-actions{
+                flex-direction:row;
             }
 
         }
@@ -349,14 +394,12 @@
             پنل مدیریت سالن زیبایی
         </div>
 
-
         <input
             type="email"
             id="email"
             placeholder="ایمیل مدیر"
             autocomplete="email"
         >
-
 
         <input
             type="password"
@@ -365,11 +408,9 @@
             autocomplete="current-password"
         >
 
-
         <button id="loginBtn">
             ورود به پنل
         </button>
-
 
         <div
             class="login-error"
@@ -381,7 +422,6 @@
 </section>
 
 
-
 <!-- =========================
      ADMIN PAGE
 ========================= -->
@@ -390,7 +430,6 @@
     class="admin-page"
     id="adminPage"
 >
-
 
 <header class="header">
 
@@ -408,7 +447,6 @@
 
         </div>
 
-
         <button
             class="logout"
             id="logoutBtn"
@@ -421,9 +459,7 @@
 </header>
 
 
-
 <main class="container">
-
 
     <h2 class="section-title">
         بخش خدمات
@@ -432,13 +468,11 @@
 
     <div class="categories">
 
-
         <button
             class="category active"
             data-service="hair"
             data-name="مو"
         >
-
             <span class="category-name">
                 مو
             </span>
@@ -446,7 +480,6 @@
             <span class="category-count">
                 ۰ نوبت
             </span>
-
         </button>
 
 
@@ -455,7 +488,6 @@
             data-service="makeup"
             data-name="میکاپ"
         >
-
             <span class="category-name">
                 میکاپ
             </span>
@@ -463,7 +495,6 @@
             <span class="category-count">
                 ۰ نوبت
             </span>
-
         </button>
 
 
@@ -472,7 +503,6 @@
             data-service="nail"
             data-name="ناخن"
         >
-
             <span class="category-name">
                 ناخن
             </span>
@@ -480,7 +510,6 @@
             <span class="category-count">
                 ۰ نوبت
             </span>
-
         </button>
 
 
@@ -489,7 +518,6 @@
             data-service="lash"
             data-name="مژه"
         >
-
             <span class="category-name">
                 مژه
             </span>
@@ -497,7 +525,6 @@
             <span class="category-count">
                 ۰ نوبت
             </span>
-
         </button>
 
 
@@ -506,7 +533,6 @@
             data-service="brow"
             data-name="ابرو"
         >
-
             <span class="category-name">
                 ابرو
             </span>
@@ -514,7 +540,6 @@
             <span class="category-count">
                 ۰ نوبت
             </span>
-
         </button>
 
 
@@ -523,7 +548,6 @@
             data-service="skin"
             data-name="مراقبت پوست"
         >
-
             <span class="category-name">
                 مراقبت پوست
             </span>
@@ -531,7 +555,6 @@
             <span class="category-count">
                 ۰ نوبت
             </span>
-
         </button>
 
 
@@ -540,7 +563,6 @@
             data-service="bridal"
             data-name="عروس"
         >
-
             <span class="category-name">
                 عروس
             </span>
@@ -548,23 +570,18 @@
             <span class="category-count">
                 ۰ نوبت
             </span>
-
         </button>
-
 
     </div>
 
 
-
     <section class="appointments-panel">
-
 
         <div class="appointments-head">
 
             <h2 id="appointmentsTitle">
                 نوبت‌های مو
             </h2>
-
 
             <button
                 class="refresh"
@@ -587,14 +604,12 @@
 
         </div>
 
-
     </section>
 
 
 </main>
 
 </section>
-
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -666,7 +681,6 @@ const serviceNames = {
     bridal:"عروس"
 
 };
-
 
 
 /* =========================
@@ -763,7 +777,6 @@ loginBtn.addEventListener(
 );
 
 
-
 /* =========================
    LOGOUT
 ========================= */
@@ -780,7 +793,6 @@ logoutBtn.addEventListener(
 
     }
 );
-
 
 
 /* =========================
@@ -813,7 +825,6 @@ async function showAdmin(){
     await loadAppointments();
 
 }
-
 
 
 /* =========================
@@ -873,7 +884,6 @@ async function loadAppointments(){
 }
 
 
-
 /* =========================
    COUNTS
 ========================= */
@@ -908,7 +918,6 @@ function updateCounts(){
     );
 
 }
-
 
 
 /* =========================
@@ -953,7 +962,6 @@ categories.forEach(
 );
 
 
-
 /* =========================
    RENDER
 ========================= */
@@ -981,9 +989,27 @@ function renderAppointments(){
 
     appointmentList.innerHTML =
         filtered.map(
-            appointment => `
+            appointment => {
 
-                <article class="appointment">
+                const phone =
+                    String(
+                        appointment.phone || ""
+                    ).trim();
+
+                const safePhone =
+                    phone.replace(
+                        /[^0-9+]/g,
+                        ""
+                    );
+
+                return `
+
+                <article
+                    class="appointment"
+                    data-id="${escapeHtml(
+                        appointment.id
+                    )}"
+                >
 
                     <div class="appointment-top">
 
@@ -1055,13 +1081,134 @@ function renderAppointments(){
 
                     </div>
 
+
+                    <div class="appointment-actions">
+
+                        <a
+                            class="call-btn"
+                            href="tel:${escapeHtml(
+                                safePhone
+                            )}"
+                        >
+                            تماس با مشتری
+                        </a>
+
+
+                        <button
+                            type="button"
+                            class="delete-btn"
+                            onclick="deleteAppointment('${escapeHtml(
+                                appointment.id
+                            )}')"
+                        >
+                            حذف نوبت
+                        </button>
+
+                    </div>
+
                 </article>
 
-            `
+                `;
+
+            }
         ).join("");
 
 }
 
+
+/* =========================
+   DELETE APPOINTMENT
+========================= */
+
+async function deleteAppointment(id){
+
+    const appointment =
+        appointments.find(
+            item =>
+                String(item.id) === String(id)
+        );
+
+
+    if(!appointment){
+
+        alert("نوبت موردنظر پیدا نشد.");
+
+        return;
+    }
+
+
+    const customerName =
+        appointment.name || "این مشتری";
+
+
+    const confirmed =
+        confirm(
+            `آیا مطمئن هستید نوبت «${customerName}» حذف شود؟`
+        );
+
+
+    if(!confirmed){
+
+        return;
+    }
+
+
+    const deleteButtons =
+        document.querySelectorAll(
+            `.delete-btn`
+        );
+
+
+    deleteButtons.forEach(
+        button => {
+
+            button.disabled = true;
+
+        }
+    );
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("appointments")
+            .delete()
+            .eq("id", id);
+
+
+    if(error){
+
+        console.error(error);
+
+        deleteButtons.forEach(
+            button => {
+
+                button.disabled = false;
+
+            }
+        );
+
+        alert(
+            "حذف نوبت انجام نشد."
+        );
+
+        return;
+    }
+
+
+    appointments =
+        appointments.filter(
+            item =>
+                String(item.id) !== String(id)
+        );
+
+
+    updateCounts();
+
+    renderAppointments();
+
+}
 
 
 /* =========================
@@ -1072,7 +1219,6 @@ refreshBtn.addEventListener(
     "click",
     loadAppointments
 );
-
 
 
 /* =========================
@@ -1126,6 +1272,10 @@ function toPersianDigits(value){
 
 }
 
+
+/* =========================
+   AUTH STATE
+========================= */
 
 supabaseClient.auth.onAuthStateChange(
     function(
