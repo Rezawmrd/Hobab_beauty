@@ -2187,3 +2187,26 @@ body.booking-message-open{
     }
 
 }
+
+/* =========================================================
+   BOOKED TIME
+========================================================= */
+
+.time-grid button.booked{
+    background:#f0eded !important;
+    color:#aaa !important;
+    border-color:#d8d1d1 !important;
+    cursor:not-allowed !important;
+    opacity:.65;
+    text-decoration:line-through;
+    transform:none !important;
+    box-shadow:none !important;
+}
+
+.time-grid button.booked:hover{
+    background:#f0eded !important;
+    color:#aaa !important;
+    border-color:#d8d1d1 !important;
+    transform:none !important;
+    box-shadow:none !important;
+}
