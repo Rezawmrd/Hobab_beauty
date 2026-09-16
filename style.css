@@ -12,9 +12,6 @@ body{
     font-family:'Vazirmatn',sans-serif;
     background:#fff8f6;
     color:#4b3035;
-
-    animation:
-        pageReveal .9s cubic-bezier(.22,.61,.36,1) both;
 }
 
 
@@ -33,6 +30,20 @@ body{
         opacity:1;
         transform:translateY(0);
     }
+}
+
+
+/*
+   مهم:
+   انیمیشن روی body نیست.
+   چون transform روی body باعث خراب شدن position:fixed می‌شد.
+*/
+
+body > *:not(.booking-message-overlay):not(.jalali-calendar-overlay){
+    animation:
+        pageReveal .9s
+        cubic-bezier(.22,.61,.36,1)
+        both;
 }
 
 
@@ -1823,27 +1834,32 @@ body.calendar-open{
 
 /* =========================================================
    BOOKING SUCCESS / ERROR MODAL
-   FIXED VIEWPORT VERSION
 ========================================================= */
 
 .booking-message-overlay{
 
     position:fixed !important;
 
-    top:0 !important;
-    left:0 !important;
-    right:0 !important;
-    bottom:0 !important;
+    inset:0 !important;
+
+    margin:0 !important;
+
+    transform:none !important;
+
+    contain:none !important;
 
     width:100vw !important;
+
     height:100vh !important;
+
     height:100dvh !important;
 
-    z-index:999999 !important;
+    z-index:2147483647 !important;
 
     display:flex;
 
     align-items:center;
+
     justify-content:center;
 
     padding:20px;
@@ -1851,10 +1867,13 @@ body.calendar-open{
     background:rgba(45,28,31,.38);
 
     backdrop-filter:blur(9px);
+
     -webkit-backdrop-filter:blur(9px);
 
     opacity:0;
+
     visibility:hidden;
+
     pointer-events:none;
 
     transition:
@@ -1865,11 +1884,11 @@ body.calendar-open{
 
 .booking-message-overlay.open{
 
-    opacity:1;
+    opacity:1 !important;
 
-    visibility:visible;
+    visibility:visible !important;
 
-    pointer-events:auto;
+    pointer-events:auto !important;
 }
 
 
@@ -1926,6 +1945,7 @@ body.calendar-open{
 .booking-message-icon{
 
     width:70px;
+
     height:70px;
 
     margin:0 auto 18px;
@@ -1933,11 +1953,13 @@ body.calendar-open{
     display:flex;
 
     align-items:center;
+
     justify-content:center;
 
     border-radius:50%;
 
     font-size:34px;
+
     font-weight:700;
 
     color:#fff;
@@ -2112,6 +2134,7 @@ body.booking-message-open{
         width:100vw !important;
 
         height:100vh !important;
+
         height:100dvh !important;
     }
 
@@ -2131,6 +2154,7 @@ body.booking-message-open{
     .booking-message-icon{
 
         width:64px;
+
         height:64px;
 
         font-size:30px;
