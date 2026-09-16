@@ -1650,3 +1650,25 @@ body.calendar-open {
 .time-grid button.selected {
     border-color: #4f6c54;
 }
+
+
+/* کادر توضیحات رزرو */
+.booking-step textarea {
+    width: 100%;
+    min-height: 52px;
+    height: 52px;
+    box-sizing: border-box;
+    resize: none;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 14px 16px;
+    border: 1px solid rgba(79, 108, 84, 0.35);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.35);
+    color: inherit;
+    outline: none;
+}
+
+.booking-step textarea:focus {
+    border-color: rgba(79, 108, 84, 0.75);
+}
