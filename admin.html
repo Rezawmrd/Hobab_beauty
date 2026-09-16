@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>پنل مدیریت | Hobab Beauty</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>پنل مدیریت | HOBAB BEAUTY</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
     <style>
+
         *{
             margin:0;
             padding:0;
@@ -25,146 +32,253 @@
             min-height:100vh;
         }
 
-        .admin-header{
-            padding:22px 18px;
-            text-align:center;
-            border-bottom:1px solid rgba(150,110,110,.15);
-            background:rgba(255,255,255,.7);
-            backdrop-filter:blur(15px);
-        }
 
-        .admin-header h1{
-            font-size:22px;
-            font-weight:700;
-        }
+        /* =========================
+           LOGIN
+        ========================= */
 
-        .admin-header p{
-            margin-top:5px;
-            font-size:13px;
-            color:#94777c;
-        }
-
-        .container{
-            width:min(1100px,92%);
-            margin:25px auto;
-        }
-
-        .stats{
-            display:grid;
-            grid-template-columns:repeat(3,1fr);
-            gap:14px;
-            margin-bottom:22px;
-        }
-
-        .stat{
-            background:rgba(255,255,255,.75);
-            border:1px solid rgba(150,110,110,.13);
-            border-radius:20px;
-            padding:20px;
-            text-align:center;
-            box-shadow:0 10px 30px rgba(100,60,60,.06);
-        }
-
-        .stat span{
-            display:block;
-            font-size:28px;
-            font-weight:700;
-            margin-bottom:5px;
-        }
-
-        .stat small{
-            color:#94777c;
-            font-size:12px;
-        }
-
-        .panel{
-            background:rgba(255,255,255,.8);
-            border:1px solid rgba(150,110,110,.13);
-            border-radius:24px;
-            padding:20px;
-            box-shadow:0 10px 35px rgba(100,60,60,.06);
-        }
-
-        .panel-top{
+        .login-page{
+            min-height:100vh;
             display:flex;
-            justify-content:space-between;
             align-items:center;
-            gap:12px;
-            margin-bottom:18px;
+            justify-content:center;
+            padding:20px;
         }
 
-        .panel-top h2{
-            font-size:18px;
+        .login-box{
+            width:min(400px,100%);
+            background:rgba(255,255,255,.82);
+            border:1px solid rgba(130,90,90,.13);
+            border-radius:28px;
+            padding:32px 25px;
+            box-shadow:0 20px 60px rgba(90,50,50,.08);
+            text-align:center;
         }
 
-        .refresh-btn{
+        .login-logo{
+            font-size:27px;
+            font-weight:700;
+            letter-spacing:2px;
+        }
+
+        .login-sub{
+            margin-top:5px;
+            color:#9b7b81;
+            font-size:13px;
+        }
+
+        .login-box input{
+            width:100%;
+            margin-top:14px;
+            padding:14px;
+            border:1px solid #e4d8d8;
+            border-radius:14px;
+            outline:none;
+            font-family:inherit;
+            background:#fff;
+        }
+
+        .login-box button{
+            width:100%;
+            margin-top:16px;
+            padding:14px;
             border:none;
-            background:#7d555d;
-            color:white;
-            padding:10px 16px;
-            border-radius:12px;
+            border-radius:14px;
+            background:#76535b;
+            color:#fff;
             font-family:inherit;
             cursor:pointer;
         }
 
-        .filters{
+        .login-error{
+            color:#b44e5b;
+            font-size:12px;
+            margin-top:12px;
+            min-height:18px;
+        }
+
+
+        /* =========================
+           ADMIN
+        ========================= */
+
+        .admin-page{
+            display:none;
+            min-height:100vh;
+        }
+
+        .header{
+            padding:22px 18px;
+            background:rgba(255,255,255,.78);
+            border-bottom:1px solid rgba(130,90,90,.12);
+            backdrop-filter:blur(15px);
+            position:sticky;
+            top:0;
+            z-index:10;
+        }
+
+        .header-inner{
+            width:min(1100px,94%);
+            margin:auto;
             display:flex;
-            gap:10px;
-            flex-wrap:wrap;
-            margin-bottom:18px;
+            align-items:center;
+            justify-content:space-between;
+            gap:15px;
         }
 
-        .filters select,
-        .filters input{
-            flex:1;
-            min-width:150px;
-            padding:11px 13px;
-            border:1px solid #e2d5d5;
-            border-radius:12px;
-            background:#fff;
-            color:#4b3035;
+        .brand h1{
+            font-size:21px;
+        }
+
+        .brand p{
+            font-size:12px;
+            color:#9b7b81;
+            margin-top:3px;
+        }
+
+        .logout{
+            border:none;
+            padding:9px 14px;
+            border-radius:11px;
+            background:#f2e7e7;
+            color:#6f4b53;
             font-family:inherit;
-            outline:none;
+            cursor:pointer;
         }
 
-        .appointments{
+
+        .container{
+            width:min(1100px,94%);
+            margin:25px auto 50px;
+        }
+
+
+        /* =========================
+           CATEGORIES
+        ========================= */
+
+        .section-title{
+            font-size:18px;
+            margin-bottom:14px;
+        }
+
+        .categories{
+            display:grid;
+            grid-template-columns:
+                repeat(4,1fr);
+            gap:12px;
+        }
+
+        .category{
+            border:1px solid #eadede;
+            background:rgba(255,255,255,.8);
+            border-radius:20px;
+            padding:19px 12px;
+            font-family:inherit;
+            color:#5a3b42;
+            cursor:pointer;
+            transition:.2s;
+            text-align:center;
+        }
+
+        .category:hover{
+            transform:translateY(-2px);
+        }
+
+        .category.active{
+            background:#76535b;
+            color:#fff;
+            border-color:#76535b;
+            box-shadow:0 10px 25px rgba(100,65,70,.15);
+        }
+
+        .category-name{
+            display:block;
+            font-size:15px;
+            font-weight:600;
+        }
+
+        .category-count{
+            display:block;
+            margin-top:6px;
+            font-size:11px;
+            opacity:.7;
+        }
+
+
+        /* =========================
+           APPOINTMENTS
+        ========================= */
+
+        .appointments-panel{
+            margin-top:25px;
+            background:rgba(255,255,255,.8);
+            border:1px solid #eadede;
+            border-radius:24px;
+            padding:20px;
+        }
+
+        .appointments-head{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:10px;
+            margin-bottom:17px;
+        }
+
+        .appointments-head h2{
+            font-size:18px;
+        }
+
+        .refresh{
+            border:none;
+            background:#f2e7e7;
+            color:#6f4b53;
+            padding:9px 13px;
+            border-radius:11px;
+            font-family:inherit;
+            cursor:pointer;
+        }
+
+        .appointment-list{
             display:grid;
             gap:12px;
         }
 
         .appointment{
-            border:1px solid #eadede;
+            border:1px solid #eee2e2;
             border-radius:17px;
             padding:16px;
             background:#fff;
         }
 
-        .appointment-head{
+        .appointment-top{
             display:flex;
             justify-content:space-between;
-            align-items:center;
+            align-items:flex-start;
             gap:10px;
-            margin-bottom:12px;
         }
 
         .appointment-name{
             font-weight:700;
+            font-size:15px;
         }
 
         .appointment-time{
-            background:#f5e8e8;
+            background:#f5e9e9;
             color:#704b53;
             padding:6px 10px;
-            border-radius:10px;
+            border-radius:9px;
             font-size:12px;
             white-space:nowrap;
         }
 
         .appointment-info{
+            margin-top:12px;
             display:grid;
             gap:7px;
             font-size:13px;
-            color:#725b60;
+            color:#735d62;
         }
 
         .appointment-info strong{
@@ -172,118 +286,319 @@
         }
 
         .description{
+            border-top:1px solid #eee4e4;
             margin-top:12px;
             padding-top:12px;
-            border-top:1px solid #eee4e4;
             font-size:13px;
             line-height:1.8;
-            color:#765f64;
+            color:#755f64;
         }
 
         .empty{
             text-align:center;
-            padding:45px 15px;
+            padding:45px 10px;
             color:#a48d91;
-            font-size:14px;
+            font-size:13px;
         }
 
         .loading{
             text-align:center;
             padding:35px;
-            color:#94777c;
+            color:#9a7c82;
+            font-size:13px;
         }
 
-        @media(max-width:650px){
 
-            .stats{
-                grid-template-columns:1fr;
+        @media(max-width:700px){
+
+            .categories{
+                grid-template-columns:
+                    repeat(2,1fr);
             }
 
-            .stat{
+            .appointments-panel{
                 padding:15px;
             }
 
-            .panel{
-                padding:14px;
-            }
-
-            .panel-top{
-                align-items:flex-start;
-            }
-
-            .appointment-head{
-                align-items:flex-start;
-            }
-
         }
+
     </style>
+
 </head>
+
 
 <body>
 
-<header class="admin-header">
-    <h1>Hobab Beauty</h1>
-    <p>پنل مدیریت نوبت‌ها</p>
+
+<!-- =========================
+     LOGIN
+========================= -->
+
+<section
+    class="login-page"
+    id="loginPage"
+>
+
+    <div class="login-box">
+
+        <div class="login-logo">
+            HOBAB
+        </div>
+
+        <div class="login-sub">
+            پنل مدیریت سالن زیبایی
+        </div>
+
+
+        <input
+            type="email"
+            id="email"
+            placeholder="ایمیل مدیر"
+            autocomplete="email"
+        >
+
+
+        <input
+            type="password"
+            id="password"
+            placeholder="رمز عبور"
+            autocomplete="current-password"
+        >
+
+
+        <button id="loginBtn">
+            ورود به پنل
+        </button>
+
+
+        <div
+            class="login-error"
+            id="loginError"
+        ></div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     ADMIN PAGE
+========================= -->
+
+<section
+    class="admin-page"
+    id="adminPage"
+>
+
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <div class="brand">
+
+            <h1>
+                HOBAB BEAUTY
+            </h1>
+
+            <p>
+                مدیریت نوبت‌ها
+            </p>
+
+        </div>
+
+
+        <button
+            class="logout"
+            id="logoutBtn"
+        >
+            خروج
+        </button>
+
+    </div>
+
 </header>
+
+
 
 <main class="container">
 
-    <section class="stats">
 
-        <div class="stat">
-            <span id="todayCount">۰</span>
-            <small>نوبت‌های امروز</small>
-        </div>
+    <h2 class="section-title">
+        بخش خدمات
+    </h2>
 
-        <div class="stat">
-            <span id="futureCount">۰</span>
-            <small>نوبت‌های آینده</small>
-        </div>
 
-        <div class="stat">
-            <span id="totalCount">۰</span>
-            <small>کل نوبت‌ها</small>
-        </div>
+    <div class="categories">
 
-    </section>
 
-    <section class="panel">
+        <button
+            class="category active"
+            data-service="hair"
+            data-name="مو"
+        >
 
-        <div class="panel-top">
-            <h2>نوبت‌ها</h2>
+            <span class="category-name">
+                مو
+            </span>
 
-            <button class="refresh-btn" id="refreshBtn">
+            <span class="category-count">
+                ۰ نوبت
+            </span>
+
+        </button>
+
+
+        <button
+            class="category"
+            data-service="makeup"
+            data-name="میکاپ"
+        >
+
+            <span class="category-name">
+                میکاپ
+            </span>
+
+            <span class="category-count">
+                ۰ نوبت
+            </span>
+
+        </button>
+
+
+        <button
+            class="category"
+            data-service="nail"
+            data-name="ناخن"
+        >
+
+            <span class="category-name">
+                ناخن
+            </span>
+
+            <span class="category-count">
+                ۰ نوبت
+            </span>
+
+        </button>
+
+
+        <button
+            class="category"
+            data-service="lash"
+            data-name="مژه"
+        >
+
+            <span class="category-name">
+                مژه
+            </span>
+
+            <span class="category-count">
+                ۰ نوبت
+            </span>
+
+        </button>
+
+
+        <button
+            class="category"
+            data-service="brow"
+            data-name="ابرو"
+        >
+
+            <span class="category-name">
+                ابرو
+            </span>
+
+            <span class="category-count">
+                ۰ نوبت
+            </span>
+
+        </button>
+
+
+        <button
+            class="category"
+            data-service="skin"
+            data-name="مراقبت پوست"
+        >
+
+            <span class="category-name">
+                مراقبت پوست
+            </span>
+
+            <span class="category-count">
+                ۰ نوبت
+            </span>
+
+        </button>
+
+
+        <button
+            class="category"
+            data-service="bridal"
+            data-name="عروس"
+        >
+
+            <span class="category-name">
+                عروس
+            </span>
+
+            <span class="category-count">
+                ۰ نوبت
+            </span>
+
+        </button>
+
+
+    </div>
+
+
+
+    <section class="appointments-panel">
+
+
+        <div class="appointments-head">
+
+            <h2 id="appointmentsTitle">
+                نوبت‌های مو
+            </h2>
+
+
+            <button
+                class="refresh"
+                id="refreshBtn"
+            >
                 بروزرسانی
             </button>
-        </div>
-
-        <div class="filters">
-
-            <select id="filter">
-                <option value="all">همه نوبت‌ها</option>
-                <option value="today">امروز</option>
-                <option value="future">آینده</option>
-            </select>
-
-            <input
-                type="text"
-                id="search"
-                placeholder="جستجوی نام یا شماره..."
-            >
 
         </div>
 
-        <div id="appointments" class="appointments">
+
+        <div
+            class="appointment-list"
+            id="appointmentList"
+        >
+
             <div class="loading">
                 در حال دریافت نوبت‌ها...
             </div>
+
         </div>
+
 
     </section>
 
+
 </main>
 
+</section>
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <script>
 
@@ -293,6 +608,7 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
     "sb_publishable_1t6kJsgr3IwQkWptFgJ1Iw_Fj1FB4U2";
 
+
 const supabaseClient =
     window.supabase.createClient(
         SUPABASE_URL,
@@ -300,254 +616,457 @@ const supabaseClient =
     );
 
 
-const appointmentsEl =
-    document.getElementById("appointments");
+const loginPage =
+    document.getElementById("loginPage");
 
-const todayCount =
-    document.getElementById("todayCount");
+const adminPage =
+    document.getElementById("adminPage");
 
-const futureCount =
-    document.getElementById("futureCount");
+const loginBtn =
+    document.getElementById("loginBtn");
 
-const totalCount =
-    document.getElementById("totalCount");
+const logoutBtn =
+    document.getElementById("logoutBtn");
 
-const filter =
-    document.getElementById("filter");
+const loginError =
+    document.getElementById("loginError");
 
-const search =
-    document.getElementById("search");
+const appointmentList =
+    document.getElementById("appointmentList");
+
+const appointmentsTitle =
+    document.getElementById("appointmentsTitle");
 
 const refreshBtn =
     document.getElementById("refreshBtn");
 
+const categories =
+    document.querySelectorAll(".category");
+
 
 let appointments = [];
 
+let selectedService = "hair";
 
-function todayJalali(){
 
-    const now = new Date();
+const serviceNames = {
 
-    const formatter =
-        new Intl.DateTimeFormat(
-            "fa-IR-u-ca-persian",
-            {
-                year:"numeric",
-                month:"2-digit",
-                day:"2-digit"
-            }
-        );
+    hair:"مو",
 
-    return formatter.format(now)
-        .replace(/[۰-۹]/g, d =>
-            "۰۱۲۳۴۵۶۷۸۹".indexOf(d)
-        );
+    makeup:"میکاپ",
+
+    nail:"ناخن",
+
+    lash:"مژه",
+
+    brow:"ابرو",
+
+    skin:"مراقبت پوست",
+
+    bridal:"عروس"
+
+};
+
+
+
+/* =========================
+   CHECK SESSION
+========================= */
+
+async function checkSession(){
+
+    const {
+        data:{
+            session
+        }
+    } =
+        await supabaseClient.auth.getSession();
+
+
+    if(session){
+
+        showAdmin();
+
+    }else{
+
+        showLogin();
+
+    }
 
 }
 
 
+/* =========================
+   LOGIN
+========================= */
+
+loginBtn.addEventListener(
+    "click",
+    async function(){
+
+        loginError.textContent = "";
+
+        const email =
+            document.getElementById("email")
+                .value.trim();
+
+        const password =
+            document.getElementById("password")
+                .value;
+
+
+        if(!email || !password){
+
+            loginError.textContent =
+                "ایمیل و رمز عبور را وارد کنید.";
+
+            return;
+        }
+
+
+        loginBtn.disabled = true;
+
+        loginBtn.textContent =
+            "در حال ورود...";
+
+
+        const {
+            error
+        } =
+            await supabaseClient.auth.signInWithPassword({
+
+                email:email,
+
+                password:password
+
+            });
+
+
+        loginBtn.disabled = false;
+
+        loginBtn.textContent =
+            "ورود به پنل";
+
+
+        if(error){
+
+            loginError.textContent =
+                "ایمیل یا رمز عبور اشتباه است.";
+
+            return;
+        }
+
+
+        showAdmin();
+
+    }
+);
+
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+logoutBtn.addEventListener(
+    "click",
+    async function(){
+
+        await supabaseClient.auth.signOut();
+
+        appointments = [];
+
+        showLogin();
+
+    }
+);
+
+
+
+/* =========================
+   SHOW LOGIN
+========================= */
+
+function showLogin(){
+
+    loginPage.style.display =
+        "flex";
+
+    adminPage.style.display =
+        "none";
+
+}
+
+
+/* =========================
+   SHOW ADMIN
+========================= */
+
+async function showAdmin(){
+
+    loginPage.style.display =
+        "none";
+
+    adminPage.style.display =
+        "block";
+
+    await loadAppointments();
+
+}
+
+
+
+/* =========================
+   LOAD APPOINTMENTS
+========================= */
+
 async function loadAppointments(){
 
-    appointmentsEl.innerHTML =
-        `<div class="loading">در حال دریافت نوبت‌ها...</div>`;
+    appointmentList.innerHTML =
+        `<div class="loading">
+            در حال دریافت نوبت‌ها...
+        </div>`;
 
-    const { data, error } =
+
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("appointments")
             .select("*")
-            .order("date", { ascending:true })
-            .order("time", { ascending:true });
+            .order(
+                "date",
+                {
+                    ascending:true
+                }
+            )
+            .order(
+                "time",
+                {
+                    ascending:true
+                }
+            );
+
 
     if(error){
 
         console.error(error);
 
-        appointmentsEl.innerHTML =
+        appointmentList.innerHTML =
             `<div class="empty">
-                دریافت نوبت‌ها با خطا مواجه شد.
+                دریافت نوبت‌ها انجام نشد.
             </div>`;
 
         return;
     }
 
-    appointments = data || [];
 
-    updateStats();
+    appointments =
+        data || [];
+
+
+    updateCounts();
 
     renderAppointments();
 
 }
 
 
-function updateStats(){
 
-    const today =
-        todayJalali();
+/* =========================
+   COUNTS
+========================= */
 
-    const todayAppointments =
-        appointments.filter(a =>
-            a.date === today
-        );
+function updateCounts(){
 
-    const futureAppointments =
-        appointments.filter(a =>
-            a.date >= today
-        );
+    categories.forEach(
+        category => {
 
-    todayCount.textContent =
-        toPersianDigits(todayAppointments.length);
+            const service =
+                category.dataset.service;
 
-    futureCount.textContent =
-        toPersianDigits(futureAppointments.length);
 
-    totalCount.textContent =
-        toPersianDigits(appointments.length);
+            const count =
+                appointments.filter(
+                    appointment =>
+                        appointment.service === service
+                ).length;
+
+
+            const countElement =
+                category.querySelector(
+                    ".category-count"
+                );
+
+
+            countElement.textContent =
+                toPersianDigits(count)
+                + " نوبت";
+
+        }
+    );
 
 }
 
 
+
+/* =========================
+   CATEGORY CLICK
+========================= */
+
+categories.forEach(
+    category => {
+
+        category.addEventListener(
+            "click",
+            function(){
+
+                categories.forEach(
+                    item =>
+                        item.classList.remove(
+                            "active"
+                        )
+                );
+
+
+                this.classList.add(
+                    "active"
+                );
+
+
+                selectedService =
+                    this.dataset.service;
+
+
+                appointmentsTitle.textContent =
+                    "نوبت‌های "
+                    + this.dataset.name;
+
+
+                renderAppointments();
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =========================
+   RENDER
+========================= */
+
 function renderAppointments(){
 
-    let list =
-        [...appointments];
-
-    const selectedFilter =
-        filter.value;
-
-    const today =
-        todayJalali();
-
-    if(selectedFilter === "today"){
-
-        list =
-            list.filter(a =>
-                a.date === today
-            );
-
-    }
-
-    if(selectedFilter === "future"){
-
-        list =
-            list.filter(a =>
-                a.date >= today
-            );
-
-    }
+    const filtered =
+        appointments.filter(
+            appointment =>
+                appointment.service ===
+                selectedService
+        );
 
 
-    const query =
-        search.value.trim().toLowerCase();
+    if(!filtered.length){
 
-    if(query){
-
-        list =
-            list.filter(a =>
-                String(a.name || "")
-                    .toLowerCase()
-                    .includes(query)
-                ||
-                String(a.phone || "")
-                    .toLowerCase()
-                    .includes(query)
-            );
-
-    }
-
-
-    if(!list.length){
-
-        appointmentsEl.innerHTML =
+        appointmentList.innerHTML =
             `<div class="empty">
-                نوبتی پیدا نشد.
+                برای این بخش هنوز نوبتی ثبت نشده است.
             </div>`;
 
         return;
     }
 
 
-    appointmentsEl.innerHTML =
-        list.map(a => `
+    appointmentList.innerHTML =
+        filtered.map(
+            appointment => `
 
-            <article class="appointment">
+                <article class="appointment">
 
-                <div class="appointment-head">
+                    <div class="appointment-top">
 
-                    <div class="appointment-name">
-                        ${escapeHtml(a.name || "بدون نام")}
+                        <div class="appointment-name">
+                            ${escapeHtml(
+                                appointment.name || "-"
+                            )}
+                        </div>
+
+
+                        <div class="appointment-time">
+
+                            ${escapeHtml(
+                                appointment.date || "-"
+                            )}
+
+                            -
+
+                            ${escapeHtml(
+                                appointment.time || "-"
+                            )}
+
+                        </div>
+
                     </div>
 
-                    <div class="appointment-time">
-                        ${escapeHtml(a.date || "")}
-                        -
-                        ${escapeHtml(a.time || "")}
+
+                    <div class="appointment-info">
+
+                        <div>
+                            <strong>
+                                شماره تماس:
+                            </strong>
+
+                            ${escapeHtml(
+                                appointment.phone || "-"
+                            )}
+                        </div>
+
+
+                        <div>
+                            <strong>
+                                خدمت:
+                            </strong>
+
+                            ${escapeHtml(
+                                serviceNames[
+                                    appointment.service
+                                ] ||
+                                appointment.service ||
+                                "-"
+                            )}
+                        </div>
+
                     </div>
 
-                </div>
 
+                    <div class="description">
 
-                <div class="appointment-info">
+                        <strong>
+                            توضیحات:
+                        </strong>
 
-                    <div>
-                        <strong>خدمت:</strong>
-                        ${escapeHtml(a.service || "-")}
+                        <br>
+
+                        ${escapeHtml(
+                            appointment.description || "-"
+                        )}
+
                     </div>
 
-                    <div>
-                        <strong>تلفن:</strong>
-                        ${escapeHtml(a.phone || "-")}
-                    </div>
+                </article>
 
-                </div>
-
-
-                <div class="description">
-
-                    <strong>توضیحات:</strong><br>
-
-                    ${escapeHtml(a.description || "-")}
-
-                </div>
-
-            </article>
-
-        `).join("");
+            `
+        ).join("");
 
 }
 
 
-function escapeHtml(value){
 
-    return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
-
-
-function toPersianDigits(value){
-
-    return String(value)
-        .replace(/\d/g, d =>
-            "۰۱۲۳۴۵۶۷۸۹"[d]
-        );
-
-}
-
-
-filter.addEventListener(
-    "change",
-    renderAppointments
-);
-
-search.addEventListener(
-    "input",
-    renderAppointments
-);
+/* =========================
+   REFRESH
+========================= */
 
 refreshBtn.addEventListener(
     "click",
@@ -555,7 +1074,80 @@ refreshBtn.addEventListener(
 );
 
 
-loadAppointments();
+
+/* =========================
+   SECURITY
+========================= */
+
+function escapeHtml(value){
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================
+   PERSIAN NUMBERS
+========================= */
+
+function toPersianDigits(value){
+
+    return String(value)
+        .replace(
+            /\d/g,
+            digit =>
+                "۰۱۲۳۴۵۶۷۸۹"[digit]
+        );
+
+}
+
+
+supabaseClient.auth.onAuthStateChange(
+    function(
+        event,
+        session
+    ){
+
+        if(session){
+
+            showAdmin();
+
+        }else{
+
+            showLogin();
+
+        }
+
+    }
+);
+
+
+checkSession();
 
 </script>
 
