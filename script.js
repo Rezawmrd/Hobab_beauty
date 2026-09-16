@@ -412,7 +412,11 @@ document.addEventListener("DOMContentLoaded", function () {
        LOAD BOOKED TIMES
     ========================================================= */
 
-    async function loadBookedTimes(date) {
+    async function loadBookedTimes(date, preserveSelectedTime = false) {
+
+        const previousSelectedTime =
+            selectedTime;
+
 
         bookedTimes =
             new Set();
@@ -434,8 +438,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
 
-        selectedTime =
-            null;
+        if (!preserveSelectedTime) {
+            selectedTime = null;
+        }
 
 
         if (!date) {
@@ -504,6 +509,51 @@ document.addEventListener("DOMContentLoaded", function () {
                     );
                 }
             });
+
+
+            if (
+                preserveSelectedTime &&
+                previousSelectedTime &&
+                !bookedTimes.has(
+                    previousSelectedTime
+                )
+            ) {
+
+                const selectedButton =
+                    Array.from(
+                        timeButtons
+                    ).find(function (button) {
+
+                        return (
+                            button.dataset.time ===
+                            previousSelectedTime
+                        );
+                    });
+
+
+                if (selectedButton) {
+
+                    selectedButton.classList.add(
+                        "selected"
+                    );
+
+                    selectedTime =
+                        previousSelectedTime;
+                }
+            }
+
+
+            if (
+                preserveSelectedTime &&
+                previousSelectedTime &&
+                bookedTimes.has(
+                    previousSelectedTime
+                )
+            ) {
+
+                selectedTime =
+                    null;
+            }
 
 
         } catch (error) {
@@ -748,7 +798,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                     await loadBookedTimes(
-                        formattedDate
+                        formattedDate,
+                        false
                     );
                 }
             );
@@ -1156,16 +1207,28 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
+                /* SAVE SELECTED TIME BEFORE REFRESH */
+
+                const timeToBook =
+                    selectedTime;
+
+
                 /* CHECK AGAIN BEFORE INSERT */
 
-                await loadBookedTimes(date);
+                await loadBookedTimes(
+                    date,
+                    true
+                );
 
 
                 if (
                     bookedTimes.has(
-                        selectedTime
+                        timeToBook
                     )
-                {
+                ) {
+
+                    selectedTime =
+                        null;
 
                     showBookingMessage(
                         "این ساعت قبلاً رزرو شده است. لطفاً ساعت دیگری انتخاب کنید.",
@@ -1173,6 +1236,32 @@ document.addEventListener("DOMContentLoaded", function () {
                     );
 
                     return;
+                }
+
+
+                /* RESTORE SELECTED TIME */
+
+                selectedTime =
+                    timeToBook;
+
+
+                const selectedButton =
+                    Array.from(
+                        timeButtons
+                    ).find(function (button) {
+
+                        return (
+                            button.dataset.time ===
+                            timeToBook
+                        );
+                    });
+
+
+                if (selectedButton) {
+
+                    selectedButton.classList.add(
+                        "selected"
+                    );
                 }
 
 
@@ -1245,7 +1334,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
-                /* DISABLE */
+                /* DISABLE BUTTON */
 
                 bookingButton.disabled =
                     true;
@@ -1273,7 +1362,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                     date,
 
                                 time:
-                                    selectedTime,
+                                    timeToBook,
 
                                 description:
                                     description,
@@ -1312,7 +1401,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                             await loadBookedTimes(
-                                date
+                                date,
+                                false
                             );
 
 
