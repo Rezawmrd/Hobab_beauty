@@ -100,6 +100,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================================
+       RESET TIME BUTTONS
+    ========================================================= */
+
+    function resetTimeButtons() {
+
+        timeButtons.forEach(function (button) {
+
+            button.disabled = false;
+
+            button.classList.remove(
+                "booked",
+                "selected"
+            );
+
+            button.removeAttribute(
+                "aria-disabled"
+            );
+        });
+
+        selectedTime = null;
+        bookedTimes = new Set();
+    }
+
+
+    /* =========================================================
        TIME BUTTONS
     ========================================================= */
 
@@ -112,15 +137,222 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             timeButtons.forEach(function (item) {
-                item.classList.remove("selected");
+
+                item.classList.remove(
+                    "selected"
+                );
             });
 
-            button.classList.add("selected");
+            button.classList.add(
+                "selected"
+            );
 
             selectedTime =
                 button.dataset.time;
         });
     });
+
+
+    /* =========================================================
+       LOAD BOOKED TIMES
+       SERVICE + DATE
+    ========================================================= */
+
+    async function loadBookedTimes(
+        service,
+        date,
+        preserveSelectedTime = false
+    ) {
+
+        const previousSelectedTime =
+            selectedTime;
+
+
+        bookedTimes =
+            new Set();
+
+
+        timeButtons.forEach(function (button) {
+
+            button.disabled = false;
+
+            button.classList.remove(
+                "booked",
+                "selected"
+            );
+
+            button.removeAttribute(
+                "aria-disabled"
+            );
+        });
+
+
+        if (!preserveSelectedTime) {
+            selectedTime = null;
+        }
+
+
+        if (!service || !date) {
+            return;
+        }
+
+
+        try {
+
+            const result =
+                await supabaseClient
+                    .rpc(
+                        "get_booked_times",
+                        {
+                            p_service: service,
+                            p_date: date
+                        }
+                    );
+
+
+            if (result.error) {
+
+                console.error(
+                    "Booked times error:",
+                    result.error
+                );
+
+                return;
+            }
+
+
+            const rows =
+                result.data || [];
+
+
+            rows.forEach(function (row) {
+
+                if (row.time) {
+
+                    bookedTimes.add(
+                        row.time
+                    );
+                }
+            });
+
+
+            timeButtons.forEach(function (button) {
+
+                const time =
+                    button.dataset.time;
+
+
+                if (
+                    bookedTimes.has(time)
+                ) {
+
+                    button.disabled = true;
+
+                    button.classList.add(
+                        "booked"
+                    );
+
+                    button.setAttribute(
+                        "aria-disabled",
+                        "true"
+                    );
+                }
+            });
+
+
+            /* RESTORE SELECTED TIME */
+
+            if (
+                preserveSelectedTime &&
+                previousSelectedTime &&
+                !bookedTimes.has(
+                    previousSelectedTime
+                )
+            ) {
+
+                const selectedButton =
+                    Array.from(
+                        timeButtons
+                    ).find(function (button) {
+
+                        return (
+                            button.dataset.time ===
+                            previousSelectedTime
+                        );
+                    });
+
+
+                if (selectedButton) {
+
+                    selectedButton.classList.add(
+                        "selected"
+                    );
+
+                    selectedTime =
+                        previousSelectedTime;
+                }
+            }
+
+
+            /* SELECTED TIME WAS JUST BOOKED */
+
+            if (
+                preserveSelectedTime &&
+                previousSelectedTime &&
+                bookedTimes.has(
+                    previousSelectedTime
+                )
+            ) {
+
+                selectedTime = null;
+            }
+
+
+        } catch (error) {
+
+            console.error(
+                "Load booked times error:",
+                error
+            );
+        }
+    }
+
+
+    /* =========================================================
+       SERVICE CHANGE
+    ========================================================= */
+
+    if (serviceInput) {
+
+        serviceInput.addEventListener(
+            "change",
+            async function () {
+
+                resetTimeButtons();
+
+
+                const service =
+                    serviceInput.value.trim();
+
+                const date =
+                    dateInput
+                        ? dateInput.value.trim()
+                        : "";
+
+
+                if (
+                    service &&
+                    date
+                ) {
+
+                    await loadBookedTimes(
+                        service,
+                        date
+                    );
+                }
+            }
+        );
+    }
 
 
     /* =========================================================
@@ -164,7 +396,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    function gregorianToJalali(gy, gm, gd) {
+    function gregorianToJalali(
+        gy,
+        gm,
+        gd
+    ) {
 
         const gdm = [
             0, 31, 59, 90, 120, 151,
@@ -213,7 +449,10 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
 
             jm =
-                7 + div(days - 186, 30);
+                7 + div(
+                    days - 186,
+                    30
+                );
         }
 
         let jd;
@@ -226,7 +465,9 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
 
             jd =
-                1 + ((days - 186) % 30);
+                1 + (
+                    (days - 186) % 30
+                );
         }
 
         return {
@@ -237,7 +478,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    function jalaliToGregorian(jy, jm, jd) {
+    function jalaliToGregorian(
+        jy,
+        jm,
+        jd
+    ) {
 
         let jy2 =
             jy + 1595;
@@ -246,7 +491,10 @@ document.addEventListener("DOMContentLoaded", function () {
             -355668 +
             (365 * jy2) +
             (div(jy2, 33) * 8) +
-            div((jy2 % 33) + 3, 4) +
+            div(
+                (jy2 % 33) + 3,
+                4
+            ) +
             jd;
 
         if (jm < 7) {
@@ -257,20 +505,31 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
 
             days +=
-                ((jm - 7) * 30) + 186;
+                ((jm - 7) * 30) +
+                186;
         }
 
         let gy =
-            400 * div(days, 146097);
+            400 *
+            div(
+                days,
+                146097
+            );
 
-        days %= 146097;
+        days %=
+            146097;
 
         if (days > 36524) {
 
             gy +=
-                100 * div(--days, 36524);
+                100 *
+                div(
+                    --days,
+                    36524
+                );
 
-            days %= 36524;
+            days %=
+                36524;
 
             if (days >= 365) {
                 days++;
@@ -278,14 +537,22 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         gy +=
-            4 * div(days, 1461);
+            4 *
+            div(
+                days,
+                1461
+            );
 
-        days %= 1461;
+        days %=
+            1461;
 
         if (days > 365) {
 
             gy +=
-                div(days - 1, 365);
+                div(
+                    days - 1,
+                    365
+                );
 
             days =
                 (days - 1) % 365;
@@ -294,12 +561,16 @@ document.addEventListener("DOMContentLoaded", function () {
         let gd =
             days + 1;
 
+
         const leap =
             (
                 gy % 4 === 0 &&
                 gy % 100 !== 0
             ) ||
-            (gy % 400 === 0);
+            (
+                gy % 400 === 0
+            );
+
 
         const monthDays = [
             31,
@@ -316,10 +587,13 @@ document.addEventListener("DOMContentLoaded", function () {
             31
         ];
 
+
         let gm = 1;
 
+
         while (
-            gd > monthDays[gm - 1]
+            gd >
+            monthDays[gm - 1]
         ) {
 
             gd -=
@@ -327,6 +601,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             gm++;
         }
+
 
         return {
             year: gy,
@@ -349,7 +624,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    function daysInJalaliMonth(year, month) {
+    function daysInJalaliMonth(
+        year,
+        month
+    ) {
 
         if (month <= 6) {
             return 31;
@@ -359,6 +637,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return 30;
         }
 
+
         const nextYear =
             jalaliToGregorian(
                 year + 1,
@@ -366,12 +645,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 1
             );
 
+
         const currentYear =
             jalaliToGregorian(
                 year,
                 1,
                 1
             );
+
 
         const difference =
             Math.round(
@@ -390,6 +671,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 86400000
             );
 
+
         return difference === 366
             ? 30
             : 29;
@@ -399,171 +681,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const today =
         getTodayJalali();
 
+
     let currentYear =
         today.year;
+
 
     let currentMonth =
         today.month;
 
-    let selectedDate = null;
 
-
-    /* =========================================================
-       LOAD BOOKED TIMES
-    ========================================================= */
-
-    async function loadBookedTimes(date, preserveSelectedTime = false) {
-
-        const previousSelectedTime =
-            selectedTime;
-
-
-        bookedTimes =
-            new Set();
-
-
-        timeButtons.forEach(function (button) {
-
-            button.disabled =
-                false;
-
-            button.classList.remove(
-                "booked",
-                "selected"
-            );
-
-            button.removeAttribute(
-                "aria-disabled"
-            );
-        });
-
-
-        if (!preserveSelectedTime) {
-            selectedTime = null;
-        }
-
-
-        if (!date) {
-            return;
-        }
-
-
-        try {
-
-            const result =
-                await supabaseClient
-                    .rpc(
-                        "get_booked_times",
-                        {
-                            p_date: date
-                        }
-                    );
-
-
-            if (result.error) {
-
-                console.error(
-                    "Booked times error:",
-                    result.error
-                );
-
-                return;
-            }
-
-
-            const rows =
-                result.data || [];
-
-
-            rows.forEach(function (row) {
-
-                if (row.time) {
-
-                    bookedTimes.add(
-                        row.time
-                    );
-                }
-            });
-
-
-            timeButtons.forEach(function (button) {
-
-                const time =
-                    button.dataset.time;
-
-
-                if (
-                    bookedTimes.has(time)
-                ) {
-
-                    button.disabled =
-                        true;
-
-                    button.classList.add(
-                        "booked"
-                    );
-
-                    button.setAttribute(
-                        "aria-disabled",
-                        "true"
-                    );
-                }
-            });
-
-
-            if (
-                preserveSelectedTime &&
-                previousSelectedTime &&
-                !bookedTimes.has(
-                    previousSelectedTime
-                )
-            ) {
-
-                const selectedButton =
-                    Array.from(
-                        timeButtons
-                    ).find(function (button) {
-
-                        return (
-                            button.dataset.time ===
-                            previousSelectedTime
-                        );
-                    });
-
-
-                if (selectedButton) {
-
-                    selectedButton.classList.add(
-                        "selected"
-                    );
-
-                    selectedTime =
-                        previousSelectedTime;
-                }
-            }
-
-
-            if (
-                preserveSelectedTime &&
-                previousSelectedTime &&
-                bookedTimes.has(
-                    previousSelectedTime
-                )
-            ) {
-
-                selectedTime =
-                    null;
-            }
-
-
-        } catch (error) {
-
-            console.error(
-                "Load booked times error:",
-                error
-            );
-        }
-    }
+    let selectedDate =
+        null;
 
 
     /* =========================================================
@@ -572,6 +700,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const calendarOverlay =
         document.createElement("div");
+
 
     calendarOverlay.className =
         "jalali-calendar-overlay";
@@ -627,7 +756,9 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="jalali-weekdays">
 
                 ${weekDays.map(function(day) {
+
                     return `<span>${day}</span>`;
+
                 }).join("")}
 
             </div>
@@ -649,15 +780,18 @@ document.addEventListener("DOMContentLoaded", function () {
             ".jalali-calendar"
         );
 
+
     const daysContainer =
         calendarOverlay.querySelector(
             ".jalali-days"
         );
 
+
     const monthTitle =
         calendarOverlay.querySelector(
             ".jalali-month-title"
         );
+
 
     const title =
         calendarOverlay.querySelector(
@@ -670,8 +804,10 @@ document.addEventListener("DOMContentLoaded", function () {
         monthTitle.textContent =
             `${monthNames[currentMonth - 1]} ${currentYear}`;
 
+
         title.textContent =
             "انتخاب تاریخ";
+
 
         daysContainer.innerHTML =
             "";
@@ -696,6 +832,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let weekDay =
             firstDate.getDay();
 
+
         weekDay =
             (weekDay + 1) % 7;
 
@@ -707,10 +844,13 @@ document.addEventListener("DOMContentLoaded", function () {
         ) {
 
             const empty =
-                document.createElement("span");
+                document.createElement(
+                    "span"
+                );
 
             empty.className =
                 "jalali-empty";
+
 
             daysContainer.appendChild(
                 empty
@@ -732,10 +872,14 @@ document.addEventListener("DOMContentLoaded", function () {
         ) {
 
             const button =
-                document.createElement("button");
+                document.createElement(
+                    "button"
+                );
+
 
             button.type =
                 "button";
+
 
             button.textContent =
                 day;
@@ -797,10 +941,22 @@ document.addEventListener("DOMContentLoaded", function () {
                     renderCalendar();
 
 
-                    await loadBookedTimes(
-                        formattedDate,
-                        false
-                    );
+                    resetTimeButtons();
+
+
+                    const service =
+                        serviceInput
+                            ? serviceInput.value.trim()
+                            : "";
+
+
+                    if (service) {
+
+                        await loadBookedTimes(
+                            service,
+                            formattedDate
+                        );
+                    }
                 }
             );
 
@@ -816,9 +972,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         renderCalendar();
 
+
         calendarOverlay.classList.add(
             "open"
         );
+
 
         document.body.classList.add(
             "calendar-open"
@@ -831,6 +989,7 @@ document.addEventListener("DOMContentLoaded", function () {
         calendarOverlay.classList.remove(
             "open"
         );
+
 
         document.body.classList.remove(
             "calendar-open"
@@ -860,7 +1019,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     calendar
-        .querySelector(".jalali-close")
+        .querySelector(
+            ".jalali-close"
+        )
         .addEventListener(
             "click",
             closeCalendar
@@ -868,7 +1029,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     calendar
-        .querySelector(".jalali-today")
+        .querySelector(
+            ".jalali-today"
+        )
         .addEventListener(
             "click",
             function () {
@@ -885,14 +1048,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     calendar
-        .querySelector(".jalali-prev")
+        .querySelector(
+            ".jalali-prev"
+        )
         .addEventListener(
             "click",
             function () {
 
                 currentMonth--;
 
-                if (currentMonth < 1) {
+
+                if (
+                    currentMonth < 1
+                ) {
 
                     currentMonth =
                         12;
@@ -900,26 +1068,33 @@ document.addEventListener("DOMContentLoaded", function () {
                     currentYear--;
                 }
 
+
                 renderCalendar();
             }
         );
 
 
     calendar
-        .querySelector(".jalali-next")
+        .querySelector(
+            ".jalali-next"
+        )
         .addEventListener(
             "click",
             function () {
 
                 currentMonth++;
 
-                if (currentMonth > 12) {
+
+                if (
+                    currentMonth > 12
+                ) {
 
                     currentMonth =
                         1;
 
                     currentYear++;
                 }
+
 
                 renderCalendar();
             }
@@ -944,7 +1119,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         overlay =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
+
 
         overlay.className =
             "booking-message-overlay";
@@ -994,7 +1172,8 @@ document.addEventListener("DOMContentLoaded", function () {
             function (event) {
 
                 if (
-                    event.target === overlay
+                    event.target ===
+                    overlay
                 ) {
 
                     closeBookingMessage();
@@ -1023,6 +1202,7 @@ document.addEventListener("DOMContentLoaded", function () {
         overlay.classList.remove(
             "open"
         );
+
 
         document.body.classList.remove(
             "booking-message-open"
@@ -1062,8 +1242,10 @@ document.addEventListener("DOMContentLoaded", function () {
             icon.textContent =
                 "✓";
 
+
             messageTitle.textContent =
                 "رزرو با موفقیت ثبت شد";
+
 
             messageText.textContent =
                 "درخواست نوبت شما با موفقیت ثبت شد. اطلاعات شما در سیستم ذخیره گردید.";
@@ -1073,8 +1255,10 @@ document.addEventListener("DOMContentLoaded", function () {
             icon.textContent =
                 "!";
 
+
             messageTitle.textContent =
                 "ثبت رزرو انجام نشد";
+
 
             messageText.textContent =
                 message;
@@ -1086,6 +1270,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "error"
         );
 
+
         overlay.classList.add(
             type
         );
@@ -1096,12 +1281,14 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-        requestAnimationFrame(function () {
+        requestAnimationFrame(
+            function () {
 
-            overlay.classList.add(
-                "open"
-            );
-        });
+                overlay.classList.add(
+                    "open"
+                );
+            }
+        );
     }
 
 
@@ -1173,9 +1360,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
+
                     if (serviceInput) {
                         serviceInput.focus();
                     }
+
 
                     return;
                 }
@@ -1188,9 +1377,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
+
                     if (dateInput) {
                         dateInput.focus();
                     }
+
 
                     return;
                 }
@@ -1203,19 +1394,27 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
+
                     return;
                 }
 
 
-                /* SAVE SELECTED TIME BEFORE REFRESH */
+                /*
+                   SAVE SELECTED TIME
+                   BEFORE REFRESH
+                */
 
                 const timeToBook =
                     selectedTime;
 
 
-                /* CHECK AGAIN BEFORE INSERT */
+                /*
+                   CHECK AGAIN
+                   SERVICE + DATE
+                */
 
                 await loadBookedTimes(
+                    service,
                     date,
                     true
                 );
@@ -1230,10 +1429,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     selectedTime =
                         null;
 
+
                     showBookingMessage(
-                        "این ساعت قبلاً رزرو شده است. لطفاً ساعت دیگری انتخاب کنید.",
+                        "این ساعت قبلاً برای این خدمت رزرو شده است. لطفاً ساعت دیگری انتخاب کنید.",
                         "error"
                     );
+
 
                     return;
                 }
@@ -1248,13 +1449,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 const selectedButton =
                     Array.from(
                         timeButtons
-                    ).find(function (button) {
+                    ).find(
+                        function (button) {
 
-                        return (
-                            button.dataset.time ===
-                            timeToBook
-                        );
-                    });
+                            return (
+                                button.dataset.time ===
+                                timeToBook
+                            );
+                        }
+                    );
 
 
                 if (selectedButton) {
@@ -1265,6 +1468,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
+                /* DESCRIPTION */
+
                 if (!description) {
 
                     showBookingMessage(
@@ -1272,13 +1477,17 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
+
                     if (descriptionInput) {
                         descriptionInput.focus();
                     }
 
+
                     return;
                 }
 
+
+                /* NAME */
 
                 if (!name) {
 
@@ -1287,13 +1496,17 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
+
                     if (nameInput) {
                         nameInput.focus();
                     }
 
+
                     return;
                 }
 
+
+                /* PHONE */
 
                 if (!phone) {
 
@@ -1302,9 +1515,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
+
                     if (phoneInput) {
                         phoneInput.focus();
                     }
+
 
                     return;
                 }
@@ -1326,9 +1541,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
+
                     if (phoneInput) {
                         phoneInput.focus();
                     }
+
 
                     return;
                 }
@@ -1395,12 +1612,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         ) {
 
                             showBookingMessage(
-                                "این ساعت همین الان توسط شخص دیگری رزرو شد. لطفاً ساعت دیگری انتخاب کنید.",
+                                "این ساعت همین الان برای این خدمت توسط شخص دیگری رزرو شد. لطفاً ساعت دیگری انتخاب کنید.",
                                 "error"
                             );
 
 
                             await loadBookedTimes(
+                                service,
                                 date,
                                 false
                             );
@@ -1414,6 +1632,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             "ثبت رزرو انجام نشد. لطفاً دوباره تلاش کنید.",
                             "error"
                         );
+
 
                         return;
                     }
@@ -1431,46 +1650,33 @@ document.addEventListener("DOMContentLoaded", function () {
                         serviceInput.value = "";
                     }
 
+
                     if (dateInput) {
                         dateInput.value = "";
                     }
+
 
                     if (descriptionInput) {
                         descriptionInput.value = "";
                     }
 
+
                     if (nameInput) {
                         nameInput.value = "";
                     }
+
 
                     if (phoneInput) {
                         phoneInput.value = "";
                     }
 
 
-                    timeButtons.forEach(
-                        function (button) {
+                    resetTimeButtons();
 
-                            button.classList.remove(
-                                "selected",
-                                "booked"
-                            );
-
-                            button.disabled =
-                                false;
-
-                            button.removeAttribute(
-                                "aria-disabled"
-                            );
-                        }
-                    );
-
-
-                    selectedTime =
-                        null;
 
                     selectedDate =
                         null;
+
 
                     bookedTimes =
                         new Set();
@@ -1494,6 +1700,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     bookingButton.disabled =
                         false;
+
 
                     bookingButton.textContent =
                         originalText;
