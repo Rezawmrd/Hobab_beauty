@@ -835,6 +835,56 @@ body{
 
 
 /* =========================================================
+   DESCRIPTION
+   1.5 برابر ارتفاع فیلد نام و نام خانوادگی
+========================================================= */
+
+.booking-step textarea{
+
+    width:100%;
+
+    height:78px;
+
+    min-height:78px;
+
+    max-height:78px;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    border:1px solid rgba(79,108,84,.35);
+
+    background:#fffdfc;
+
+    color:#4b3035;
+
+    font-family:inherit;
+
+    font-size:14px;
+
+    line-height:1.7;
+
+    outline:none;
+
+    resize:none;
+
+    overflow:hidden;
+
+    transition:.3s;
+}
+
+
+.booking-step textarea:focus{
+
+    border-color:rgba(79,108,84,.75);
+
+    box-shadow:
+        0 0 0 3px rgba(183,123,127,.10);
+}
+
+
+/* =========================================================
    TIME GRID
 ========================================================= */
 
@@ -1198,6 +1248,22 @@ body{
     }
 
 
+    /* توضیحات در موبایل هم 1.5 برابر می‌ماند */
+
+    .booking-step textarea{
+
+        height:78px;
+
+        min-height:78px;
+
+        max-height:78px;
+
+        font-size:13px;
+
+        line-height:1.7;
+    }
+
+
     .time-grid{
         gap:7px;
     }
@@ -1259,6 +1325,7 @@ body{
     *,
     *::before,
     *::after{
+
         animation-duration:.01ms !important;
 
         animation-iteration-count:1 !important;
@@ -1267,300 +1334,342 @@ body{
     }
 }
 
+
 /* =========================================
    CUSTOM JALALI CALENDAR
 ========================================= */
 
 .jalali-calendar-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position:fixed;
 
-    padding: 20px;
+    inset:0;
 
-    background: rgba(45, 28, 31, 0.28);
+    z-index:9999;
 
-    backdrop-filter: blur(7px);
-    -webkit-backdrop-filter: blur(7px);
+    display:flex;
 
-    opacity: 0;
-    visibility: hidden;
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    background:rgba(45,28,31,.28);
+
+    backdrop-filter:blur(7px);
+
+    -webkit-backdrop-filter:blur(7px);
+
+    opacity:0;
+
+    visibility:hidden;
 
     transition:
-        opacity 0.2s ease,
-        visibility 0.2s ease;
+        opacity .2s ease,
+        visibility .2s ease;
 }
 
 
 .jalali-calendar-overlay.open {
-    opacity: 1;
-    visibility: visible;
+
+    opacity:1;
+
+    visibility:visible;
 }
 
 
 .jalali-calendar {
-    width: min(360px, 100%);
 
-    background: #fffaf8;
+    width:min(360px,100%);
 
-    border: 1px solid rgba(183, 123, 127, 0.35);
+    background:#fffaf8;
 
-    border-radius: 22px;
+    border:1px solid rgba(183,123,127,.35);
 
-    padding: 18px;
+    border-radius:22px;
+
+    padding:18px;
 
     box-shadow:
-        0 20px 60px rgba(75, 48, 53, 0.22);
+        0 20px 60px rgba(75,48,53,.22);
 
-    transform: translateY(12px) scale(0.97);
+    transform:translateY(12px) scale(.97);
 
     transition:
-        transform 0.25s ease;
+        transform .25s ease;
 }
 
 
 .jalali-calendar-overlay.open
 .jalali-calendar {
-    transform: translateY(0) scale(1);
+
+    transform:translateY(0) scale(1);
 }
 
 
 /* HEADER */
 
 .jalali-calendar-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 
-    margin-bottom: 16px;
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:16px;
 }
 
 
 .jalali-title {
-    font-size: 15px;
-    font-weight: 600;
 
-    color: #4b3035;
+    font-size:15px;
+
+    font-weight:600;
+
+    color:#4b3035;
 }
 
 
 .jalali-close,
 .jalali-today {
-    border: 0;
 
-    background: transparent;
+    border:0;
 
-    font-family: inherit;
+    background:transparent;
 
-    cursor: pointer;
+    font-family:inherit;
+
+    cursor:pointer;
 }
 
 
 .jalali-close {
-    width: 32px;
-    height: 32px;
 
-    font-size: 24px;
+    width:32px;
 
-    color: #8f6569;
+    height:32px;
+
+    font-size:24px;
+
+    color:#8f6569;
 }
 
 
 .jalali-today {
-    padding: 7px 11px;
 
-    border-radius: 10px;
+    padding:7px 11px;
 
-    color: #9c676c;
+    border-radius:10px;
 
-    font-size: 12px;
+    color:#9c676c;
 
-    background: #f8e8e5;
+    font-size:12px;
+
+    background:#f8e8e5;
 }
 
 
 /* NAVIGATION */
 
 .jalali-navigation {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 
-    margin-bottom: 15px;
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:15px;
 }
 
 
 .jalali-month-title {
-    font-size: 16px;
 
-    font-weight: 600;
+    font-size:16px;
 
-    color: #4b3035;
+    font-weight:600;
+
+    color:#4b3035;
 }
 
 
 .jalali-prev,
 .jalali-next {
-    width: 36px;
-    height: 36px;
 
-    border: 0;
+    width:36px;
 
-    border-radius: 10px;
+    height:36px;
 
-    background: #f8e8e5;
+    border:0;
 
-    color: #8d5d62;
+    border-radius:10px;
 
-    font-family: inherit;
+    background:#f8e8e5;
 
-    font-size: 22px;
+    color:#8d5d62;
 
-    cursor: pointer;
+    font-family:inherit;
+
+    font-size:22px;
+
+    cursor:pointer;
 }
 
 
 .jalali-prev:active,
 .jalali-next:active,
 .jalali-today:active {
-    transform: scale(0.94);
+
+    transform:scale(.94);
 }
 
 
 /* WEEK DAYS */
 
 .jalali-weekdays {
-    display: grid;
+
+    display:grid;
 
     grid-template-columns:
-        repeat(7, 1fr);
+        repeat(7,1fr);
 
-    margin-bottom: 7px;
+    margin-bottom:7px;
 }
 
 
 .jalali-weekdays span {
-    text-align: center;
 
-    font-size: 11px;
+    text-align:center;
 
-    font-weight: 600;
+    font-size:11px;
 
-    color: #a98285;
+    font-weight:600;
+
+    color:#a98285;
 }
 
 
 /* DAYS */
 
 .jalali-days {
-    display: grid;
+
+    display:grid;
 
     grid-template-columns:
-        repeat(7, 1fr);
+        repeat(7,1fr);
 
-    gap: 5px;
+    gap:5px;
 }
 
 
 .jalali-days button,
 .jalali-empty {
-    aspect-ratio: 1 / 1;
 
-    min-width: 0;
+    aspect-ratio:1 / 1;
 
-    border-radius: 11px;
+    min-width:0;
+
+    border-radius:11px;
 }
 
 
 .jalali-days button {
-    border: 1px solid transparent;
 
-    background: transparent;
+    border:1px solid transparent;
 
-    color: #4b3035;
+    background:transparent;
 
-    font-family: inherit;
+    color:#4b3035;
 
-    font-size: 13px;
+    font-family:inherit;
 
-    cursor: pointer;
+    font-size:13px;
+
+    cursor:pointer;
 
     transition:
-        background 0.15s ease,
-        color 0.15s ease,
-        border 0.15s ease;
+        background .15s ease,
+        color .15s ease,
+        border .15s ease;
 }
 
 
 .jalali-days button:hover {
-    background: #f8e8e5;
+
+    background:#f8e8e5;
 }
 
 
 .jalali-days button.today {
-    border-color: #c68b90;
 
-    color: #a05f65;
+    border-color:#c68b90;
 
-    font-weight: 700;
+    color:#a05f65;
+
+    font-weight:700;
 }
 
 
 .jalali-days button.selected {
-    background: #b77b7f;
 
-    color: #ffffff;
+    background:#b77b7f;
 
-    border-color: #b77b7f;
+    color:#ffffff;
 
-    font-weight: 600;
+    border-color:#b77b7f;
+
+    font-weight:600;
 }
 
 
 .jalali-days button.today.selected {
-    background: #b77b7f;
 
-    color: #ffffff;
+    background:#b77b7f;
+
+    color:#ffffff;
 }
 
 
 /* MOBILE */
 
-@media (max-width: 600px) {
+@media(max-width:600px){
 
     .jalali-calendar-overlay {
-        padding: 16px;
+
+        padding:16px;
     }
 
 
     .jalali-calendar {
-        width: 100%;
 
-        max-width: 350px;
+        width:100%;
 
-        padding: 16px;
+        max-width:350px;
 
-        border-radius: 20px;
+        padding:16px;
+
+        border-radius:20px;
     }
 
 
     .jalali-days {
-        gap: 4px;
+
+        gap:4px;
     }
 
 
     .jalali-days button,
     .jalali-empty {
-        border-radius: 10px;
+
+        border-radius:10px;
     }
 
 
     .jalali-days button {
-        font-size: 12px;
+
+        font-size:12px;
     }
 
 }
@@ -1569,94 +1678,139 @@ body{
 /* PREVENT PAGE SCROLL WHILE CALENDAR IS OPEN */
 
 body.calendar-open {
-    overflow: hidden;
+
+    overflow:hidden;
 }
+
 
 /* =========================================
    GREEN BORDERS ONLY
 ========================================= */
 
 .header {
-    border-color: rgba(79, 108, 84, 0.35);
+
+    border-color:rgba(79,108,84,.35);
 }
+
 
 .header .top-buttons .top-btn {
-    border-color: rgba(79, 108, 84, 0.35);
+
+    border-color:rgba(79,108,84,.35);
 }
+
 
 .header .top-buttons .top-btn:hover {
-    border-color: rgba(79, 108, 84, 0.65);
+
+    border-color:rgba(79,108,84,.65);
 }
+
 
 .services-toggle {
-    border-color: rgba(79, 108, 84, 0.42);
+
+    border-color:rgba(79,108,84,.42);
 }
+
 
 .services-toggle:hover {
-    border-color: rgba(79, 108, 84, 0.70);
+
+    border-color:rgba(79,108,84,.70);
 }
+
 
 .bridal-toggle {
-    border-color: rgba(79, 108, 84, 0.42);
+
+    border-color:rgba(79,108,84,.42);
 }
+
 
 .bridal-toggle:hover {
-    border-color: rgba(79, 108, 84, 0.70);
+
+    border-color:rgba(79,108,84,.70);
 }
+
 
 .card {
-    border-color: rgba(79, 108, 84, 0.32);
+
+    border-color:rgba(79,108,84,.32);
 }
+
 
 .card:hover {
-    border-color: rgba(79, 108, 84, 0.65);
+
+    border-color:rgba(79,108,84,.65);
 }
+
 
 .bridal-box {
-    border-color: rgba(79, 108, 84, 0.38);
+
+    border-color:rgba(79,108,84,.38);
 }
+
 
 .bridal-services span {
-    border-color: rgba(79, 108, 84, 0.32);
+
+    border-color:rgba(79,108,84,.32);
 }
+
 
 .bridal-services span:hover {
-    border-color: #4f6c54;
+
+    border-color:#4f6c54;
 }
+
 
 .booking {
-    border-color: rgba(79, 108, 84, 0.42);
+
+    border-color:rgba(79,108,84,.42);
 }
 
+
 .booking-step {
-    border-color: rgba(79, 108, 84, 0.32);
+
+    border-color:rgba(79,108,84,.32);
 }
+
 
 .booking-step select,
 .booking-step input {
-    border-color: rgba(79, 108, 84, 0.35);
+
+    border-color:rgba(79,108,84,.35);
 }
+
 
 .booking-step select:focus,
 .booking-step input:focus {
-    border-color: rgba(79, 108, 84, 0.75);
+
+    border-color:rgba(79,108,84,.75);
 }
 
+
 .time-grid button {
-    border-color: rgba(79, 108, 84, 0.32);
+
+    border-color:rgba(79,108,84,.32);
 }
+
 
 .time-grid button:hover,
 .time-grid button.selected {
-    border-color: #4f6c54;
+
+    border-color:#4f6c54;
 }
 
-/* کادر توضیحات رزرو */
+
+/* =========================================
+   DESCRIPTION - 1.5X
+========================================= */
+
 .booking-step textarea {
+
     width:100%;
 
-    height:98px;
-    min-height:98px;
+    height:78px;
+
+    min-height:78px;
+
+    max-height:78px;
 
     padding:14px;
 
@@ -1670,19 +1824,24 @@ body.calendar-open {
 
     font-size:14px;
 
+    line-height:1.7;
+
     color:inherit;
 
     outline:none;
 
     resize:none;
 
+    overflow:hidden;
+
     transition:.3s;
 }
 
 
 .booking-step textarea:focus {
+
     border-color:rgba(79,108,84,.75);
 
     box-shadow:
-        0 0 0 3px rgba(183,123,127,.10);
+        0 0 0 3px rgba(79,108,84,.10);
 }
