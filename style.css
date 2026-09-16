@@ -838,7 +838,6 @@ body{
 
 /* =========================================================
    DESCRIPTION
-   EXACTLY 1.5X INPUT HEIGHT
 ========================================================= */
 
 .booking-step textarea{
@@ -1043,6 +1042,18 @@ body{
 }
 
 
+.booking-button:disabled{
+
+    opacity:.65;
+
+    cursor:not-allowed;
+
+    transform:none !important;
+
+    filter:none;
+}
+
+
 /* =========================================================
    FOOTER
 ========================================================= */
@@ -1160,8 +1171,6 @@ body{
     }
 
 
-    /* SERVICES */
-
     .services{
 
         width:92%;
@@ -1218,8 +1227,6 @@ body{
     }
 
 
-    /* BRIDAL */
-
     .bridal-section{
 
         width:92%;
@@ -1271,8 +1278,6 @@ body{
         padding:7px 10px;
     }
 
-
-    /* BOOKING */
 
     .booking{
 
@@ -1328,8 +1333,6 @@ body{
     }
 
 
-    /* MOBILE INPUTS */
-
     .booking-step select,
     .booking-step input{
 
@@ -1342,9 +1345,6 @@ body{
         border-radius:13px;
     }
 
-
-    /* MOBILE TEXTAREA
-       1.5 برابر ارتفاع ورودی */
 
     .booking-step textarea{
 
@@ -1363,8 +1363,6 @@ body{
         border-radius:13px;
     }
 
-
-    /* MOBILE TIME */
 
     .time-grid{
 
@@ -1387,8 +1385,6 @@ body{
     }
 
 
-    /* MOBILE BOOKING BUTTON */
-
     .booking-button{
 
         height:53px;
@@ -1398,8 +1394,6 @@ body{
         font-size:14px;
     }
 
-
-    /* FOOTER */
 
     .footer{
 
@@ -1493,6 +1487,8 @@ body{
 
     visibility:hidden;
 
+    pointer-events:none;
+
     transition:
         opacity .2s ease,
         visibility .2s ease;
@@ -1504,6 +1500,8 @@ body{
     opacity:1;
 
     visibility:visible;
+
+    pointer-events:auto;
 }
 
 
@@ -1535,8 +1533,6 @@ body{
     transform:translateY(0) scale(1);
 }
 
-
-/* CALENDAR HEADER */
 
 .jalali-calendar-header{
 
@@ -1599,10 +1595,6 @@ body{
 }
 
 
-/* =========================================================
-   CALENDAR NAVIGATION
-========================================================= */
-
 .jalali-navigation{
 
     display:flex;
@@ -1656,10 +1648,6 @@ body{
 }
 
 
-/* =========================================================
-   CALENDAR WEEK DAYS
-========================================================= */
-
 .jalali-weekdays{
 
     display:grid;
@@ -1681,10 +1669,6 @@ body{
     color:#a98285;
 }
 
-
-/* =========================================================
-   CALENDAR DAYS
-========================================================= */
 
 .jalali-days{
 
@@ -1764,10 +1748,6 @@ body{
 }
 
 
-/* =========================================================
-   CALENDAR MOBILE
-========================================================= */
-
 @media(max-width:600px){
 
     .jalali-calendar-overlay{
@@ -1843,33 +1823,39 @@ body.calendar-open{
 
 /* =========================================================
    BOOKING SUCCESS / ERROR MODAL
+   FIXED VIEWPORT VERSION
 ========================================================= */
 
 .booking-message-overlay{
 
-    position:fixed;
+    position:fixed !important;
 
-    inset:0;
+    top:0 !important;
+    left:0 !important;
+    right:0 !important;
+    bottom:0 !important;
 
-    z-index:10000;
+    width:100vw !important;
+    height:100vh !important;
+    height:100dvh !important;
+
+    z-index:999999 !important;
 
     display:flex;
 
     align-items:center;
-
     justify-content:center;
 
     padding:20px;
 
-    background:rgba(45,28,31,.35);
+    background:rgba(45,28,31,.38);
 
     backdrop-filter:blur(9px);
-
     -webkit-backdrop-filter:blur(9px);
 
     opacity:0;
-
     visibility:hidden;
+    pointer-events:none;
 
     transition:
         opacity .3s ease,
@@ -1882,8 +1868,14 @@ body.calendar-open{
     opacity:1;
 
     visibility:visible;
+
+    pointer-events:auto;
 }
 
+
+/* =========================================================
+   MODAL CARD
+========================================================= */
 
 .booking-message-card{
 
@@ -1896,8 +1888,8 @@ body.calendar-open{
     background:
         linear-gradient(
             135deg,
-            rgba(255,255,255,.94),
-            rgba(255,248,246,.97)
+            rgba(255,255,255,.97),
+            rgba(255,248,246,.98)
         );
 
     border:2px solid rgba(79,108,84,.55);
@@ -1927,12 +1919,13 @@ body.calendar-open{
 }
 
 
-/* ICON */
+/* =========================================================
+   MODAL ICON
+========================================================= */
 
 .booking-message-icon{
 
     width:70px;
-
     height:70px;
 
     margin:0 auto 18px;
@@ -1940,13 +1933,11 @@ body.calendar-open{
     display:flex;
 
     align-items:center;
-
     justify-content:center;
 
     border-radius:50%;
 
     font-size:34px;
-
     font-weight:700;
 
     color:#fff;
@@ -1963,7 +1954,9 @@ body.calendar-open{
 }
 
 
-/* SUCCESS */
+/* =========================================================
+   SUCCESS
+========================================================= */
 
 .booking-message-overlay.success
 .booking-message-card{
@@ -1988,7 +1981,9 @@ body.calendar-open{
 }
 
 
-/* ERROR */
+/* =========================================================
+   ERROR
+========================================================= */
 
 .booking-message-overlay.error
 .booking-message-card{
@@ -2010,7 +2005,9 @@ body.calendar-open{
 }
 
 
-/* TITLE */
+/* =========================================================
+   MODAL TITLE
+========================================================= */
 
 .booking-message-title{
 
@@ -2024,7 +2021,9 @@ body.calendar-open{
 }
 
 
-/* TEXT */
+/* =========================================================
+   MODAL TEXT
+========================================================= */
 
 .booking-message-text{
 
@@ -2040,7 +2039,9 @@ body.calendar-open{
 }
 
 
-/* CLOSE BUTTON */
+/* =========================================================
+   MODAL BUTTON
+========================================================= */
 
 .booking-message-close{
 
@@ -2088,17 +2089,36 @@ body.calendar-open{
 }
 
 
-/* MOBILE */
+/* =========================================================
+   PREVENT PAGE SCROLL WHILE MESSAGE IS OPEN
+========================================================= */
+
+body.booking-message-open{
+
+    overflow:hidden !important;
+}
+
+
+/* =========================================================
+   MODAL MOBILE
+========================================================= */
 
 @media(max-width:600px){
 
     .booking-message-overlay{
 
         padding:16px;
+
+        width:100vw !important;
+
+        height:100vh !important;
+        height:100dvh !important;
     }
 
 
     .booking-message-card{
+
+        width:100%;
 
         max-width:350px;
 
@@ -2111,7 +2131,6 @@ body.calendar-open{
     .booking-message-icon{
 
         width:64px;
-
         height:64px;
 
         font-size:30px;
