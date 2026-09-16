@@ -1,9 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* =========================================================
-       SUPABASE
-    ========================================================= */
-
     const SUPABASE_URL =
         "https://oeadtawmcbzblkmfqmbd.supabase.co";
 
@@ -27,13 +23,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const servicesContent =
         document.querySelector(".services-content");
 
-
     if (servicesButton && servicesContent) {
 
         servicesButton.addEventListener("click", function () {
 
             servicesContent.classList.toggle("open");
-
             servicesButton.classList.toggle("active");
 
             const opened =
@@ -43,9 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "aria-expanded",
                 opened ? "true" : "false"
             );
-
         });
-
     }
 
 
@@ -59,13 +51,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const bridalContent =
         document.querySelector(".bridal-content");
 
-
     if (bridalButton && bridalContent) {
 
         bridalButton.addEventListener("click", function () {
 
             bridalContent.classList.toggle("open");
-
             bridalButton.classList.toggle("active");
 
             const opened =
@@ -75,14 +65,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 "aria-expanded",
                 opened ? "true" : "false"
             );
-
         });
-
     }
 
 
     /* =========================================================
-       FORM ELEMENTS
+       FORM
     ========================================================= */
 
     const serviceInput =
@@ -103,35 +91,35 @@ document.addEventListener("DOMContentLoaded", function () {
     const bookingButton =
         document.querySelector(".booking-button");
 
-
-    /* =========================================================
-       TIME SELECTION
-    ========================================================= */
-
     const timeButtons =
         document.querySelectorAll(".time-grid button");
 
-    let selectedTime = null;
 
+    let selectedTime = null;
+    let bookedTimes = new Set();
+
+
+    /* =========================================================
+       TIME BUTTONS
+    ========================================================= */
 
     timeButtons.forEach(function (button) {
 
         button.addEventListener("click", function () {
 
+            if (button.disabled) {
+                return;
+            }
+
             timeButtons.forEach(function (item) {
-
                 item.classList.remove("selected");
-
             });
-
 
             button.classList.add("selected");
 
             selectedTime =
                 button.dataset.time;
-
         });
-
     });
 
 
@@ -139,7 +127,9 @@ document.addEventListener("DOMContentLoaded", function () {
        JALALI CALENDAR
     ========================================================= */
 
-    if (!dateInput) return;
+    if (!dateInput) {
+        return;
+    }
 
 
     const monthNames = [
@@ -169,14 +159,8 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
 
-    /* =========================================================
-       JALALI CONVERSION
-    ========================================================= */
-
     function div(a, b) {
-
         return Math.floor(a / b);
-
     }
 
 
@@ -187,10 +171,8 @@ document.addEventListener("DOMContentLoaded", function () {
             181, 212, 243, 273, 304, 334
         ];
 
-
         let gy2 =
             gm > 2 ? gy + 1 : gy;
-
 
         let days =
             355666 +
@@ -201,21 +183,16 @@ document.addEventListener("DOMContentLoaded", function () {
             gd +
             gdm[gm - 1];
 
-
         let jy =
             -1595 +
             (33 * div(days, 12053));
 
-
         days %= 12053;
-
 
         jy +=
             4 * div(days, 1461);
 
-
         days %= 1461;
-
 
         if (days > 365) {
 
@@ -224,12 +201,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             days =
                 (days - 1) % 365;
-
         }
 
-
         let jm;
-
 
         if (days < 186) {
 
@@ -240,12 +214,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             jm =
                 7 + div(days - 186, 30);
-
         }
 
-
         let jd;
-
 
         if (days < 186) {
 
@@ -256,16 +227,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
             jd =
                 1 + ((days - 186) % 30);
-
         }
-
 
         return {
             year: jy,
             month: jm,
             day: jd
         };
-
     }
 
 
@@ -274,14 +242,12 @@ document.addEventListener("DOMContentLoaded", function () {
         let jy2 =
             jy + 1595;
 
-
         let days =
             -355668 +
             (365 * jy2) +
             (div(jy2, 33) * 8) +
             div((jy2 % 33) + 3, 4) +
             jd;
-
 
         if (jm < 7) {
 
@@ -292,16 +258,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             days +=
                 ((jm - 7) * 30) + 186;
-
         }
-
 
         let gy =
             400 * div(days, 146097);
 
-
         days %= 146097;
-
 
         if (days > 36524) {
 
@@ -310,22 +272,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
             days %= 36524;
 
-
             if (days >= 365) {
-
                 days++;
-
             }
-
         }
-
 
         gy +=
             4 * div(days, 1461);
 
-
         days %= 1461;
-
 
         if (days > 365) {
 
@@ -334,13 +289,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             days =
                 (days - 1) % 365;
-
         }
-
 
         let gd =
             days + 1;
-
 
         const leap =
             (
@@ -348,7 +300,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 gy % 100 !== 0
             ) ||
             (gy % 400 === 0);
-
 
         const monthDays = [
             31,
@@ -365,9 +316,7 @@ document.addEventListener("DOMContentLoaded", function () {
             31
         ];
 
-
         let gm = 1;
-
 
         while (
             gd > monthDays[gm - 1]
@@ -377,16 +326,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 monthDays[gm - 1];
 
             gm++;
-
         }
-
 
         return {
             year: gy,
             month: gm,
             day: gd
         };
-
     }
 
 
@@ -395,31 +341,23 @@ document.addEventListener("DOMContentLoaded", function () {
         const now =
             new Date();
 
-
         return gregorianToJalali(
             now.getFullYear(),
             now.getMonth() + 1,
             now.getDate()
         );
-
     }
 
 
     function daysInJalaliMonth(year, month) {
 
         if (month <= 6) {
-
             return 31;
-
         }
-
 
         if (month <= 11) {
-
             return 30;
-
         }
-
 
         const nextYear =
             jalaliToGregorian(
@@ -428,14 +366,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 1
             );
 
-
         const currentYear =
             jalaliToGregorian(
                 year,
                 1,
                 1
             );
-
 
         const difference =
             Math.round(
@@ -454,47 +390,144 @@ document.addEventListener("DOMContentLoaded", function () {
                 86400000
             );
 
-
         return difference === 366
             ? 30
             : 29;
-
     }
 
-
-    /* =========================================================
-       CALENDAR STATE
-    ========================================================= */
 
     const today =
         getTodayJalali();
 
-
     let currentYear =
         today.year;
 
-
     let currentMonth =
         today.month;
-
 
     let selectedDate = null;
 
 
     /* =========================================================
-       CALENDAR HTML
+       LOAD BOOKED TIMES
+    ========================================================= */
+
+    async function loadBookedTimes(date) {
+
+        bookedTimes =
+            new Set();
+
+
+        timeButtons.forEach(function (button) {
+
+            button.disabled =
+                false;
+
+            button.classList.remove(
+                "booked",
+                "selected"
+            );
+
+            button.removeAttribute(
+                "aria-disabled"
+            );
+        });
+
+
+        selectedTime =
+            null;
+
+
+        if (!date) {
+            return;
+        }
+
+
+        try {
+
+            const result =
+                await supabaseClient
+                    .rpc(
+                        "get_booked_times",
+                        {
+                            p_date: date
+                        }
+                    );
+
+
+            if (result.error) {
+
+                console.error(
+                    "Booked times error:",
+                    result.error
+                );
+
+                return;
+            }
+
+
+            const rows =
+                result.data || [];
+
+
+            rows.forEach(function (row) {
+
+                if (row.time) {
+
+                    bookedTimes.add(
+                        row.time
+                    );
+                }
+            });
+
+
+            timeButtons.forEach(function (button) {
+
+                const time =
+                    button.dataset.time;
+
+
+                if (
+                    bookedTimes.has(time)
+                ) {
+
+                    button.disabled =
+                        true;
+
+                    button.classList.add(
+                        "booked"
+                    );
+
+                    button.setAttribute(
+                        "aria-disabled",
+                        "true"
+                    );
+                }
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "Load booked times error:",
+                error
+            );
+        }
+    }
+
+
+    /* =========================================================
+       CALENDAR
     ========================================================= */
 
     const calendarOverlay =
         document.createElement("div");
-
 
     calendarOverlay.className =
         "jalali-calendar-overlay";
 
 
     calendarOverlay.innerHTML = `
-
         <div class="jalali-calendar">
 
             <div class="jalali-calendar-header">
@@ -529,9 +562,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     ‹
                 </button>
 
-
                 <div class="jalali-month-title"></div>
-
 
                 <button
                     type="button"
@@ -546,9 +577,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="jalali-weekdays">
 
                 ${weekDays.map(function(day) {
-
                     return `<span>${day}</span>`;
-
                 }).join("")}
 
             </div>
@@ -557,7 +586,6 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="jalali-days"></div>
 
         </div>
-
     `;
 
 
@@ -571,18 +599,15 @@ document.addEventListener("DOMContentLoaded", function () {
             ".jalali-calendar"
         );
 
-
     const daysContainer =
         calendarOverlay.querySelector(
             ".jalali-days"
         );
 
-
     const monthTitle =
         calendarOverlay.querySelector(
             ".jalali-month-title"
         );
-
 
     const title =
         calendarOverlay.querySelector(
@@ -590,19 +615,13 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-    /* =========================================================
-       RENDER CALENDAR
-    ========================================================= */
-
     function renderCalendar() {
 
         monthTitle.textContent =
             `${monthNames[currentMonth - 1]} ${currentYear}`;
 
-
         title.textContent =
             "انتخاب تاریخ";
-
 
         daysContainer.innerHTML =
             "";
@@ -627,7 +646,6 @@ document.addEventListener("DOMContentLoaded", function () {
         let weekDay =
             firstDate.getDay();
 
-
         weekDay =
             (weekDay + 1) % 7;
 
@@ -641,15 +659,12 @@ document.addEventListener("DOMContentLoaded", function () {
             const empty =
                 document.createElement("span");
 
-
             empty.className =
                 "jalali-empty";
-
 
             daysContainer.appendChild(
                 empty
             );
-
         }
 
 
@@ -669,10 +684,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const button =
                 document.createElement("button");
 
-
             button.type =
                 "button";
-
 
             button.textContent =
                 day;
@@ -687,7 +700,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 button.classList.add(
                     "today"
                 );
-
             }
 
 
@@ -701,13 +713,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 button.classList.add(
                     "selected"
                 );
-
             }
 
 
             button.addEventListener(
                 "click",
-                function () {
+                async function () {
 
                     selectedDate = {
 
@@ -719,18 +730,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         day:
                             day
-
                     };
 
 
-                    dateInput.value =
+                    const formattedDate =
                         `${currentYear}/${String(currentMonth).padStart(2, "0")}/${String(day).padStart(2, "0")}`;
+
+
+                    dateInput.value =
+                        formattedDate;
 
 
                     closeCalendar();
 
+
                     renderCalendar();
 
+
+                    await loadBookedTimes(
+                        formattedDate
+                    );
                 }
             );
 
@@ -738,30 +757,21 @@ document.addEventListener("DOMContentLoaded", function () {
             daysContainer.appendChild(
                 button
             );
-
         }
-
     }
 
-
-    /* =========================================================
-       OPEN / CLOSE CALENDAR
-    ========================================================= */
 
     function openCalendar() {
 
         renderCalendar();
 
-
         calendarOverlay.classList.add(
             "open"
         );
 
-
         document.body.classList.add(
             "calendar-open"
         );
-
     }
 
 
@@ -771,11 +781,9 @@ document.addEventListener("DOMContentLoaded", function () {
             "open"
         );
 
-
         document.body.classList.remove(
             "calendar-open"
         );
-
     }
 
 
@@ -795,9 +803,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ) {
 
                 closeCalendar();
-
             }
-
         }
     );
 
@@ -810,10 +816,6 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-    /* =========================================================
-       TODAY
-    ========================================================= */
-
     calendar
         .querySelector(".jalali-today")
         .addEventListener(
@@ -823,20 +825,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 currentYear =
                     today.year;
 
-
                 currentMonth =
                     today.month;
 
-
                 renderCalendar();
-
             }
         );
 
-
-    /* =========================================================
-       PREVIOUS MONTH
-    ========================================================= */
 
     calendar
         .querySelector(".jalali-prev")
@@ -846,25 +841,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 currentMonth--;
 
-
                 if (currentMonth < 1) {
 
-                    currentMonth = 12;
+                    currentMonth =
+                        12;
 
                     currentYear--;
-
                 }
 
-
                 renderCalendar();
-
             }
         );
 
-
-    /* =========================================================
-       NEXT MONTH
-    ========================================================= */
 
     calendar
         .querySelector(".jalali-next")
@@ -874,46 +862,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 currentMonth++;
 
-
                 if (currentMonth > 12) {
 
-                    currentMonth = 1;
+                    currentMonth =
+                        1;
 
                     currentYear++;
-
                 }
 
-
                 renderCalendar();
-
             }
         );
 
 
     /* =========================================================
-       ESC CLOSE CALENDAR
-    ========================================================= */
-
-    document.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (
-                event.key === "Escape"
-            ) {
-
-                closeCalendar();
-
-                closeBookingMessage();
-
-            }
-
-        }
-    );
-
-
-    /* =========================================================
-       BOOKING MESSAGE MODAL
+       BOOKING MESSAGE
     ========================================================= */
 
     function createBookingMessage() {
@@ -925,22 +888,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         if (overlay) {
-
             return overlay;
-
         }
 
 
         overlay =
             document.createElement("div");
 
-
         overlay.className =
             "booking-message-overlay";
 
 
         overlay.innerHTML = `
-
             <div class="booking-message-card">
 
                 <div class="booking-message-icon">
@@ -961,31 +920,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 </button>
 
             </div>
-
         `;
 
-
-        /*
-           مهم:
-           مودال مستقیماً داخل body قرار می‌گیرد
-           تا transform والدها روی position:fixed اثر نگذارد.
-        */
 
         document.body.appendChild(
             overlay
         );
 
 
-        const closeButton =
-            overlay.querySelector(
+        overlay
+            .querySelector(
                 ".booking-message-close"
+            )
+            .addEventListener(
+                "click",
+                closeBookingMessage
             );
-
-
-        closeButton.addEventListener(
-            "click",
-            closeBookingMessage
-        );
 
 
         overlay.addEventListener(
@@ -997,15 +947,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 ) {
 
                     closeBookingMessage();
-
                 }
-
             }
         );
 
 
         return overlay;
-
     }
 
 
@@ -1018,9 +965,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         if (!overlay) {
-
             return;
-
         }
 
 
@@ -1028,11 +973,9 @@ document.addEventListener("DOMContentLoaded", function () {
             "open"
         );
 
-
         document.body.classList.remove(
             "booking-message-open"
         );
-
     }
 
 
@@ -1068,10 +1011,8 @@ document.addEventListener("DOMContentLoaded", function () {
             icon.textContent =
                 "✓";
 
-
             messageTitle.textContent =
                 "رزرو با موفقیت ثبت شد";
-
 
             messageText.textContent =
                 "درخواست نوبت شما با موفقیت ثبت شد. اطلاعات شما در سیستم ذخیره گردید.";
@@ -1081,14 +1022,11 @@ document.addEventListener("DOMContentLoaded", function () {
             icon.textContent =
                 "!";
 
-
             messageTitle.textContent =
                 "ثبت رزرو انجام نشد";
 
-
             messageText.textContent =
                 message;
-
         }
 
 
@@ -1097,40 +1035,46 @@ document.addEventListener("DOMContentLoaded", function () {
             "error"
         );
 
-
         overlay.classList.add(
             type
         );
 
-
-        /*
-           قفل کردن اسکرول صفحه
-        */
 
         document.body.classList.add(
             "booking-message-open"
         );
 
 
-        /*
-           نمایش مودال
-        */
+        requestAnimationFrame(function () {
 
-        requestAnimationFrame(
-            function () {
-
-                overlay.classList.add(
-                    "open"
-                );
-
-            }
-        );
-
+            overlay.classList.add(
+                "open"
+            );
+        });
     }
 
 
     /* =========================================================
-       BOOKING SUBMIT
+       ESC
+    ========================================================= */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeCalendar();
+                closeBookingMessage();
+            }
+        }
+    );
+
+
+    /* =========================================================
+       BOOKING
     ========================================================= */
 
     if (bookingButton) {
@@ -1169,9 +1113,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         : "";
 
 
-                /* -----------------------------------------
-                   VALIDATION
-                ----------------------------------------- */
+                /* VALIDATION */
 
                 if (!service) {
 
@@ -1180,16 +1122,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
-
                     if (serviceInput) {
-
                         serviceInput.focus();
-
                     }
 
-
                     return;
-
                 }
 
 
@@ -1200,16 +1137,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
-
                     if (dateInput) {
-
                         dateInput.focus();
-
                     }
 
-
                     return;
-
                 }
 
 
@@ -1220,9 +1152,27 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
+                    return;
+                }
+
+
+                /* CHECK AGAIN BEFORE INSERT */
+
+                await loadBookedTimes(date);
+
+
+                if (
+                    bookedTimes.has(
+                        selectedTime
+                    )
+                {
+
+                    showBookingMessage(
+                        "این ساعت قبلاً رزرو شده است. لطفاً ساعت دیگری انتخاب کنید.",
+                        "error"
+                    );
 
                     return;
-
                 }
 
 
@@ -1233,16 +1183,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
-
                     if (descriptionInput) {
-
                         descriptionInput.focus();
-
                     }
 
-
                     return;
-
                 }
 
 
@@ -1253,16 +1198,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
-
                     if (nameInput) {
-
                         nameInput.focus();
-
                     }
 
-
                     return;
-
                 }
 
 
@@ -1273,22 +1213,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
-
                     if (phoneInput) {
-
                         phoneInput.focus();
-
                     }
 
-
                     return;
-
                 }
 
-
-                /* -----------------------------------------
-                   PHONE VALIDATION
-                ----------------------------------------- */
 
                 const cleanPhone =
                     phone.replace(
@@ -1306,22 +1237,15 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
-
                     if (phoneInput) {
-
                         phoneInput.focus();
-
                     }
 
-
                     return;
-
                 }
 
 
-                /* -----------------------------------------
-                   DISABLE BUTTON
-                ----------------------------------------- */
+                /* DISABLE */
 
                 bookingButton.disabled =
                     true;
@@ -1334,10 +1258,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 bookingButton.textContent =
                     "در حال ثبت درخواست...";
 
-
-                /* -----------------------------------------
-                   INSERT INTO SUPABASE
-                ----------------------------------------- */
 
                 try {
 
@@ -1363,13 +1283,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
                                 phone:
                                     cleanPhone
-
                             });
 
 
                     const error =
                         result.error;
 
+
+                    /* DUPLICATE */
 
                     if (error) {
 
@@ -1379,20 +1300,36 @@ document.addEventListener("DOMContentLoaded", function () {
                         );
 
 
+                        if (
+                            error.code ===
+                            "23505"
+                        ) {
+
+                            showBookingMessage(
+                                "این ساعت همین الان توسط شخص دیگری رزرو شد. لطفاً ساعت دیگری انتخاب کنید.",
+                                "error"
+                            );
+
+
+                            await loadBookedTimes(
+                                date
+                            );
+
+
+                            return;
+                        }
+
+
                         showBookingMessage(
                             "ثبت رزرو انجام نشد. لطفاً دوباره تلاش کنید.",
                             "error"
                         );
 
-
                         return;
-
                     }
 
 
-                    /* -----------------------------------------
-                       SUCCESS
-                    ----------------------------------------- */
+                    /* SUCCESS */
 
                     showBookingMessage(
                         "",
@@ -1400,47 +1337,24 @@ document.addEventListener("DOMContentLoaded", function () {
                     );
 
 
-                    /* -----------------------------------------
-                       RESET FORM
-                    ----------------------------------------- */
-
                     if (serviceInput) {
-
-                        serviceInput.value =
-                            "";
-
+                        serviceInput.value = "";
                     }
-
 
                     if (dateInput) {
-
-                        dateInput.value =
-                            "";
-
+                        dateInput.value = "";
                     }
-
 
                     if (descriptionInput) {
-
-                        descriptionInput.value =
-                            "";
-
+                        descriptionInput.value = "";
                     }
-
 
                     if (nameInput) {
-
-                        nameInput.value =
-                            "";
-
+                        nameInput.value = "";
                     }
 
-
                     if (phoneInput) {
-
-                        phoneInput.value =
-                            "";
-
+                        phoneInput.value = "";
                     }
 
 
@@ -1448,9 +1362,16 @@ document.addEventListener("DOMContentLoaded", function () {
                         function (button) {
 
                             button.classList.remove(
-                                "selected"
+                                "selected",
+                                "booked"
                             );
 
+                            button.disabled =
+                                false;
+
+                            button.removeAttribute(
+                                "aria-disabled"
+                            );
                         }
                     );
 
@@ -1458,9 +1379,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     selectedTime =
                         null;
 
-
                     selectedDate =
                         null;
+
+                    bookedTimes =
+                        new Set();
 
 
                 } catch (error) {
@@ -1476,20 +1399,17 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
+
                 } finally {
 
                     bookingButton.disabled =
                         false;
 
-
                     bookingButton.textContent =
                         originalText;
-
                 }
-
             }
         );
-
     }
 
 });
