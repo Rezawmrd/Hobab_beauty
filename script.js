@@ -174,7 +174,9 @@ document.addEventListener("DOMContentLoaded", function () {
     ========================================================= */
 
     function div(a, b) {
+
         return Math.floor(a / b);
+
     }
 
 
@@ -185,8 +187,10 @@ document.addEventListener("DOMContentLoaded", function () {
             181, 212, 243, 273, 304, 334
         ];
 
+
         let gy2 =
             gm > 2 ? gy + 1 : gy;
+
 
         let days =
             355666 +
@@ -197,14 +201,18 @@ document.addEventListener("DOMContentLoaded", function () {
             gd +
             gdm[gm - 1];
 
+
         let jy =
             -1595 +
             (33 * div(days, 12053));
 
+
         days %= 12053;
+
 
         jy +=
             4 * div(days, 1461);
+
 
         days %= 1461;
 
@@ -266,6 +274,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let jy2 =
             jy + 1595;
 
+
         let days =
             -355668 +
             (365 * jy2) +
@@ -290,6 +299,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let gy =
             400 * div(days, 146097);
 
+
         days %= 146097;
 
 
@@ -302,7 +312,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             if (days >= 365) {
+
                 days++;
+
             }
 
         }
@@ -310,6 +322,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         gy +=
             4 * div(days, 1461);
+
 
         days %= 1461;
 
@@ -382,6 +395,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const now =
             new Date();
 
+
         return gregorianToJalali(
             now.getFullYear(),
             now.getMonth() + 1,
@@ -394,12 +408,16 @@ document.addEventListener("DOMContentLoaded", function () {
     function daysInJalaliMonth(year, month) {
 
         if (month <= 6) {
+
             return 31;
+
         }
 
 
         if (month <= 11) {
+
             return 30;
+
         }
 
 
@@ -451,11 +469,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const today =
         getTodayJalali();
 
+
     let currentYear =
         today.year;
 
+
     let currentMonth =
         today.month;
+
 
     let selectedDate = null;
 
@@ -466,6 +487,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const calendarOverlay =
         document.createElement("div");
+
 
     calendarOverlay.className =
         "jalali-calendar-overlay";
@@ -484,7 +506,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     ×
                 </button>
 
-                <div class="jalali-title"></div>
+                <div class="jalali-title">
+                    انتخاب تاریخ
+                </div>
 
                 <button
                     type="button"
@@ -521,9 +545,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             <div class="jalali-weekdays">
 
-                ${weekDays.map(day => `
-                    <span>${day}</span>
-                `).join("")}
+                ${weekDays.map(function(day) {
+
+                    return `<span>${day}</span>`;
+
+                }).join("")}
 
             </div>
 
@@ -578,7 +604,8 @@ document.addEventListener("DOMContentLoaded", function () {
             "انتخاب تاریخ";
 
 
-        daysContainer.innerHTML = "";
+        daysContainer.innerHTML =
+            "";
 
 
         const firstDay =
@@ -614,8 +641,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const empty =
                 document.createElement("span");
 
+
             empty.className =
                 "jalali-empty";
+
 
             daysContainer.appendChild(
                 empty
@@ -640,8 +669,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const button =
                 document.createElement("button");
 
+
             button.type =
                 "button";
+
 
             button.textContent =
                 day;
@@ -679,9 +710,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 function () {
 
                     selectedDate = {
-                        year: currentYear,
-                        month: currentMonth,
-                        day: day
+
+                        year:
+                            currentYear,
+
+                        month:
+                            currentMonth,
+
+                        day:
+                            day
+
                     };
 
 
@@ -714,9 +752,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         renderCalendar();
 
+
         calendarOverlay.classList.add(
             "open"
         );
+
 
         document.body.classList.add(
             "calendar-open"
@@ -730,6 +770,7 @@ document.addEventListener("DOMContentLoaded", function () {
         calendarOverlay.classList.remove(
             "open"
         );
+
 
         document.body.classList.remove(
             "calendar-open"
@@ -782,8 +823,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 currentYear =
                     today.year;
 
+
                 currentMonth =
                     today.month;
+
 
                 renderCalendar();
 
@@ -803,6 +846,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 currentMonth--;
 
+
                 if (currentMonth < 1) {
 
                     currentMonth = 12;
@@ -810,6 +854,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     currentYear--;
 
                 }
+
 
                 renderCalendar();
 
@@ -829,6 +874,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 currentMonth++;
 
+
                 if (currentMonth > 12) {
 
                     currentMonth = 1;
@@ -837,6 +883,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 }
 
+
                 renderCalendar();
 
             }
@@ -844,7 +891,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================================
-       ESC CLOSE
+       ESC CLOSE CALENDAR
     ========================================================= */
 
     document.addEventListener(
@@ -857,6 +904,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 closeCalendar();
 
+                closeBookingMessage();
+
             }
 
         }
@@ -867,10 +916,7 @@ document.addEventListener("DOMContentLoaded", function () {
        BOOKING MESSAGE MODAL
     ========================================================= */
 
-    function showBookingMessage(
-        message,
-        type = "success"
-    ) {
+    function createBookingMessage() {
 
         let overlay =
             document.querySelector(
@@ -878,77 +924,125 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-        if (!overlay) {
+        if (overlay) {
 
-            overlay =
-                document.createElement("div");
-
-            overlay.className =
-                "booking-message-overlay";
-
-            overlay.innerHTML = `
-
-                <div class="booking-message-card">
-
-                    <div class="booking-message-icon">
-                        ✓
-                    </div>
-
-                    <h3 class="booking-message-title"></h3>
-
-                    <p class="booking-message-text"></p>
-
-                    <button
-                        type="button"
-                        class="booking-message-close"
-                    >
-                        متوجه شدم
-                    </button>
-
-                </div>
-
-            `;
-
-
-            document.body.appendChild(
-                overlay
-            );
-
-
-            overlay
-                .querySelector(
-                    ".booking-message-close"
-                )
-                .addEventListener(
-                    "click",
-                    function () {
-
-                        overlay.classList.remove(
-                            "open"
-                        );
-
-                    }
-                );
-
-
-            overlay.addEventListener(
-                "click",
-                function (event) {
-
-                    if (
-                        event.target === overlay
-                    ) {
-
-                        overlay.classList.remove(
-                            "open"
-                        );
-
-                    }
-
-                }
-            );
+            return overlay;
 
         }
+
+
+        overlay =
+            document.createElement("div");
+
+
+        overlay.className =
+            "booking-message-overlay";
+
+
+        overlay.innerHTML = `
+
+            <div class="booking-message-card">
+
+                <div class="booking-message-icon">
+                    ✓
+                </div>
+
+                <h3 class="booking-message-title">
+                    رزرو با موفقیت ثبت شد
+                </h3>
+
+                <p class="booking-message-text"></p>
+
+                <button
+                    type="button"
+                    class="booking-message-close"
+                >
+                    متوجه شدم
+                </button>
+
+            </div>
+
+        `;
+
+
+        /*
+           مهم:
+           مودال مستقیماً داخل body قرار می‌گیرد
+           تا transform والدها روی position:fixed اثر نگذارد.
+        */
+
+        document.body.appendChild(
+            overlay
+        );
+
+
+        const closeButton =
+            overlay.querySelector(
+                ".booking-message-close"
+            );
+
+
+        closeButton.addEventListener(
+            "click",
+            closeBookingMessage
+        );
+
+
+        overlay.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    event.target === overlay
+                ) {
+
+                    closeBookingMessage();
+
+                }
+
+            }
+        );
+
+
+        return overlay;
+
+    }
+
+
+    function closeBookingMessage() {
+
+        const overlay =
+            document.querySelector(
+                ".booking-message-overlay"
+            );
+
+
+        if (!overlay) {
+
+            return;
+
+        }
+
+
+        overlay.classList.remove(
+            "open"
+        );
+
+
+        document.body.classList.remove(
+            "booking-message-open"
+        );
+
+    }
+
+
+    function showBookingMessage(
+        message,
+        type = "success"
+    ) {
+
+        const overlay =
+            createBookingMessage();
 
 
         const icon =
@@ -974,8 +1068,10 @@ document.addEventListener("DOMContentLoaded", function () {
             icon.textContent =
                 "✓";
 
+
             messageTitle.textContent =
                 "رزرو با موفقیت ثبت شد";
+
 
             messageText.textContent =
                 "درخواست نوبت شما با موفقیت ثبت شد. اطلاعات شما در سیستم ذخیره گردید.";
@@ -985,8 +1081,10 @@ document.addEventListener("DOMContentLoaded", function () {
             icon.textContent =
                 "!";
 
+
             messageTitle.textContent =
                 "ثبت رزرو انجام نشد";
+
 
             messageText.textContent =
                 message;
@@ -1004,6 +1102,19 @@ document.addEventListener("DOMContentLoaded", function () {
             type
         );
 
+
+        /*
+           قفل کردن اسکرول صفحه
+        */
+
+        document.body.classList.add(
+            "booking-message-open"
+        );
+
+
+        /*
+           نمایش مودال
+        */
 
         requestAnimationFrame(
             function () {
@@ -1069,7 +1180,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
-                    serviceInput.focus();
+
+                    if (serviceInput) {
+
+                        serviceInput.focus();
+
+                    }
+
 
                     return;
 
@@ -1083,7 +1200,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
-                    dateInput.focus();
+
+                    if (dateInput) {
+
+                        dateInput.focus();
+
+                    }
+
 
                     return;
 
@@ -1097,6 +1220,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
+
                     return;
 
                 }
@@ -1109,7 +1233,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
-                    descriptionInput.focus();
+
+                    if (descriptionInput) {
+
+                        descriptionInput.focus();
+
+                    }
+
 
                     return;
 
@@ -1123,7 +1253,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
-                    nameInput.focus();
+
+                    if (nameInput) {
+
+                        nameInput.focus();
+
+                    }
+
 
                     return;
 
@@ -1137,7 +1273,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
-                    phoneInput.focus();
+
+                    if (phoneInput) {
+
+                        phoneInput.focus();
+
+                    }
+
 
                     return;
 
@@ -1164,7 +1306,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         "error"
                     );
 
-                    phoneInput.focus();
+
+                    if (phoneInput) {
+
+                        phoneInput.focus();
+
+                    }
+
 
                     return;
 
