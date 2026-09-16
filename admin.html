@@ -32,6 +32,7 @@
             min-height:100vh;
         }
 
+
         /* =========================
            LOGIN
         ========================= */
@@ -96,6 +97,7 @@
             min-height:18px;
         }
 
+
         /* =========================
            ADMIN
         ========================= */
@@ -144,10 +146,12 @@
             cursor:pointer;
         }
 
+
         .container{
             width:min(1100px,94%);
             margin:25px auto 50px;
         }
+
 
         /* =========================
            CATEGORIES
@@ -199,6 +203,7 @@
             font-size:11px;
             opacity:.7;
         }
+
 
         /* =========================
            APPOINTMENTS
@@ -288,6 +293,7 @@
             color:#755f64;
         }
 
+
         /* =========================
            ACTIONS
         ========================= */
@@ -337,6 +343,49 @@
             cursor:not-allowed;
         }
 
+
+        /* =========================
+           DAY GROUPS
+        ========================= */
+
+        .day-group{
+            margin-bottom:24px;
+        }
+
+        .day-group:last-child{
+            margin-bottom:0;
+        }
+
+        .day-group-title{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:10px;
+            margin-bottom:10px;
+            padding:12px 14px;
+            border-radius:14px;
+            background:#f5eaea;
+            color:#6f4b53;
+            font-size:14px;
+            font-weight:700;
+        }
+
+        .day-group-title span{
+            font-size:11px;
+            font-weight:400;
+            color:#9b7b81;
+        }
+
+        .day-group-list{
+            display:grid;
+            gap:10px;
+        }
+
+
+        /* =========================
+           STATES
+        ========================= */
+
         .empty{
             text-align:center;
             padding:45px 10px;
@@ -351,6 +400,11 @@
             font-size:13px;
         }
 
+
+        /* =========================
+           MOBILE
+        ========================= */
+
         @media(max-width:700px){
 
             .categories{
@@ -363,6 +417,10 @@
 
             .appointment-actions{
                 flex-direction:row;
+            }
+
+            .day-group-title{
+                padding:11px 12px;
             }
 
         }
@@ -394,12 +452,14 @@
             پنل مدیریت سالن زیبایی
         </div>
 
+
         <input
             type="email"
             id="email"
             placeholder="ایمیل مدیر"
             autocomplete="email"
         >
+
 
         <input
             type="password"
@@ -408,9 +468,11 @@
             autocomplete="current-password"
         >
 
+
         <button id="loginBtn">
             ورود به پنل
         </button>
+
 
         <div
             class="login-error"
@@ -422,6 +484,7 @@
 </section>
 
 
+
 <!-- =========================
      ADMIN PAGE
 ========================= -->
@@ -430,6 +493,7 @@
     class="admin-page"
     id="adminPage"
 >
+
 
 <header class="header">
 
@@ -447,6 +511,7 @@
 
         </div>
 
+
         <button
             class="logout"
             id="logoutBtn"
@@ -459,7 +524,9 @@
 </header>
 
 
+
 <main class="container">
+
 
     <h2 class="section-title">
         بخش خدمات
@@ -468,11 +535,13 @@
 
     <div class="categories">
 
+
         <button
             class="category active"
             data-service="hair"
             data-name="مو"
         >
+
             <span class="category-name">
                 مو
             </span>
@@ -480,6 +549,7 @@
             <span class="category-count">
                 ۰ نوبت
             </span>
+
         </button>
 
 
@@ -488,6 +558,7 @@
             data-service="makeup"
             data-name="میکاپ"
         >
+
             <span class="category-name">
                 میکاپ
             </span>
@@ -495,6 +566,7 @@
             <span class="category-count">
                 ۰ نوبت
             </span>
+
         </button>
 
 
@@ -503,6 +575,7 @@
             data-service="nail"
             data-name="ناخن"
         >
+
             <span class="category-name">
                 ناخن
             </span>
@@ -510,6 +583,7 @@
             <span class="category-count">
                 ۰ نوبت
             </span>
+
         </button>
 
 
@@ -518,6 +592,7 @@
             data-service="lash"
             data-name="مژه"
         >
+
             <span class="category-name">
                 مژه
             </span>
@@ -525,6 +600,7 @@
             <span class="category-count">
                 ۰ نوبت
             </span>
+
         </button>
 
 
@@ -533,6 +609,7 @@
             data-service="brow"
             data-name="ابرو"
         >
+
             <span class="category-name">
                 ابرو
             </span>
@@ -540,6 +617,7 @@
             <span class="category-count">
                 ۰ نوبت
             </span>
+
         </button>
 
 
@@ -548,6 +626,7 @@
             data-service="skin"
             data-name="مراقبت پوست"
         >
+
             <span class="category-name">
                 مراقبت پوست
             </span>
@@ -555,6 +634,7 @@
             <span class="category-count">
                 ۰ نوبت
             </span>
+
         </button>
 
 
@@ -563,6 +643,7 @@
             data-service="bridal"
             data-name="عروس"
         >
+
             <span class="category-name">
                 عروس
             </span>
@@ -570,18 +651,23 @@
             <span class="category-count">
                 ۰ نوبت
             </span>
+
         </button>
+
 
     </div>
 
 
+
     <section class="appointments-panel">
+
 
         <div class="appointments-head">
 
             <h2 id="appointmentsTitle">
                 نوبت‌های مو
             </h2>
+
 
             <button
                 class="refresh"
@@ -604,12 +690,14 @@
 
         </div>
 
+
     </section>
 
 
 </main>
 
 </section>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -963,7 +1051,7 @@ categories.forEach(
 
 
 /* =========================
-   RENDER
+   RENDER APPOINTMENTS
 ========================= */
 
 function renderAppointments(){
@@ -987,131 +1075,367 @@ function renderAppointments(){
     }
 
 
-    appointmentList.innerHTML =
-        filtered.map(
-            appointment => {
+    /* =========================
+       GROUP BY DATE
+    ========================= */
 
-                const phone =
-                    String(
-                        appointment.phone || ""
-                    ).trim();
-
-                const safePhone =
-                    phone.replace(
-                        /[^0-9+]/g,
-                        ""
-                    );
-
-                return `
-
-                <article
-                    class="appointment"
-                    data-id="${escapeHtml(
-                        appointment.id
-                    )}"
-                >
-
-                    <div class="appointment-top">
-
-                        <div class="appointment-name">
-                            ${escapeHtml(
-                                appointment.name || "-"
-                            )}
-                        </div>
+    const groups = {};
 
 
-                        <div class="appointment-time">
+    filtered.forEach(
+        appointment => {
 
-                            ${escapeHtml(
-                                appointment.date || "-"
-                            )}
-
-                            -
-
-                            ${escapeHtml(
-                                appointment.time || "-"
-                            )}
-
-                        </div>
-
-                    </div>
+            const date =
+                appointment.date || "-";
 
 
-                    <div class="appointment-info">
+            if(!groups[date]){
 
-                        <div>
-                            <strong>
-                                شماره تماس:
-                            </strong>
-
-                            ${escapeHtml(
-                                appointment.phone || "-"
-                            )}
-                        </div>
-
-
-                        <div>
-                            <strong>
-                                خدمت:
-                            </strong>
-
-                            ${escapeHtml(
-                                serviceNames[
-                                    appointment.service
-                                ] ||
-                                appointment.service ||
-                                "-"
-                            )}
-                        </div>
-
-                    </div>
-
-
-                    <div class="description">
-
-                        <strong>
-                            توضیحات:
-                        </strong>
-
-                        <br>
-
-                        ${escapeHtml(
-                            appointment.description || "-"
-                        )}
-
-                    </div>
-
-
-                    <div class="appointment-actions">
-
-                        <a
-                            class="call-btn"
-                            href="tel:${escapeHtml(
-                                safePhone
-                            )}"
-                        >
-                            تماس با مشتری
-                        </a>
-
-
-                        <button
-                            type="button"
-                            class="delete-btn"
-                            onclick="deleteAppointment('${escapeHtml(
-                                appointment.id
-                            )}')"
-                        >
-                            حذف نوبت
-                        </button>
-
-                    </div>
-
-                </article>
-
-                `;
+                groups[date] = [];
 
             }
-        ).join("");
+
+
+            groups[date].push(
+                appointment
+            );
+
+        }
+    );
+
+
+    /* =========================
+       SORT DATES
+    ========================= */
+
+    const sortedDates =
+        Object.keys(groups).sort(
+            (a,b) =>
+                normalizeDateForSort(a) -
+                normalizeDateForSort(b)
+        );
+
+
+    /* =========================
+       TODAY
+    ========================= */
+
+    const today =
+        getTodayJalaliForAdmin();
+
+
+    appointmentList.innerHTML =
+        sortedDates
+            .map(
+                date => {
+
+                    const dayAppointments =
+                        groups[date].sort(
+                            (a,b) =>
+                                String(
+                                    a.time || ""
+                                ).localeCompare(
+                                    String(
+                                        b.time || ""
+                                    )
+                                )
+                        );
+
+
+                    const dayLabel =
+                        getDayLabel(
+                            date,
+                            today
+                        );
+
+
+                    return `
+
+                        <div class="day-group">
+
+                            <div class="day-group-title">
+
+                                <div>
+                                    ${dayLabel}
+                                </div>
+
+                                <span>
+                                    ${escapeHtml(
+                                        date
+                                    )}
+                                </span>
+
+                            </div>
+
+
+                            <div class="day-group-list">
+
+                                ${dayAppointments
+                                    .map(
+                                        appointment => {
+
+                                            const phone =
+                                                String(
+                                                    appointment.phone || ""
+                                                ).trim();
+
+
+                                            const safePhone =
+                                                phone.replace(
+                                                    /[^0-9+]/g,
+                                                    ""
+                                                );
+
+
+                                            return `
+
+                                            <article
+                                                class="appointment"
+                                                data-id="${escapeHtml(
+                                                    appointment.id
+                                                )}"
+                                            >
+
+                                                <div class="appointment-top">
+
+                                                    <div class="appointment-name">
+                                                        ${escapeHtml(
+                                                            appointment.name || "-"
+                                                        )}
+                                                    </div>
+
+
+                                                    <div class="appointment-time">
+
+                                                        ${escapeHtml(
+                                                            appointment.time || "-"
+                                                        )}
+
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="appointment-info">
+
+                                                    <div>
+                                                        <strong>
+                                                            شماره تماس:
+                                                        </strong>
+
+                                                        ${escapeHtml(
+                                                            appointment.phone || "-"
+                                                        )}
+                                                    </div>
+
+
+                                                    <div>
+                                                        <strong>
+                                                            خدمت:
+                                                        </strong>
+
+                                                        ${escapeHtml(
+                                                            serviceNames[
+                                                                appointment.service
+                                                            ] ||
+                                                            appointment.service ||
+                                                            "-"
+                                                        )}
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="description">
+
+                                                    <strong>
+                                                        توضیحات:
+                                                    </strong>
+
+                                                    <br>
+
+                                                    ${escapeHtml(
+                                                        appointment.description || "-"
+                                                    )}
+
+                                                </div>
+
+
+                                                <div class="appointment-actions">
+
+                                                    <a
+                                                        class="call-btn"
+                                                        href="tel:${escapeHtml(
+                                                            safePhone
+                                                        )}"
+                                                    >
+                                                        تماس با مشتری
+                                                    </a>
+
+
+                                                    <button
+                                                        type="button"
+                                                        class="delete-btn"
+                                                        onclick="deleteAppointment('${escapeHtml(
+                                                            appointment.id
+                                                        )}')"
+                                                    >
+                                                        حذف نوبت
+                                                    </button>
+
+                                                </div>
+
+                                            </article>
+
+                                            `;
+
+                                        }
+                                    )
+                                    .join("")}
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+}
+
+
+/* =========================
+   DATE HELPERS
+========================= */
+
+function normalizeDateForSort(date){
+
+    if(!date){
+
+        return 99999999;
+
+    }
+
+
+    const numbers =
+        String(date)
+
+            .replace(/۰/g,"0")
+            .replace(/۱/g,"1")
+            .replace(/۲/g,"2")
+            .replace(/۳/g,"3")
+            .replace(/۴/g,"4")
+            .replace(/۵/g,"5")
+            .replace(/۶/g,"6")
+            .replace(/۷/g,"7")
+            .replace(/۸/g,"8")
+            .replace(/۹/g,"9")
+
+            .replace(/-/g,"/")
+
+            .split("/");
+
+
+    if(numbers.length !== 3){
+
+        return 99999999;
+
+    }
+
+
+    return (
+        Number(numbers[0]) * 10000 +
+        Number(numbers[1]) * 100 +
+        Number(numbers[2])
+    );
+
+}
+
+
+function getTodayJalaliForAdmin(){
+
+    const formatter =
+        new Intl.DateTimeFormat(
+            "fa-IR-u-ca-persian",
+            {
+                year:"numeric",
+                month:"2-digit",
+                day:"2-digit"
+            }
+        );
+
+
+    const parts =
+        formatter.formatToParts(
+            new Date()
+        );
+
+
+    const year =
+        parts.find(
+            part =>
+                part.type === "year"
+        ).value;
+
+
+    const month =
+        parts.find(
+            part =>
+                part.type === "month"
+        ).value;
+
+
+    const day =
+        parts.find(
+            part =>
+                part.type === "day"
+        ).value;
+
+
+    return (
+        Number(year) * 10000 +
+        Number(month) * 100 +
+        Number(day)
+    );
+
+}
+
+
+function getDayLabel(
+    date,
+    today
+){
+
+    const dateNumber =
+        normalizeDateForSort(
+            date
+        );
+
+
+    if(dateNumber === today){
+
+        return "امروز";
+
+    }
+
+
+    if(dateNumber === today + 1){
+
+        return "فردا";
+
+    }
+
+
+    if(dateNumber === today + 2){
+
+        return "پس‌فردا";
+
+    }
+
+
+    return "تاریخ نوبت";
 
 }
 
@@ -1131,14 +1455,17 @@ async function deleteAppointment(id){
 
     if(!appointment){
 
-        alert("نوبت موردنظر پیدا نشد.");
+        alert(
+            "نوبت موردنظر پیدا نشد."
+        );
 
         return;
     }
 
 
     const customerName =
-        appointment.name || "این مشتری";
+        appointment.name ||
+        "این مشتری";
 
 
     const confirmed =
@@ -1155,7 +1482,7 @@ async function deleteAppointment(id){
 
     const deleteButtons =
         document.querySelectorAll(
-            `.delete-btn`
+            ".delete-btn"
         );
 
 
@@ -1174,12 +1501,13 @@ async function deleteAppointment(id){
         await supabaseClient
             .from("appointments")
             .delete()
-            .eq("id", id);
+            .eq("id",id);
 
 
     if(error){
 
         console.error(error);
+
 
         deleteButtons.forEach(
             button => {
@@ -1188,6 +1516,7 @@ async function deleteAppointment(id){
 
             }
         );
+
 
         alert(
             "حذف نوبت انجام نشد."
@@ -1264,6 +1593,7 @@ function escapeHtml(value){
 function toPersianDigits(value){
 
     return String(value)
+
         .replace(
             /\d/g,
             digit =>
