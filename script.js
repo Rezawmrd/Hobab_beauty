@@ -100,6 +100,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================================
+       CONVERT PERSIAN / ARABIC DIGITS TO ENGLISH
+    ========================================================= */
+
+    function convertDigitsToEnglish(value) {
+
+        return String(value)
+            .replace(/[۰-۹]/g, function (digit) {
+
+                return "۰۱۲۳۴۵۶۷۸۹".indexOf(digit);
+
+            })
+            .replace(/[٠-٩]/g, function (digit) {
+
+                return "٠١٢٣٤٥٦٧٨٩".indexOf(digit);
+
+            });
+    }
+
+
+    /* =========================================================
        RESET TIME BUTTONS
     ========================================================= */
 
@@ -1525,11 +1545,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
+                /* =================================================
+                   PHONE NORMALIZATION
+                   فارسی / عربی → انگلیسی
+                ================================================= */
+
                 const cleanPhone =
-                    phone.replace(
-                        /[\s\-()]/g,
-                        ""
-                    );
+                    convertDigitsToEnglish(phone)
+                        .replace(
+                            /[\s\-()]/g,
+                            ""
+                        );
 
 
                 if (
