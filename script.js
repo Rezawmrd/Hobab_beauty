@@ -174,9 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ========================================================= */
 
     function div(a, b) {
-
         return Math.floor(a / b);
-
     }
 
 
@@ -187,10 +185,8 @@ document.addEventListener("DOMContentLoaded", function () {
             181, 212, 243, 273, 304, 334
         ];
 
-
         let gy2 =
             gm > 2 ? gy + 1 : gy;
-
 
         let days =
             355666 +
@@ -201,18 +197,14 @@ document.addEventListener("DOMContentLoaded", function () {
             gd +
             gdm[gm - 1];
 
-
         let jy =
             -1595 +
             (33 * div(days, 12053));
 
-
         days %= 12053;
-
 
         jy +=
             4 * div(days, 1461);
-
 
         days %= 1461;
 
@@ -274,7 +266,6 @@ document.addEventListener("DOMContentLoaded", function () {
         let jy2 =
             jy + 1595;
 
-
         let days =
             -355668 +
             (365 * jy2) +
@@ -299,7 +290,6 @@ document.addEventListener("DOMContentLoaded", function () {
         let gy =
             400 * div(days, 146097);
 
-
         days %= 146097;
 
 
@@ -312,9 +302,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             if (days >= 365) {
-
                 days++;
-
             }
 
         }
@@ -322,7 +310,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         gy +=
             4 * div(days, 1461);
-
 
         days %= 1461;
 
@@ -395,7 +382,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const now =
             new Date();
 
-
         return gregorianToJalali(
             now.getFullYear(),
             now.getMonth() + 1,
@@ -408,16 +394,12 @@ document.addEventListener("DOMContentLoaded", function () {
     function daysInJalaliMonth(year, month) {
 
         if (month <= 6) {
-
             return 31;
-
         }
 
 
         if (month <= 11) {
-
             return 30;
-
         }
 
 
@@ -445,7 +427,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         nextYear.month - 1,
                         nextYear.day
                     ) -
-
                     new Date(
                         currentYear.year,
                         currentYear.month - 1,
@@ -470,14 +451,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const today =
         getTodayJalali();
 
-
     let currentYear =
         today.year;
 
-
     let currentMonth =
         today.month;
-
 
     let selectedDate = null;
 
@@ -488,7 +466,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const calendarOverlay =
         document.createElement("div");
-
 
     calendarOverlay.className =
         "jalali-calendar-overlay";
@@ -637,10 +614,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const empty =
                 document.createElement("span");
 
-
             empty.className =
                 "jalali-empty";
-
 
             daysContainer.appendChild(
                 empty
@@ -665,10 +640,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const button =
                 document.createElement("button");
 
-
             button.type =
                 "button";
-
 
             button.textContent =
                 day;
@@ -706,16 +679,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 function () {
 
                     selectedDate = {
-
-                        year:
-                            currentYear,
-
-                        month:
-                            currentMonth,
-
-                        day:
-                            day
-
+                        year: currentYear,
+                        month: currentMonth,
+                        day: day
                     };
 
 
@@ -748,11 +714,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         renderCalendar();
 
-
         calendarOverlay.classList.add(
             "open"
         );
-
 
         document.body.classList.add(
             "calendar-open"
@@ -766,7 +730,6 @@ document.addEventListener("DOMContentLoaded", function () {
         calendarOverlay.classList.remove(
             "open"
         );
-
 
         document.body.classList.remove(
             "calendar-open"
@@ -819,10 +782,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 currentYear =
                     today.year;
 
-
                 currentMonth =
                     today.month;
-
 
                 renderCalendar();
 
@@ -842,16 +803,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 currentMonth--;
 
-
                 if (currentMonth < 1) {
 
-                    currentMonth =
-                        12;
+                    currentMonth = 12;
 
                     currentYear--;
 
                 }
-
 
                 renderCalendar();
 
@@ -871,16 +829,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 currentMonth++;
 
-
                 if (currentMonth > 12) {
 
-                    currentMonth =
-                        1;
+                    currentMonth = 1;
 
                     currentYear++;
 
                 }
-
 
                 renderCalendar();
 
@@ -909,7 +864,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================================
-       BOOKING MESSAGE
+       BOOKING MESSAGE MODAL
     ========================================================= */
 
     function showBookingMessage(
@@ -917,49 +872,148 @@ document.addEventListener("DOMContentLoaded", function () {
         type = "success"
     ) {
 
-        let messageBox =
+        let overlay =
             document.querySelector(
-                ".booking-message"
+                ".booking-message-overlay"
             );
 
 
-        if (!messageBox) {
+        if (!overlay) {
 
-            messageBox =
+            overlay =
                 document.createElement("div");
 
-            messageBox.className =
-                "booking-message";
+            overlay.className =
+                "booking-message-overlay";
 
-            bookingButton
-                .parentNode
-                .insertBefore(
-                    messageBox,
-                    bookingButton
+            overlay.innerHTML = `
+
+                <div class="booking-message-card">
+
+                    <div class="booking-message-icon">
+                        ✓
+                    </div>
+
+                    <h3 class="booking-message-title"></h3>
+
+                    <p class="booking-message-text"></p>
+
+                    <button
+                        type="button"
+                        class="booking-message-close"
+                    >
+                        متوجه شدم
+                    </button>
+
+                </div>
+
+            `;
+
+
+            document.body.appendChild(
+                overlay
+            );
+
+
+            overlay
+                .querySelector(
+                    ".booking-message-close"
+                )
+                .addEventListener(
+                    "click",
+                    function () {
+
+                        overlay.classList.remove(
+                            "open"
+                        );
+
+                    }
                 );
+
+
+            overlay.addEventListener(
+                "click",
+                function (event) {
+
+                    if (
+                        event.target === overlay
+                    ) {
+
+                        overlay.classList.remove(
+                            "open"
+                        );
+
+                    }
+
+                }
+            );
 
         }
 
 
-        messageBox.textContent =
-            message;
+        const icon =
+            overlay.querySelector(
+                ".booking-message-icon"
+            );
 
 
-        messageBox.classList.remove(
+        const messageTitle =
+            overlay.querySelector(
+                ".booking-message-title"
+            );
+
+
+        const messageText =
+            overlay.querySelector(
+                ".booking-message-text"
+            );
+
+
+        if (type === "success") {
+
+            icon.textContent =
+                "✓";
+
+            messageTitle.textContent =
+                "رزرو با موفقیت ثبت شد";
+
+            messageText.textContent =
+                "درخواست نوبت شما با موفقیت ثبت شد. اطلاعات شما در سیستم ذخیره گردید.";
+
+        } else {
+
+            icon.textContent =
+                "!";
+
+            messageTitle.textContent =
+                "ثبت رزرو انجام نشد";
+
+            messageText.textContent =
+                message;
+
+        }
+
+
+        overlay.classList.remove(
             "success",
             "error"
         );
 
 
-        messageBox.classList.add(
+        overlay.classList.add(
             type
         );
 
 
-        messageBox.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
+        requestAnimationFrame(
+            function () {
+
+                overlay.classList.add(
+                    "open"
+                );
+
+            }
+        );
 
     }
 
@@ -973,10 +1027,6 @@ document.addEventListener("DOMContentLoaded", function () {
         bookingButton.addEventListener(
             "click",
             async function () {
-
-                /* -----------------------------------------
-                   GET VALUES
-                ----------------------------------------- */
 
                 const service =
                     serviceInput
@@ -1122,7 +1172,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 /* -----------------------------------------
-                   PREVENT DOUBLE SUBMIT
+                   DISABLE BUTTON
                 ----------------------------------------- */
 
                 bookingButton.disabled =
@@ -1138,14 +1188,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 /* -----------------------------------------
-                   SEND TO SUPABASE
+                   INSERT INTO SUPABASE
                 ----------------------------------------- */
 
                 try {
 
-                    const {
-                        error
-                    } =
+                    const result =
                         await supabaseClient
                             .from("appointments")
                             .insert({
@@ -1169,6 +1217,10 @@ document.addEventListener("DOMContentLoaded", function () {
                                     cleanPhone
 
                             });
+
+
+                    const error =
+                        result.error;
 
 
                     if (error) {
@@ -1195,7 +1247,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     ----------------------------------------- */
 
                     showBookingMessage(
-                        "درخواست رزرو شما با موفقیت ثبت شد.",
+                        "",
                         "success"
                     );
 
