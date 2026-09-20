@@ -2225,8 +2225,10 @@ body.booking-message-open{
 }
 
 
+
 /* =========================================================
-   HOBAB BEAUTY — SPLASH SCREEN
+   HOBAB BEAUTY — CINEMATIC SPLASH
+   NO CIRCLE FRAME
 ========================================================= */
 
 #hobabSplash {
@@ -2247,62 +2249,72 @@ body.booking-message-open{
     visibility: visible;
     pointer-events: auto;
 
+    overflow: hidden;
+
     transition:
-        opacity .65s cubic-bezier(.22,.61,.36,1),
-        visibility .65s ease;
+        opacity .7s cubic-bezier(.22,.61,.36,1),
+        visibility .7s ease;
 }
 
 
 /* =========================================================
-   قاب
+   محفظه اصلی لوگو
 ========================================================= */
 
 .splash-frame {
     position: relative;
 
-    width: 220px;
-    height: 220px;
+    width: min(78vw, 330px);
+    height: min(78vw, 330px);
 
     display: flex;
     align-items: center;
     justify-content: center;
 
     opacity: 0;
-    transform: scale(.82);
+    transform: scale(.84);
 
     animation:
-        splashFrameIn 1s cubic-bezier(.22,.61,.36,1) .1s forwards;
+        hobabSplashLogoIn 1.15s
+        cubic-bezier(.22,.61,.36,1)
+        .1s forwards;
 }
 
 
 /* =========================================================
-   حلقه بیرونی Rose Gold
+   نور بسیار ظریف پشت لوگو
 ========================================================= */
 
 .splash-frame::before {
     content: "";
 
     position: absolute;
-    inset: 0;
+
+    width: 75%;
+    height: 75%;
 
     border-radius: 50%;
 
-    border: 1.5px solid rgba(183,123,127,.78);
+    background:
+        radial-gradient(
+            circle,
+            rgba(183,123,127,.13) 0%,
+            rgba(183,123,127,.06) 38%,
+            rgba(183,123,127,0) 72%
+        );
 
-    box-shadow:
-        0 0 14px rgba(183,123,127,.14),
-        inset 0 0 14px rgba(183,123,127,.06);
+    filter: blur(18px);
 
     opacity: 0;
-    transform: scale(.78);
 
     animation:
-        splashRingIn 1s cubic-bezier(.22,.61,.36,1) .35s forwards;
+        hobabSplashGlow 1.5s ease .35s forwards;
 }
 
 
 /* =========================================================
-   حلقه داخلی
+   خط Rose Gold تزئینی
+   بدون قاب دایره‌ای
 ========================================================= */
 
 .splash-frame::after {
@@ -2310,17 +2322,31 @@ body.booking-message-open{
 
     position: absolute;
 
-    inset: 8px;
+    width: 48%;
+    height: 1px;
 
-    border-radius: 50%;
+    bottom: 8%;
 
-    border: 1px solid rgba(183,123,127,.25);
+    left: 26%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(183,123,127,.75),
+            transparent
+        );
+
+    transform: scaleX(0);
+
+    transform-origin: center;
 
     opacity: 0;
-    transform: scale(.86);
 
     animation:
-        splashInnerRingIn 1s cubic-bezier(.22,.61,.36,1) .48s forwards;
+        hobabSplashLine 1.2s
+        cubic-bezier(.22,.61,.36,1)
+        .65s forwards;
 }
 
 
@@ -2333,29 +2359,24 @@ body.booking-message-open{
 
     z-index: 5;
 
-    /*
-       بزرگ‌تر از قبل،
-       ولی همچنان داخل حلقه
-    */
-
-    width: 175px;
-    height: 175px;
+    width: 88%;
+    height: 88%;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
     opacity: 0;
-    transform: scale(.86);
+
+    transform: scale(.88);
 
     animation:
-        splashLogoIn .9s cubic-bezier(.22,.61,.36,1) .45s forwards;
+        hobabSplashLogo
+        1.05s
+        cubic-bezier(.22,.61,.36,1)
+        .25s forwards;
 }
 
-
-/* =========================================================
-   خود تصویر لوگو
-========================================================= */
 
 .splash-logo {
     display: block;
@@ -2363,35 +2384,25 @@ body.booking-message-open{
     width: 100%;
     height: 100%;
 
-    /*
-       جلوگیری از بیرون زدن گوشه‌های تصویر
-    */
-
     object-fit: contain;
-
-    /*
-       لوگو بالاتر از حلقه قرار نمی‌گیرد
-    */
-
-    max-width: 100%;
-    max-height: 100%;
 
     filter:
         drop-shadow(
-            0 5px 14px rgba(183,123,127,.13)
+            0 8px 22px
+            rgba(183,123,127,.16)
         );
 }
 
 
 /* =========================================================
-   انیمیشن قاب
+   انیمیشن ورود
 ========================================================= */
 
-@keyframes splashFrameIn {
+@keyframes hobabSplashLogoIn {
 
     0% {
         opacity: 0;
-        transform: scale(.82);
+        transform: scale(.84);
     }
 
     100% {
@@ -2401,62 +2412,14 @@ body.booking-message-open{
 }
 
 
-/* =========================================================
-   انیمیشن حلقه
-========================================================= */
-
-@keyframes splashRingIn {
+@keyframes hobabSplashLogo {
 
     0% {
         opacity: 0;
-        transform: scale(.78);
+        transform: scale(.88);
     }
 
-    55% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-
-/* =========================================================
-   انیمیشن حلقه داخلی
-========================================================= */
-
-@keyframes splashInnerRingIn {
-
-    0% {
-        opacity: 0;
-        transform: scale(.86);
-    }
-
-    60% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-
-/* =========================================================
-   انیمیشن لوگو
-========================================================= */
-
-@keyframes splashLogoIn {
-
-    0% {
-        opacity: 0;
-        transform: scale(.86);
-    }
-
-    70% {
+    65% {
         opacity: 1;
         transform: scale(1.025);
     }
@@ -2468,13 +2431,43 @@ body.booking-message-open{
 }
 
 
+@keyframes hobabSplashGlow {
+
+    0% {
+        opacity: 0;
+        transform: scale(.65);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+@keyframes hobabSplashLine {
+
+    0% {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+
 /* =========================================================
-   خروج
+   خروج Splash
 ========================================================= */
 
 #hobabSplash.hide {
     opacity: 0;
+
     visibility: hidden;
+
     pointer-events: none;
 }
 
@@ -2486,13 +2479,12 @@ body.booking-message-open{
 @media (max-width: 600px) {
 
     .splash-frame {
-        width: 195px;
-        height: 195px;
+        width: 82vw;
+        height: 82vw;
     }
 
     .splash-logo-wrap {
-        width: 150px;
-        height: 150px;
+        width: 90%;
+        height: 90%;
     }
 }
-
