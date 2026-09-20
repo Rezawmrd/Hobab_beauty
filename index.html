@@ -643,6 +643,42 @@
 <script src="script.js"></script>
 
 
+<script>
+/* =========================================================
+   HOBAB BEAUTY
+   SPLASH CONTROLLER
+========================================================= */
+
+window.addEventListener("load", function () {
+
+    const splash = document.getElementById("hobabSplash");
+
+    if (!splash) return;
+
+
+    /* زمان نمایش Splash */
+
+    setTimeout(function () {
+
+        splash.classList.add("hide");
+
+
+        /* حذف کامل بعد از Fade */
+
+        setTimeout(function () {
+
+            if (splash) {
+                splash.remove();
+            }
+
+        }, 700);
+
+    }, 1900);
+
+});
+</script>
+    
+    
 </body>
 
 </html>
