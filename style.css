@@ -34,7 +34,7 @@ body{
 
 
 body > *:not(.booking-message-overlay):not(.jalali-calendar-overlay):not(#hobabSplash){
-    animation: pageReveal .9s cubic-bezier(.22,.61,.36,1) both;
+    animation:pageReveal .9s cubic-bezier(.22,.61,.36,1) both;
 }
 
 
@@ -2208,6 +2208,7 @@ body.booking-message-open{
     box-shadow:none !important;
 }
 
+
 .time-grid button.booked:hover{
     background:#f0eded !important;
     color:#aaa !important;
@@ -2217,57 +2218,66 @@ body.booking-message-open{
 }
 
 
-    
-
-
 /* =========================================================
-   HOBAB BEAUTY — CINEMATIC SPLASH
-   VISIBLE / MINIMAL / LUXURY
+   HOBAB BEAUTY — FINAL CINEMATIC SPLASH
+   LARGE LOGO / NO CIRCLE
 ========================================================= */
 
 #hobabSplash{
+
     position:fixed;
+
     inset:0;
+
     z-index:999999;
 
     width:100%;
+
     height:100dvh;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     background:#fff8f6;
 
     opacity:1;
+
     visibility:visible;
+
     pointer-events:auto;
 
     overflow:hidden;
 
     transition:
-        opacity .8s cubic-bezier(.22,.61,.36,1),
-        visibility .8s ease;
+        opacity .9s cubic-bezier(.22,.61,.36,1),
+        visibility .9s ease;
 }
 
 
 /* =========================================================
-   مرکز Splash
+   فضای اصلی لوگو
 ========================================================= */
 
 .splash-frame{
+
     position:relative;
 
-    width:min(82vw,360px);
-    height:min(82vw,360px);
+    width:min(94vw,460px);
+
+    height:min(82vw,390px);
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     opacity:0;
 
-    transform:scale(.82);
+    transform:scale(.90);
 
     animation:
         hobabSplashFrameIn
@@ -2275,151 +2285,235 @@ body.booking-message-open{
         cubic-bezier(.22,.61,.36,1)
         .05s
         forwards;
+
+
+    /* چهار گوشه‌ی نورانی
+       بدون ساختن قاب کامل */
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(183,123,127,.75),
+            rgba(183,123,127,.75)
+        )
+        left top /
+        58px 1px
+        no-repeat,
+
+        linear-gradient(
+            180deg,
+            rgba(183,123,127,.75),
+            rgba(183,123,127,.75)
+        )
+        left top /
+        1px 58px
+        no-repeat,
+
+        linear-gradient(
+            270deg,
+            rgba(183,123,127,.75),
+            rgba(183,123,127,.75)
+        )
+        right top /
+        58px 1px
+        no-repeat,
+
+        linear-gradient(
+            180deg,
+            rgba(183,123,127,.75),
+            rgba(183,123,127,.75)
+        )
+        right top /
+        1px 58px
+        no-repeat,
+
+        linear-gradient(
+            90deg,
+            rgba(183,123,127,.75),
+            rgba(183,123,127,.75)
+        )
+        left bottom /
+        58px 1px
+        no-repeat,
+
+        linear-gradient(
+            0deg,
+            rgba(183,123,127,.75),
+            rgba(183,123,127,.75)
+        )
+        left bottom /
+        1px 58px
+        no-repeat,
+
+        linear-gradient(
+            270deg,
+            rgba(183,123,127,.75),
+            rgba(183,123,127,.75)
+        )
+        right bottom /
+        58px 1px
+        no-repeat,
+
+        linear-gradient(
+            0deg,
+            rgba(183,123,127,.75),
+            rgba(183,123,127,.75)
+        )
+        right bottom /
+        1px 58px
+        no-repeat;
 }
 
 
 /* =========================================================
-   هاله‌ی رزگلد دور لوگو
+   نور بزرگ و نرم پشت لوگو
 ========================================================= */
 
 .splash-frame::before{
+
     content:"";
 
     position:absolute;
 
     width:72%;
-    height:72%;
 
-    border-radius:50%;
+    height:72%;
 
     background:
         radial-gradient(
-            circle,
-            rgba(183,123,127,.20) 0%,
+            ellipse at center,
+            rgba(183,123,127,.22) 0%,
             rgba(183,123,127,.12) 30%,
-            rgba(183,123,127,.05) 52%,
-            rgba(183,123,127,0) 75%
+            rgba(183,123,127,.05) 53%,
+            transparent 75%
         );
 
-    filter:blur(22px);
+    filter:blur(28px);
 
     opacity:0;
 
-    transform:scale(.65);
+    transform:scale(.72);
 
     animation:
         hobabSplashGlow
-        1.5s
+        1.7s
         ease
-        .25s
+        .2s
         forwards;
 }
 
 
 /* =========================================================
-   حلقه‌ی بسیار ظریف رزگلد
-   قاب کامل نیست؛ فقط حس نور دور لوگو
+   خطوط نورانی وسط بالا و پایین
 ========================================================= */
 
 .splash-frame::after{
-    content:"";
 
-    position:absolute;
-
-    width:76%;
-    height:76%;
-
-    border-radius:50%;
-
-    border:1px solid rgba(183,123,127,.32);
-
-    box-shadow:
-        0 0 18px rgba(183,123,127,.10),
-        inset 0 0 18px rgba(183,123,127,.06);
-
-    opacity:0;
-
-    transform:scale(.82);
-
-    animation:
-        hobabSplashRing
-        1.35s
-        cubic-bezier(.22,.61,.36,1)
-        .35s
-        forwards;
-}
-
-
-/* =========================================================
-   لوگو
-========================================================= */
-
-.splash-logo-wrap{
-    position:relative;
-
-    z-index:5;
-
-    width:82%;
-    height:82%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    opacity:0;
-
-    transform:scale(.88);
-
-    animation:
-        hobabSplashLogo
-        1.15s
-        cubic-bezier(.22,.61,.36,1)
-        .18s
-        forwards;
-}
-
-
-.splash-logo{
-    display:block;
-
-    width:100%;
-    height:100%;
-
-    object-fit:contain;
-
-    filter:
-        drop-shadow(
-            0 10px 25px
-            rgba(183,123,127,.20)
-        );
-}
-
-
-/* =========================================================
-   خطوط تزئینی بالا و پایین
-========================================================= */
-
-.splash-logo-wrap::before,
-.splash-logo-wrap::after{
     content:"";
 
     position:absolute;
 
     left:50%;
 
-    width:38%;
+    top:7%;
+
+    width:30%;
 
     height:1px;
+
+    transform:
+        translateX(-50%)
+        scaleX(0);
+
+    transform-origin:center;
 
     background:
         linear-gradient(
             90deg,
             transparent,
-            rgba(183,123,127,.65),
+            rgba(183,123,127,.8),
             transparent
         );
 
-    transform:translateX(-50%) scaleX(0);
+    box-shadow:
+        0 0 10px rgba(183,123,127,.25);
+
+    opacity:0;
+
+    animation:
+        hobabSplashTopLine
+        1.15s
+        cubic-bezier(.22,.61,.36,1)
+        .65s
+        forwards;
+}
+
+
+/* =========================================================
+   لوگوی بزرگ
+========================================================= */
+
+.splash-logo-wrap{
+
+    position:relative;
+
+    z-index:5;
+
+    width:92%;
+
+    height:92%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    opacity:0;
+
+    transform:scale(.86);
+
+    animation:
+        hobabSplashLogo
+        1.25s
+        cubic-bezier(.22,.61,.36,1)
+        .15s
+        forwards;
+}
+
+
+/* =========================================================
+   خط بالا و پایین لوگو
+========================================================= */
+
+.splash-logo-wrap::before,
+.splash-logo-wrap::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    width:34%;
+
+    height:1px;
+
+    transform:
+        translateX(-50%)
+        scaleX(0);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(183,123,127,.78),
+            transparent
+        );
+
+    box-shadow:
+        0 0 9px rgba(183,123,127,.22);
 
     opacity:0;
 
@@ -2427,32 +2521,40 @@ body.booking-message-open{
         hobabSplashLine
         1.1s
         cubic-bezier(.22,.61,.36,1)
-        .65s
+        .7s
         forwards;
 }
 
 
 .splash-logo-wrap::before{
-    top:-3%;
+    top:2%;
 }
 
 
 .splash-logo-wrap::after{
-    bottom:-3%;
+    bottom:2%;
 }
 
 
 /* =========================================================
-   نقطه‌های رزگلد ظریف کنار لوگو
+   خود لوگو
 ========================================================= */
 
-.splash-frame{
-    --dot-color:rgba(183,123,127,.65);
-}
+.splash-logo{
 
+    display:block;
 
-.splash-frame .splash-logo-wrap::marker{
-    display:none;
+    width:100%;
+
+    height:100%;
+
+    object-fit:contain;
+
+    filter:
+        drop-shadow(
+            0 12px 28px
+            rgba(183,123,127,.20)
+        );
 }
 
 
@@ -2464,12 +2566,16 @@ body.booking-message-open{
 
     0%{
         opacity:0;
-        transform:scale(.82);
+
+        transform:
+            scale(.90);
     }
 
     100%{
         opacity:1;
-        transform:scale(1);
+
+        transform:
+            scale(1);
     }
 }
 
@@ -2482,30 +2588,47 @@ body.booking-message-open{
 
     0%{
         opacity:0;
-        transform:scale(.88);
+
+        transform:
+            scale(.86);
+
+        filter:
+            blur(5px);
     }
 
-    65%{
+    60%{
         opacity:1;
-        transform:scale(1.025);
+
+        transform:
+            scale(1.025);
+
+        filter:
+            blur(0);
     }
 
     100%{
         opacity:1;
-        transform:scale(1);
+
+        transform:
+            scale(1);
+
+        filter:
+            blur(0);
     }
 }
 
 
 /* =========================================================
-   انیمیشن هاله
+   انیمیشن نور
 ========================================================= */
 
 @keyframes hobabSplashGlow{
 
     0%{
         opacity:0;
-        transform:scale(.65);
+
+        transform:
+            scale(.72);
     }
 
     55%{
@@ -2514,47 +2637,57 @@ body.booking-message-open{
 
     100%{
         opacity:1;
-        transform:scale(1);
+
+        transform:
+            scale(1);
     }
 }
 
 
 /* =========================================================
-   انیمیشن حلقه
+   انیمیشن خط بالا
 ========================================================= */
 
-@keyframes hobabSplashRing{
+@keyframes hobabSplashTopLine{
 
     0%{
         opacity:0;
-        transform:scale(.82);
-    }
 
-    70%{
-        opacity:1;
+        transform:
+            translateX(-50%)
+            scaleX(0);
     }
 
     100%{
         opacity:1;
-        transform:scale(1);
+
+        transform:
+            translateX(-50%)
+            scaleX(1);
     }
 }
 
 
 /* =========================================================
-   انیمیشن خطوط
+   انیمیشن خطوط لوگو
 ========================================================= */
 
 @keyframes hobabSplashLine{
 
     0%{
         opacity:0;
-        transform:translateX(-50%) scaleX(0);
+
+        transform:
+            translateX(-50%)
+            scaleX(0);
     }
 
     100%{
         opacity:1;
-        transform:translateX(-50%) scaleX(1);
+
+        transform:
+            translateX(-50%)
+            scaleX(1);
     }
 }
 
@@ -2564,6 +2697,7 @@ body.booking-message-open{
 ========================================================= */
 
 #hobabSplash.hide{
+
     opacity:0;
 
     visibility:hidden;
@@ -2573,23 +2707,59 @@ body.booking-message-open{
 
 
 /* =========================================================
-   موبایل
+   MOBILE SPLASH
 ========================================================= */
 
 @media(max-width:600px){
 
     .splash-frame{
-        width:86vw;
-        height:86vw;
+
+        width:94vw;
+
+        height:82vw;
+
+        max-height:390px;
     }
+
 
     .splash-logo-wrap{
-        width:82%;
-        height:82%;
+
+        width:94%;
+
+        height:94%;
     }
 
+
+    .splash-frame{
+
+        background-size:
+            48px 1px,
+            1px 48px,
+            48px 1px,
+            1px 48px,
+            48px 1px,
+            1px 48px,
+            48px 1px,
+            1px 48px;
+    }
+
+
     .splash-frame::after{
-        width:76%;
-        height:76%;
+
+        top:6%;
+
+        width:32%;
+    }
+
+
+    .splash-logo-wrap::before{
+
+        top:1%;
+    }
+
+
+    .splash-logo-wrap::after{
+
+        bottom:1%;
     }
 }
