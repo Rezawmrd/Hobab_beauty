@@ -2218,3 +2218,267 @@ body.booking-message-open{
     transform:none !important;
     box-shadow:none !important;
 }
+
+
+/* =========================================================
+   HOBAB BEAUTY
+   SPLASH SCREEN
+========================================================= */
+
+#hobabSplash {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+
+    width: 100%;
+    height: 100dvh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff8f6;
+
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    transition:
+        opacity .65s cubic-bezier(.22,.61,.36,1),
+        visibility .65s ease;
+}
+
+
+/* =========================================================
+   قاب اصلی
+========================================================= */
+
+.splash-frame {
+    position: relative;
+
+    width: 190px;
+    height: 190px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+
+    transform: scale(.82);
+
+    animation:
+        splashFrameIn 1s cubic-bezier(.22,.61,.36,1) .1s forwards;
+}
+
+
+/* =========================================================
+   حلقه بیرونی Rose Gold
+========================================================= */
+
+.splash-frame::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 50%;
+
+    border: 1.5px solid rgba(183,123,127,.78);
+
+    box-shadow:
+        0 0 14px rgba(183,123,127,.14),
+        inset 0 0 14px rgba(183,123,127,.06);
+
+    opacity: 0;
+
+    transform: scale(.78);
+
+    animation:
+        splashRingIn 1s cubic-bezier(.22,.61,.36,1) .35s forwards;
+}
+
+
+/* =========================================================
+   حلقه داخلی ظریف
+========================================================= */
+
+.splash-frame::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 8px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(183,123,127,.25);
+
+    opacity: 0;
+
+    transform: scale(.86);
+
+    animation:
+        splashInnerRingIn 1s cubic-bezier(.22,.61,.36,1) .48s forwards;
+}
+
+
+/* =========================================================
+   محفظه لوگو
+========================================================= */
+
+.splash-logo-wrap {
+    position: relative;
+
+    z-index: 5;
+
+    width: 135px;
+    height: 135px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+
+    transform: scale(.86);
+
+    animation:
+        splashLogoIn .9s cubic-bezier(.22,.61,.36,1) .45s forwards;
+}
+
+
+/* =========================================================
+   خود لوگو
+========================================================= */
+
+.splash-logo {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 5px 14px rgba(183,123,127,.13)
+        );
+}
+
+
+/* =========================================================
+   انیمیشن قاب
+========================================================= */
+
+@keyframes splashFrameIn {
+
+    0% {
+        opacity: 0;
+        transform: scale(.82);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* =========================================================
+   انیمیشن حلقه بیرونی
+========================================================= */
+
+@keyframes splashRingIn {
+
+    0% {
+        opacity: 0;
+        transform: scale(.78);
+    }
+
+    55% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* =========================================================
+   انیمیشن حلقه داخلی
+========================================================= */
+
+@keyframes splashInnerRingIn {
+
+    0% {
+        opacity: 0;
+        transform: scale(.86);
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* =========================================================
+   انیمیشن لوگو
+========================================================= */
+
+@keyframes splashLogoIn {
+
+    0% {
+        opacity: 0;
+        transform: scale(.86);
+    }
+
+    70% {
+        opacity: 1;
+        transform: scale(1.025);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* =========================================================
+   خروج Splash
+========================================================= */
+
+#hobabSplash.hide {
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   موبایل
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .splash-frame {
+        width: 165px;
+        height: 165px;
+    }
+
+    .splash-logo-wrap {
+        width: 118px;
+        height: 118px;
+    }
+}
