@@ -1804,7 +1804,7 @@ body.calendar-open{
 
 
 /* =========================================================
-   EXTRA GREEN BORDER CONSISTENCY
+   STRONG GREEN BORDER
 ========================================================= */
 
 .header,
@@ -1822,8 +1822,20 @@ body.calendar-open{
 .time-grid button,
 .jalali-calendar{
 
-    border-width:3px;
-    border-color:rgba(79,108,84,.68);
+    border-width:4px;
+    border-color:rgba(63,92,67,.85);
+}
+
+
+/* HOVER */
+
+.header .top-buttons .top-btn:hover,
+.services-toggle:hover,
+.bridal-toggle:hover,
+.card:hover,
+.booking-step:hover{
+
+    border-color:#3f5c43;
 }
 
 
