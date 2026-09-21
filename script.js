@@ -150,182 +150,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================================
-       LOCK PASSED TIMES — IRAN TIME
-    ========================================================= */
-
-    function lockPassedTimes() {
-
-        if (!dateInput) {
-            return;
-        }
-
-
-        const selectedDateValue =
-            dateInput.value.trim();
-
-
-        if (!selectedDateValue) {
-            return;
-        }
-
-
-        /*
-           دریافت تاریخ امروز بر اساس ساعت ایران
-        */
-
-        const iranDateParts =
-            new Intl.DateTimeFormat("en-US", {
-                timeZone: "Asia/Tehran",
-                year: "numeric",
-                month: "2-digit",
-                day: "2-digit"
-            }).formatToParts(new Date());
-
-
-        let iranYear = "";
-        let iranMonth = "";
-        let iranDay = "";
-
-
-        iranDateParts.forEach(function (part) {
-
-            if (part.type === "year") {
-                iranYear = part.value;
-            }
-
-            if (part.type === "month") {
-                iranMonth = part.value;
-            }
-
-            if (part.type === "day") {
-                iranDay = part.value;
-            }
-        });
-
-
-        /*
-           تبدیل امروز میلادی ایران به جلالی
-        */
-
-        const todayJalaliIran =
-            gregorianToJalali(
-                Number(iranYear),
-                Number(iranMonth),
-                Number(iranDay)
-            );
-
-
-        const todayJalaliValue =
-            `${todayJalaliIran.year}/${String(todayJalaliIran.month).padStart(2, "0")}/${String(todayJalaliIran.day).padStart(2, "0")}`;
-
-
-        /*
-           فقط اگر تاریخ انتخاب شده امروز باشد،
-           ساعت‌های گذشته قفل می‌شوند.
-        */
-
-        if (
-            selectedDateValue !==
-            todayJalaliValue
-        ) {
-
-            return;
-        }
-
-
-        /*
-           دریافت ساعت و دقیقه فعلی ایران
-        */
-
-        const currentTime =
-            new Intl.DateTimeFormat("en-GB", {
-                timeZone: "Asia/Tehran",
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: false
-            }).format(new Date());
-
-
-        const timeParts =
-            currentTime.split(":");
-
-
-        const currentMinutes =
-            Number(timeParts[0]) * 60 +
-            Number(timeParts[1]);
-
-
-        /*
-           بررسی تمام ساعت‌ها
-        */
-
-        timeButtons.forEach(function (button) {
-
-            const time =
-                button.dataset.time;
-
-
-            if (!time) {
-                return;
-            }
-
-
-            const parts =
-                time.split(":");
-
-
-            const buttonMinutes =
-                Number(parts[0]) * 60 +
-                Number(parts[1]);
-
-
-            /*
-               ساعت‌های گذشته قفل شوند
-            */
-
-            if (
-                buttonMinutes <
-                currentMinutes
-            ) {
-
-                button.disabled = true;
-
-
-                button.classList.remove(
-                    "selected"
-                );
-
-
-                button.classList.add(
-                    "passed"
-                );
-
-
-                button.setAttribute(
-                    "aria-disabled",
-                    "true"
-                );
-
-
-                if (
-                    selectedTime === time
-                ) {
-
-                    selectedTime = null;
-                }
-
-
-            } else {
-
-                button.classList.remove(
-                    "passed"
-                );
-            }
-        });
-    }
-
-
-    /* =========================================================
        TIME BUTTONS
     ========================================================= */
 
@@ -337,7 +161,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-
             timeButtons.forEach(function (item) {
 
                 item.classList.remove(
@@ -345,11 +168,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
             });
 
-
             button.classList.add(
                 "selected"
             );
-
 
             selectedTime =
                 button.dataset.time;
@@ -409,12 +230,8 @@ document.addEventListener("DOMContentLoaded", function () {
             181, 212, 243, 273, 304, 334
         ];
 
-
         let gy2 =
-            gm > 2
-                ? gy + 1
-                : gy;
-
+            gm > 2 ? gy + 1 : gy;
 
         let days =
             355666 +
@@ -425,35 +242,27 @@ document.addEventListener("DOMContentLoaded", function () {
             gd +
             gdm[gm - 1];
 
-
         let jy =
             -1595 +
             (33 * div(days, 12053));
 
-
         days %= 12053;
-
 
         jy +=
             4 * div(days, 1461);
 
-
         days %= 1461;
-
 
         if (days > 365) {
 
             jy +=
                 div(days - 1, 365);
 
-
             days =
                 (days - 1) % 365;
         }
 
-
         let jm;
-
 
         if (days < 186) {
 
@@ -469,9 +278,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
         }
 
-
         let jd;
-
 
         if (days < 186) {
 
@@ -481,12 +288,10 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
 
             jd =
-                1 +
-                (
+                1 + (
                     (days - 186) % 30
                 );
         }
-
 
         return {
             year: jy,
@@ -505,7 +310,6 @@ document.addEventListener("DOMContentLoaded", function () {
         let jy2 =
             jy + 1595;
 
-
         let days =
             -355668 +
             (365 * jy2) +
@@ -515,7 +319,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 4
             ) +
             jd;
-
 
         if (jm < 7) {
 
@@ -529,7 +332,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 186;
         }
 
-
         let gy =
             400 *
             div(
@@ -537,10 +339,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 146097
             );
 
-
         days %=
             146097;
-
 
         if (days > 36524) {
 
@@ -551,16 +351,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     36524
                 );
 
-
             days %=
                 36524;
-
 
             if (days >= 365) {
                 days++;
             }
         }
-
 
         gy +=
             4 *
@@ -569,10 +366,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 1461
             );
 
-
         days %=
             1461;
-
 
         if (days > 365) {
 
@@ -582,11 +377,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     365
                 );
 
-
             days =
                 (days - 1) % 365;
         }
-
 
         let gd =
             days + 1;
@@ -629,7 +422,6 @@ document.addEventListener("DOMContentLoaded", function () {
             gd -=
                 monthDays[gm - 1];
 
-
             gm++;
         }
 
@@ -642,17 +434,253 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    function getTodayJalali() {
+    /* =========================================================
+       GET TODAY — IRAN
+    ========================================================= */
 
-        const now =
-            new Date();
+    function getIranTodayJalali() {
+
+        const parts =
+            new Intl.DateTimeFormat(
+                "en-US",
+                {
+                    timeZone: "Asia/Tehran",
+                    year: "numeric",
+                    month: "numeric",
+                    day: "numeric"
+                }
+            ).formatToParts(new Date());
+
+
+        let year = 0;
+        let month = 0;
+        let day = 0;
+
+
+        parts.forEach(function (part) {
+
+            if (part.type === "year") {
+                year = Number(part.value);
+            }
+
+            if (part.type === "month") {
+                month = Number(part.value);
+            }
+
+            if (part.type === "day") {
+                day = Number(part.value);
+            }
+        });
 
 
         return gregorianToJalali(
-            now.getFullYear(),
-            now.getMonth() + 1,
-            now.getDate()
+            year,
+            month,
+            day
         );
+    }
+
+
+    /* =========================================================
+       LOCK PASSED TIMES — IRAN TIME
+    ========================================================= */
+
+    function lockPassedTimes() {
+
+        if (!dateInput) {
+            return;
+        }
+
+
+        const selectedDate =
+            convertDigitsToEnglish(
+                dateInput.value.trim()
+            );
+
+
+        if (!selectedDate) {
+            return;
+        }
+
+
+        const iranToday =
+            getIranTodayJalali();
+
+
+        const todayValue =
+            `${iranToday.year}/${String(iranToday.month).padStart(2, "0")}/${String(iranToday.day).padStart(2, "0")}`;
+
+
+        /*
+           اگر تاریخ انتخاب‌شده امروز ایران نباشد،
+           هیچ ساعت گذشته‌ای قفل نمی‌شود.
+        */
+
+        if (
+            selectedDate !==
+            todayValue
+        ) {
+
+            timeButtons.forEach(function (button) {
+
+                /*
+                   اگر ساعت به دلیل ظرفیت پر نیست،
+                   فقط passed را بردار.
+                */
+
+                if (
+                    !button.classList.contains("booked")
+                ) {
+
+                    button.classList.remove(
+                        "passed"
+                    );
+
+                    button.disabled = false;
+
+                    button.removeAttribute(
+                        "aria-disabled"
+                    );
+                }
+            });
+
+            return;
+        }
+
+
+        /* -----------------------------------------
+           دریافت ساعت فعلی ایران
+        ----------------------------------------- */
+
+        const iranTime =
+            new Intl.DateTimeFormat(
+                "en-GB",
+                {
+                    timeZone: "Asia/Tehran",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false
+                }
+            ).format(new Date());
+
+
+        const timeParts =
+            iranTime.split(":");
+
+
+        const currentHour =
+            Number(timeParts[0]);
+
+
+        const currentMinute =
+            Number(timeParts[1]);
+
+
+        const currentTotalMinutes =
+            (currentHour * 60) +
+            currentMinute;
+
+
+        /* -----------------------------------------
+           بررسی ساعت‌ها
+        ----------------------------------------- */
+
+        timeButtons.forEach(function (button) {
+
+            const time =
+                button.dataset.time;
+
+
+            if (!time) {
+                return;
+            }
+
+
+            /*
+               اگر ظرفیت این ساعت قبلاً کامل شده،
+               وضعیت booked باید حفظ شود.
+            */
+
+            if (
+                button.classList.contains("booked")
+            ) {
+                return;
+            }
+
+
+            const parts =
+                time.split(":");
+
+
+            const hour =
+                Number(parts[0]);
+
+
+            const minute =
+                Number(parts[1]);
+
+
+            const buttonTotalMinutes =
+                (hour * 60) +
+                minute;
+
+
+            /*
+               ساعت گذشته = قفل
+            */
+
+            if (
+                buttonTotalMinutes <
+                currentTotalMinutes
+            ) {
+
+                button.disabled = true;
+
+                button.classList.remove(
+                    "selected"
+                );
+
+                button.classList.add(
+                    "passed"
+                );
+
+                button.setAttribute(
+                    "aria-disabled",
+                    "true"
+                );
+
+
+                if (
+                    selectedTime === time
+                ) {
+
+                    selectedTime = null;
+                }
+
+
+            } else {
+
+                /*
+                   ساعت هنوز نگذشته
+                */
+
+                button.disabled = false;
+
+                button.classList.remove(
+                    "passed"
+                );
+
+                button.removeAttribute(
+                    "aria-disabled"
+                );
+            }
+        });
+    }
+
+
+    function getTodayJalali() {
+
+        return getIranTodayJalali();
     }
 
 
@@ -664,7 +692,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (month <= 6) {
             return 31;
         }
-
 
         if (month <= 11) {
             return 30;
@@ -993,12 +1020,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     } else {
 
-                        /*
-                           اگر خدمتی انتخاب نشده باشد،
-                           باز هم ساعت‌های گذشته
-                           باید برای امروز قفل شوند.
-                        */
-
                         lockPassedTimes();
                     }
                 }
@@ -1083,10 +1104,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 currentYear =
                     today.year;
 
-
                 currentMonth =
                     today.month;
-
 
                 renderCalendar();
             }
@@ -1220,11 +1239,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
 
 
-                /*
-                   حتی اگر Supabase خطا بدهد،
-                   ساعت‌های گذشته همچنان قفل شوند.
-                */
-
                 lockPassedTimes();
 
                 return;
@@ -1278,17 +1292,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         button.disabled = true;
 
-
                         button.classList.add(
                             "booked"
                         );
-
 
                         button.setAttribute(
                             "aria-disabled",
                             "true"
                         );
-
 
                         button.setAttribute(
                             "data-booked-count",
@@ -1297,10 +1308,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
 
                 } else {
-
-                    /*
-                       ظرفیت هنوز باقی مانده
-                    */
 
                     const button =
                         Array.from(
@@ -1356,7 +1363,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         "selected"
                     );
 
-
                     selectedTime =
                         previousSelectedTime;
                 }
@@ -1393,10 +1399,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 error
             );
 
-
-            /*
-               در صورت خطا هم ساعت‌های گذشته قفل شوند.
-            */
 
             lockPassedTimes();
         }
@@ -2005,5 +2007,29 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         );
     }
+
+
+    /* =========================================================
+       AUTO LOCK PASSED TIMES
+       هر 30 ثانیه ساعت ایران بررسی می‌شود
+    ========================================================= */
+
+    setInterval(function () {
+
+        lockPassedTimes();
+
+    }, 30000);
+
+
+    /*
+       یک بار هم بعد از آماده شدن کامل صفحه اجرا شود.
+    */
+
+    setTimeout(function () {
+
+        lockPassedTimes();
+
+    }, 500);
+
 
 });
