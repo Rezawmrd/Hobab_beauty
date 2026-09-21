@@ -131,7 +131,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             button.classList.remove(
                 "booked",
-                "selected"
+                "selected",
+                "passed"
             );
 
             button.removeAttribute(
@@ -149,6 +150,182 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================================
+       LOCK PASSED TIMES — IRAN TIME
+    ========================================================= */
+
+    function lockPassedTimes() {
+
+        if (!dateInput) {
+            return;
+        }
+
+
+        const selectedDateValue =
+            dateInput.value.trim();
+
+
+        if (!selectedDateValue) {
+            return;
+        }
+
+
+        /*
+           دریافت تاریخ امروز بر اساس ساعت ایران
+        */
+
+        const iranDateParts =
+            new Intl.DateTimeFormat("en-US", {
+                timeZone: "Asia/Tehran",
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit"
+            }).formatToParts(new Date());
+
+
+        let iranYear = "";
+        let iranMonth = "";
+        let iranDay = "";
+
+
+        iranDateParts.forEach(function (part) {
+
+            if (part.type === "year") {
+                iranYear = part.value;
+            }
+
+            if (part.type === "month") {
+                iranMonth = part.value;
+            }
+
+            if (part.type === "day") {
+                iranDay = part.value;
+            }
+        });
+
+
+        /*
+           تبدیل امروز میلادی ایران به جلالی
+        */
+
+        const todayJalaliIran =
+            gregorianToJalali(
+                Number(iranYear),
+                Number(iranMonth),
+                Number(iranDay)
+            );
+
+
+        const todayJalaliValue =
+            `${todayJalaliIran.year}/${String(todayJalaliIran.month).padStart(2, "0")}/${String(todayJalaliIran.day).padStart(2, "0")}`;
+
+
+        /*
+           فقط اگر تاریخ انتخاب شده امروز باشد،
+           ساعت‌های گذشته قفل می‌شوند.
+        */
+
+        if (
+            selectedDateValue !==
+            todayJalaliValue
+        ) {
+
+            return;
+        }
+
+
+        /*
+           دریافت ساعت و دقیقه فعلی ایران
+        */
+
+        const currentTime =
+            new Intl.DateTimeFormat("en-GB", {
+                timeZone: "Asia/Tehran",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false
+            }).format(new Date());
+
+
+        const timeParts =
+            currentTime.split(":");
+
+
+        const currentMinutes =
+            Number(timeParts[0]) * 60 +
+            Number(timeParts[1]);
+
+
+        /*
+           بررسی تمام ساعت‌ها
+        */
+
+        timeButtons.forEach(function (button) {
+
+            const time =
+                button.dataset.time;
+
+
+            if (!time) {
+                return;
+            }
+
+
+            const parts =
+                time.split(":");
+
+
+            const buttonMinutes =
+                Number(parts[0]) * 60 +
+                Number(parts[1]);
+
+
+            /*
+               ساعت‌های گذشته قفل شوند
+            */
+
+            if (
+                buttonMinutes <
+                currentMinutes
+            ) {
+
+                button.disabled = true;
+
+
+                button.classList.remove(
+                    "selected"
+                );
+
+
+                button.classList.add(
+                    "passed"
+                );
+
+
+                button.setAttribute(
+                    "aria-disabled",
+                    "true"
+                );
+
+
+                if (
+                    selectedTime === time
+                ) {
+
+                    selectedTime = null;
+                }
+
+
+            } else {
+
+                button.classList.remove(
+                    "passed"
+                );
+            }
+        });
+    }
+
+
+    /* =========================================================
        TIME BUTTONS
     ========================================================= */
 
@@ -160,6 +337,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
+
             timeButtons.forEach(function (item) {
 
                 item.classList.remove(
@@ -167,274 +345,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
             });
 
+
             button.classList.add(
                 "selected"
             );
+
 
             selectedTime =
                 button.dataset.time;
         });
     });
-
-
-    /* =========================================================
-       LOAD BOOKED TIMES
-       CAPACITY = 3
-    ========================================================= */
-
-    async function loadBookedTimes(
-        service,
-        date,
-        preserveSelectedTime = false
-    ) {
-
-        const previousSelectedTime =
-            selectedTime;
-
-
-        bookedTimes =
-            new Set();
-
-
-        timeButtons.forEach(function (button) {
-
-            button.disabled = false;
-
-            button.classList.remove(
-                "booked",
-                "selected"
-            );
-
-            button.removeAttribute(
-                "aria-disabled"
-            );
-
-            button.removeAttribute(
-                "data-booked-count"
-            );
-        });
-
-
-        if (!preserveSelectedTime) {
-            selectedTime = null;
-        }
-
-
-        if (!service || !date) {
-            return;
-        }
-
-
-        try {
-
-            const result =
-                await supabaseClient
-                    .rpc(
-                        "get_booked_times",
-                        {
-                            p_service: service,
-                            p_date: date
-                        }
-                    );
-
-
-            if (result.error) {
-
-                console.error(
-                    "Booked times error:",
-                    result.error
-                );
-
-                return;
-            }
-
-
-            const rows =
-                result.data || [];
-
-
-            rows.forEach(function (row) {
-
-                const time =
-                    row.booked_time;
-
-                const count =
-                    Number(row.booked_count || 0);
-
-
-                if (!time) {
-                    return;
-                }
-
-
-                /*
-                   ظرفیت کامل = 3 نفر
-                */
-
-                if (count >= 3) {
-
-                    bookedTimes.add(time);
-
-
-                    const button =
-                        Array.from(
-                            timeButtons
-                        ).find(function (item) {
-
-                            return (
-                                item.dataset.time ===
-                                time
-                            );
-
-                        });
-
-
-                    if (button) {
-
-                        button.disabled = true;
-
-                        button.classList.add(
-                            "booked"
-                        );
-
-                        button.setAttribute(
-                            "aria-disabled",
-                            "true"
-                        );
-
-                        button.setAttribute(
-                            "data-booked-count",
-                            "3"
-                        );
-                    }
-
-                } else {
-
-                    /*
-                       ظرفیت هنوز باقی مانده
-                    */
-
-                    const button =
-                        Array.from(
-                            timeButtons
-                        ).find(function (item) {
-
-                            return (
-                                item.dataset.time ===
-                                time
-                            );
-
-                        });
-
-
-                    if (button) {
-
-                        button.setAttribute(
-                            "data-booked-count",
-                            String(count)
-                        );
-                    }
-                }
-            });
-
-
-            /* =================================================
-               RESTORE SELECTED TIME
-            ================================================= */
-
-            if (
-                preserveSelectedTime &&
-                previousSelectedTime &&
-                !bookedTimes.has(
-                    previousSelectedTime
-                )
-            ) {
-
-                const selectedButton =
-                    Array.from(
-                        timeButtons
-                    ).find(function (button) {
-
-                        return (
-                            button.dataset.time ===
-                            previousSelectedTime
-                        );
-                    });
-
-
-                if (selectedButton) {
-
-                    selectedButton.classList.add(
-                        "selected"
-                    );
-
-                    selectedTime =
-                        previousSelectedTime;
-                }
-            }
-
-
-            /* =================================================
-               SELECTED TIME WAS JUST FILLED
-            ================================================= */
-
-            if (
-                preserveSelectedTime &&
-                previousSelectedTime &&
-                bookedTimes.has(
-                    previousSelectedTime
-                )
-            ) {
-
-                selectedTime = null;
-            }
-
-
-        } catch (error) {
-
-            console.error(
-                "Load booked times error:",
-                error
-            );
-        }
-    }
-
-
-    /* =========================================================
-       SERVICE CHANGE
-    ========================================================= */
-
-    if (serviceInput) {
-
-        serviceInput.addEventListener(
-            "change",
-            async function () {
-
-                resetTimeButtons();
-
-
-                const service =
-                    serviceInput.value.trim();
-
-                const date =
-                    dateInput
-                        ? dateInput.value.trim()
-                        : "";
-
-
-                if (
-                    service &&
-                    date
-                ) {
-
-                    await loadBookedTimes(
-                        service,
-                        date
-                    );
-                }
-            }
-        );
-    }
 
 
     /* =========================================================
@@ -489,8 +409,12 @@ document.addEventListener("DOMContentLoaded", function () {
             181, 212, 243, 273, 304, 334
         ];
 
+
         let gy2 =
-            gm > 2 ? gy + 1 : gy;
+            gm > 2
+                ? gy + 1
+                : gy;
+
 
         let days =
             355666 +
@@ -501,27 +425,35 @@ document.addEventListener("DOMContentLoaded", function () {
             gd +
             gdm[gm - 1];
 
+
         let jy =
             -1595 +
             (33 * div(days, 12053));
 
+
         days %= 12053;
+
 
         jy +=
             4 * div(days, 1461);
 
+
         days %= 1461;
+
 
         if (days > 365) {
 
             jy +=
                 div(days - 1, 365);
 
+
             days =
                 (days - 1) % 365;
         }
 
+
         let jm;
+
 
         if (days < 186) {
 
@@ -537,7 +469,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
         }
 
+
         let jd;
+
 
         if (days < 186) {
 
@@ -547,10 +481,12 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
 
             jd =
-                1 + (
+                1 +
+                (
                     (days - 186) % 30
                 );
         }
+
 
         return {
             year: jy,
@@ -569,6 +505,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let jy2 =
             jy + 1595;
 
+
         let days =
             -355668 +
             (365 * jy2) +
@@ -578,6 +515,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 4
             ) +
             jd;
+
 
         if (jm < 7) {
 
@@ -591,6 +529,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 186;
         }
 
+
         let gy =
             400 *
             div(
@@ -598,8 +537,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 146097
             );
 
+
         days %=
             146097;
+
 
         if (days > 36524) {
 
@@ -610,13 +551,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     36524
                 );
 
+
             days %=
                 36524;
+
 
             if (days >= 365) {
                 days++;
             }
         }
+
 
         gy +=
             4 *
@@ -625,8 +569,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 1461
             );
 
+
         days %=
             1461;
+
 
         if (days > 365) {
 
@@ -636,9 +582,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     365
                 );
 
+
             days =
                 (days - 1) % 365;
         }
+
 
         let gd =
             days + 1;
@@ -681,6 +629,7 @@ document.addEventListener("DOMContentLoaded", function () {
             gd -=
                 monthDays[gm - 1];
 
+
             gm++;
         }
 
@@ -698,6 +647,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const now =
             new Date();
 
+
         return gregorianToJalali(
             now.getFullYear(),
             now.getMonth() + 1,
@@ -714,6 +664,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (month <= 6) {
             return 31;
         }
+
 
         if (month <= 11) {
             return 30;
@@ -930,6 +881,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     "span"
                 );
 
+
             empty.className =
                 "jalali-empty";
 
@@ -1038,6 +990,16 @@ document.addEventListener("DOMContentLoaded", function () {
                             service,
                             formattedDate
                         );
+
+                    } else {
+
+                        /*
+                           اگر خدمتی انتخاب نشده باشد،
+                           باز هم ساعت‌های گذشته
+                           باید برای امروز قفل شوند.
+                        */
+
+                        lockPassedTimes();
                     }
                 }
             );
@@ -1121,8 +1083,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 currentYear =
                     today.year;
 
+
                 currentMonth =
                     today.month;
+
 
                 renderCalendar();
             }
@@ -1181,6 +1145,304 @@ document.addEventListener("DOMContentLoaded", function () {
                 renderCalendar();
             }
         );
+
+
+    /* =========================================================
+       LOAD BOOKED TIMES
+       CAPACITY = 3
+    ========================================================= */
+
+    async function loadBookedTimes(
+        service,
+        date,
+        preserveSelectedTime = false
+    ) {
+
+        const previousSelectedTime =
+            selectedTime;
+
+
+        bookedTimes =
+            new Set();
+
+
+        timeButtons.forEach(function (button) {
+
+            button.disabled = false;
+
+            button.classList.remove(
+                "booked",
+                "selected",
+                "passed"
+            );
+
+            button.removeAttribute(
+                "aria-disabled"
+            );
+
+            button.removeAttribute(
+                "data-booked-count"
+            );
+        });
+
+
+        if (!preserveSelectedTime) {
+            selectedTime = null;
+        }
+
+
+        if (!service || !date) {
+
+            lockPassedTimes();
+
+            return;
+        }
+
+
+        try {
+
+            const result =
+                await supabaseClient
+                    .rpc(
+                        "get_booked_times",
+                        {
+                            p_service: service,
+                            p_date: date
+                        }
+                    );
+
+
+            if (result.error) {
+
+                console.error(
+                    "Booked times error:",
+                    result.error
+                );
+
+
+                /*
+                   حتی اگر Supabase خطا بدهد،
+                   ساعت‌های گذشته همچنان قفل شوند.
+                */
+
+                lockPassedTimes();
+
+                return;
+            }
+
+
+            const rows =
+                result.data || [];
+
+
+            rows.forEach(function (row) {
+
+                const time =
+                    row.booked_time;
+
+
+                const count =
+                    Number(
+                        row.booked_count || 0
+                    );
+
+
+                if (!time) {
+                    return;
+                }
+
+
+                /*
+                   ظرفیت کامل = 3 نفر
+                */
+
+                if (count >= 3) {
+
+                    bookedTimes.add(time);
+
+
+                    const button =
+                        Array.from(
+                            timeButtons
+                        ).find(function (item) {
+
+                            return (
+                                item.dataset.time ===
+                                time
+                            );
+
+                        });
+
+
+                    if (button) {
+
+                        button.disabled = true;
+
+
+                        button.classList.add(
+                            "booked"
+                        );
+
+
+                        button.setAttribute(
+                            "aria-disabled",
+                            "true"
+                        );
+
+
+                        button.setAttribute(
+                            "data-booked-count",
+                            "3"
+                        );
+                    }
+
+                } else {
+
+                    /*
+                       ظرفیت هنوز باقی مانده
+                    */
+
+                    const button =
+                        Array.from(
+                            timeButtons
+                        ).find(function (item) {
+
+                            return (
+                                item.dataset.time ===
+                                time
+                            );
+
+                        });
+
+
+                    if (button) {
+
+                        button.setAttribute(
+                            "data-booked-count",
+                            String(count)
+                        );
+                    }
+                }
+            });
+
+
+            /* =================================================
+               RESTORE SELECTED TIME
+            ================================================= */
+
+            if (
+                preserveSelectedTime &&
+                previousSelectedTime &&
+                !bookedTimes.has(
+                    previousSelectedTime
+                )
+            ) {
+
+                const selectedButton =
+                    Array.from(
+                        timeButtons
+                    ).find(function (button) {
+
+                        return (
+                            button.dataset.time ===
+                            previousSelectedTime
+                        );
+                    });
+
+
+                if (selectedButton) {
+
+                    selectedButton.classList.add(
+                        "selected"
+                    );
+
+
+                    selectedTime =
+                        previousSelectedTime;
+                }
+            }
+
+
+            /* =================================================
+               SELECTED TIME WAS JUST FILLED
+            ================================================= */
+
+            if (
+                preserveSelectedTime &&
+                previousSelectedTime &&
+                bookedTimes.has(
+                    previousSelectedTime
+                )
+            ) {
+
+                selectedTime = null;
+            }
+
+
+            /* =================================================
+               LOCK PASSED TIMES
+            ================================================= */
+
+            lockPassedTimes();
+
+
+        } catch (error) {
+
+            console.error(
+                "Load booked times error:",
+                error
+            );
+
+
+            /*
+               در صورت خطا هم ساعت‌های گذشته قفل شوند.
+            */
+
+            lockPassedTimes();
+        }
+    }
+
+
+    /* =========================================================
+       SERVICE CHANGE
+    ========================================================= */
+
+    if (serviceInput) {
+
+        serviceInput.addEventListener(
+            "change",
+            async function () {
+
+                resetTimeButtons();
+
+
+                const service =
+                    serviceInput.value.trim();
+
+
+                const date =
+                    dateInput
+                        ? dateInput.value.trim()
+                        : "";
+
+
+                if (
+                    service &&
+                    date
+                ) {
+
+                    await loadBookedTimes(
+                        service,
+                        date
+                    );
+
+                } else {
+
+                    lockPassedTimes();
+                }
+            }
+        );
+    }
 
 
     /* =========================================================
@@ -1573,7 +1835,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
-                /* DISABLE BUTTON */
+                /* =================================================
+                   DISABLE BUTTON
+                ================================================= */
 
                 bookingButton.disabled =
                     true;
