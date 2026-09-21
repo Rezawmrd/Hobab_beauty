@@ -219,6 +219,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    /* =========================================================
+       GREGORIAN → JALALI
+    ========================================================= */
+
     function gregorianToJalali(
         gy,
         gm,
@@ -300,6 +304,10 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     }
 
+
+    /* =========================================================
+       JALALI → GREGORIAN
+    ========================================================= */
 
     function jalaliToGregorian(
         jy,
@@ -494,8 +502,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const selectedDate =
             convertDigitsToEnglish(
-                dateInput.value.trim()
-            );
+                dateInput.value || ""
+            ).trim();
 
 
         if (!selectedDate) {
@@ -503,53 +511,82 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
+        /* -----------------------------------------
+           خواندن مستقیم تاریخ انتخاب‌شده
+        ----------------------------------------- */
+
+        const match =
+            selectedDate.match(
+                /^(\d{4})\/(\d{1,2})\/(\d{1,2})$/
+            );
+
+
+        if (!match) {
+            return;
+        }
+
+
+        const selectedYear =
+            Number(match[1]);
+
+
+        const selectedMonth =
+            Number(match[2]);
+
+
+        const selectedDay =
+            Number(match[3]);
+
+
+        /* -----------------------------------------
+           تاریخ امروز ایران
+        ----------------------------------------- */
+
         const iranToday =
             getIranTodayJalali();
 
 
-        const todayValue =
-            `${iranToday.year}/${String(iranToday.month).padStart(2, "0")}/${String(iranToday.day).padStart(2, "0")}`;
+        const isToday =
+            selectedYear === iranToday.year &&
+            selectedMonth === iranToday.month &&
+            selectedDay === iranToday.day;
 
 
-        /*
-           اگر تاریخ انتخاب‌شده امروز ایران نباشد،
-           هیچ ساعت گذشته‌ای قفل نمی‌شود.
-        */
+        /* -----------------------------------------
+           اگر تاریخ امروز نیست
+        ----------------------------------------- */
 
-        if (
-            selectedDate !==
-            todayValue
-        ) {
+        if (!isToday) {
 
             timeButtons.forEach(function (button) {
 
-                /*
-                   اگر ساعت به دلیل ظرفیت پر نیست،
-                   فقط passed را بردار.
-                */
-
                 if (
-                    !button.classList.contains("booked")
+                    button.classList.contains("booked")
                 ) {
-
-                    button.classList.remove(
-                        "passed"
-                    );
-
-                    button.disabled = false;
-
-                    button.removeAttribute(
-                        "aria-disabled"
-                    );
+                    return;
                 }
+
+
+                button.disabled = false;
+
+
+                button.classList.remove(
+                    "passed"
+                );
+
+
+                button.removeAttribute(
+                    "aria-disabled"
+                );
             });
+
 
             return;
         }
 
 
         /* -----------------------------------------
-           دریافت ساعت فعلی ایران
+           ساعت فعلی ایران
         ----------------------------------------- */
 
         const iranTime =
@@ -582,7 +619,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /* -----------------------------------------
-           بررسی ساعت‌ها
+           بررسی تمام ساعت‌ها
         ----------------------------------------- */
 
         timeButtons.forEach(function (button) {
@@ -596,11 +633,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
 
-            /*
-               اگر ظرفیت این ساعت قبلاً کامل شده،
-               وضعیت booked باید حفظ شود.
-            */
-
+            /* ظرفیت کامل را دست نزن */
             if (
                 button.classList.contains("booked")
             ) {
@@ -625,9 +658,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 minute;
 
 
-            /*
-               ساعت گذشته = قفل
-            */
+            /* -------------------------------------
+               ساعت گذشته
+            ------------------------------------- */
 
             if (
                 buttonTotalMinutes <
@@ -636,13 +669,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 button.disabled = true;
 
-                button.classList.remove(
-                    "selected"
-                );
 
                 button.classList.add(
                     "passed"
                 );
+
+
+                button.classList.remove(
+                    "selected"
+                );
+
 
                 button.setAttribute(
                     "aria-disabled",
@@ -660,15 +696,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
             } else {
 
-                /*
-                   ساعت هنوز نگذشته
-                */
+                /* ---------------------------------
+                   ساعت آینده
+                --------------------------------- */
 
                 button.disabled = false;
+
 
                 button.classList.remove(
                     "passed"
                 );
+
 
                 button.removeAttribute(
                     "aria-disabled"
@@ -684,6 +722,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    /* =========================================================
+       JALALI MONTH DAYS
+    ========================================================= */
+
     function daysInJalaliMonth(
         year,
         month
@@ -692,6 +734,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (month <= 6) {
             return 31;
         }
+
 
         if (month <= 11) {
             return 30;
@@ -737,6 +780,10 @@ document.addEventListener("DOMContentLoaded", function () {
             : 29;
     }
 
+
+    /* =========================================================
+       TODAY
+    ========================================================= */
 
     const today =
         getTodayJalali();
@@ -1189,15 +1236,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
             button.disabled = false;
 
+
             button.classList.remove(
                 "booked",
                 "selected",
                 "passed"
             );
 
+
             button.removeAttribute(
                 "aria-disabled"
             );
+
 
             button.removeAttribute(
                 "data-booked-count"
@@ -1225,8 +1275,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     .rpc(
                         "get_booked_times",
                         {
-                            p_service: service,
-                            p_date: date
+                            p_service:
+                                service,
+
+                            p_date:
+                                date
                         }
                     );
 
@@ -1266,9 +1319,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
-                /*
-                   ظرفیت کامل = 3 نفر
-                */
+                /* ظرفیت کامل = 3 نفر */
 
                 if (count >= 3) {
 
@@ -1292,14 +1343,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         button.disabled = true;
 
+
                         button.classList.add(
                             "booked"
                         );
+
 
                         button.setAttribute(
                             "aria-disabled",
                             "true"
                         );
+
 
                         button.setAttribute(
                             "data-booked-count",
@@ -1362,6 +1416,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     selectedButton.classList.add(
                         "selected"
                     );
+
 
                     selectedTime =
                         previousSelectedTime;
@@ -2021,15 +2076,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 30000);
 
 
-    /*
-       یک بار هم بعد از آماده شدن کامل صفحه اجرا شود.
-    */
+    /* =========================================================
+       INITIAL CHECK
+    ========================================================= */
 
     setTimeout(function () {
 
         lockPassedTimes();
 
     }, 500);
-
 
 });
