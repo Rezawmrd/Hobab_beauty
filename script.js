@@ -137,6 +137,10 @@ document.addEventListener("DOMContentLoaded", function () {
             button.removeAttribute(
                 "aria-disabled"
             );
+
+            button.removeAttribute(
+                "data-booked-count"
+            );
         });
 
         selectedTime = null;
@@ -175,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* =========================================================
        LOAD BOOKED TIMES
-       SERVICE + DATE
+       CAPACITY = 3
     ========================================================= */
 
     async function loadBookedTimes(
@@ -203,6 +207,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             button.removeAttribute(
                 "aria-disabled"
+            );
+
+            button.removeAttribute(
+                "data-booked-count"
             );
         });
 
@@ -247,40 +255,92 @@ document.addEventListener("DOMContentLoaded", function () {
 
             rows.forEach(function (row) {
 
-                if (row.time) {
-
-                    bookedTimes.add(
-                        row.time
-                    );
-                }
-            });
-
-
-            timeButtons.forEach(function (button) {
-
                 const time =
-                    button.dataset.time;
+                    row.booked_time;
+
+                const count =
+                    Number(row.booked_count || 0);
 
 
-                if (
-                    bookedTimes.has(time)
-                ) {
+                if (!time) {
+                    return;
+                }
 
-                    button.disabled = true;
 
-                    button.classList.add(
-                        "booked"
-                    );
+                /*
+                   ظرفیت کامل = 3 نفر
+                */
 
-                    button.setAttribute(
-                        "aria-disabled",
-                        "true"
-                    );
+                if (count >= 3) {
+
+                    bookedTimes.add(time);
+
+
+                    const button =
+                        Array.from(
+                            timeButtons
+                        ).find(function (item) {
+
+                            return (
+                                item.dataset.time ===
+                                time
+                            );
+
+                        });
+
+
+                    if (button) {
+
+                        button.disabled = true;
+
+                        button.classList.add(
+                            "booked"
+                        );
+
+                        button.setAttribute(
+                            "aria-disabled",
+                            "true"
+                        );
+
+                        button.setAttribute(
+                            "data-booked-count",
+                            "3"
+                        );
+                    }
+
+                } else {
+
+                    /*
+                       ظرفیت هنوز باقی مانده
+                    */
+
+                    const button =
+                        Array.from(
+                            timeButtons
+                        ).find(function (item) {
+
+                            return (
+                                item.dataset.time ===
+                                time
+                            );
+
+                        });
+
+
+                    if (button) {
+
+                        button.setAttribute(
+                            "data-booked-count",
+                            String(count)
+                        );
+                    }
                 }
             });
 
 
-            /* RESTORE SELECTED TIME */
+            /* =================================================
+               RESTORE SELECTED TIME
+            ================================================= */
 
             if (
                 preserveSelectedTime &&
@@ -314,7 +374,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
 
-            /* SELECTED TIME WAS JUST BOOKED */
+            /* =================================================
+               SELECTED TIME WAS JUST FILLED
+            ================================================= */
 
             if (
                 preserveSelectedTime &&
@@ -1419,73 +1481,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
-                /*
-                   SAVE SELECTED TIME
-                   BEFORE REFRESH
-                */
-
                 const timeToBook =
                     selectedTime;
-
-
-                /*
-                   CHECK AGAIN
-                   SERVICE + DATE
-                */
-
-                await loadBookedTimes(
-                    service,
-                    date,
-                    true
-                );
-
-
-                if (
-                    bookedTimes.has(
-                        timeToBook
-                    )
-                ) {
-
-                    selectedTime =
-                        null;
-
-
-                    showBookingMessage(
-                        "این ساعت قبلاً برای این خدمت رزرو شده است. لطفاً ساعت دیگری انتخاب کنید.",
-                        "error"
-                    );
-
-
-                    return;
-                }
-
-
-                /* RESTORE SELECTED TIME */
-
-                selectedTime =
-                    timeToBook;
-
-
-                const selectedButton =
-                    Array.from(
-                        timeButtons
-                    ).find(
-                        function (button) {
-
-                            return (
-                                button.dataset.time ===
-                                timeToBook
-                            );
-                        }
-                    );
-
-
-                if (selectedButton) {
-
-                    selectedButton.classList.add(
-                        "selected"
-                    );
-                }
 
 
                 /* DESCRIPTION */
@@ -1547,7 +1544,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 /* =================================================
                    PHONE NORMALIZATION
-                   فارسی / عربی → انگلیسی
                 ================================================= */
 
                 const cleanPhone =
@@ -1593,65 +1589,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 try {
 
+                    /* =================================================
+                       ثبت رزرو از طریق RPC
+                       ظرفیت حداکثر 3 نفر
+                    ================================================= */
+
                     const result =
                         await supabaseClient
-                            .from("appointments")
-                            .insert({
+                            .rpc(
+                                "create_appointment",
+                                {
+                                    p_service:
+                                        service,
 
-                                service:
-                                    service,
+                                    p_date:
+                                        date,
 
-                                date:
-                                    date,
+                                    p_time:
+                                        timeToBook,
 
-                                time:
-                                    timeToBook,
+                                    p_description:
+                                        description,
 
-                                description:
-                                    description,
+                                    p_name:
+                                        name,
 
-                                name:
-                                    name,
-
-                                phone:
-                                    cleanPhone
-                            });
-
-
-                    const error =
-                        result.error;
+                                    p_phone:
+                                        cleanPhone
+                                }
+                            );
 
 
-                    /* DUPLICATE */
-
-                    if (error) {
+                    if (result.error) {
 
                         console.error(
-                            "Supabase error:",
-                            error
+                            "Create appointment error:",
+                            result.error
                         );
-
-
-                        if (
-                            error.code ===
-                            "23505"
-                        ) {
-
-                            showBookingMessage(
-                                "این ساعت همین الان برای این خدمت توسط شخص دیگری رزرو شد. لطفاً ساعت دیگری انتخاب کنید.",
-                                "error"
-                            );
-
-
-                            await loadBookedTimes(
-                                service,
-                                date,
-                                false
-                            );
-
-
-                            return;
-                        }
 
 
                         showBookingMessage(
@@ -1664,7 +1638,40 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
 
 
-                    /* SUCCESS */
+                    const response =
+                        result.data;
+
+
+                    /* =================================================
+                       ظرفیت پر شده
+                    ================================================= */
+
+                    if (
+                        response &&
+                        response.success === false
+                    ) {
+
+                        await loadBookedTimes(
+                            service,
+                            date,
+                            false
+                        );
+
+
+                        showBookingMessage(
+                            response.message ||
+                            "این ساعت ظرفیت کامل دارد. لطفاً ساعت دیگری انتخاب کنید.",
+                            "error"
+                        );
+
+
+                        return;
+                    }
+
+
+                    /* =================================================
+                       SUCCESS
+                    ================================================= */
 
                     showBookingMessage(
                         "",
