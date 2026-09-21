@@ -2763,3 +2763,13 @@ body.booking-message-open{
         bottom:1%;
     }
 }
+
+
+.time-grid button.passed,
+.time-grid button:disabled.passed {
+    opacity: .30 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    text-decoration: line-through;
+    filter: grayscale(.7);
+}
