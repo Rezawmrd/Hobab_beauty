@@ -1,3 +1,7 @@
+/* =========================================================
+   HOBAB BEAUTY — COMPLETE STYLE
+   ========================================================= */
+
 *{
     margin:0;
     padding:0;
@@ -12,2764 +16,1455 @@ body{
     font-family:'Vazirmatn',sans-serif;
     background:#fff8f6;
     color:#4b3035;
+    direction:rtl;
+    overflow-x:hidden;
+
+    animation:pageReveal .9s cubic-bezier(.22,.61,.36,1) both;
+}
+
+button,
+input,
+textarea,
+select{
+    font-family:inherit;
+}
+
+button,
+a{
+    -webkit-tap-highlight-color:transparent;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+::selection{
+    background:rgba(183,123,127,.18);
+    color:#4b3035;
 }
 
 
 /* =========================================================
-   PAGE ENTRANCE
-========================================================= */
+   PAGE REVEAL
+   ========================================================= */
 
 @keyframes pageReveal{
-
-    0%{
+    from{
         opacity:0;
-        transform:translateY(10px);
+        transform:translateY(8px);
     }
 
-    100%{
+    to{
         opacity:1;
         transform:translateY(0);
     }
-}
-
-
-body > *:not(.booking-message-overlay):not(.jalali-calendar-overlay):not(#hobabSplash){
-    animation:pageReveal .9s cubic-bezier(.22,.61,.36,1) both;
 }
 
 
 /* =========================================================
    HEADER
-========================================================= */
+   ========================================================= */
 
 .header{
     width:92%;
-    margin:20px auto;
-    padding:22px 28px;
+    max-width:1050px;
+    margin:22px auto 28px;
 
     display:flex;
-    flex-direction:column;
     align-items:center;
-    gap:18px;
+    justify-content:space-between;
+    gap:20px;
 
-    background:rgba(255,255,255,.48);
+    padding:15px 18px;
 
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-
-    border-radius:30px;
-    border:3px solid rgba(79,108,84,.68);
+    background:rgba(255,255,255,.58);
+    border:2px solid rgba(79,108,84,.35);
+    border-radius:24px;
 
     box-shadow:
-        0 15px 45px rgba(180,120,120,.12),
-        inset 0 1px 0 rgba(255,255,255,.8);
+        0 12px 30px rgba(180,120,120,.08),
+        inset 0 1px 0 rgba(255,255,255,.85);
 
-    animation:
-        headerReveal 1s
-        cubic-bezier(.16,1,.3,1)
-        .1s
-        both;
-}
-
-
-@keyframes headerReveal{
-
-    0%{
-        opacity:0;
-        transform:translateY(-18px);
-    }
-
-    100%{
-        opacity:1;
-        transform:translateY(0);
-    }
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
 }
 
 
 /* =========================================================
-   TEXT LOGO
-========================================================= */
+   LOGO
+   ========================================================= */
 
 .logo{
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:center;
-
-    width:100%;
-    color:#a9686d;
-
-    animation:
-        logoReveal 1.1s
-        cubic-bezier(.16,1,.3,1)
-        .25s
-        both;
+    line-height:1;
+    min-width:100px;
 }
-
-
-@keyframes logoReveal{
-
-    0%{
-        opacity:0;
-        transform:scale(.94);
-        filter:blur(5px);
-    }
-
-    100%{
-        opacity:1;
-        transform:scale(1);
-        filter:blur(0);
-    }
-}
-
 
 .logo span{
-    font-size:27px;
+    font-family:Arial,sans-serif;
+    font-size:22px;
     font-weight:700;
-    letter-spacing:5px;
+    letter-spacing:3px;
+    color:#4b3035;
 }
 
-
 .logo small{
-    font-size:10px;
-    font-weight:500;
-    letter-spacing:7px;
-    margin-top:3px;
-    opacity:.8;
+    margin-top:5px;
+    font-size:9px;
+    letter-spacing:4px;
+    color:#a9686d;
 }
 
 
 /* =========================================================
    TOP BUTTONS
-========================================================= */
+   ========================================================= */
 
 .top-buttons{
     display:flex;
     align-items:center;
-    justify-content:center;
-    gap:10px;
-
-    animation:
-        buttonsReveal 1s
-        cubic-bezier(.16,1,.3,1)
-        .4s
-        both;
+    gap:9px;
 }
 
-
-@keyframes buttonsReveal{
-
-    0%{
-        opacity:0;
-        transform:translateY(12px);
-    }
-
-    100%{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-
-.header .top-buttons .top-btn{
+.top-btn{
     display:flex;
     align-items:center;
     justify-content:center;
 
     min-width:90px;
     height:42px;
+    padding:0 14px;
 
-    padding:0 17px;
+    border-radius:14px;
 
-    border-radius:18px;
+    background:rgba(255,255,255,.65);
+    border:2px solid rgba(79,108,84,.52);
 
-    text-decoration:none;
-    color:#5d4146;
-
-    background:rgba(255,255,255,.42);
-
-    border:3px solid rgba(79,108,84,.68);
-
-    box-shadow:
-        0 8px 25px rgba(150,100,100,.10),
-        inset 0 1px 0 rgba(255,255,255,.9);
-
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-
-    font-family:'Vazirmatn',sans-serif;
-    font-size:13px;
+    color:#5b4146;
+    font-size:12px;
     font-weight:500;
 
-    transition:.3s ease;
+    transition:
+        background .25s ease,
+        color .25s ease,
+        border-color .25s ease,
+        transform .2s ease,
+        box-shadow .25s ease;
 }
 
-
-.header .top-buttons .top-btn:hover{
-    transform:translateY(-3px);
-
-    background:rgba(255,255,255,.7);
-
-    color:#a9686d;
-
-    border-color:rgba(79,108,84,.80);
-
-    box-shadow:
-        0 12px 30px rgba(150,100,100,.17),
-        inset 0 1px 0 rgba(255,255,255,.95);
+.top-btn:hover{
+    background:rgba(79,108,84,.09);
+    border-color:#4f6c54;
+    color:#4f6c54;
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(79,108,84,.10);
 }
 
-
-/* =========================================================
-   BOOKING TOP
-========================================================= */
-
-.header .top-buttons .booking-top{
-    color:white;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(217,155,159,.95),
-            rgba(183,123,127,.95)
-        );
-
-    border:3px solid rgba(79,108,84,.68);
-
-    box-shadow:
-        0 10px 25px rgba(183,123,127,.22);
+.booking-top{
+    background:#4f6c54;
+    color:#fff;
+    border-color:#3f5944;
 }
 
-
-.header .top-buttons .booking-top:hover{
-    color:white;
-
-    transform:translateY(-3px);
-
-    background:
-        linear-gradient(
-            135deg,
-            #d99b9f,
-            #a9686d
-        );
+.booking-top:hover{
+    background:#3f5944;
+    color:#fff;
 }
 
 
 /* =========================================================
    SERVICES
-========================================================= */
+   ========================================================= */
 
-.services{
-    width:90%;
-    margin:45px auto 18px;
-
-    text-align:center;
-
-    animation:
-        contentReveal 1s
-        cubic-bezier(.16,1,.3,1)
-        .45s
-        both;
+.services,
+.bridal-section{
+    width:92%;
+    max-width:1050px;
+    margin:0 auto 22px;
 }
 
-
-.services-toggle{
+.services-toggle,
+.bridal-toggle{
     width:100%;
-    max-width:900px;
-
-    padding:19px 24px;
+    min-height:58px;
 
     display:flex;
     align-items:center;
     justify-content:space-between;
 
-    margin:auto;
+    padding:0 20px;
 
-    background:rgba(255,255,255,.52);
+    border:none;
+    border-radius:19px;
+
+    background:rgba(255,255,255,.60);
+    border:3px solid rgba(79,108,84,.68);
+
     color:#4b3035;
 
-    border:3px solid rgba(79,108,84,.68);
-    border-radius:23px;
-
-    box-shadow:
-        0 12px 30px rgba(180,120,120,.10),
-        inset 0 1px 0 rgba(255,255,255,.8);
-
-    backdrop-filter:blur(15px);
-    -webkit-backdrop-filter:blur(15px);
-
-    font-family:inherit;
-    font-size:18px;
-    font-weight:500;
+    font-size:15px;
+    font-weight:600;
 
     cursor:pointer;
-    transition:.3s ease;
+
+    box-shadow:
+        0 10px 25px rgba(180,120,120,.07),
+        inset 0 1px 0 rgba(255,255,255,.85);
+
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+
+    transition:
+        background .3s ease,
+        border-color .3s ease,
+        transform .2s ease;
 }
 
-
-.services-toggle:hover{
-    transform:translateY(-2px);
-    border-color:rgba(79,108,84,.80);
+.services-toggle:hover,
+.bridal-toggle:hover{
+    background:rgba(79,108,84,.07);
+    border-color:#4f6c54;
 }
 
-
-.services-arrow{
-    width:30px;
-    height:30px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:50%;
-
-    color:#a9686d;
+.services-arrow,
+.bridal-arrow{
     font-size:23px;
+    font-weight:400;
+    color:#4f6c54;
 
-    transition:.4s ease;
+    transition:transform .3s ease;
 }
 
-
-.services-toggle.active .services-arrow{
+.services-toggle.active .services-arrow,
+.bridal-toggle.active .bridal-arrow{
     transform:rotate(45deg);
 }
 
-
-/* =========================================================
-   SERVICES CONTENT
-========================================================= */
-
-.services-content{
-    max-width:900px;
-    margin:0 auto;
-
-    max-height:0;
-    overflow:hidden;
-    opacity:0;
-
-    transition:
-        max-height .5s ease,
-        opacity .3s ease,
-        margin-top .5s ease;
+.services-content,
+.bridal-content{
+    display:none;
+    padding-top:12px;
 }
 
-
-.services-content.open{
-    max-height:600px;
-    opacity:1;
-    margin-top:12px;
+.services-content.active,
+.bridal-content.active{
+    display:block;
 }
 
 
 /* =========================================================
    SERVICE CARDS
-========================================================= */
+   ========================================================= */
 
 .service-box{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
 }
 
-
 .card{
-    background:rgba(255,255,255,.65);
+    min-height:125px;
+    padding:19px 15px;
 
-    padding:18px 15px;
+    border-radius:19px;
 
-    border-radius:20px;
-    border:3px solid rgba(79,108,84,.68);
+    background:rgba(255,255,255,.57);
+    border:2px solid rgba(79,108,84,.35);
 
     box-shadow:
-        0 15px 35px rgba(180,120,120,.10),
-        inset 0 1px 0 rgba(255,255,255,.7);
+        0 8px 22px rgba(180,120,120,.06),
+        inset 0 1px 0 rgba(255,255,255,.85);
 
     backdrop-filter:blur(12px);
     -webkit-backdrop-filter:blur(12px);
 
-    transition:.35s ease;
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease;
 }
-
 
 .card:hover{
-    transform:translateY(-5px);
-
-    border-color:rgba(79,108,84,.80);
-
-    box-shadow:
-        0 22px 45px rgba(180,120,120,.17);
+    transform:translateY(-3px);
+    border-color:rgba(79,108,84,.65);
+    background:rgba(255,255,255,.72);
 }
 
-
 .card h3{
-    margin-bottom:7px;
-
+    margin-bottom:9px;
     color:#a9686d;
-    font-size:17px;
+    font-size:15px;
     font-weight:600;
 }
 
-
 .card p{
-    line-height:1.8;
-    color:#76565b;
+    color:#6f5559;
     font-size:12px;
+    line-height:2;
 }
 
 
 /* =========================================================
    BRIDAL
-========================================================= */
-
-.bridal-section{
-    width:90%;
-    margin:15px auto 50px;
-
-    text-align:center;
-
-    animation:
-        contentReveal 1s
-        cubic-bezier(.16,1,.3,1)
-        .55s
-        both;
-}
-
-
-.bridal-toggle{
-    width:100%;
-    max-width:900px;
-
-    padding:19px 24px;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    margin:auto;
-
-    background:rgba(255,255,255,.52);
-    color:#4b3035;
-
-    border:3px solid rgba(79,108,84,.68);
-    border-radius:23px;
-
-    box-shadow:
-        0 12px 30px rgba(180,120,120,.10),
-        inset 0 1px 0 rgba(255,255,255,.8);
-
-    backdrop-filter:blur(15px);
-    -webkit-backdrop-filter:blur(15px);
-
-    font-family:inherit;
-    font-size:18px;
-    font-weight:500;
-
-    cursor:pointer;
-    transition:.3s ease;
-}
-
-
-.bridal-toggle:hover{
-    transform:translateY(-2px);
-    border-color:rgba(79,108,84,.80);
-}
-
-
-.bridal-arrow{
-    width:30px;
-    height:30px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    color:#a9686d;
-    font-size:23px;
-
-    transition:.4s ease;
-}
-
-
-.bridal-toggle.active .bridal-arrow{
-    transform:rotate(45deg);
-}
-
-
-/* =========================================================
-   BRIDAL CONTENT
-========================================================= */
-
-.bridal-content{
-    max-width:900px;
-    margin:0 auto;
-
-    max-height:0;
-    overflow:hidden;
-    opacity:0;
-
-    transition:
-        max-height .5s ease,
-        opacity .3s ease,
-        margin-top .5s ease;
-}
-
-
-.bridal-content.open{
-    max-height:500px;
-    opacity:1;
-    margin-top:12px;
-}
-
+   ========================================================= */
 
 .bridal-box{
-    padding:32px 22px;
+    padding:25px 20px;
 
-    border-radius:30px;
+    border-radius:21px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #f8e8e3,
-            #fff8f6
-        );
-
+    background:rgba(255,255,255,.58);
     border:3px solid rgba(79,108,84,.68);
 
     box-shadow:
-        0 20px 50px rgba(180,120,120,.12);
-}
+        0 10px 28px rgba(180,120,120,.07),
+        inset 0 1px 0 rgba(255,255,255,.85);
 
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+
+    text-align:center;
+}
 
 .bridal-box h2{
-    color:#a9686d;
-    font-size:29px;
-    margin-bottom:13px;
-}
+    margin-bottom:10px;
 
+    color:#a9686d;
+    font-size:20px;
+    font-weight:600;
+}
 
 .bridal-box p{
-    max-width:600px;
-    margin:0 auto 22px;
+    max-width:700px;
+    margin:0 auto;
 
+    color:#6f5559;
+    font-size:13px;
     line-height:2;
-    color:#76565b;
-    font-size:14px;
 }
 
-
 .bridal-services{
+    margin-top:20px;
+
     display:flex;
     flex-wrap:wrap;
     justify-content:center;
     gap:9px;
 }
 
-
 .bridal-services span{
-    padding:8px 14px;
+    padding:8px 13px;
 
-    border-radius:18px;
+    border-radius:12px;
 
-    background:rgba(255,255,255,.65);
+    background:rgba(79,108,84,.08);
+    border:1px solid rgba(79,108,84,.35);
 
-    border:3px solid rgba(79,108,84,.68);
-
-    color:#6b4b50;
-
-    font-size:12px;
-
-    transition:.3s ease;
+    color:#4f6c54;
+    font-size:11px;
 }
 
 
-.bridal-services span:hover{
-    border-color:#4f6c54;
+/* =========================================================
+   OPENING HOURS
+   ========================================================= */
+
+.opening-hours{
+    width:92%;
+    max-width:1050px;
+
+    margin:4px auto 30px;
+
+    display:flex;
+    justify-content:center;
+}
+
+.opening-hours-box{
+    width:100%;
+    max-width:620px;
+
+    position:relative;
+
+    padding:18px 24px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.62);
+    border:2px solid rgba(79,108,84,.55);
+
+    box-shadow:
+        0 10px 25px rgba(180,120,120,.07),
+        inset 0 1px 0 rgba(255,255,255,.9);
+
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+}
+
+.opening-hours-box::before{
+    content:"";
+
+    position:absolute;
+    right:0;
+    top:13px;
+    bottom:13px;
+
+    width:4px;
+
+    border-radius:10px;
+
+    background:#4f6c54;
+}
+
+.opening-hours-label{
     color:#a9686d;
+    font-size:12px;
+    font-weight:500;
+    white-space:nowrap;
+}
+
+.opening-hours-box h2{
+    color:#4b3035;
+    font-size:17px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.opening-hours-box p{
+    margin:0;
+
+    color:#6f5559;
+    font-size:11px;
+    white-space:nowrap;
 }
 
 
 /* =========================================================
    BOOKING
-========================================================= */
+   ========================================================= */
 
 .booking{
-    width:90%;
-    margin:50px auto 80px;
-
-    padding:65px 28px;
-
-    border-radius:45px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #fffaf8,
-            #f7e4df
-        );
-
-    border:3px solid rgba(79,108,84,.68);
-
-    box-shadow:
-        0 25px 60px rgba(180,120,120,.12);
-
-    animation:
-        contentReveal 1s
-        cubic-bezier(.16,1,.3,1)
-        .65s
-        both;
+    width:92%;
+    max-width:850px;
+    margin:0 auto 60px;
 }
-
-
-@keyframes contentReveal{
-
-    0%{
-        opacity:0;
-        transform:translateY(18px);
-    }
-
-    100%{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-
-/* =========================================================
-   BOOKING TITLE
-========================================================= */
 
 .booking-title{
     text-align:center;
-    margin-bottom:40px;
+    margin-bottom:24px;
 }
-
 
 .booking-title span{
-    color:#a9686d;
-    font-size:13px;
-    letter-spacing:2px;
-}
+    display:block;
+    margin-bottom:5px;
 
+    color:#a9686d;
+    font-size:12px;
+    letter-spacing:1px;
+}
 
 .booking-title h2{
-    margin:12px 0;
+    margin-bottom:7px;
 
-    font-size:37px;
     color:#4b3035;
+    font-size:24px;
+    font-weight:600;
 }
-
 
 .booking-title p{
     color:#76565b;
-    font-size:14px;
-}
-
-
-.booking-title::after{
-    content:"";
-
-    display:block;
-
-    width:35px;
-    height:2px;
-
-    margin:10px auto 0;
-
-    background:#a9686d;
-
-    opacity:.65;
-    border-radius:10px;
+    font-size:12px;
 }
 
 
 /* =========================================================
    BOOKING BOX
-========================================================= */
+   ========================================================= */
 
 .booking-box{
-    max-width:700px;
-    margin:auto;
+    padding:25px;
 
-    display:grid;
-    gap:18px;
-}
+    border-radius:25px;
 
-
-/* =========================================================
-   BOOKING STEP
-========================================================= */
-
-.booking-step{
-    position:relative;
-
-    background:rgba(255,255,255,.75);
-
-    padding:24px;
-
-    border-radius:23px;
-
+    background:rgba(255,255,255,.58);
     border:3px solid rgba(79,108,84,.68);
 
     box-shadow:
-        0 10px 25px rgba(180,120,120,.07);
+        0 14px 35px rgba(180,120,120,.08),
+        inset 0 1px 0 rgba(255,255,255,.9);
 
-    transition:
-        transform .3s ease,
-        box-shadow .3s ease,
-        border-color .3s ease;
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
 }
 
-
-.booking-step:hover{
-    transform:translateY(-2px);
-
-    border-color:rgba(79,108,84,.70);
-
-    box-shadow:
-        0 14px 30px rgba(180,120,120,.10);
+.booking-step{
+    margin-bottom:23px;
 }
 
-
-/* =========================================================
-   STEP NUMBER
-========================================================= */
+.booking-step:last-of-type{
+    margin-bottom:25px;
+}
 
 .step-number{
     display:inline-flex;
-
     align-items:center;
     justify-content:center;
 
-    min-width:38px;
-    height:25px;
+    width:31px;
+    height:31px;
 
-    padding:0 8px;
+    margin-left:7px;
 
-    border-radius:20px;
+    border-radius:50%;
 
-    background:rgba(79,108,84,.08);
+    background:rgba(79,108,84,.10);
+    border:1px solid rgba(79,108,84,.35);
 
     color:#4f6c54;
 
     font-size:11px;
-
-    letter-spacing:2px;
-
-    font-weight:700;
+    font-weight:600;
 }
 
-
-/* =========================================================
-   STEP TITLE
-========================================================= */
-
 .booking-step h3{
-    margin:10px 0 16px;
+    display:inline-block;
 
-    color:#4b3035;
-
-    font-size:18px;
+    color:#5b4146;
+    font-size:14px;
     font-weight:600;
 }
 
 
 /* =========================================================
-   SELECT + INPUT
-========================================================= */
+   INPUTS
+   ========================================================= */
+
+.booking-step select,
+.booking-step input,
+.booking-step textarea{
+    width:100%;
+
+    margin-top:11px;
+
+    border:2px solid rgba(79,108,84,.35);
+    border-radius:15px;
+
+    background:rgba(255,255,255,.68);
+
+    color:#4b3035;
+
+    outline:none;
+
+    transition:
+        border-color .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+}
 
 .booking-step select,
 .booking-step input{
-
-    width:100%;
-
     height:52px;
-
     padding:0 15px;
 
-    border-radius:14px;
-
-    border:3px solid rgba(79,108,84,.68);
-
-    background:#fffdfc;
-
-    color:#4b3035;
-
-    font-family:inherit;
-
-    font-size:14px;
-
-    outline:none;
-
-    transition:
-        border-color .3s ease,
-        box-shadow .3s ease,
-        background .3s ease;
+    font-size:13px;
 }
-
-
-.booking-step select{
-    cursor:pointer;
-}
-
-
-.booking-step input{
-    margin-bottom:10px;
-}
-
-
-.booking-step select:hover,
-.booking-step input:hover{
-
-    border-color:rgba(79,108,84,.72);
-
-    background:#ffffff;
-}
-
-
-.booking-step select:focus,
-.booking-step input:focus{
-
-    border-color:rgba(79,108,84,.95);
-
-    background:#ffffff;
-
-    box-shadow:
-        0 0 0 4px rgba(79,108,84,.10);
-}
-
-
-/* =========================================================
-   DESCRIPTION
-========================================================= */
 
 .booking-step textarea{
+    min-height:115px;
 
-    width:100%;
+    padding:14px 15px;
 
-    height:78px;
+    resize:vertical;
 
-    min-height:78px;
+    font-size:13px;
+    line-height:2;
+}
 
-    max-height:78px;
-
-    padding:13px 15px;
-
-    border-radius:14px;
-
-    border:3px solid rgba(79,108,84,.68);
-
+.booking-step select:focus,
+.booking-step input:focus,
+.booking-step textarea:focus{
+    border-color:#4f6c54;
     background:#fffdfc;
 
-    color:#4b3035;
-
-    font-family:inherit;
-
-    font-size:14px;
-
-    line-height:1.7;
-
-    outline:none;
-
-    resize:none;
-
-    overflow:hidden;
-
-    transition:
-        border-color .3s ease,
-        box-shadow .3s ease,
-        background .3s ease;
-}
-
-
-.booking-step textarea:hover{
-
-    border-color:rgba(79,108,84,.72);
-
-    background:#ffffff;
-}
-
-
-.booking-step textarea:focus{
-
-    border-color:rgba(79,108,84,.95);
-
-    background:#ffffff;
-
     box-shadow:
-        0 0 0 4px rgba(79,108,84,.10);
+        0 0 0 4px rgba(79,108,84,.08);
 }
 
+.booking-step input + input{
+    margin-top:10px;
+}
 
 .booking-step textarea::placeholder,
 .booking-step input::placeholder{
-
-    color:#9b7d80;
-
-    opacity:.9;
+    color:#9a8185;
 }
 
 
 /* =========================================================
-   TIME GRID
-========================================================= */
+   TIME SELECTION — MORNING / AFTERNOON
+   ========================================================= */
 
 .time-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:10px;
-}
-
-
-.time-grid button{
-
     width:100%;
 
-    height:46px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
 
-    padding:0 7px;
+    gap:12px;
 
-    border-radius:14px;
+    margin-top:11px;
+}
 
-    background:#fffdfc;
+.time-grid button{
+    position:relative;
 
-    color:#6b4b50;
+    width:100%;
+    min-height:62px;
 
-    border:3px solid rgba(79,108,84,.68);
+    padding:0 12px;
 
-    box-shadow:none;
+    border:2px solid rgba(79,108,84,.42);
+    border-radius:16px;
 
-    font-family:inherit;
+    background:rgba(255,255,255,.62);
 
-    font-size:13px;
+    color:#4b3035;
+
+    font-family:'Vazirmatn',sans-serif;
+    font-size:14px;
+    font-weight:600;
 
     cursor:pointer;
 
     transition:
-        background .3s ease,
-        color .3s ease,
-        border-color .3s ease,
-        transform .3s ease,
-        box-shadow .3s ease;
+        background .25s ease,
+        border-color .25s ease,
+        color .25s ease,
+        box-shadow .25s ease,
+        transform .2s ease;
 }
-
 
 .time-grid button:hover{
-
-    background:rgba(79,108,84,.06);
-
-    color:#4f6c54;
-
+    background:rgba(79,108,84,.08);
     border-color:#4f6c54;
-
-    transform:translateY(-2px);
+    color:#4f6c54;
 }
 
+.time-grid button:active{
+    transform:scale(.97);
+}
 
-.time-grid button.selected{
+.time-grid button.selected,
+.time-grid button.active{
+    background:#4f6c54;
+    border-color:#3f5944;
 
-    background:rgba(79,108,84,.11);
-
-    color:#4f6c54;
-
-    border-color:#4f6c54;
+    color:#fff;
 
     box-shadow:
-        0 8px 20px rgba(79,108,84,.12);
+        0 8px 20px rgba(79,108,84,.25),
+        inset 0 0 0 1px rgba(255,255,255,.15);
+
+    transform:translateY(-1px);
+}
+
+.time-grid button.selected::after,
+.time-grid button.active::after{
+    content:"✓";
+
+    position:absolute;
+
+    top:7px;
+    left:9px;
+
+    width:21px;
+    height:21px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.96);
+    color:#4f6c54;
+
+    font-size:12px;
+    font-weight:800;
+
+    box-shadow:0 2px 7px rgba(0,0,0,.12);
 }
 
 
 /* =========================================================
    BOOKING BUTTON
-========================================================= */
+   ========================================================= */
 
 .booking-button{
-
     width:100%;
+    height:55px;
 
-    height:56px;
+    border:none;
+    border-radius:16px;
 
-    padding:0 16px;
-
-    font-size:15px;
-
-    font-weight:600;
-
-    margin-top:3px;
-
-    border:2px solid rgba(79,108,84,.30);
-
-    border-radius:18px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #d99b9f,
-            #a9686d
-        );
-
-    color:white;
+    background:#4f6c54;
+    color:#fff;
 
     font-family:inherit;
+    font-size:14px;
+    font-weight:600;
 
     cursor:pointer;
 
     box-shadow:
-        0 12px 25px rgba(190,130,130,.22);
+        0 10px 25px rgba(79,108,84,.20);
 
     transition:
-        transform .3s ease,
-        box-shadow .3s ease,
-        filter .3s ease;
+        background .25s ease,
+        transform .2s ease,
+        box-shadow .25s ease;
 }
-
 
 .booking-button:hover{
+    background:#3f5944;
 
-    transform:translateY(-3px);
-
-    filter:brightness(1.03);
+    transform:translateY(-2px);
 
     box-shadow:
-        0 16px 30px rgba(190,130,130,.30);
+        0 13px 28px rgba(79,108,84,.25);
 }
-
 
 .booking-button:active{
-
-    transform:translateY(-1px) scale(.99);
-}
-
-
-.booking-button:disabled{
-
-    opacity:.65;
-
-    cursor:not-allowed;
-
-    transform:none !important;
-
-    filter:none;
+    transform:scale(.985);
 }
 
 
 /* =========================================================
    FOOTER
-========================================================= */
+   ========================================================= */
 
 .footer{
-    margin-top:35px;
+    width:92%;
+    max-width:1050px;
 
-    padding:28px 20px 16px;
+    margin:0 auto 25px;
+    padding:25px 15px 18px;
 
     text-align:center;
 
-    background:#4b3035;
+    border-top:1px solid rgba(79,108,84,.20);
+}
 
-    color:white;
+.footer-logo{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    margin-bottom:8px;
+}
+
+.footer-logo h2{
+    font-family:Arial,sans-serif;
+
+    font-size:20px;
+    letter-spacing:3px;
+
+    color:#4b3035;
+}
+
+.footer-logo span{
+    margin-top:4px;
+
+    color:#a9686d;
+
+    font-size:8px;
+    letter-spacing:4px;
+}
+
+.footer > p{
+    color:#76565b;
+    font-size:11px;
+}
+
+.copyright{
+    margin-top:10px;
+
+    color:#a18b8f;
+    font-size:9px;
 }
 
 
-.footer-logo h2{
-    font-size:24px;
+/* =========================================================
+   JALALI CALENDAR
+   ========================================================= */
 
-    letter-spacing:6px;
+.jalali-calendar-overlay{
+    position:fixed;
 
-    margin-bottom:2px;
+    inset:0;
+    z-index:9999;
 
+    display:none;
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    background:rgba(54,39,42,.35);
+
+    backdrop-filter:blur(7px);
+    -webkit-backdrop-filter:blur(7px);
+}
+
+.jalali-calendar-overlay.active{
+    display:flex;
+}
+
+.jalali-calendar{
+    width:min(95%,390px);
+
+    padding:20px;
+
+    border-radius:25px;
+
+    background:#fffaf8;
+
+    border:2px solid rgba(79,108,84,.55);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.18);
+
+    animation:calendarIn .3s ease both;
+}
+
+@keyframes calendarIn{
+    from{
+        opacity:0;
+        transform:translateY(15px) scale(.97);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.jalali-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:16px;
+}
+
+.jalali-title h3{
+    color:#4b3035;
+    font-size:16px;
+}
+
+.jalali-close{
+    width:34px;
+    height:34px;
+
+    border:none;
+    border-radius:50%;
+
+    background:rgba(79,108,84,.09);
+
+    color:#4f6c54;
+
+    font-size:19px;
+
+    cursor:pointer;
+}
+
+.jalali-month{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:14px;
+}
+
+.jalali-month button{
+    width:35px;
+    height:35px;
+
+    border:none;
+    border-radius:11px;
+
+    background:rgba(79,108,84,.09);
+
+    color:#4f6c54;
+
+    cursor:pointer;
+}
+
+.jalali-month-title{
+    color:#5b4146;
+    font-size:14px;
     font-weight:600;
 }
 
+.jalali-weekdays,
+.jalali-days{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:5px;
+}
 
-.footer-logo span{
-    font-size:9px;
+.jalali-weekdays{
+    margin-bottom:6px;
+}
 
-    letter-spacing:5px;
+.jalali-weekdays div{
+    padding:5px 0;
 
-    opacity:.75;
+    text-align:center;
+
+    color:#a9686d;
+    font-size:10px;
+    font-weight:600;
+}
+
+.jalali-day{
+    min-height:39px;
+
+    border:none;
+    border-radius:10px;
+
+    background:transparent;
+
+    color:#5b4146;
+
+    font-family:inherit;
+    font-size:11px;
+
+    cursor:pointer;
+}
+
+.jalali-day:hover{
+    background:rgba(79,108,84,.09);
+}
+
+.jalali-day.today{
+    border:1px solid rgba(79,108,84,.5);
+}
+
+.jalali-day.selected{
+    background:#4f6c54;
+    color:#fff;
+}
+
+.jalali-day.disabled{
+    opacity:.28;
+    pointer-events:none;
 }
 
 
-.footer p{
-    margin:8px 0 0;
+/* =========================================================
+   MODAL
+   ========================================================= */
 
-    color:#f3dcd7;
+.booking-modal{
+    position:fixed;
 
+    inset:0;
+    z-index:10000;
+
+    display:none;
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    background:rgba(54,39,42,.38);
+
+    backdrop-filter:blur(7px);
+    -webkit-backdrop-filter:blur(7px);
+}
+
+.booking-modal.active{
+    display:flex;
+}
+
+.booking-modal-box{
+    width:min(92%,430px);
+
+    padding:28px 22px;
+
+    text-align:center;
+
+    border-radius:25px;
+
+    background:#fffaf8;
+
+    border:2px solid rgba(79,108,84,.55);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.18);
+
+    animation:modalIn .3s ease both;
+}
+
+@keyframes modalIn{
+    from{
+        opacity:0;
+        transform:scale(.95) translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1) translateY(0);
+    }
+}
+
+.booking-modal-box h3{
+    margin-bottom:10px;
+
+    color:#4f6c54;
+    font-size:19px;
+}
+
+.booking-modal-box p{
+    color:#76565b;
     font-size:12px;
+    line-height:2;
 }
 
-
-.copyright{
+.booking-modal-close{
     margin-top:18px;
 
-    padding-top:12px;
+    width:100%;
+    height:45px;
 
-    border-top:2px solid rgba(183,123,127,.25);
+    border:none;
+    border-radius:13px;
 
-    font-size:10px;
+    background:#4f6c54;
+    color:#fff;
 
-    color:#f3dcd7;
+    font-family:inherit;
+    font-size:13px;
 
-    opacity:.7;
+    cursor:pointer;
+}
+
+
+/* =========================================================
+   SPLASH
+   ========================================================= */
+
+#hobabSplash{
+    position:fixed;
+
+    inset:0;
+    z-index:99999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#fff8f6;
+
+    opacity:1;
+    visibility:visible;
+
+    transition:
+        opacity .7s ease,
+        visibility .7s ease;
+}
+
+#hobabSplash.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+.splash-frame{
+    width:min(82vw,420px);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.splash-logo-wrap{
+    width:100%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    animation:splashLogoIn 1.1s cubic-bezier(.22,.61,.36,1) both;
+}
+
+.splash-logo{
+    display:block;
+
+    width:min(78vw,360px);
+    max-width:100%;
+    height:auto;
+
+    object-fit:contain;
+
+    background:transparent;
+
+    animation:splashLogoFloat 2.2s ease-in-out infinite;
+}
+
+@keyframes splashLogoIn{
+    from{
+        opacity:0;
+        transform:scale(.88);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+@keyframes splashLogoFloat{
+    0%,
+    100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-4px);
+    }
 }
 
 
 /* =========================================================
    MOBILE
-========================================================= */
+   ========================================================= */
 
-@media(max-width:800px){
+@media (max-width:800px){
 
     .header{
-
         width:94%;
 
-        margin:12px auto;
+        margin-top:13px;
+        margin-bottom:20px;
 
-        padding:14px 12px;
+        padding:12px;
 
-        gap:13px;
+        border-radius:20px;
 
-        border-radius:25px;
+        flex-direction:column;
+        gap:12px;
     }
 
+    .logo{
+        min-width:auto;
+    }
 
     .logo span{
-        font-size:23px;
+        font-size:20px;
     }
-
-
-    .logo small{
-        font-size:9px;
-    }
-
 
     .top-buttons{
-
         width:100%;
-
-        justify-content:center;
-
-        gap:6px;
-    }
-
-
-    .header .top-buttons .top-btn{
-
-        flex:1;
-
-        min-width:0;
-
-        height:37px;
-
-        padding:0 11px;
-
-        border-radius:15px;
-
-        font-size:11px;
-    }
-
-
-    .services{
-
-        width:92%;
-
-        margin:35px auto 14px;
-    }
-
-
-    .services-toggle{
-
-        padding:17px 18px;
-
-        font-size:16px;
-
-        border-radius:20px;
-    }
-
-
-    .services-content.open{
-
-        margin-top:12px;
-    }
-
-
-    .service-box{
-
-        grid-template-columns:1fr 1fr;
-
-        gap:8px;
-    }
-
-
-    .card{
-
-        padding:16px 10px;
-
-        border-radius:18px;
-    }
-
-
-    .card h3{
-
-        font-size:15px;
-
-        margin-bottom:5px;
-    }
-
-
-    .card p{
-
-        font-size:11px;
-
-        line-height:1.7;
-    }
-
-
-    .bridal-section{
-
-        width:92%;
-
-        margin:10px auto 35px;
-    }
-
-
-    .bridal-toggle{
-
-        padding:17px 18px;
-
-        font-size:16px;
-
-        border-radius:20px;
-    }
-
-
-    .bridal-content.open{
-
-        margin-top:12px;
-    }
-
-
-    .bridal-box{
-
-        padding:26px 17px;
-
-        border-radius:25px;
-    }
-
-
-    .bridal-box h2{
-
-        font-size:25px;
-    }
-
-
-    .bridal-box p{
-
-        font-size:13px;
-    }
-
-
-    .bridal-services span{
-
-        font-size:11px;
-
-        padding:7px 10px;
-    }
-
-
-    .booking{
-
-        width:92%;
-
-        margin:35px auto 60px;
-
-        padding:40px 16px;
-
-        border-radius:32px;
-    }
-
-
-    .booking-title{
-
-        margin-bottom:28px;
-    }
-
-
-    .booking-title h2{
-
-        font-size:29px;
-    }
-
-
-    .booking-title p{
-
-        font-size:13px;
-
-        line-height:2;
-    }
-
-
-    .booking-box{
-
-        gap:14px;
-    }
-
-
-    .booking-step{
-
-        padding:19px;
-
-        border-radius:21px;
-    }
-
-
-    .booking-step h3{
-
-        font-size:16px;
-
-        margin-bottom:14px;
-    }
-
-
-    .booking-step select,
-    .booking-step input{
-
-        height:50px;
-
-        padding:0 13px;
-
-        font-size:13px;
-
-        border-radius:13px;
-    }
-
-
-    .booking-step textarea{
-
-        height:75px;
-
-        min-height:75px;
-
-        max-height:75px;
-
-        padding:11px 13px;
-
-        font-size:13px;
-
-        line-height:1.7;
-
-        border-radius:13px;
-    }
-
-
-    .time-grid{
-
-        grid-template-columns:
-            repeat(3,1fr);
-
         gap:7px;
     }
 
+    .top-btn{
+        flex:1;
+        min-width:0;
+        height:40px;
 
-    .time-grid button{
+        padding:0 8px;
 
-        height:44px;
+        font-size:10px;
 
-        padding:0 5px;
-
-        font-size:12px;
-
-        border-radius:13px;
+        border-radius:12px;
     }
 
+    .services,
+    .bridal-section{
+        width:94%;
+        margin-bottom:16px;
+    }
 
-    .booking-button{
+    .services-toggle,
+    .bridal-toggle{
+        min-height:54px;
 
-        height:53px;
+        padding:0 16px;
 
         border-radius:17px;
 
-        font-size:14px;
+        font-size:13px;
     }
 
-
-    .footer{
-
-        padding:25px 15px 13px;
-
-        margin-top:25px;
+    .service-box{
+        grid-template-columns:1fr 1fr;
+        gap:9px;
     }
 
+    .card{
+        min-height:115px;
+        padding:15px 12px;
 
-    .footer-logo h2{
-
-        font-size:21px;
-
-        letter-spacing:5px;
+        border-radius:16px;
     }
 
-
-    .footer-logo span{
-
-        font-size:8px;
-
-        letter-spacing:4px;
+    .card h3{
+        font-size:13px;
     }
 
+    .card p{
+        font-size:10px;
+        line-height:1.9;
+    }
 
-    .footer p{
+    .bridal-box{
+        padding:20px 15px;
+        border-radius:18px;
+    }
 
+    .bridal-box h2{
+        font-size:17px;
+    }
+
+    .bridal-box p{
         font-size:11px;
+    }
 
-        margin-top:7px;
+    .bridal-services{
+        gap:7px;
+        margin-top:15px;
+    }
+
+    .bridal-services span{
+        padding:7px 10px;
+        font-size:9px;
     }
 
 
-    .copyright{
+    /* OPENING HOURS MOBILE */
 
-        margin-top:14px;
+    .opening-hours{
+        width:94%;
+        margin:3px auto 23px;
+    }
 
-        padding-top:10px;
+    .opening-hours-box{
+        max-width:none;
+
+        padding:15px 12px;
+
+        gap:9px;
+
+        border-radius:17px;
+    }
+
+    .opening-hours-box::before{
+        top:10px;
+        bottom:10px;
+        width:3px;
+    }
+
+    .opening-hours-label{
+        font-size:10px;
+    }
+
+    .opening-hours-box h2{
+        font-size:13px;
+    }
+
+    .opening-hours-box p{
+        font-size:9px;
+    }
+
+
+    /* BOOKING MOBILE */
+
+    .booking{
+        width:94%;
+        margin-bottom:40px;
+    }
+
+    .booking-title{
+        margin-bottom:18px;
+    }
+
+    .booking-title span{
+        font-size:10px;
+    }
+
+    .booking-title h2{
+        font-size:20px;
+    }
+
+    .booking-title p{
+        font-size:10px;
+    }
+
+    .booking-box{
+        padding:18px 14px;
+        border-radius:20px;
+    }
+
+    .booking-step{
+        margin-bottom:19px;
+    }
+
+    .step-number{
+        width:27px;
+        height:27px;
+
+        margin-left:5px;
 
         font-size:9px;
+    }
+
+    .booking-step h3{
+        font-size:12px;
+    }
+
+    .booking-step select,
+    .booking-step input{
+        height:48px;
+        padding:0 12px;
+        font-size:11px;
+    }
+
+    .booking-step textarea{
+        min-height:105px;
+        padding:12px;
+        font-size:11px;
+    }
+
+
+    /* TIME BUTTONS */
+
+    .time-grid{
+        gap:9px;
+    }
+
+    .time-grid button{
+        min-height:60px;
+
+        border-radius:14px;
+
+        font-size:13px;
+    }
+
+    .time-grid button.selected::after,
+    .time-grid button.active::after{
+        width:19px;
+        height:19px;
+
+        top:6px;
+        left:7px;
+
+        font-size:11px;
+    }
+
+    .booking-button{
+        height:52px;
+
+        border-radius:14px;
+
+        font-size:12px;
+    }
+
+
+    /* FOOTER */
+
+    .footer{
+        padding-top:20px;
+    }
+
+    .footer-logo h2{
+        font-size:18px;
+    }
+
+    .copyright{
+        font-size:8px;
+    }
+
+
+    /* SPLASH */
+
+    .splash-frame{
+        width:88vw;
+    }
+
+    .splash-logo{
+        width:84vw;
+        max-width:360px;
+    }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width:390px){
+
+    .top-btn{
+        font-size:9px;
+    }
+
+    .service-box{
+        gap:7px;
+    }
+
+    .card{
+        padding:13px 10px;
+    }
+
+    .card h3{
+        font-size:12px;
+    }
+
+    .card p{
+        font-size:9px;
+    }
+
+    .opening-hours-box{
+        gap:7px;
+        padding:14px 9px;
+    }
+
+    .opening-hours-label{
+        font-size:9px;
+    }
+
+    .opening-hours-box h2{
+        font-size:12px;
+    }
+
+    .opening-hours-box p{
+        font-size:8px;
     }
 }
 
 
 /* =========================================================
    REDUCED MOTION
-========================================================= */
+   ========================================================= */
 
-@media(prefers-reduced-motion:reduce){
+@media (prefers-reduced-motion:reduce){
 
     *,
     *::before,
     *::after{
-
         animation-duration:.01ms !important;
-
         animation-iteration-count:1 !important;
-
+        scroll-behavior:auto !important;
         transition-duration:.01ms !important;
     }
-}
-
-
-/* =========================================================
-   CUSTOM JALALI CALENDAR
-========================================================= */
-
-.jalali-calendar-overlay{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:9999;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:20px;
-
-    background:rgba(45,28,31,.28);
-
-    backdrop-filter:blur(7px);
-
-    -webkit-backdrop-filter:blur(7px);
-
-    opacity:0;
-
-    visibility:hidden;
-
-    pointer-events:none;
-
-    transition:
-        opacity .2s ease,
-        visibility .2s ease;
-}
-
-
-.jalali-calendar-overlay.open{
-
-    opacity:1;
-
-    visibility:visible;
-
-    pointer-events:auto;
-}
-
-
-.jalali-calendar{
-
-    width:min(360px,100%);
-
-    background:#fffaf8;
-
-    border:3px solid rgba(79,108,84,.68);
-
-    border-radius:22px;
-
-    padding:18px;
-
-    box-shadow:
-        0 20px 60px rgba(75,48,53,.22);
-
-    transform:translateY(12px) scale(.97);
-
-    transition:
-        transform .25s ease;
-}
-
-
-.jalali-calendar-overlay.open
-.jalali-calendar{
-
-    transform:translateY(0) scale(1);
-}
-
-
-.jalali-calendar-header{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    margin-bottom:16px;
-}
-
-
-.jalali-title{
-
-    font-size:15px;
-
-    font-weight:600;
-
-    color:#4b3035;
-}
-
-
-.jalali-close,
-.jalali-today{
-
-    border:0;
-
-    background:transparent;
-
-    font-family:inherit;
-
-    cursor:pointer;
-}
-
-
-.jalali-close{
-
-    width:32px;
-
-    height:32px;
-
-    font-size:24px;
-
-    color:#8f6569;
-}
-
-
-.jalali-today{
-
-    padding:7px 11px;
-
-    border-radius:10px;
-
-    color:#9c676c;
-
-    font-size:12px;
-
-    background:#f8e8e5;
-}
-
-
-.jalali-navigation{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    margin-bottom:15px;
-}
-
-
-.jalali-month-title{
-
-    font-size:16px;
-
-    font-weight:600;
-
-    color:#4b3035;
-}
-
-
-.jalali-prev,
-.jalali-next{
-
-    width:36px;
-
-    height:36px;
-
-    border:0;
-
-    border-radius:10px;
-
-    background:#f8e8e5;
-
-    color:#8d5d62;
-
-    font-family:inherit;
-
-    font-size:22px;
-
-    cursor:pointer;
-}
-
-
-.jalali-prev:active,
-.jalali-next:active,
-.jalali-today:active{
-
-    transform:scale(.94);
-}
-
-
-.jalali-weekdays{
-
-    display:grid;
-
-    grid-template-columns:repeat(7,1fr);
-
-    margin-bottom:7px;
-}
-
-
-.jalali-weekdays span{
-
-    text-align:center;
-
-    font-size:11px;
-
-    font-weight:600;
-
-    color:#a98285;
-}
-
-
-.jalali-days{
-
-    display:grid;
-
-    grid-template-columns:repeat(7,1fr);
-
-    gap:5px;
-}
-
-
-.jalali-days button,
-.jalali-empty{
-
-    aspect-ratio:1 / 1;
-
-    min-width:0;
-
-    border-radius:11px;
-}
-
-
-.jalali-days button{
-
-    border:2px solid transparent;
-
-    background:transparent;
-
-    color:#4b3035;
-
-    font-family:inherit;
-
-    font-size:13px;
-
-    cursor:pointer;
-
-    transition:
-        background .15s ease,
-        color .15s ease,
-        border .15s ease;
-}
-
-
-.jalali-days button:hover{
-
-    background:#f8e8e5;
-}
-
-
-.jalali-days button.today{
-
-    border-color:#4f6c54;
-
-    color:#4f6c54;
-
-    font-weight:700;
-}
-
-
-.jalali-days button.selected{
-
-    background:#a9686d;
-
-    color:#ffffff;
-
-    border-color:#a9686d;
-
-    font-weight:600;
-}
-
-
-.jalali-days button.today.selected{
-
-    background:#a9686d;
-
-    color:#ffffff;
-}
-
-
-@media(max-width:600px){
-
-    .jalali-calendar-overlay{
-
-        padding:16px;
-    }
-
-
-    .jalali-calendar{
-
-        width:100%;
-
-        max-width:350px;
-
-        padding:16px;
-
-        border-radius:20px;
-    }
-
-
-    .jalali-days{
-
-        gap:4px;
-    }
-
-
-    .jalali-days button,
-    .jalali-empty{
-
-        border-radius:10px;
-    }
-
-
-    .jalali-days button{
-
-        font-size:12px;
-    }
-}
-
-
-/* =========================================================
-   PREVENT PAGE SCROLL WHILE CALENDAR IS OPEN
-========================================================= */
-
-body.calendar-open{
-
-    overflow:hidden;
-}
-
-
-/* =========================================================
-   STRONG GREEN BORDER
-========================================================= */
-
-.header,
-.header .top-buttons .top-btn,
-.services-toggle,
-.bridal-toggle,
-.card,
-.bridal-box,
-.bridal-services span,
-.booking,
-.booking-step,
-.booking-step select,
-.booking-step input,
-.booking-step textarea,
-.time-grid button,
-.jalali-calendar{
-
-    border-width:4px;
-    border-color:rgba(63,92,67,.85);
-}
-
-
-/* HOVER */
-
-.header .top-buttons .top-btn:hover,
-.services-toggle:hover,
-.bridal-toggle:hover,
-.card:hover,
-.booking-step:hover{
-
-    border-color:#3f5c43;
-}
-
-
-/* =========================================================
-   BOOKING SUCCESS / ERROR MODAL
-========================================================= */
-
-.booking-message-overlay{
-
-    position:fixed !important;
-
-    inset:0 !important;
-
-    margin:0 !important;
-
-    transform:none !important;
-
-    contain:none !important;
-
-    width:100vw !important;
-
-    height:100vh !important;
-
-    height:100dvh !important;
-
-    z-index:2147483647 !important;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:20px;
-
-    background:rgba(45,28,31,.38);
-
-    backdrop-filter:blur(9px);
-
-    -webkit-backdrop-filter:blur(9px);
-
-    opacity:0;
-
-    visibility:hidden;
-
-    pointer-events:none;
-
-    transition:
-        opacity .3s ease,
-        visibility .3s ease;
-}
-
-
-.booking-message-overlay.open{
-
-    opacity:1 !important;
-
-    visibility:visible !important;
-
-    pointer-events:auto !important;
-}
-
-
-/* =========================================================
-   MODAL CARD
-========================================================= */
-
-.booking-message-card{
-
-    width:min(390px,100%);
-
-    padding:34px 25px 25px;
-
-    text-align:center;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.97),
-            rgba(255,248,246,.98)
-        );
-
-    border:2px solid rgba(79,108,84,.55);
-
-    border-radius:30px;
-
-    box-shadow:
-        0 25px 70px rgba(75,48,53,.25),
-        inset 0 1px 0 rgba(255,255,255,.9);
-
-    transform:
-        translateY(20px)
-        scale(.94);
-
-    transition:
-        transform .35s
-        cubic-bezier(.16,1,.3,1);
-}
-
-
-.booking-message-overlay.open
-.booking-message-card{
-
-    transform:
-        translateY(0)
-        scale(1);
-}
-
-
-/* =========================================================
-   MODAL ICON
-========================================================= */
-
-.booking-message-icon{
-
-    width:70px;
-
-    height:70px;
-
-    margin:0 auto 18px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:50%;
-
-    font-size:34px;
-
-    font-weight:700;
-
-    color:#fff;
-
-    background:
-        linear-gradient(
-            135deg,
-            #d99b9f,
-            #a9686d
-        );
-
-    box-shadow:
-        0 12px 30px rgba(183,123,127,.28);
-}
-
-
-/* =========================================================
-   SUCCESS
-========================================================= */
-
-.booking-message-overlay.success
-.booking-message-card{
-
-    border-color:
-        rgba(79,108,84,.65);
-}
-
-
-.booking-message-overlay.success
-.booking-message-icon{
-
-    background:
-        linear-gradient(
-            135deg,
-            #6f9075,
-            #4f6c54
-        );
-
-    box-shadow:
-        0 12px 30px rgba(79,108,84,.25);
-}
-
-
-/* =========================================================
-   ERROR
-========================================================= */
-
-.booking-message-overlay.error
-.booking-message-card{
-
-    border-color:
-        rgba(183,123,127,.65);
-}
-
-
-.booking-message-overlay.error
-.booking-message-icon{
-
-    background:
-        linear-gradient(
-            135deg,
-            #d99b9f,
-            #a9686d
-        );
-}
-
-
-/* =========================================================
-   MODAL TITLE
-========================================================= */
-
-.booking-message-title{
-
-    margin-bottom:10px;
-
-    color:#4b3035;
-
-    font-size:22px;
-
-    font-weight:700;
-}
-
-
-/* =========================================================
-   MODAL TEXT
-========================================================= */
-
-.booking-message-text{
-
-    max-width:310px;
-
-    margin:0 auto 24px;
-
-    color:#76565b;
-
-    font-size:13px;
-
-    line-height:2;
-}
-
-
-/* =========================================================
-   MODAL BUTTON
-========================================================= */
-
-.booking-message-close{
-
-    width:100%;
-
-    height:48px;
-
-    border:2px solid rgba(79,108,84,.35);
-
-    border-radius:15px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #d99b9f,
-            #a9686d
-        );
-
-    color:#fff;
-
-    font-family:'Vazirmatn',sans-serif;
-
-    font-size:13px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:.3s ease;
-}
-
-
-.booking-message-close:hover{
-
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 10px 25px rgba(183,123,127,.25);
-}
-
-
-.booking-message-close:active{
-
-    transform:scale(.98);
-}
-
-
-/* =========================================================
-   PREVENT PAGE SCROLL WHILE MESSAGE IS OPEN
-========================================================= */
-
-body.booking-message-open{
-
-    overflow:hidden !important;
-}
-
-
-/* =========================================================
-   MODAL MOBILE
-========================================================= */
-
-@media(max-width:600px){
-
-    .booking-message-overlay{
-
-        padding:16px;
-
-        width:100vw !important;
-
-        height:100vh !important;
-
-        height:100dvh !important;
-    }
-
-
-    .booking-message-card{
-
-        width:100%;
-
-        max-width:350px;
-
-        padding:30px 20px 21px;
-
-        border-radius:27px;
-    }
-
-
-    .booking-message-icon{
-
-        width:64px;
-
-        height:64px;
-
-        font-size:30px;
-
-        margin-bottom:16px;
-    }
-
-
-    .booking-message-title{
-
-        font-size:20px;
-    }
-
-
-    .booking-message-text{
-
-        font-size:12px;
-
-        line-height:1.9;
-
-        margin-bottom:21px;
-    }
-
-
-    .booking-message-close{
-
-        height:46px;
-
-        font-size:12px;
-    }
-
-}
-
-
-/* =========================================================
-   BOOKED TIME
-========================================================= */
-
-.time-grid button.booked{
-    background:#f0eded !important;
-    color:#aaa !important;
-    border-color:#d8d1d1 !important;
-    cursor:not-allowed !important;
-    opacity:.65;
-    text-decoration:line-through;
-    transform:none !important;
-    box-shadow:none !important;
-}
-
-
-.time-grid button.booked:hover{
-    background:#f0eded !important;
-    color:#aaa !important;
-    border-color:#d8d1d1 !important;
-    transform:none !important;
-    box-shadow:none !important;
-}
-
-
-/* =========================================================
-   HOBAB BEAUTY — FINAL CINEMATIC SPLASH
-   LARGE LOGO / NO CIRCLE
-========================================================= */
-
-#hobabSplash{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:999999;
-
-    width:100%;
-
-    height:100dvh;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:#fff8f6;
-
-    opacity:1;
-
-    visibility:visible;
-
-    pointer-events:auto;
-
-    overflow:hidden;
-
-    transition:
-        opacity .9s cubic-bezier(.22,.61,.36,1),
-        visibility .9s ease;
-}
-
-
-/* =========================================================
-   فضای اصلی لوگو
-========================================================= */
-
-.splash-frame{
-
-    position:relative;
-
-    width:min(94vw,460px);
-
-    height:min(82vw,390px);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    opacity:0;
-
-    transform:scale(.90);
-
-    animation:
-        hobabSplashFrameIn
-        1.25s
-        cubic-bezier(.22,.61,.36,1)
-        .05s
-        forwards;
-
-
-    /* چهار گوشه‌ی نورانی
-       بدون ساختن قاب کامل */
-
-    background:
-
-        linear-gradient(
-            90deg,
-            rgba(183,123,127,.75),
-            rgba(183,123,127,.75)
-        )
-        left top /
-        58px 1px
-        no-repeat,
-
-        linear-gradient(
-            180deg,
-            rgba(183,123,127,.75),
-            rgba(183,123,127,.75)
-        )
-        left top /
-        1px 58px
-        no-repeat,
-
-        linear-gradient(
-            270deg,
-            rgba(183,123,127,.75),
-            rgba(183,123,127,.75)
-        )
-        right top /
-        58px 1px
-        no-repeat,
-
-        linear-gradient(
-            180deg,
-            rgba(183,123,127,.75),
-            rgba(183,123,127,.75)
-        )
-        right top /
-        1px 58px
-        no-repeat,
-
-        linear-gradient(
-            90deg,
-            rgba(183,123,127,.75),
-            rgba(183,123,127,.75)
-        )
-        left bottom /
-        58px 1px
-        no-repeat,
-
-        linear-gradient(
-            0deg,
-            rgba(183,123,127,.75),
-            rgba(183,123,127,.75)
-        )
-        left bottom /
-        1px 58px
-        no-repeat,
-
-        linear-gradient(
-            270deg,
-            rgba(183,123,127,.75),
-            rgba(183,123,127,.75)
-        )
-        right bottom /
-        58px 1px
-        no-repeat,
-
-        linear-gradient(
-            0deg,
-            rgba(183,123,127,.75),
-            rgba(183,123,127,.75)
-        )
-        right bottom /
-        1px 58px
-        no-repeat;
-}
-
-
-/* =========================================================
-   نور بزرگ و نرم پشت لوگو
-========================================================= */
-
-.splash-frame::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:72%;
-
-    height:72%;
-
-    background:
-        radial-gradient(
-            ellipse at center,
-            rgba(183,123,127,.22) 0%,
-            rgba(183,123,127,.12) 30%,
-            rgba(183,123,127,.05) 53%,
-            transparent 75%
-        );
-
-    filter:blur(28px);
-
-    opacity:0;
-
-    transform:scale(.72);
-
-    animation:
-        hobabSplashGlow
-        1.7s
-        ease
-        .2s
-        forwards;
-}
-
-
-/* =========================================================
-   خطوط نورانی وسط بالا و پایین
-========================================================= */
-
-.splash-frame::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-
-    top:7%;
-
-    width:30%;
-
-    height:1px;
-
-    transform:
-        translateX(-50%)
-        scaleX(0);
-
-    transform-origin:center;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(183,123,127,.8),
-            transparent
-        );
-
-    box-shadow:
-        0 0 10px rgba(183,123,127,.25);
-
-    opacity:0;
-
-    animation:
-        hobabSplashTopLine
-        1.15s
-        cubic-bezier(.22,.61,.36,1)
-        .65s
-        forwards;
-}
-
-
-/* =========================================================
-   لوگوی بزرگ
-========================================================= */
-
-.splash-logo-wrap{
-
-    position:relative;
-
-    z-index:5;
-
-    width:92%;
-
-    height:92%;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    opacity:0;
-
-    transform:scale(.86);
-
-    animation:
-        hobabSplashLogo
-        1.25s
-        cubic-bezier(.22,.61,.36,1)
-        .15s
-        forwards;
-}
-
-
-/* =========================================================
-   خط بالا و پایین لوگو
-========================================================= */
-
-.splash-logo-wrap::before,
-.splash-logo-wrap::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-
-    width:34%;
-
-    height:1px;
-
-    transform:
-        translateX(-50%)
-        scaleX(0);
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(183,123,127,.78),
-            transparent
-        );
-
-    box-shadow:
-        0 0 9px rgba(183,123,127,.22);
-
-    opacity:0;
-
-    animation:
-        hobabSplashLine
-        1.1s
-        cubic-bezier(.22,.61,.36,1)
-        .7s
-        forwards;
-}
-
-
-.splash-logo-wrap::before{
-    top:2%;
-}
-
-
-.splash-logo-wrap::after{
-    bottom:2%;
-}
-
-
-/* =========================================================
-   خود لوگو
-========================================================= */
-
-.splash-logo{
-
-    display:block;
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:contain;
-
-    filter:
-        drop-shadow(
-            0 12px 28px
-            rgba(183,123,127,.20)
-        );
-}
-
-
-/* =========================================================
-   انیمیشن ورود قاب
-========================================================= */
-
-@keyframes hobabSplashFrameIn{
-
-    0%{
-        opacity:0;
-
-        transform:
-            scale(.90);
-    }
-
-    100%{
-        opacity:1;
-
-        transform:
-            scale(1);
-    }
-}
-
-
-/* =========================================================
-   انیمیشن لوگو
-========================================================= */
-
-@keyframes hobabSplashLogo{
-
-    0%{
-        opacity:0;
-
-        transform:
-            scale(.86);
-
-        filter:
-            blur(5px);
-    }
-
-    60%{
-        opacity:1;
-
-        transform:
-            scale(1.025);
-
-        filter:
-            blur(0);
-    }
-
-    100%{
-        opacity:1;
-
-        transform:
-            scale(1);
-
-        filter:
-            blur(0);
-    }
-}
-
-
-/* =========================================================
-   انیمیشن نور
-========================================================= */
-
-@keyframes hobabSplashGlow{
-
-    0%{
-        opacity:0;
-
-        transform:
-            scale(.72);
-    }
-
-    55%{
-        opacity:1;
-    }
-
-    100%{
-        opacity:1;
-
-        transform:
-            scale(1);
-    }
-}
-
-
-/* =========================================================
-   انیمیشن خط بالا
-========================================================= */
-
-@keyframes hobabSplashTopLine{
-
-    0%{
-        opacity:0;
-
-        transform:
-            translateX(-50%)
-            scaleX(0);
-    }
-
-    100%{
-        opacity:1;
-
-        transform:
-            translateX(-50%)
-            scaleX(1);
-    }
-}
-
-
-/* =========================================================
-   انیمیشن خطوط لوگو
-========================================================= */
-
-@keyframes hobabSplashLine{
-
-    0%{
-        opacity:0;
-
-        transform:
-            translateX(-50%)
-            scaleX(0);
-    }
-
-    100%{
-        opacity:1;
-
-        transform:
-            translateX(-50%)
-            scaleX(1);
-    }
-}
-
-
-/* =========================================================
-   خروج Splash
-========================================================= */
-
-#hobabSplash.hide{
-
-    opacity:0;
-
-    visibility:hidden;
-
-    pointer-events:none;
-}
-
-
-/* =========================================================
-   MOBILE SPLASH
-========================================================= */
-
-@media(max-width:600px){
-
-    .splash-frame{
-
-        width:94vw;
-
-        height:82vw;
-
-        max-height:390px;
-    }
-
-
-    .splash-logo-wrap{
-
-        width:94%;
-
-        height:94%;
-    }
-
-
-    .splash-frame{
-
-        background-size:
-            48px 1px,
-            1px 48px,
-            48px 1px,
-            1px 48px,
-            48px 1px,
-            1px 48px,
-            48px 1px,
-            1px 48px;
-    }
-
-
-    .splash-frame::after{
-
-        top:6%;
-
-        width:32%;
-    }
-
-
-    .splash-logo-wrap::before{
-
-        top:1%;
-    }
-
-
-    .splash-logo-wrap::after{
-
-        bottom:1%;
-    }
-}
-
-
-.time-grid button.passed,
-.time-grid button:disabled.passed {
-    opacity: .30 !important;
-    cursor: not-allowed !important;
-    pointer-events: none !important;
-    text-decoration: line-through;
-    filter: grayscale(.7);
 }
