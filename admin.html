@@ -249,6 +249,16 @@
             border-radius:17px;
             padding:16px;
             background:#fff;
+            transition:.2s;
+        }
+
+        .appointment.confirmed-card{
+            border-color:#b9d7c1;
+            background:linear-gradient(
+                135deg,
+                #ffffff 0%,
+                #fbfffc 100%
+            );
         }
 
         .appointment-top{
@@ -270,6 +280,11 @@
             border-radius:9px;
             font-size:12px;
             white-space:nowrap;
+        }
+
+        .appointment.confirmed-card .appointment-time{
+            background:#e7f4ea;
+            color:#356b48;
         }
 
         .appointment-info{
@@ -295,11 +310,41 @@
 
 
         /* =========================
+           CONFIRMATION STATUS
+        ========================= */
+
+        .appointment-status{
+            margin-top:13px;
+            padding:10px 12px;
+            border-radius:11px;
+            font-size:12px;
+            line-height:1.8;
+        }
+
+        .appointment-status.pending{
+            background:#fff8ed;
+            border:1px solid #f0dfbd;
+            color:#987342;
+        }
+
+        .appointment-status.confirmed{
+            background:#edf8f0;
+            border:1px solid #c9e3d0;
+            color:#356b48;
+        }
+
+        .appointment-status strong{
+            font-weight:700;
+        }
+
+
+        /* =========================
            ACTIONS
         ========================= */
 
         .appointment-actions{
-            display:flex;
+            display:grid;
+            grid-template-columns:1fr 1fr 1fr;
             gap:9px;
             margin-top:15px;
             padding-top:14px;
@@ -307,13 +352,13 @@
         }
 
         .call-btn,
+        .confirm-btn,
         .delete-btn{
-            flex:1;
             border:none;
             border-radius:11px;
-            padding:11px 12px;
+            padding:11px 8px;
             font-family:inherit;
-            font-size:13px;
+            font-size:12px;
             cursor:pointer;
             text-decoration:none;
             text-align:center;
@@ -329,6 +374,20 @@
             background:#e9dddd;
         }
 
+        .confirm-btn{
+            background:#e8f5ec;
+            color:#356b48;
+        }
+
+        .confirm-btn:hover{
+            background:#dceee1;
+        }
+
+        .confirm-btn.confirmed{
+            background:#dff0e3;
+            color:#2f6642;
+        }
+
         .delete-btn{
             background:#f7e5e5;
             color:#b04f5b;
@@ -338,7 +397,8 @@
             background:#f0d8d8;
         }
 
-        .delete-btn:disabled{
+        .delete-btn:disabled,
+        .confirm-btn:disabled{
             opacity:.6;
             cursor:not-allowed;
         }
@@ -356,34 +416,160 @@
             margin-bottom:0;
         }
 
-.day-group-title{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    margin-bottom:10px;
-    padding:13px 15px;
-    border-radius:14px;
-    background:#e8f5ec;
-    color:#356b48;
-    font-size:14px;
-    font-weight:700;
-    border-right:4px solid #6fa982;
-}
+        .day-group-title{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:10px;
+            margin-bottom:10px;
+            padding:13px 15px;
+            border-radius:14px;
+            background:#e8f5ec;
+            color:#356b48;
+            font-size:14px;
+            font-weight:700;
+            border-right:4px solid #6fa982;
+        }
 
-.day-group-title span{
-    font-size:12px;
-    font-weight:600;
-    color:#4d805d;
-    background:#f7fcf8;
-    padding:6px 10px;
-    border-radius:9px;
-    border:1px solid #cfe5d5;
-}
+        .day-group-title span{
+            font-size:12px;
+            font-weight:600;
+            color:#4d805d;
+            background:#f7fcf8;
+            padding:6px 10px;
+            border-radius:9px;
+            border:1px solid #cfe5d5;
+        }
 
         .day-group-list{
             display:grid;
             gap:10px;
+        }
+
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal-overlay{
+            position:fixed;
+            inset:0;
+            background:rgba(60,40,45,.38);
+            backdrop-filter:blur(6px);
+            display:none;
+            align-items:center;
+            justify-content:center;
+            padding:20px;
+            z-index:100;
+        }
+
+        .modal-overlay.show{
+            display:flex;
+        }
+
+        .confirm-modal{
+            width:min(390px,100%);
+            background:#fff;
+            border-radius:24px;
+            padding:24px;
+            box-shadow:0 25px 70px rgba(50,30,35,.2);
+        }
+
+        .modal-title{
+            font-size:18px;
+            font-weight:700;
+            color:#4b3035;
+        }
+
+        .modal-subtitle{
+            margin-top:6px;
+            color:#9b7b81;
+            font-size:12px;
+            line-height:1.8;
+        }
+
+        .modal-customer{
+            margin-top:16px;
+            padding:12px 13px;
+            background:#faf5f4;
+            border:1px solid #eee1e1;
+            border-radius:13px;
+            font-size:13px;
+            line-height:2;
+        }
+
+        .time-label{
+            display:block;
+            margin-top:18px;
+            margin-bottom:7px;
+            font-size:13px;
+            font-weight:600;
+            color:#5a3b42;
+        }
+
+        .time-input{
+            width:100%;
+            padding:13px 14px;
+            border:1px solid #dfd1d1;
+            border-radius:13px;
+            outline:none;
+            font-family:inherit;
+            font-size:15px;
+            direction:ltr;
+            text-align:center;
+            background:#fff;
+            color:#4b3035;
+        }
+
+        .time-input:focus{
+            border-color:#8cae94;
+            box-shadow:0 0 0 3px rgba(111,169,130,.12);
+        }
+
+        .time-hint{
+            margin-top:7px;
+            font-size:11px;
+            color:#a48d91;
+            text-align:center;
+        }
+
+        .modal-error{
+            min-height:20px;
+            margin-top:8px;
+            color:#b44e5b;
+            font-size:12px;
+            text-align:center;
+        }
+
+        .modal-actions{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:9px;
+            margin-top:15px;
+        }
+
+        .modal-cancel,
+        .modal-confirm{
+            border:none;
+            border-radius:12px;
+            padding:12px;
+            font-family:inherit;
+            cursor:pointer;
+        }
+
+        .modal-cancel{
+            background:#f2e7e7;
+            color:#6f4b53;
+        }
+
+        .modal-confirm{
+            background:#6f9878;
+            color:#fff;
+        }
+
+        .modal-confirm:disabled{
+            opacity:.6;
+            cursor:not-allowed;
         }
 
 
@@ -421,11 +607,23 @@
             }
 
             .appointment-actions{
-                flex-direction:row;
+                grid-template-columns:1fr 1fr 1fr;
+                gap:7px;
+            }
+
+            .call-btn,
+            .confirm-btn,
+            .delete-btn{
+                padding:10px 5px;
+                font-size:11px;
             }
 
             .day-group-title{
                 padding:11px 12px;
+            }
+
+            .confirm-modal{
+                padding:20px;
             }
 
         }
@@ -705,6 +903,90 @@
 
 
 
+<!-- =========================
+     CONFIRM MODAL
+========================= -->
+
+<div
+    class="modal-overlay"
+    id="confirmModal"
+>
+
+    <div class="confirm-modal">
+
+        <div class="modal-title">
+            تأیید نوبت
+        </div>
+
+        <div class="modal-subtitle">
+            ساعت دقیق نوبت را وارد کنید.
+        </div>
+
+
+        <div
+            class="modal-customer"
+            id="modalCustomer"
+        >
+        </div>
+
+
+        <label
+            class="time-label"
+            for="confirmedTime"
+        >
+            ساعت دقیق نوبت
+        </label>
+
+
+        <input
+            type="text"
+            id="confirmedTime"
+            class="time-input"
+            inputmode="numeric"
+            maxlength="5"
+            placeholder="مثلاً 10:00"
+            autocomplete="off"
+        >
+
+
+        <div class="time-hint">
+            ساعت را به شکل ۱۰:۰۰ یا 10:00 وارد کنید.
+        </div>
+
+
+        <div
+            class="modal-error"
+            id="modalError"
+        ></div>
+
+
+        <div class="modal-actions">
+
+            <button
+                type="button"
+                class="modal-cancel"
+                id="modalCancel"
+            >
+                انصراف
+            </button>
+
+
+            <button
+                type="button"
+                class="modal-confirm"
+                id="modalConfirm"
+            >
+                تأیید و ثبت ساعت
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
@@ -752,9 +1034,30 @@ const categories =
     document.querySelectorAll(".category");
 
 
+const confirmModal =
+    document.getElementById("confirmModal");
+
+const modalCustomer =
+    document.getElementById("modalCustomer");
+
+const confirmedTimeInput =
+    document.getElementById("confirmedTime");
+
+const modalError =
+    document.getElementById("modalError");
+
+const modalCancel =
+    document.getElementById("modalCancel");
+
+const modalConfirm =
+    document.getElementById("modalConfirm");
+
+
 let appointments = [];
 
 let selectedService = "hair";
+
+let selectedAppointment = null;
 
 
 const serviceNames = {
@@ -1080,10 +1383,6 @@ function renderAppointments(){
     }
 
 
-    /* =========================
-       GROUP BY DATE
-    ========================= */
-
     const groups = {};
 
 
@@ -1109,10 +1408,6 @@ function renderAppointments(){
     );
 
 
-    /* =========================
-       SORT DATES
-    ========================= */
-
     const sortedDates =
         Object.keys(groups).sort(
             (a,b) =>
@@ -1120,10 +1415,6 @@ function renderAppointments(){
                 normalizeDateForSort(b)
         );
 
-
-    /* =========================
-       TODAY
-    ========================= */
 
     const today =
         getTodayJalaliForAdmin();
@@ -1136,14 +1427,29 @@ function renderAppointments(){
 
                     const dayAppointments =
                         groups[date].sort(
-                            (a,b) =>
-                                String(
-                                    a.time || ""
+                            (a,b) => {
+
+                                const aConfirmed =
+                                    a.confirmed_time ||
+                                    "";
+
+                                const bConfirmed =
+                                    b.confirmed_time ||
+                                    "";
+
+                                return String(
+                                    aConfirmed ||
+                                    a.time ||
+                                    ""
                                 ).localeCompare(
                                     String(
-                                        b.time || ""
+                                        bConfirmed ||
+                                        b.time ||
+                                        ""
                                     )
-                                )
+                                );
+
+                            }
                         );
 
 
@@ -1192,10 +1498,19 @@ function renderAppointments(){
                                                 );
 
 
+                                            const isConfirmed =
+                                                appointment.confirmed === true;
+
+
+                                            const confirmedTime =
+                                                appointment.confirmed_time ||
+                                                "";
+
+
                                             return `
 
                                             <article
-                                                class="appointment"
+                                                class="appointment ${isConfirmed ? "confirmed-card" : ""}"
                                                 data-id="${escapeHtml(
                                                     appointment.id
                                                 )}"
@@ -1212,9 +1527,23 @@ function renderAppointments(){
 
                                                     <div class="appointment-time">
 
-                                                        ${escapeHtml(
-                                                            appointment.time || "-"
-                                                        )}
+                                                        ${
+                                                            isConfirmed &&
+                                                            confirmedTime
+                                                                ?
+                                                                "ساعت " +
+                                                                toPersianDigits(
+                                                                    confirmedTime
+                                                                )
+                                                                :
+                                                                escapeHtml(
+                                                                    appointment.time === "morning"
+                                                                        ? "صبح"
+                                                                        : appointment.time === "afternoon"
+                                                                            ? "عصر"
+                                                                            : appointment.time || "-"
+                                                                )
+                                                        }
 
                                                     </div>
 
@@ -1266,6 +1595,38 @@ function renderAppointments(){
                                                 </div>
 
 
+                                                ${
+                                                    isConfirmed
+                                                        ?
+                                                        `
+                                                        <div class="appointment-status confirmed">
+
+                                                            <strong>
+                                                                ✓ نوبت تأیید شده
+                                                            </strong>
+
+                                                            <br>
+
+                                                            ساعت دقیق:
+                                                            <strong>
+                                                                ${toPersianDigits(
+                                                                    confirmedTime || "-"
+                                                                )}
+                                                            </strong>
+
+                                                        </div>
+                                                        `
+                                                        :
+                                                        `
+                                                        <div class="appointment-status pending">
+
+                                                            نوبت در انتظار تأیید و تعیین ساعت دقیق است.
+
+                                                        </div>
+                                                        `
+                                                }
+
+
                                                 <div class="appointment-actions">
 
                                                     <a
@@ -1276,6 +1637,23 @@ function renderAppointments(){
                                                     >
                                                         تماس با مشتری
                                                     </a>
+
+
+                                                    <button
+                                                        type="button"
+                                                        class="confirm-btn ${isConfirmed ? "confirmed" : ""}"
+                                                        onclick="openConfirmModal('${escapeHtml(
+                                                            appointment.id
+                                                        )}')"
+                                                    >
+                                                        ${
+                                                            isConfirmed
+                                                                ?
+                                                                "ویرایش ساعت"
+                                                                :
+                                                                "تأیید نوبت"
+                                                        }
+                                                    </button>
 
 
                                                     <button
@@ -1309,6 +1687,424 @@ function renderAppointments(){
             .join("");
 
 }
+
+
+/* =========================
+   OPEN CONFIRM MODAL
+========================= */
+
+function openConfirmModal(id){
+
+    const appointment =
+        appointments.find(
+            item =>
+                String(item.id) === String(id)
+        );
+
+
+    if(!appointment){
+
+        alert(
+            "نوبت موردنظر پیدا نشد."
+        );
+
+        return;
+    }
+
+
+    selectedAppointment =
+        appointment;
+
+
+    const service =
+        serviceNames[
+            appointment.service
+        ] ||
+        appointment.service ||
+        "-";
+
+
+    const period =
+        appointment.time === "morning"
+            ? "صبح"
+            : appointment.time === "afternoon"
+                ? "عصر"
+                : appointment.time || "-";
+
+
+    modalCustomer.innerHTML = `
+
+        <strong>
+            ${escapeHtml(
+                appointment.name || "-"
+            )}
+        </strong>
+
+        <br>
+
+        تاریخ:
+        ${escapeHtml(
+            appointment.date || "-"
+        )}
+
+        <br>
+
+        بازه انتخابی:
+        ${escapeHtml(
+            period
+        )}
+
+        <br>
+
+        خدمت:
+        ${escapeHtml(
+            service
+        )}
+
+    `;
+
+
+    confirmedTimeInput.value =
+        appointment.confirmed_time || "";
+
+
+    modalError.textContent = "";
+
+
+    confirmModal.classList.add(
+        "show"
+    );
+
+
+    setTimeout(
+        function(){
+
+            confirmedTimeInput.focus();
+
+        },
+        100
+    );
+
+}
+
+
+/* =========================
+   CLOSE MODAL
+========================= */
+
+function closeConfirmModal(){
+
+    confirmModal.classList.remove(
+        "show"
+    );
+
+    selectedAppointment =
+        null;
+
+    confirmedTimeInput.value =
+        "";
+
+    modalError.textContent =
+        "";
+
+}
+
+
+/* =========================
+   MODAL EVENTS
+========================= */
+
+modalCancel.addEventListener(
+    "click",
+    closeConfirmModal
+);
+
+
+confirmModal.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target ===
+            confirmModal
+        ){
+
+            closeConfirmModal();
+
+        }
+
+    }
+);
+
+
+confirmedTimeInput.addEventListener(
+    "input",
+    function(){
+
+        let value =
+            this.value;
+
+        value =
+            value
+                .replace(
+                    /[۰-۹]/g,
+                    digit =>
+                        "۰۱۲۳۴۵۶۷۸۹".indexOf(
+                            digit
+                        )
+                );
+
+
+        value =
+            value.replace(
+                /[^0-9:]/g,
+                ""
+            );
+
+
+        this.value =
+            value;
+
+    }
+);
+
+
+/* =========================
+   CONFIRM APPOINTMENT
+========================= */
+
+modalConfirm.addEventListener(
+    "click",
+    async function(){
+
+        if(!selectedAppointment){
+
+            return;
+        }
+
+
+        let time =
+            confirmedTimeInput.value
+                .trim();
+
+
+        time =
+            convertPersianDigitsToEnglish(
+                time
+            );
+
+
+        const timePattern =
+            /^([01]\d|2[0-3]):([0-5]\d)$/;
+
+
+        if(!timePattern.test(time)){
+
+            modalError.textContent =
+                "ساعت را به شکل صحیح وارد کنید؛ مثلاً 10:00";
+
+            confirmedTimeInput.focus();
+
+            return;
+        }
+
+
+        modalError.textContent =
+            "";
+
+
+        modalConfirm.disabled =
+            true;
+
+        modalConfirm.textContent =
+            "در حال ثبت...";
+
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from("appointments")
+                .update({
+
+                    confirmed:true,
+
+                    confirmed_time:time
+
+                })
+                .eq(
+                    "id",
+                    selectedAppointment.id
+                );
+
+
+        if(error){
+
+            console.error(error);
+
+
+            modalConfirm.disabled =
+                false;
+
+            modalConfirm.textContent =
+                "تأیید و ثبت ساعت";
+
+
+            modalError.textContent =
+                "ثبت ساعت انجام نشد. دسترسی دیتابیس را بررسی کنید.";
+
+            return;
+        }
+
+
+        appointments =
+            appointments.map(
+                appointment => {
+
+                    if(
+                        String(
+                            appointment.id
+                        ) ===
+                        String(
+                            selectedAppointment.id
+                        )
+                    ){
+
+                        return {
+
+                            ...appointment,
+
+                            confirmed:true,
+
+                            confirmed_time:time
+
+                        };
+
+                    }
+
+
+                    return appointment;
+
+                }
+            );
+
+
+        closeConfirmModal();
+
+        renderAppointments();
+
+    }
+);
+
+
+/* =========================
+   DELETE APPOINTMENT
+========================= */
+
+async function deleteAppointment(id){
+
+    const appointment =
+        appointments.find(
+            item =>
+                String(item.id) === String(id)
+        );
+
+
+    if(!appointment){
+
+        alert(
+            "نوبت موردنظر پیدا نشد."
+        );
+
+        return;
+    }
+
+
+    const customerName =
+        appointment.name ||
+        "این مشتری";
+
+
+    const confirmed =
+        confirm(
+            `آیا مطمئن هستید نوبت «${customerName}» حذف شود؟`
+        );
+
+
+    if(!confirmed){
+
+        return;
+    }
+
+
+    const deleteButtons =
+        document.querySelectorAll(
+            ".delete-btn"
+        );
+
+
+    deleteButtons.forEach(
+        button => {
+
+            button.disabled = true;
+
+        }
+    );
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("appointments")
+            .delete()
+            .eq("id",id);
+
+
+    if(error){
+
+        console.error(error);
+
+
+        deleteButtons.forEach(
+            button => {
+
+                button.disabled = false;
+
+            }
+        );
+
+
+        alert(
+            "حذف نوبت انجام نشد."
+        );
+
+        return;
+    }
+
+
+    appointments =
+        appointments.filter(
+            item =>
+                String(item.id) !== String(id)
+        );
+
+
+    updateCounts();
+
+    renderAppointments();
+
+}
+
+
+/* =========================
+   REFRESH
+========================= */
+
+refreshBtn.addEventListener(
+    "click",
+    loadAppointments
+);
 
 
 /* =========================
@@ -1446,118 +2242,65 @@ function getDayLabel(
 
 
 /* =========================
-   DELETE APPOINTMENT
+   HELPERS
 ========================= */
 
-async function deleteAppointment(id){
+function convertPersianDigitsToEnglish(value){
 
-    const appointment =
-        appointments.find(
-            item =>
-                String(item.id) === String(id)
+    return String(value)
+
+        .replace(
+            /۰/g,
+            "0"
+        )
+
+        .replace(
+            /۱/g,
+            "1"
+        )
+
+        .replace(
+            /۲/g,
+            "2"
+        )
+
+        .replace(
+            /۳/g,
+            "3"
+        )
+
+        .replace(
+            /۴/g,
+            "4"
+        )
+
+        .replace(
+            /۵/g,
+            "5"
+        )
+
+        .replace(
+            /۶/g,
+            "6"
+        )
+
+        .replace(
+            /۷/g,
+            "7"
+        )
+
+        .replace(
+            /۸/g,
+            "8"
+        )
+
+        .replace(
+            /۹/g,
+            "9"
         );
-
-
-    if(!appointment){
-
-        alert(
-            "نوبت موردنظر پیدا نشد."
-        );
-
-        return;
-    }
-
-
-    const customerName =
-        appointment.name ||
-        "این مشتری";
-
-
-    const confirmed =
-        confirm(
-            `آیا مطمئن هستید نوبت «${customerName}» حذف شود؟`
-        );
-
-
-    if(!confirmed){
-
-        return;
-    }
-
-
-    const deleteButtons =
-        document.querySelectorAll(
-            ".delete-btn"
-        );
-
-
-    deleteButtons.forEach(
-        button => {
-
-            button.disabled = true;
-
-        }
-    );
-
-
-    const {
-        error
-    } =
-        await supabaseClient
-            .from("appointments")
-            .delete()
-            .eq("id",id);
-
-
-    if(error){
-
-        console.error(error);
-
-
-        deleteButtons.forEach(
-            button => {
-
-                button.disabled = false;
-
-            }
-        );
-
-
-        alert(
-            "حذف نوبت انجام نشد."
-        );
-
-        return;
-    }
-
-
-    appointments =
-        appointments.filter(
-            item =>
-                String(item.id) !== String(id)
-        );
-
-
-    updateCounts();
-
-    renderAppointments();
 
 }
 
-
-/* =========================
-   REFRESH
-========================= */
-
-refreshBtn.addEventListener(
-    "click",
-    loadAppointments
-);
-
-
-/* =========================
-   SECURITY
-========================= */
 
 function escapeHtml(value){
 
@@ -1590,10 +2333,6 @@ function escapeHtml(value){
 
 }
 
-
-/* =========================
-   PERSIAN NUMBERS
-========================= */
 
 function toPersianDigits(value){
 
