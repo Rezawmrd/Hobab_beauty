@@ -192,7 +192,7 @@
                 </h3>
 
                 <p>
-                 اصلاح ابرو و اصلاح صورت
+                    اصلاح ابرو و اصلاح صورت
                 </p>
 
             </div>
@@ -327,7 +327,7 @@
 
 
         <p>
-            خدمت، تاریخ و ساعت مورد نظر خود را انتخاب کنید
+            خدمت، تاریخ و نوبت مورد نظر خود را انتخاب کنید
         </p>
 
     </div>
@@ -440,49 +440,28 @@
 
 
             <h3>
-                انتخاب ساعت
+                انتخاب نوبت
             </h3>
 
 
-            
+            <div class="time-grid">
+
+                <button
+                    type="button"
+                    data-time="morning"
+                >
+                    نوبت صبح
+                </button>
 
 
-                <div class="time-grid">
+                <button
+                    type="button"
+                    data-time="afternoon"
+                >
+                    نوبت عصر
+                </button>
 
-    <button type="button" data-time="09:00">09:00</button>
-    <button type="button" data-time="09:30">09:30</button>
-
-    <button type="button" data-time="10:00">10:00</button>
-    <button type="button" data-time="10:30">10:30</button>
-
-    <button type="button" data-time="11:00">11:00</button>
-    <button type="button" data-time="11:30">11:30</button>
-
-    <button type="button" data-time="12:00">12:00</button>
-    <button type="button" data-time="12:30">12:30</button>
-
-    <button type="button" data-time="13:00">13:00</button>
-    <button type="button" data-time="13:30">13:30</button>
-
-    <button type="button" data-time="14:00">14:00</button>
-    <button type="button" data-time="14:30">14:30</button>
-
-    <button type="button" data-time="15:00">15:00</button>
-    <button type="button" data-time="15:30">15:30</button>
-
-    <button type="button" data-time="16:00">16:00</button>
-    <button type="button" data-time="16:30">16:30</button>
-
-    <button type="button" data-time="17:00">17:00</button>
-    <button type="button" data-time="17:30">17:30</button>
-
-    <button type="button" data-time="18:00">18:00</button>
-    <button type="button" data-time="18:30">18:30</button>
-
-    <button type="button" data-time="19:00">19:00</button>
-    <button type="button" data-time="19:30">19:30</button>
-
-</div>
+            </div>
 
         </div>
 
@@ -604,7 +583,8 @@
 
 <!-- Main JavaScript -->
 
- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>   
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="script.js"></script>
 
 
@@ -642,8 +622,8 @@ window.addEventListener("load", function () {
 
 });
 </script>
-    
-    
+
+
 </body>
 
 </html>
