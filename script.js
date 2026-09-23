@@ -1643,13 +1643,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     createBookingMessage(
 
-                        true,
+                        createBookingMessage(
 
-                        "درخواست رزرو شما با موفقیت ثبت شد.<br><br>" +
-                        "به‌زودی با شما تماس می‌گیریم و پس از هماهنگی، ساعت دقیق نوبت را به شما اطلاع می‌دهیم.<br><br>" +
-                        "HOBAB BEAUTY"
+    true,
 
-                    );
+    "به‌زودی با شما تماس می‌گیریم و پس از هماهنگی، ساعت دقیق نوبت را به شما اطلاع می‌دهیم.<br><br>" +
+    "HOBAB BEAUTY"
+
+);
 
 
                     /* =========================
