@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    /* =========================
+       SUPABASE
+    ========================= */
+
     const SUPABASE_URL =
         "https://oeadtawmcbzblkmfqmbd.supabase.co";
 
@@ -13,65 +17,53 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-    /* =========================================================
-       SERVICES
-    ========================================================= */
+    /* =========================
+       SERVICES ACCORDION
+    ========================= */
 
-    const servicesButton =
-        document.querySelector(".services-toggle");
+    const servicesToggle =
+        document.getElementById("servicesToggle");
 
     const servicesContent =
-        document.querySelector(".services-content");
+        document.getElementById("servicesContent");
 
-    if (servicesButton && servicesContent) {
+    if (servicesToggle && servicesContent) {
 
-        servicesButton.addEventListener("click", function () {
+        servicesToggle.addEventListener("click", function () {
 
+            servicesToggle.classList.toggle("active");
             servicesContent.classList.toggle("open");
-            servicesButton.classList.toggle("active");
 
-            const opened =
-                servicesContent.classList.contains("open");
-
-            servicesButton.setAttribute(
-                "aria-expanded",
-                opened ? "true" : "false"
-            );
         });
+
     }
 
 
-    /* =========================================================
-       BRIDAL
-    ========================================================= */
+    /* =========================
+       BRIDAL ACCORDION
+    ========================= */
 
-    const bridalButton =
-        document.querySelector(".bridal-toggle");
+    const bridalToggle =
+        document.getElementById("bridalToggle");
 
     const bridalContent =
-        document.querySelector(".bridal-content");
+        document.getElementById("bridalContent");
 
-    if (bridalButton && bridalContent) {
+    if (bridalToggle && bridalContent) {
 
-        bridalButton.addEventListener("click", function () {
+        bridalToggle.addEventListener("click", function () {
 
+            bridalToggle.classList.toggle("active");
             bridalContent.classList.toggle("open");
-            bridalButton.classList.toggle("active");
 
-            const opened =
-                bridalContent.classList.contains("open");
-
-            bridalButton.setAttribute(
-                "aria-expanded",
-                opened ? "true" : "false"
-            );
         });
+
     }
 
 
-    /* =========================================================
-       FORM
-    ========================================================= */
+    /* =========================
+       FORM ELEMENTS
+    ========================= */
 
     const serviceInput =
         document.getElementById("service");
@@ -89,103 +81,90 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("phone");
 
     const bookingButton =
-        document.querySelector(".booking-button");
+        document.getElementById("bookingButton");
 
     const timeButtons =
         document.querySelectorAll(".time-grid button");
 
 
+    /* =========================
+       SELECTED TIME
+    ========================= */
+
     let selectedTime = null;
-    let bookedTimes = new Set();
 
 
-    /* =========================================================
-       CONVERT PERSIAN / ARABIC DIGITS TO ENGLISH
-    ========================================================= */
+    /* =========================
+       DIGIT CONVERSION
+    ========================= */
 
     function convertDigitsToEnglish(value) {
 
-        return String(value)
+        if (!value) return value;
+
+        return value
             .replace(/[۰-۹]/g, function (digit) {
-
-                return "۰۱۲۳۴۵۶۷۸۹".indexOf(digit);
-
+                return String(
+                    "۰۱۲۳۴۵۶۷۸۹".indexOf(digit)
+                );
             })
             .replace(/[٠-٩]/g, function (digit) {
-
-                return "٠١٢٣٤٥٦٧٨٩".indexOf(digit);
-
+                return String(
+                    "٠١٢٣٤٥٦٧٨٩".indexOf(digit)
+                );
             });
     }
 
 
-    /* =========================================================
+    /* =========================
        RESET TIME BUTTONS
-    ========================================================= */
+    ========================= */
 
     function resetTimeButtons() {
 
+        selectedTime = null;
+
         timeButtons.forEach(function (button) {
+
+            button.classList.remove("selected");
+            button.classList.remove("active");
 
             button.disabled = false;
 
-            button.classList.remove(
-                "booked",
-                "selected",
-                "passed"
-            );
-
-            button.removeAttribute(
-                "aria-disabled"
-            );
-
-            button.removeAttribute(
-                "data-booked-count"
-            );
         });
 
-        selectedTime = null;
-        bookedTimes = new Set();
     }
 
 
-    /* =========================================================
+    /* =========================
        TIME BUTTONS
-    ========================================================= */
+    ========================= */
 
     timeButtons.forEach(function (button) {
 
         button.addEventListener("click", function () {
 
-            if (button.disabled) {
-                return;
-            }
-
             timeButtons.forEach(function (item) {
 
-                item.classList.remove(
-                    "selected"
-                );
+                item.classList.remove("selected");
+                item.classList.remove("active");
+
             });
 
-            button.classList.add(
-                "selected"
-            );
+            button.classList.add("selected");
+            button.classList.add("active");
 
             selectedTime =
                 button.dataset.time;
+
         });
+
     });
 
 
-    /* =========================================================
+    /* =========================
        JALALI CALENDAR
-    ========================================================= */
-
-    if (!dateInput) {
-        return;
-    }
-
+    ========================= */
 
     const monthNames = [
         "فروردین",
@@ -202,7 +181,6 @@ document.addEventListener("DOMContentLoaded", function () {
         "اسفند"
     ];
 
-
     const weekDays = [
         "ش",
         "ی",
@@ -214,14 +192,22 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
 
-    function div(a, b) {
-        return Math.floor(a / b);
+    function div(className) {
+
+        const element =
+            document.createElement("div");
+
+        if (className) {
+            element.className = className;
+        }
+
+        return element;
     }
 
 
-    /* =========================================================
+    /* =========================
        GREGORIAN → JALALI
-    ========================================================= */
+    ========================= */
 
     function gregorianToJalali(
         gy,
@@ -229,41 +215,79 @@ document.addEventListener("DOMContentLoaded", function () {
         gd
     ) {
 
-        const gdm = [
-            0, 31, 59, 90, 120, 151,
-            181, 212, 243, 273, 304, 334
+        const g_d_m = [
+            0,
+            31,
+            59,
+            90,
+            120,
+            151,
+            181,
+            212,
+            243,
+            273,
+            304,
+            334
         ];
 
-        let gy2 =
-            gm > 2 ? gy + 1 : gy;
+        let jy;
+
+        if (gy > 1600) {
+
+            jy = 979;
+
+            gy -= 1600;
+
+        } else {
+
+            jy = 0;
+
+            gy -= 621;
+
+        }
+
+        const gy2 =
+            gm > 2
+                ? gy + 1
+                : gy;
 
         let days =
-            355666 +
-            (365 * gy) +
-            div(gy2 + 3, 4) -
-            div(gy2 + 99, 100) +
-            div(gy2 + 399, 400) +
+            365 * gy +
+            Math.floor(
+                (gy2 + 3) / 4
+            ) -
+            Math.floor(
+                (gy2 + 99) / 100
+            ) +
+            Math.floor(
+                (gy2 + 399) / 400
+            ) -
+            80 +
             gd +
-            gdm[gm - 1];
+            g_d_m[gm - 1];
 
-        let jy =
-            -1595 +
-            (33 * div(days, 12053));
+        jy +=
+            33 *
+            Math.floor(days / 12053);
 
         days %= 12053;
 
         jy +=
-            4 * div(days, 1461);
+            4 *
+            Math.floor(days / 1461);
 
         days %= 1461;
 
         if (days > 365) {
 
             jy +=
-                div(days - 1, 365);
+                Math.floor(
+                    (days - 1) / 365
+                );
 
             days =
                 (days - 1) % 365;
+
         }
 
         let jm;
@@ -271,43 +295,39 @@ document.addEventListener("DOMContentLoaded", function () {
         if (days < 186) {
 
             jm =
-                1 + div(days, 31);
+                1 +
+                Math.floor(days / 31);
 
         } else {
 
             jm =
-                7 + div(
-                    days - 186,
-                    30
+                7 +
+                Math.floor(
+                    (days - 186) / 30
                 );
+
         }
 
-        let jd;
+        const jd =
+            1 +
+            (
+                days < 186
+                    ? days % 31
+                    : (days - 186) % 30
+            );
 
-        if (days < 186) {
+        return [
+            jy,
+            jm,
+            jd
+        ];
 
-            jd =
-                1 + (days % 31);
-
-        } else {
-
-            jd =
-                1 + (
-                    (days - 186) % 30
-                );
-        }
-
-        return {
-            year: jy,
-            month: jm,
-            day: jd
-        };
     }
 
 
-    /* =========================================================
+    /* =========================
        JALALI → GREGORIAN
-    ========================================================= */
+    ========================= */
 
     function jalaliToGregorian(
         jy,
@@ -315,16 +335,14 @@ document.addEventListener("DOMContentLoaded", function () {
         jd
     ) {
 
-        let jy2 =
-            jy + 1595;
+        jy += 1595;
 
         let days =
             -355668 +
-            (365 * jy2) +
-            (div(jy2, 33) * 8) +
-            div(
-                (jy2 % 33) + 3,
-                4
+            365 * jy +
+            Math.floor(jy / 33) * 8 +
+            Math.floor(
+                ((jy % 33) + 3) / 4
             ) +
             jd;
 
@@ -336,76 +354,64 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
 
             days +=
-                ((jm - 7) * 30) +
+                (jm - 7) * 30 +
                 186;
+
         }
 
         let gy =
             400 *
-            div(
-                days,
-                146097
-            );
+            Math.floor(days / 146097);
 
-        days %=
-            146097;
+        days %= 146097;
 
         if (days > 36524) {
 
             gy +=
                 100 *
-                div(
-                    --days,
-                    36524
+                Math.floor(
+                    --days / 36524
                 );
 
-            days %=
-                36524;
+            days %= 36524;
 
             if (days >= 365) {
                 days++;
             }
+
         }
 
         gy +=
             4 *
-            div(
-                days,
-                1461
-            );
+            Math.floor(days / 1461);
 
-        days %=
-            1461;
+        days %= 1461;
 
         if (days > 365) {
 
             gy +=
-                div(
-                    days - 1,
-                    365
+                Math.floor(
+                    (days - 1) / 365
                 );
 
             days =
                 (days - 1) % 365;
+
         }
 
-        let gd =
+        const gd =
             days + 1;
 
-
-        const leap =
+        const sal_a = [
+            0,
+            31,
             (
                 gy % 4 === 0 &&
                 gy % 100 !== 0
             ) ||
-            (
-                gy % 400 === 0
-            );
-
-
-        const monthDays = [
-            31,
-            leap ? 29 : 28,
+            gy % 400 === 0
+                ? 29
+                : 28,
             31,
             30,
             31,
@@ -418,313 +424,73 @@ document.addEventListener("DOMContentLoaded", function () {
             31
         ];
 
-
-        let gm = 1;
-
+        let gm = 0;
+        let dayCount = 0;
 
         while (
-            gd >
-            monthDays[gm - 1]
+            gm < 13 &&
+            dayCount + sal_a[gm] < gd
         ) {
 
-            gd -=
-                monthDays[gm - 1];
+            dayCount +=
+                sal_a[gm];
 
             gm++;
+
         }
 
+        return [
+            gy,
+            gm,
+            gd - dayCount
+        ];
 
-        return {
-            year: gy,
-            month: gm,
-            day: gd
-        };
     }
 
 
-    /* =========================================================
-       GET TODAY — IRAN
-    ========================================================= */
+    /* =========================
+       IRAN TODAY
+    ========================= */
 
     function getIranTodayJalali() {
 
-        const parts =
-            new Intl.DateTimeFormat(
-                "en-US",
-                {
-                    timeZone: "Asia/Tehran",
-                    year: "numeric",
-                    month: "numeric",
-                    day: "numeric"
-                }
-            ).formatToParts(new Date());
-
-
-        let year = 0;
-        let month = 0;
-        let day = 0;
-
-
-        parts.forEach(function (part) {
-
-            if (part.type === "year") {
-                year = Number(part.value);
-            }
-
-            if (part.type === "month") {
-                month = Number(part.value);
-            }
-
-            if (part.type === "day") {
-                day = Number(part.value);
-            }
-        });
-
-
-        return gregorianToJalali(
-            year,
-            month,
-            day
-        );
-    }
-
-
-    /* =========================================================
-       LOCK PASSED TIMES — IRAN TIME
-    ========================================================= */
-
-    function lockPassedTimes() {
-
-        if (!dateInput) {
-            return;
-        }
-
-
-        const selectedDate =
-            convertDigitsToEnglish(
-                dateInput.value || ""
-            ).trim();
-
-
-        if (!selectedDate) {
-            return;
-        }
-
-
-        /* -----------------------------------------
-           خواندن مستقیم تاریخ انتخاب‌شده
-        ----------------------------------------- */
-
-        const match =
-            selectedDate.match(
-                /^(\d{4})\/(\d{1,2})\/(\d{1,2})$/
-            );
-
-
-        if (!match) {
-            return;
-        }
-
-
-        const selectedYear =
-            Number(match[1]);
-
-
-        const selectedMonth =
-            Number(match[2]);
-
-
-        const selectedDay =
-            Number(match[3]);
-
-
-        /* -----------------------------------------
-           تاریخ امروز ایران
-        ----------------------------------------- */
-
-        const iranToday =
-            getIranTodayJalali();
-
-
-        const isToday =
-            selectedYear === iranToday.year &&
-            selectedMonth === iranToday.month &&
-            selectedDay === iranToday.day;
-
-
-        /* -----------------------------------------
-           اگر تاریخ امروز نیست
-        ----------------------------------------- */
-
-        if (!isToday) {
-
-            timeButtons.forEach(function (button) {
-
-                if (
-                    button.classList.contains("booked")
-                ) {
-                    return;
-                }
-
-
-                button.disabled = false;
-
-
-                button.classList.remove(
-                    "passed"
-                );
-
-
-                button.removeAttribute(
-                    "aria-disabled"
-                );
-            });
-
-
-            return;
-        }
-
-
-        /* -----------------------------------------
-           ساعت فعلی ایران
-        ----------------------------------------- */
+        const now =
+            new Date();
 
         const iranTime =
-            new Intl.DateTimeFormat(
-                "en-GB",
-                {
-                    timeZone: "Asia/Tehran",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    hour12: false
-                }
-            ).format(new Date());
+            new Date(
+                now.toLocaleString(
+                    "en-US",
+                    {
+                        timeZone:
+                            "Asia/Tehran"
+                    }
+                )
+            );
 
+        return gregorianToJalali(
+            iranTime.getFullYear(),
+            iranTime.getMonth() + 1,
+            iranTime.getDate()
+        );
 
-        const timeParts =
-            iranTime.split(":");
-
-
-        const currentHour =
-            Number(timeParts[0]);
-
-
-        const currentMinute =
-            Number(timeParts[1]);
-
-
-        const currentTotalMinutes =
-            (currentHour * 60) +
-            currentMinute;
-
-
-        /* -----------------------------------------
-           بررسی تمام ساعت‌ها
-        ----------------------------------------- */
-
-        timeButtons.forEach(function (button) {
-
-            const time =
-                button.dataset.time;
-
-
-            if (!time) {
-                return;
-            }
-
-
-            /* ظرفیت کامل را دست نزن */
-            if (
-                button.classList.contains("booked")
-            ) {
-                return;
-            }
-
-
-            const parts =
-                time.split(":");
-
-
-            const hour =
-                Number(parts[0]);
-
-
-            const minute =
-                Number(parts[1]);
-
-
-            const buttonTotalMinutes =
-                (hour * 60) +
-                minute;
-
-
-            /* -------------------------------------
-               ساعت گذشته
-            ------------------------------------- */
-
-            if (
-                buttonTotalMinutes <
-                currentTotalMinutes
-            ) {
-
-                button.disabled = true;
-
-
-                button.classList.add(
-                    "passed"
-                );
-
-
-                button.classList.remove(
-                    "selected"
-                );
-
-
-                button.setAttribute(
-                    "aria-disabled",
-                    "true"
-                );
-
-
-                if (
-                    selectedTime === time
-                ) {
-
-                    selectedTime = null;
-                }
-
-
-            } else {
-
-                /* ---------------------------------
-                   ساعت آینده
-                --------------------------------- */
-
-                button.disabled = false;
-
-
-                button.classList.remove(
-                    "passed"
-                );
-
-
-                button.removeAttribute(
-                    "aria-disabled"
-                );
-            }
-        });
     }
 
+
+    /* =========================
+       TODAY
+    ========================= */
 
     function getTodayJalali() {
 
         return getIranTodayJalali();
+
     }
 
 
-    /* =========================================================
-       JALALI MONTH DAYS
-    ========================================================= */
+    /* =========================
+       DAYS IN JALALI MONTH
+    ========================= */
 
     function daysInJalaliMonth(
         year,
@@ -732,250 +498,228 @@ document.addEventListener("DOMContentLoaded", function () {
     ) {
 
         if (month <= 6) {
-            return 31;
-        }
 
+            return 31;
+
+        }
 
         if (month <= 11) {
+
             return 30;
+
         }
 
-
         const nextYear =
-            jalaliToGregorian(
-                year + 1,
-                1,
-                1
-            );
+            year + 1;
 
-
-        const currentYear =
+        const current =
             jalaliToGregorian(
                 year,
+                12,
+                29
+            );
+
+        const next =
+            jalaliToGregorian(
+                nextYear,
                 1,
                 1
             );
 
-
-        const difference =
-            Math.round(
-                (
-                    new Date(
-                        nextYear.year,
-                        nextYear.month - 1,
-                        nextYear.day
-                    ) -
-                    new Date(
-                        currentYear.year,
-                        currentYear.month - 1,
-                        currentYear.day
-                    )
-                ) /
-                86400000
-            );
-
-
-        return difference === 366
+        return (
+            next[2] === 1 &&
+            next[1] === 1
+        )
             ? 30
             : 29;
+
     }
 
 
-    /* =========================================================
-       TODAY
-    ========================================================= */
-
-    const today =
-        getTodayJalali();
-
-
-    let currentYear =
-        today.year;
-
-
-    let currentMonth =
-        today.month;
-
-
-    let selectedDate =
-        null;
-
-
-    /* =========================================================
-       CALENDAR
-    ========================================================= */
+    /* =========================
+       CALENDAR ELEMENTS
+    ========================= */
 
     const calendarOverlay =
         document.createElement("div");
 
-
     calendarOverlay.className =
-        "jalali-calendar-overlay";
-
+        "calendar-overlay";
 
     calendarOverlay.innerHTML = `
-        <div class="jalali-calendar">
 
-            <div class="jalali-calendar-header">
+        <div class="calendar-box">
 
-                <button
-                    type="button"
-                    class="jalali-close"
-                >
-                    ×
-                </button>
-
-                <div class="jalali-title">
-                    انتخاب تاریخ
-                </div>
+            <div class="calendar-header">
 
                 <button
                     type="button"
-                    class="jalali-today"
-                >
-                    امروز
-                </button>
-
-            </div>
-
-
-            <div class="jalali-navigation">
-
-                <button
-                    type="button"
-                    class="jalali-next"
+                    class="calendar-prev"
                 >
                     ‹
                 </button>
 
-                <div class="jalali-month-title"></div>
+                <div
+                    class="calendar-title"
+                ></div>
 
                 <button
                     type="button"
-                    class="jalali-prev"
+                    class="calendar-next"
                 >
                     ›
                 </button>
 
             </div>
 
+            <div
+                class="calendar-weekdays"
+            ></div>
 
-            <div class="jalali-weekdays">
+            <div
+                class="calendar-days"
+            ></div>
 
-                ${weekDays.map(function(day) {
-
-                    return `<span>${day}</span>`;
-
-                }).join("")}
-
-            </div>
-
-
-            <div class="jalali-days"></div>
+            <button
+                type="button"
+                class="calendar-today"
+            >
+                امروز
+            </button>
 
         </div>
-    `;
 
+    `;
 
     document.body.appendChild(
         calendarOverlay
     );
 
 
-    const calendar =
+    const calendarTitle =
         calendarOverlay.querySelector(
-            ".jalali-calendar"
+            ".calendar-title"
+        );
+
+    const calendarDays =
+        calendarOverlay.querySelector(
+            ".calendar-days"
+        );
+
+    const calendarWeekdays =
+        calendarOverlay.querySelector(
+            ".calendar-weekdays"
+        );
+
+    const calendarPrev =
+        calendarOverlay.querySelector(
+            ".calendar-prev"
+        );
+
+    const calendarNext =
+        calendarOverlay.querySelector(
+            ".calendar-next"
+        );
+
+    const calendarToday =
+        calendarOverlay.querySelector(
+            ".calendar-today"
         );
 
 
-    const daysContainer =
-        calendarOverlay.querySelector(
-            ".jalali-days"
+    weekDays.forEach(function (day) {
+
+        const element =
+            document.createElement("div");
+
+        element.textContent = day;
+
+        calendarWeekdays.appendChild(
+            element
         );
 
-
-    const monthTitle =
-        calendarOverlay.querySelector(
-            ".jalali-month-title"
-        );
+    });
 
 
-    const title =
-        calendarOverlay.querySelector(
-            ".jalali-title"
-        );
+    let calendarYear;
+    let calendarMonth;
 
+
+    /* =========================
+       CALENDAR RENDER
+    ========================= */
 
     function renderCalendar() {
 
-        monthTitle.textContent =
-            `${monthNames[currentMonth - 1]} ${currentYear}`;
+        calendarTitle.textContent =
+            `${monthNames[calendarMonth - 1]} ${calendarYear}`;
 
+        calendarDays.innerHTML = "";
 
-        title.textContent =
-            "انتخاب تاریخ";
-
-
-        daysContainer.innerHTML =
-            "";
-
-
-        const firstDay =
+        const firstDayGregorian =
             jalaliToGregorian(
-                currentYear,
-                currentMonth,
+                calendarYear,
+                calendarMonth,
                 1
             );
 
-
         const firstDate =
             new Date(
-                firstDay.year,
-                firstDay.month - 1,
-                firstDay.day
+                firstDayGregorian[0],
+                firstDayGregorian[1] - 1,
+                firstDayGregorian[2]
             );
 
-
-        let weekDay =
+        let startDay =
             firstDate.getDay();
 
+        /*
+          JS:
+          Sunday = 0
+          Monday = 1
+          ...
+          Saturday = 6
 
-        weekDay =
-            (weekDay + 1) % 7;
+          Persian calendar starts Saturday.
+        */
+
+        startDay =
+            (startDay + 1) % 7;
 
 
         for (
             let i = 0;
-            i < weekDay;
+            i < startDay;
             i++
         ) {
 
             const empty =
-                document.createElement(
-                    "span"
-                );
-
+                document.createElement("div");
 
             empty.className =
-                "jalali-empty";
+                "calendar-empty";
 
-
-            daysContainer.appendChild(
+            calendarDays.appendChild(
                 empty
             );
+
         }
 
 
-        const totalDays =
+        const days =
             daysInJalaliMonth(
-                currentYear,
-                currentMonth
+                calendarYear,
+                calendarMonth
             );
+
+
+        const today =
+            getTodayJalali();
 
 
         for (
             let day = 1;
-            day <= totalDays;
+            day <= days;
             day++
         ) {
 
@@ -984,136 +728,206 @@ document.addEventListener("DOMContentLoaded", function () {
                     "button"
                 );
 
-
             button.type =
                 "button";
-
 
             button.textContent =
                 day;
 
+            button.className =
+                "calendar-day";
+
 
             if (
-                currentYear === today.year &&
-                currentMonth === today.month &&
-                day === today.day
+                calendarYear === today[0] &&
+                calendarMonth === today[1] &&
+                day === today[2]
             ) {
 
                 button.classList.add(
                     "today"
                 );
+
             }
 
 
-            if (
-                selectedDate &&
-                selectedDate.year === currentYear &&
-                selectedDate.month === currentMonth &&
-                selectedDate.day === day
-            ) {
+            /*
+              گذشته را غیرفعال می‌کنیم
+            */
+
+            const isPast =
+                calendarYear < today[0] ||
+                (
+                    calendarYear === today[0] &&
+                    calendarMonth < today[1]
+                ) ||
+                (
+                    calendarYear === today[0] &&
+                    calendarMonth === today[1] &&
+                    day < today[2]
+                );
+
+
+            if (isPast) {
+
+                button.disabled = true;
 
                 button.classList.add(
-                    "selected"
+                    "disabled"
                 );
+
             }
 
 
             button.addEventListener(
                 "click",
-                async function () {
-
-                    selectedDate = {
-
-                        year:
-                            currentYear,
-
-                        month:
-                            currentMonth,
-
-                        day:
-                            day
-                    };
-
+                function () {
 
                     const formattedDate =
-                        `${currentYear}/${String(currentMonth).padStart(2, "0")}/${String(day).padStart(2, "0")}`;
-
+                        `${calendarYear}/${String(calendarMonth).padStart(2, "0")}/${String(day).padStart(2, "0")}`;
 
                     dateInput.value =
                         formattedDate;
 
-
-                    closeCalendar();
-
-
-                    renderCalendar();
-
+                    calendarOverlay.classList.remove(
+                        "open"
+                    );
 
                     resetTimeButtons();
 
-
-                    const service =
-                        serviceInput
-                            ? serviceInput.value.trim()
-                            : "";
-
-
-                    if (service) {
-
-                        await loadBookedTimes(
-                            service,
-                            formattedDate
-                        );
-
-                    } else {
-
-                        lockPassedTimes();
-                    }
                 }
             );
 
 
-            daysContainer.appendChild(
+            calendarDays.appendChild(
                 button
             );
+
         }
+
     }
 
 
-    function openCalendar() {
+    /* =========================
+       OPEN CALENDAR
+    ========================= */
 
-        renderCalendar();
+    if (dateInput) {
 
+        dateInput.addEventListener(
+            "click",
+            function () {
 
-        calendarOverlay.classList.add(
-            "open"
+                const current =
+                    dateInput.value;
+
+                if (current) {
+
+                    const parts =
+                        current.split("/");
+
+                    calendarYear =
+                        parseInt(parts[0]);
+
+                    calendarMonth =
+                        parseInt(parts[1]);
+
+                } else {
+
+                    const today =
+                        getTodayJalali();
+
+                    calendarYear =
+                        today[0];
+
+                    calendarMonth =
+                        today[1];
+
+                }
+
+                renderCalendar();
+
+                calendarOverlay.classList.add(
+                    "open"
+                );
+
+            }
         );
 
-
-        document.body.classList.add(
-            "calendar-open"
-        );
     }
 
 
-    function closeCalendar() {
+    /* =========================
+       CALENDAR NAVIGATION
+    ========================= */
 
-        calendarOverlay.classList.remove(
-            "open"
-        );
-
-
-        document.body.classList.remove(
-            "calendar-open"
-        );
-    }
-
-
-    dateInput.addEventListener(
+    calendarPrev.addEventListener(
         "click",
-        openCalendar
+        function () {
+
+            calendarMonth--;
+
+            if (calendarMonth < 1) {
+
+                calendarMonth = 12;
+                calendarYear--;
+
+            }
+
+            renderCalendar();
+
+        }
     );
 
+
+    calendarNext.addEventListener(
+        "click",
+        function () {
+
+            calendarMonth++;
+
+            if (calendarMonth > 12) {
+
+                calendarMonth = 1;
+                calendarYear++;
+
+            }
+
+            renderCalendar();
+
+        }
+    );
+
+
+    calendarToday.addEventListener(
+        "click",
+        function () {
+
+            const today =
+                getTodayJalali();
+
+            calendarYear =
+                today[0];
+
+            calendarMonth =
+                today[1];
+
+            dateInput.value =
+                `${today[0]}/${String(today[1]).padStart(2, "0")}/${String(today[2]).padStart(2, "0")}`;
+
+            calendarOverlay.classList.remove(
+                "open"
+            );
+
+            resetTimeButtons();
+
+        }
+    );
+
+
+    /* =========================
+       CLOSE CALENDAR
+    ========================= */
 
     calendarOverlay.addEventListener(
         "click",
@@ -1124,578 +938,141 @@ document.addEventListener("DOMContentLoaded", function () {
                 calendarOverlay
             ) {
 
-                closeCalendar();
+                calendarOverlay.classList.remove(
+                    "open"
+                );
+
             }
+
         }
     );
 
 
-    calendar
-        .querySelector(
-            ".jalali-close"
-        )
-        .addEventListener(
-            "click",
-            closeCalendar
-        );
-
-
-    calendar
-        .querySelector(
-            ".jalali-today"
-        )
-        .addEventListener(
-            "click",
-            function () {
-
-                currentYear =
-                    today.year;
-
-                currentMonth =
-                    today.month;
-
-                renderCalendar();
-            }
-        );
-
-
-    calendar
-        .querySelector(
-            ".jalali-prev"
-        )
-        .addEventListener(
-            "click",
-            function () {
-
-                currentMonth--;
-
-
-                if (
-                    currentMonth < 1
-                ) {
-
-                    currentMonth =
-                        12;
-
-                    currentYear--;
-                }
-
-
-                renderCalendar();
-            }
-        );
-
-
-    calendar
-        .querySelector(
-            ".jalali-next"
-        )
-        .addEventListener(
-            "click",
-            function () {
-
-                currentMonth++;
-
-
-                if (
-                    currentMonth > 12
-                ) {
-
-                    currentMonth =
-                        1;
-
-                    currentYear++;
-                }
-
-
-                renderCalendar();
-            }
-        );
-
-
-    /* =========================================================
-       LOAD BOOKED TIMES
-       CAPACITY = 3
-    ========================================================= */
-
-    async function loadBookedTimes(
-        service,
-        date,
-        preserveSelectedTime = false
-    ) {
-
-        const previousSelectedTime =
-            selectedTime;
-
-
-        bookedTimes =
-            new Set();
-
-
-        timeButtons.forEach(function (button) {
-
-            button.disabled = false;
-
-
-            button.classList.remove(
-                "booked",
-                "selected",
-                "passed"
-            );
-
-
-            button.removeAttribute(
-                "aria-disabled"
-            );
-
-
-            button.removeAttribute(
-                "data-booked-count"
-            );
-        });
-
-
-        if (!preserveSelectedTime) {
-            selectedTime = null;
-        }
-
-
-        if (!service || !date) {
-
-            lockPassedTimes();
-
-            return;
-        }
-
-
-        try {
-
-            const result =
-                await supabaseClient
-                    .rpc(
-                        "get_booked_times",
-                        {
-                            p_service:
-                                service,
-
-                            p_date:
-                                date
-                        }
-                    );
-
-
-            if (result.error) {
-
-                console.error(
-                    "Booked times error:",
-                    result.error
-                );
-
-
-                lockPassedTimes();
-
-                return;
-            }
-
-
-            const rows =
-                result.data || [];
-
-
-            rows.forEach(function (row) {
-
-                const time =
-                    row.booked_time;
-
-
-                const count =
-                    Number(
-                        row.booked_count || 0
-                    );
-
-
-                if (!time) {
-                    return;
-                }
-
-
-                /* ظرفیت کامل = 3 نفر */
-
-                if (count >= 3) {
-
-                    bookedTimes.add(time);
-
-
-                    const button =
-                        Array.from(
-                            timeButtons
-                        ).find(function (item) {
-
-                            return (
-                                item.dataset.time ===
-                                time
-                            );
-
-                        });
-
-
-                    if (button) {
-
-                        button.disabled = true;
-
-
-                        button.classList.add(
-                            "booked"
-                        );
-
-
-                        button.setAttribute(
-                            "aria-disabled",
-                            "true"
-                        );
-
-
-                        button.setAttribute(
-                            "data-booked-count",
-                            "3"
-                        );
-                    }
-
-                } else {
-
-                    const button =
-                        Array.from(
-                            timeButtons
-                        ).find(function (item) {
-
-                            return (
-                                item.dataset.time ===
-                                time
-                            );
-
-                        });
-
-
-                    if (button) {
-
-                        button.setAttribute(
-                            "data-booked-count",
-                            String(count)
-                        );
-                    }
-                }
-            });
-
-
-            /* =================================================
-               RESTORE SELECTED TIME
-            ================================================= */
-
-            if (
-                preserveSelectedTime &&
-                previousSelectedTime &&
-                !bookedTimes.has(
-                    previousSelectedTime
-                )
-            ) {
-
-                const selectedButton =
-                    Array.from(
-                        timeButtons
-                    ).find(function (button) {
-
-                        return (
-                            button.dataset.time ===
-                            previousSelectedTime
-                        );
-                    });
-
-
-                if (selectedButton) {
-
-                    selectedButton.classList.add(
-                        "selected"
-                    );
-
-
-                    selectedTime =
-                        previousSelectedTime;
-                }
-            }
-
-
-            /* =================================================
-               SELECTED TIME WAS JUST FILLED
-            ================================================= */
-
-            if (
-                preserveSelectedTime &&
-                previousSelectedTime &&
-                bookedTimes.has(
-                    previousSelectedTime
-                )
-            ) {
-
-                selectedTime = null;
-            }
-
-
-            /* =================================================
-               LOCK PASSED TIMES
-            ================================================= */
-
-            lockPassedTimes();
-
-
-        } catch (error) {
-
-            console.error(
-                "Load booked times error:",
-                error
-            );
-
-
-            lockPassedTimes();
-        }
-    }
-
-
-    /* =========================================================
+    /* =========================
        SERVICE CHANGE
-    ========================================================= */
+    ========================= */
 
     if (serviceInput) {
 
         serviceInput.addEventListener(
             "change",
-            async function () {
+            function () {
 
                 resetTimeButtons();
 
-
-                const service =
-                    serviceInput.value.trim();
-
-
-                const date =
-                    dateInput
-                        ? dateInput.value.trim()
-                        : "";
-
-
-                if (
-                    service &&
-                    date
-                ) {
-
-                    await loadBookedTimes(
-                        service,
-                        date
-                    );
-
-                } else {
-
-                    lockPassedTimes();
-                }
             }
         );
+
     }
 
 
-    /* =========================================================
+    /* =========================
        BOOKING MESSAGE
-    ========================================================= */
+    ========================= */
 
     function createBookingMessage() {
 
-        let overlay =
-            document.querySelector(
-                ".booking-message-overlay"
-            );
+        const modal =
+            document.createElement("div");
 
-
-        if (overlay) {
-            return overlay;
-        }
-
-
-        overlay =
-            document.createElement(
-                "div"
-            );
-
-
-        overlay.className =
+        modal.className =
             "booking-message-overlay";
 
+        modal.innerHTML = `
 
-        overlay.innerHTML = `
-            <div class="booking-message-card">
+            <div class="booking-message-box">
 
-                <div class="booking-message-icon">
+                <div
+                    class="booking-message-icon"
+                >
                     ✓
                 </div>
 
-                <h3 class="booking-message-title">
-                    رزرو با موفقیت ثبت شد
+                <h3>
+                    رزرو با موفقیت انجام شد
                 </h3>
 
-                <p class="booking-message-text"></p>
+                <p>
+                    نوبت شما ثبت شد.
+                    لطفاً در زمان تعیین‌شده
+                    در سالن حضور داشته باشید.
+                </p>
 
                 <button
                     type="button"
                     class="booking-message-close"
                 >
-                    متوجه شدم
+                    باشه
                 </button>
 
             </div>
+
         `;
 
-
         document.body.appendChild(
-            overlay
+            modal
         );
 
+        return modal;
 
-        overlay
-            .querySelector(
+    }
+
+
+    function closeBookingMessage(
+        modal
+    ) {
+
+        if (!modal) return;
+
+        modal.remove();
+
+    }
+
+
+    function showBookingMessage() {
+
+        const modal =
+            createBookingMessage();
+
+        const closeButton =
+            modal.querySelector(
                 ".booking-message-close"
-            )
-            .addEventListener(
-                "click",
-                closeBookingMessage
             );
 
+        closeButton.addEventListener(
+            "click",
+            function () {
 
-        overlay.addEventListener(
+                closeBookingMessage(
+                    modal
+                );
+
+            }
+        );
+
+        modal.addEventListener(
             "click",
             function (event) {
 
                 if (
-                    event.target ===
-                    overlay
+                    event.target === modal
                 ) {
 
-                    closeBookingMessage();
+                    closeBookingMessage(
+                        modal
+                    );
+
                 }
+
             }
         );
 
-
-        return overlay;
     }
 
 
-    function closeBookingMessage() {
-
-        const overlay =
-            document.querySelector(
-                ".booking-message-overlay"
-            );
-
-
-        if (!overlay) {
-            return;
-        }
-
-
-        overlay.classList.remove(
-            "open"
-        );
-
-
-        document.body.classList.remove(
-            "booking-message-open"
-        );
-    }
-
-
-    function showBookingMessage(
-        message,
-        type = "success"
-    ) {
-
-        const overlay =
-            createBookingMessage();
-
-
-        const icon =
-            overlay.querySelector(
-                ".booking-message-icon"
-            );
-
-
-        const messageTitle =
-            overlay.querySelector(
-                ".booking-message-title"
-            );
-
-
-        const messageText =
-            overlay.querySelector(
-                ".booking-message-text"
-            );
-
-
-        if (type === "success") {
-
-            icon.textContent =
-                "✓";
-
-
-            messageTitle.textContent =
-                "رزرو با موفقیت ثبت شد";
-
-
-            messageText.textContent =
-                "درخواست نوبت شما با موفقیت ثبت شد. اطلاعات شما در سیستم ذخیره گردید.";
-
-        } else {
-
-            icon.textContent =
-                "!";
-
-
-            messageTitle.textContent =
-                "ثبت رزرو انجام نشد";
-
-
-            messageText.textContent =
-                message;
-        }
-
-
-        overlay.classList.remove(
-            "success",
-            "error"
-        );
-
-
-        overlay.classList.add(
-            type
-        );
-
-
-        document.body.classList.add(
-            "booking-message-open"
-        );
-
-
-        requestAnimationFrame(
-            function () {
-
-                overlay.classList.add(
-                    "open"
-                );
-            }
-        );
-    }
-
-
-    /* =========================================================
+    /* =========================
        ESC
-    ========================================================= */
+    ========================= */
 
     document.addEventListener(
         "keydown",
@@ -1705,16 +1082,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 event.key === "Escape"
             ) {
 
-                closeCalendar();
-                closeBookingMessage();
+                calendarOverlay.classList.remove(
+                    "open"
+                );
+
             }
+
         }
     );
 
 
-    /* =========================================================
-       BOOKING
-    ========================================================= */
+    /* =========================
+       BOOKING SUBMIT
+    ========================= */
 
     if (bookingButton) {
 
@@ -1727,24 +1107,22 @@ document.addEventListener("DOMContentLoaded", function () {
                         ? serviceInput.value.trim()
                         : "";
 
-
                 const date =
                     dateInput
-                        ? dateInput.value.trim()
+                        ? convertDigitsToEnglish(
+                            dateInput.value.trim()
+                        )
                         : "";
-
 
                 const description =
                     descriptionInput
                         ? descriptionInput.value.trim()
                         : "";
 
-
                 const name =
                     nameInput
                         ? nameInput.value.trim()
                         : "";
-
 
                 const phone =
                     phoneInput
@@ -1752,288 +1130,219 @@ document.addEventListener("DOMContentLoaded", function () {
                         : "";
 
 
-                /* VALIDATION */
+                /* =====================
+                   VALIDATION
+                ===================== */
 
                 if (!service) {
 
-                    showBookingMessage(
-                        "لطفاً خدمت موردنظر خود را انتخاب کنید.",
-                        "error"
+                    alert(
+                        "لطفاً خدمت مورد نظر را انتخاب کنید."
                     );
 
-
-                    if (serviceInput) {
-                        serviceInput.focus();
-                    }
-
-
                     return;
+
                 }
 
 
                 if (!date) {
 
-                    showBookingMessage(
-                        "لطفاً تاریخ موردنظر خود را انتخاب کنید.",
-                        "error"
+                    alert(
+                        "لطفاً تاریخ مورد نظر را انتخاب کنید."
                     );
 
-
-                    if (dateInput) {
-                        dateInput.focus();
-                    }
-
-
                     return;
+
                 }
 
 
                 if (!selectedTime) {
 
-                    showBookingMessage(
-                        "لطفاً ساعت موردنظر خود را انتخاب کنید.",
-                        "error"
+                    alert(
+                        "لطفاً نوبت صبح یا عصر را انتخاب کنید."
                     );
 
-
                     return;
+
                 }
 
-
-                const timeToBook =
-                    selectedTime;
-
-
-                /* DESCRIPTION */
 
                 if (!description) {
 
-                    showBookingMessage(
-                        "لطفاً توضیحات خود را در مورد خدمات موردنظر بنویسید.",
-                        "error"
+                    alert(
+                        "لطفاً توضیحات مورد نیاز را وارد کنید."
                     );
 
-
-                    if (descriptionInput) {
-                        descriptionInput.focus();
-                    }
-
-
                     return;
+
                 }
 
-
-                /* NAME */
 
                 if (!name) {
 
-                    showBookingMessage(
-                        "لطفاً نام و نام خانوادگی خود را وارد کنید.",
-                        "error"
+                    alert(
+                        "لطفاً نام و نام خانوادگی را وارد کنید."
                     );
 
-
-                    if (nameInput) {
-                        nameInput.focus();
-                    }
-
-
                     return;
+
                 }
 
-
-                /* PHONE */
 
                 if (!phone) {
 
-                    showBookingMessage(
-                        "لطفاً شماره تماس خود را وارد کنید.",
-                        "error"
+                    alert(
+                        "لطفاً شماره موبایل را وارد کنید."
                     );
 
-
-                    if (phoneInput) {
-                        phoneInput.focus();
-                    }
-
-
                     return;
+
                 }
 
 
-                /* =================================================
-                   PHONE NORMALIZATION
-                ================================================= */
-
                 const cleanPhone =
-                    convertDigitsToEnglish(phone)
-                        .replace(
-                            /[\s\-()]/g,
-                            ""
-                        );
+                    convertDigitsToEnglish(
+                        phone
+                    ).replace(
+                        /\s+/g,
+                        ""
+                    );
 
 
                 if (
                     cleanPhone.length < 10
                 ) {
 
-                    showBookingMessage(
-                        "لطفاً یک شماره تماس معتبر وارد کنید.",
-                        "error"
+                    alert(
+                        "لطفاً شماره موبایل صحیح وارد کنید."
                     );
 
-
-                    if (phoneInput) {
-                        phoneInput.focus();
-                    }
-
-
                     return;
+
                 }
 
 
-                /* =================================================
-                   DISABLE BUTTON
-                ================================================= */
-
-                bookingButton.disabled =
-                    true;
-
+                /* =====================
+                   BUTTON LOADING
+                ===================== */
 
                 const originalText =
                     bookingButton.textContent;
 
+                bookingButton.disabled =
+                    true;
 
                 bookingButton.textContent =
-                    "در حال ثبت درخواست...";
+                    "در حال ثبت رزرو...";
 
 
                 try {
 
-                    /* =================================================
-                       ثبت رزرو از طریق RPC
-                       ظرفیت حداکثر 3 نفر
-                    ================================================= */
+                    /* =================
+                       DATABASE
+                    ================= */
 
-                    const result =
-                        await supabaseClient
-                            .rpc(
-                                "create_appointment",
-                                {
-                                    p_service:
-                                        service,
+                    const {
+                        data,
+                        error
+                    } =
+                        await supabaseClient.rpc(
+                            "create_appointment",
+                            {
+                                p_service:
+                                    service,
 
-                                    p_date:
-                                        date,
+                                p_date:
+                                    date,
 
-                                    p_time:
-                                        timeToBook,
+                                p_time:
+                                    selectedTime,
 
-                                    p_description:
-                                        description,
+                                p_description:
+                                    description,
 
-                                    p_name:
-                                        name,
+                                p_name:
+                                    name,
 
-                                    p_phone:
-                                        cleanPhone
-                                }
-                            );
+                                p_phone:
+                                    cleanPhone
+                            }
+                        );
 
 
-                    if (result.error) {
+                    if (error) {
 
                         console.error(
-                            "Create appointment error:",
-                            result.error
+                            "Supabase error:",
+                            error
                         );
 
-
-                        showBookingMessage(
-                            "ثبت رزرو انجام نشد. لطفاً دوباره تلاش کنید.",
-                            "error"
+                        alert(
+                            "ثبت رزرو انجام نشد. لطفاً دوباره تلاش کنید."
                         );
-
 
                         return;
+
                     }
 
-
-                    const response =
-                        result.data;
-
-
-                    /* =================================================
-                       ظرفیت پر شده
-                    ================================================= */
 
                     if (
-                        response &&
-                        response.success === false
+                        data &&
+                        data.success === false
                     ) {
 
-                        await loadBookedTimes(
-                            service,
-                            date,
-                            false
+                        alert(
+                            data.message ||
+                            "ثبت رزرو انجام نشد."
                         );
-
-
-                        showBookingMessage(
-                            response.message ||
-                            "این ساعت ظرفیت کامل دارد. لطفاً ساعت دیگری انتخاب کنید.",
-                            "error"
-                        );
-
 
                         return;
+
                     }
 
 
-                    /* =================================================
+                    /* =================
                        SUCCESS
-                    ================================================= */
+                    ================= */
 
-                    showBookingMessage(
-                        "",
-                        "success"
-                    );
+                    showBookingMessage();
 
+
+                    /* =================
+                       RESET FORM
+                    ================= */
 
                     if (serviceInput) {
-                        serviceInput.value = "";
-                    }
 
+                        serviceInput.value = "";
+
+                    }
 
                     if (dateInput) {
-                        dateInput.value = "";
-                    }
 
+                        dateInput.value = "";
+
+                    }
 
                     if (descriptionInput) {
-                        descriptionInput.value = "";
-                    }
 
+                        descriptionInput.value = "";
+
+                    }
 
                     if (nameInput) {
-                        nameInput.value = "";
-                    }
 
+                        nameInput.value = "";
+
+                    }
 
                     if (phoneInput) {
+
                         phoneInput.value = "";
+
                     }
 
-
                     resetTimeButtons();
-
-
-                    selectedDate =
-                        null;
-
-
-                    bookedTimes =
-                        new Set();
 
 
                 } catch (error) {
@@ -2043,47 +1352,30 @@ document.addEventListener("DOMContentLoaded", function () {
                         error
                     );
 
-
-                    showBookingMessage(
-                        "خطایی هنگام ثبت درخواست رخ داد. لطفاً دوباره تلاش کنید.",
-                        "error"
+                    alert(
+                        "خطایی در ثبت رزرو رخ داد. لطفاً دوباره تلاش کنید."
                     );
-
 
                 } finally {
 
                     bookingButton.disabled =
                         false;
 
-
                     bookingButton.textContent =
                         originalText;
+
                 }
+
             }
         );
+
     }
 
 
-    /* =========================================================
-       AUTO LOCK PASSED TIMES
-       هر 30 ثانیه ساعت ایران بررسی می‌شود
-    ========================================================= */
+    /* =========================
+       INITIAL STATE
+    ========================= */
 
-    setInterval(function () {
-
-        lockPassedTimes();
-
-    }, 30000);
-
-
-    /* =========================================================
-       INITIAL CHECK
-    ========================================================= */
-
-    setTimeout(function () {
-
-        lockPassedTimes();
-
-    }, 500);
+    resetTimeButtons();
 
 });
