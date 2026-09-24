@@ -227,6 +227,7 @@ body{
     0%,100%{
         box-shadow:0 0 0 4px rgba(229,57,53,.10);
     }
+
     50%{
         box-shadow:0 0 0 8px rgba(229,57,53,.20);
     }
@@ -294,37 +295,6 @@ body{
     border-radius:22px;
     padding:15px;
     margin-bottom:20px;
-}
-
-.search-row{
-    display:flex;
-    gap:10px;
-    margin-bottom:12px;
-}
-
-.search-input{
-    flex:1;
-    height:46px;
-    border:1px solid #dfced1;
-    border-radius:13px;
-    padding:0 14px;
-    font-family:inherit;
-    outline:none;
-    background:#fff;
-}
-
-.search-input:focus{
-    border-color:#b77b7f;
-}
-
-.date-input{
-    height:46px;
-    border:1px solid #dfced1;
-    border-radius:13px;
-    padding:0 12px;
-    font-family:inherit;
-    outline:none;
-    background:#fff;
 }
 
 .filter-row{
@@ -410,6 +380,7 @@ body{
     0%,100%{
         transform:scale(1);
     }
+
     50%{
         transform:scale(1.08);
     }
@@ -880,14 +851,6 @@ body{
         font-size:20px;
     }
 
-    .search-row{
-        flex-direction:column;
-    }
-
-    .date-input{
-        width:100%;
-    }
-
     .card-info{
         grid-template-columns:1fr 1fr;
     }
@@ -908,6 +871,7 @@ body{
         padding:7px 10px;
         font-size:10px;
     }
+
 }
 
 </style>
@@ -1106,25 +1070,6 @@ body{
 
         <div class="filter-box">
 
-            <div class="search-row">
-
-                <input
-                    type="text"
-                    id="searchInput"
-                    class="search-input"
-                    placeholder="جستجو بر اساس نام یا شماره موبایل..."
-                >
-
-                <input
-                    type="text"
-                    id="dateFilter"
-                    class="date-input"
-                    placeholder="تاریخ"
-                >
-
-            </div>
-
-
             <div class="filter-row">
 
                 <button
@@ -1254,8 +1199,6 @@ body{
 
         <div class="time-picker">
 
-            <!-- HOUR -->
-
             <div class="time-column">
 
                 <div class="time-label">
@@ -1284,8 +1227,6 @@ body{
                 :
             </div>
 
-
-            <!-- MINUTE -->
 
             <div class="time-column">
 
@@ -1463,8 +1404,6 @@ let currentServiceFilter = "all";
 
 let refreshTimer = null;
 
-let previousNewAppointmentIds = new Set();
-
 
 /* =========================================================
    ELEMENTS
@@ -1484,12 +1423,6 @@ const loginError =
 
 const logoutButton =
     document.getElementById("logoutButton");
-
-const searchInput =
-    document.getElementById("searchInput");
-
-const dateFilter =
-    document.getElementById("dateFilter");
 
 const appointmentsContainer =
     document.getElementById("appointmentsContainer");
@@ -1552,6 +1485,7 @@ function showToast(message){
         toast.classList.remove("show");
 
     },3000);
+
 }
 
 
@@ -1631,10 +1565,15 @@ loginButton.addEventListener(
     async function(){
 
         const email =
-            document.getElementById("loginEmail").value.trim();
+            document
+                .getElementById("loginEmail")
+                .value
+                .trim();
 
         const password =
-            document.getElementById("loginPassword").value;
+            document
+                .getElementById("loginPassword")
+                .value;
 
         loginError.style.display =
             "none";
@@ -1840,11 +1779,6 @@ async function silentRefresh(){
         );
 
 
-    /*
-       اگر رزرو جدیدی اضافه شده باشد،
-       اعلان را نمایش می‌دهیم.
-    */
-
     let brandNewFound = false;
 
 
@@ -1872,10 +1806,6 @@ async function silentRefresh(){
             "یک رزرو جدید ثبت شد"
         );
 
-        /*
-           صدای کوتاه مرورگر
-           در صورت اجازه مرورگر
-        */
 
         try{
 
@@ -1943,11 +1873,6 @@ function updateStats(){
 
 function updateNewNotifications(){
 
-    /*
-       هر رزروی که confirmed=false باشد
-       به عنوان رزرو جدید/در انتظار در نظر گرفته می‌شود.
-    */
-
     const newAppointments =
         appointments.filter(
             a => !a.confirmed
@@ -1975,10 +1900,6 @@ function updateNewNotifications(){
 
     }
 
-
-    /*
-       تعداد رزروهای جدید هر خدمت
-    */
 
     document
         .querySelectorAll(".service-tab")
@@ -2059,6 +1980,7 @@ alertButton.addEventListener(
         currentStatusFilter =
             "pending";
 
+
         document
             .querySelectorAll(
                 ".filter-button"
@@ -2089,9 +2011,13 @@ alertButton.addEventListener(
 
         renderAppointments();
 
+
         window.scrollTo({
+
             top:0,
+
             behavior:"smooth"
+
         });
 
     }
@@ -2183,26 +2109,6 @@ document
 
 
 /* =========================================================
-   SEARCH
-========================================================= */
-
-searchInput.addEventListener(
-    "input",
-    renderAppointments
-);
-
-
-/* =========================================================
-   DATE FILTER
-========================================================= */
-
-dateFilter.addEventListener(
-    "input",
-    renderAppointments
-);
-
-
-/* =========================================================
    RENDER APPOINTMENTS
 ========================================================= */
 
@@ -2212,9 +2118,7 @@ function renderAppointments(){
         [...appointments];
 
 
-    /*
-       SERVICE
-    */
+    /* SERVICE */
 
     if(
         currentServiceFilter !==
@@ -2231,9 +2135,7 @@ function renderAppointments(){
     }
 
 
-    /*
-       STATUS
-    */
+    /* STATUS */
 
     if(
         currentStatusFilter ===
@@ -2261,65 +2163,6 @@ function renderAppointments(){
     }
 
 
-    /*
-       SEARCH
-    */
-
-    const search =
-        searchInput.value
-            .trim()
-            .toLowerCase();
-
-
-    if(search){
-
-        filtered =
-            filtered.filter(
-                a =>
-
-                String(
-                    a.name || ""
-                )
-                .toLowerCase()
-                .includes(search)
-
-                ||
-
-                String(
-                    a.phone || ""
-                )
-                .toLowerCase()
-                .includes(search)
-
-            );
-
-    }
-
-
-    /*
-       DATE
-    */
-
-    const dateSearch =
-        dateFilter.value
-            .trim();
-
-
-    if(dateSearch){
-
-        filtered =
-            filtered.filter(
-                a =>
-                String(
-                    a.date || ""
-                ).includes(
-                    dateSearch
-                )
-            );
-
-    }
-
-
     if(filtered.length === 0){
 
         appointmentsContainer.innerHTML = `
@@ -2341,9 +2184,7 @@ function renderAppointments(){
     }
 
 
-    /*
-       GROUP BY DATE
-    */
+    /* GROUP BY DATE */
 
     const groups = {};
 
@@ -3117,7 +2958,7 @@ function updateSelectedTime(){
 
 
 function initializeTimePicker(
-currentTime
+    currentTime
 ){
 
     let hour =
@@ -3147,11 +2988,6 @@ currentTime
 
     }
 
-
-    /*
-       اگر دقیقه غیر از 00/30 بود،
-       نزدیک‌ترین مقدار را انتخاب می‌کنیم.
-    */
 
     if(
         minute !== "00" &&
@@ -3585,11 +3421,6 @@ function formatDate(date){
     }
 
 
-    /*
-       اگر تاریخ از قبل فارسی باشد
-       همان را نمایش می‌دهیم.
-    */
-
     return toPersianNumber(
         String(date)
     );
@@ -3604,46 +3435,16 @@ function formatDate(date){
 function toPersianNumber(value){
 
     return String(value)
-        .replace(
-            /0/g,
-            "۰"
-        )
-        .replace(
-            /1/g,
-            "۱"
-        )
-        .replace(
-            /2/g,
-            "۲"
-        )
-        .replace(
-            /3/g,
-            "۳"
-        )
-        .replace(
-            /4/g,
-            "۴"
-        )
-        .replace(
-            /5/g,
-            "۵"
-        )
-        .replace(
-            /6/g,
-            "۶"
-        )
-        .replace(
-            /7/g,
-            "۷"
-        )
-        .replace(
-            /8/g,
-            "۸"
-        )
-        .replace(
-            /9/g,
-            "۹"
-        );
+        .replace(/0/g,"۰")
+        .replace(/1/g,"۱")
+        .replace(/2/g,"۲")
+        .replace(/3/g,"۳")
+        .replace(/4/g,"۴")
+        .replace(/5/g,"۵")
+        .replace(/6/g,"۶")
+        .replace(/7/g,"۷")
+        .replace(/8/g,"۸")
+        .replace(/9/g,"۹");
 
 }
 
@@ -3657,26 +3458,11 @@ function escapeHtml(value){
     return String(
         value ?? ""
     )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
-    );
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
