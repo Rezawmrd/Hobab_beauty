@@ -38,6 +38,7 @@ button{
     cursor:pointer;
 }
 
+
 /* =========================
    LOGIN
 ========================= */
@@ -122,6 +123,7 @@ button{
     min-height:18px;
 }
 
+
 /* =========================
    DASHBOARD
 ========================= */
@@ -162,6 +164,7 @@ button{
     border-radius:11px;
     font-size:13px;
 }
+
 
 /* =========================
    NEW BOOKING ALERT
@@ -209,6 +212,7 @@ button{
     font-size:12px;
 }
 
+
 /* =========================
    STATS
 ========================= */
@@ -240,8 +244,9 @@ button{
     margin-top:5px;
 }
 
+
 /* =========================
-   DAY FILTER
+   SIMPLE DAY NAVIGATION
 ========================= */
 
 .section-title{
@@ -250,51 +255,68 @@ button{
     margin:0 0 10px;
 }
 
-.day-scroller{
-    display:flex;
+.day-navigation{
+    display:grid;
+    grid-template-columns:48px 1fr 48px;
     gap:8px;
-    overflow-x:auto;
-    padding:3px 2px 10px;
-    margin-bottom:15px;
-    scrollbar-width:none;
+    align-items:stretch;
+    margin-bottom:10px;
 }
 
-.day-scroller::-webkit-scrollbar{
-    display:none;
+.day-nav-button{
+    border:1px solid rgba(79,108,84,.25);
+    background:#fff;
+    color:#4f6c54;
+    border-radius:13px;
+    font-size:22px;
+    min-height:58px;
 }
 
-.day-button{
-    flex:0 0 auto;
+.day-nav-button:hover{
+    background:#eef5ef;
+}
+
+.current-day{
     border:1px solid rgba(79,108,84,.28);
     background:#fff;
-    color:#5e4a4d;
-    border-radius:12px;
-    padding:10px 14px;
-    min-width:82px;
-    font-size:12px;
-    transition:.2s;
+    border-radius:13px;
+    min-height:58px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    padding:7px;
 }
 
-.day-button small{
-    display:block;
+.current-day-label{
+    font-size:14px;
+    font-weight:bold;
+    color:#4f6c54;
+}
+
+.current-day-date{
     margin-top:4px;
-    color:#9a888a;
-    font-size:10px;
+    font-size:11px;
+    color:#8c7a7d;
 }
 
-.day-button.active{
-    background:#4f6c54;
-    border-color:#4f6c54;
+.all-days-button{
+    width:100%;
+    border:1px solid rgba(183,123,127,.30);
+    background:white;
+    color:#8e5e63;
+    border-radius:11px;
+    padding:10px;
+    font-size:12px;
+    margin-bottom:15px;
+}
+
+.all-days-button.active{
+    background:#b77b7f;
     color:white;
-}
-
-.day-button.active small{
-    color:rgba(255,255,255,.8);
-}
-
-.day-button.today{
     border-color:#b77b7f;
 }
+
 
 /* =========================
    STATUS FILTER
@@ -327,6 +349,7 @@ button{
     color:white;
     border-color:#b77b7f;
 }
+
 
 /* =========================
    SERVICE TABS
@@ -383,6 +406,7 @@ button{
     display:block;
 }
 
+
 /* =========================
    DATE GROUP
 ========================= */
@@ -417,6 +441,7 @@ button{
     font-size:10px;
     color:#6d5b5f;
 }
+
 
 /* =========================
    APPOINTMENT CARD
@@ -523,6 +548,7 @@ button{
     font-weight:bold;
 }
 
+
 /* =========================
    ACTIONS
 ========================= */
@@ -556,6 +582,7 @@ button{
     color:#a44852;
 }
 
+
 /* =========================
    EMPTY
 ========================= */
@@ -576,6 +603,7 @@ button{
     margin-bottom:7px;
 }
 
+
 /* =========================
    LOADING
 ========================= */
@@ -586,6 +614,7 @@ button{
     color:#8c7a7d;
     font-size:13px;
 }
+
 
 /* =========================
    MODAL
@@ -697,6 +726,7 @@ button{
     color:#8e5e63;
 }
 
+
 /* =========================
    TOAST
 ========================= */
@@ -722,6 +752,7 @@ button{
     opacity:1;
     transform:translateY(0);
 }
+
 
 /* =========================
    RESPONSIVE
@@ -763,6 +794,36 @@ button{
 
     .actions{
         grid-template-columns:1fr 1fr 1fr;
+    }
+
+    .day-navigation{
+        grid-template-columns:44px 1fr 44px;
+        gap:6px;
+    }
+
+    .day-nav-button{
+        font-size:20px;
+    }
+
+}
+
+
+/* =========================
+   VERY SMALL MOBILE
+========================= */
+
+@media(max-width:380px){
+
+    .current-day-label{
+        font-size:13px;
+    }
+
+    .current-day-date{
+        font-size:10px;
+    }
+
+    .day-navigation{
+        grid-template-columns:40px 1fr 40px;
     }
 
 }
@@ -909,16 +970,55 @@ button{
     </div>
 
 
-    <!-- DAYS -->
+    <!-- DAY NAVIGATION -->
 
     <div class="section-title">
         نمایش نوبت‌ها
     </div>
 
-    <div
-        class="day-scroller"
-        id="dayScroller">
+
+    <div class="day-navigation">
+
+        <button
+            class="day-nav-button"
+            onclick="changeDay(-1)"
+            aria-label="روز قبل">
+            ‹
+        </button>
+
+
+        <div class="current-day">
+
+            <div
+                class="current-day-label"
+                id="currentDayLabel">
+                امروز
+            </div>
+
+            <div
+                class="current-day-date"
+                id="currentDayDate">
+            </div>
+
+        </div>
+
+
+        <button
+            class="day-nav-button"
+            onclick="changeDay(1)"
+            aria-label="روز بعد">
+            ›
+        </button>
+
     </div>
+
+
+    <button
+        class="all-days-button"
+        id="allDaysButton"
+        onclick="showAllDays()">
+        همه نوبت‌ها
+    </button>
 
 
     <!-- STATUS -->
@@ -1030,9 +1130,11 @@ button{
     <!-- APPOINTMENTS -->
 
     <div id="appointmentsContainer">
+
         <div class="loading">
             در حال دریافت نوبت‌ها...
         </div>
+
     </div>
 
 </div>
@@ -1154,6 +1256,8 @@ const supabaseClient =
 ========================= */
 
 let appointments = [];
+
+let selectedDayOffset = 0;
 
 let selectedDay = "today";
 
@@ -1308,120 +1412,144 @@ function getJalaliDate(offset = 0){
 
 
 /* =========================
-   BUILD DAY FILTER
+   UPDATE DAY NAVIGATION
 ========================= */
 
-function buildDayFilter(){
+function updateDayNavigation(){
 
-    const container =
+    const label =
         document.getElementById(
-            "dayScroller"
+            "currentDayLabel"
         );
 
-    container.innerHTML = "";
-
-    const dayNames = [
-        "امروز",
-        "فردا",
-        "پس‌فردا",
-        "۳ روز بعد",
-        "۴ روز بعد",
-        "۵ روز بعد",
-        "۶ روز بعد",
-        "۷ روز بعد"
-    ];
-
-    for(
-        let i = 0;
-        i <= 7;
-        i++
-    ){
-
-        const date =
-            getJalaliDate(i);
-
-        const button =
-            document.createElement("button");
-
-        button.className =
-            "day-button";
-
-        if(i === 0){
-
-            button.classList.add(
-                "today"
-            );
-
-        }
-
-        if(
-            selectedDay ===
-            String(i)
-        ){
-
-            button.classList.add(
-                "active"
-            );
-
-        }
-
-        button.innerHTML = `
-            ${dayNames[i]}
-            <small>
-                ${date.day} ${date.month}
-            </small>
-        `;
-
-        button.onclick =
-            function(){
-
-                selectedDay =
-                    String(i);
-
-                buildDayFilter();
-
-                renderAppointments();
-
-            };
-
-        container.appendChild(button);
-
-    }
-
+    const date =
+        document.getElementById(
+            "currentDayDate"
+        );
 
     const allButton =
-        document.createElement("button");
+        document.getElementById(
+            "allDaysButton"
+        );
 
-    allButton.className =
-        "day-button";
 
     if(selectedDay === "all"){
+
+        label.textContent =
+            "همه نوبت‌ها";
+
+        date.textContent =
+            "تمام تاریخ‌ها";
 
         allButton.classList.add(
             "active"
         );
 
+        return;
+
     }
 
-    allButton.innerHTML = `
-        همه
-        <small>
-            تمام نوبت‌ها
-        </small>
-    `;
 
-    allButton.onclick =
-        function(){
+    allButton.classList.remove(
+        "active"
+    );
 
-            selectedDay = "all";
 
-            buildDayFilter();
+    if(selectedDayOffset === 0){
 
-            renderAppointments();
+        label.textContent =
+            "امروز";
 
-        };
+    }else if(selectedDayOffset === -1){
 
-    container.appendChild(allButton);
+        label.textContent =
+            "روز قبل";
+
+    }else if(selectedDayOffset === 1){
+
+        label.textContent =
+            "روز بعد";
+
+    }else if(selectedDayOffset < 0){
+
+        label.textContent =
+            `${toPersianNumber(
+                Math.abs(selectedDayOffset)
+            )} روز قبل`;
+
+    }else{
+
+        label.textContent =
+            `${toPersianNumber(
+                selectedDayOffset
+            )} روز بعد`;
+
+    }
+
+
+    const jalali =
+        getJalaliDate(
+            selectedDayOffset
+        );
+
+    date.textContent =
+        jalali.text;
+
+}
+
+
+/* =========================
+   CHANGE DAY
+========================= */
+
+function changeDay(direction){
+
+    if(selectedDay === "all"){
+
+        selectedDayOffset = 0;
+
+    }
+
+    selectedDayOffset += direction;
+
+    selectedDay =
+        String(selectedDayOffset);
+
+    updateDayNavigation();
+
+    renderAppointments();
+
+}
+
+
+/* =========================
+   SHOW TODAY
+========================= */
+
+function showToday(){
+
+    selectedDayOffset = 0;
+
+    selectedDay = "today";
+
+    updateDayNavigation();
+
+    renderAppointments();
+
+}
+
+
+/* =========================
+   SHOW ALL DAYS
+========================= */
+
+function showAllDays(){
+
+    selectedDay = "all";
+
+    updateDayNavigation();
+
+    renderAppointments();
 
 }
 
@@ -1525,7 +1653,7 @@ async function showDashboard(){
         .getElementById("dashboard")
         .style.display = "block";
 
-    buildDayFilter();
+    updateDayNavigation();
 
     await loadAppointments();
 
@@ -1977,7 +2105,7 @@ function appointmentMatchesDay(
 
     const target =
         getJalaliDate(
-            Number(selectedDay)
+            selectedDayOffset
         );
 
     return normalizeText(
@@ -2136,7 +2264,7 @@ function renderAppointments(){
 
             const target =
                 getJalaliDate(
-                    Number(selectedDay)
+                    selectedDayOffset
                 );
 
             title =
@@ -3009,7 +3137,7 @@ async function requestNotificationPermission(){
 
 async function init(){
 
-    buildDayFilter();
+    updateDayNavigation();
 
     const {
         data
