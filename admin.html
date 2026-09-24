@@ -1,24 +1,16 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<title>HOBAB BEAUTY | مدیریت</title>
 
-<title>مدیریت نوبت‌ها | HOBAB BEAUTY</title>
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 
 <style>
 
@@ -35,858 +27,681 @@ html{
 body{
     font-family:'Vazirmatn',sans-serif;
     background:#fff8f6;
-    color:#4b3035;
+    color:#432f34;
     min-height:100vh;
 }
 
-
-/* =========================================
-   HEADER
-========================================= */
-
-.admin-header{
-    position:sticky;
-    top:0;
-    z-index:50;
-
-    background:rgba(255,248,246,.92);
-    backdrop-filter:blur(16px);
-
-    border-bottom:1px solid rgba(183,123,127,.18);
-
-    padding:16px;
-}
-
-.header-inner{
-    width:min(1100px,100%);
-    margin:auto;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-}
-
-.logo-area{
-    display:flex;
-    flex-direction:column;
-    gap:2px;
-}
-
-.logo-title{
-    font-size:20px;
-    font-weight:900;
-    letter-spacing:1px;
-    color:#4f6c54;
-}
-
-.logo-subtitle{
-    font-size:11px;
-    color:#9a7c80;
-}
-
-.logout-button{
-    border:1px solid rgba(183,123,127,.3);
-    background:#fff;
-    color:#6d5559;
-
-    border-radius:12px;
-    padding:9px 13px;
-
-    font-family:inherit;
-    font-size:12px;
-    font-weight:700;
-
-    cursor:pointer;
-}
-
-
-/* =========================================
-   MAIN
-========================================= */
-
-.container{
-    width:min(1100px,100%);
-    margin:auto;
-    padding:20px 14px 40px;
-}
-
-
-/* =========================================
+/* =========================
    LOGIN
-========================================= */
+========================= */
 
 .login-screen{
     min-height:100vh;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     padding:20px;
+    background:
+        radial-gradient(circle at top right,rgba(183,123,127,.16),transparent 35%),
+        #fff8f6;
 }
 
-.login-card{
-    width:min(400px,100%);
-
-    background:rgba(255,255,255,.86);
-    border:1px solid rgba(183,123,127,.22);
-
-    border-radius:24px;
-
-    padding:28px 22px;
-
-    box-shadow:0 20px 60px rgba(70,40,45,.10);
-}
-
-.login-title{
-    text-align:center;
-    font-size:24px;
-    font-weight:900;
-    color:#4f6c54;
-    margin-bottom:7px;
-}
-
-.login-subtitle{
-    text-align:center;
-    font-size:12px;
-    color:#8c7478;
-    margin-bottom:24px;
-}
-
-.form-group{
-    margin-bottom:14px;
-}
-
-.form-group label{
-    display:block;
-    margin-bottom:7px;
-
-    font-size:12px;
-    font-weight:700;
-    color:#6d5559;
-}
-
-.form-group input{
+.login-box{
     width:100%;
-
-    height:47px;
-
-    border:1px solid rgba(183,123,127,.25);
-    border-radius:13px;
-
-    background:#fff;
-
-    padding:0 13px;
-
-    font-family:inherit;
-    font-size:14px;
-    color:#4b3035;
-
-    outline:none;
+    max-width:400px;
+    padding:32px 24px;
+    border-radius:28px;
+    background:rgba(255,255,255,.72);
+    border:1px solid rgba(79,108,84,.25);
+    box-shadow:0 20px 60px rgba(85,55,60,.12);
+    backdrop-filter:blur(18px);
+    text-align:center;
 }
 
-.form-group input:focus{
-    border-color:#6fa982;
+.login-logo{
+    width:95px;
+    height:95px;
+    object-fit:contain;
+    margin-bottom:15px;
+}
+
+.login-box h1{
+    font-size:22px;
+    margin-bottom:7px;
+}
+
+.login-box p{
+    font-size:13px;
+    color:#856f74;
+    margin-bottom:25px;
+}
+
+.login-input{
+    width:100%;
+    height:48px;
+    border:1px solid #e4d5d7;
+    border-radius:14px;
+    padding:0 15px;
+    margin-bottom:12px;
+    font-family:inherit;
+    outline:none;
+    background:#fff;
+    color:#432f34;
+}
+
+.login-input:focus{
+    border-color:#b77b7f;
 }
 
 .login-button{
     width:100%;
     height:48px;
-
     border:0;
-    border-radius:13px;
-
+    border-radius:14px;
     background:#4f6c54;
     color:#fff;
-
     font-family:inherit;
-    font-size:14px;
-    font-weight:800;
-
+    font-weight:700;
     cursor:pointer;
 }
 
 .login-error{
-    min-height:20px;
-
-    text-align:center;
-
-    color:#b34d4d;
-
-    font-size:12px;
-
-    margin-top:10px;
-}
-
-
-/* =========================================
-   DASHBOARD
-========================================= */
-
-#dashboard{
+    color:#b32626;
+    font-size:13px;
+    margin-top:12px;
     display:none;
 }
 
-.dashboard-title{
-    margin-bottom:16px;
+/* =========================
+   ADMIN
+========================= */
+
+.admin-app{
+    display:none;
+    min-height:100vh;
 }
 
-.dashboard-title h1{
-    font-size:22px;
-    font-weight:900;
-    color:#4f6c54;
+.topbar{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(255,248,246,.92);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(79,108,84,.16);
 }
 
-.dashboard-title p{
-    margin-top:5px;
+.topbar-inner{
+    max-width:1200px;
+    margin:auto;
+    min-height:72px;
+    padding:12px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.brand-dot{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:#4f6c54;
+}
+
+.brand h1{
+    font-size:18px;
+}
+
+.brand span{
+    display:block;
+    font-size:11px;
+    color:#917b80;
+    margin-top:2px;
+}
+
+.logout-button{
+    border:1px solid #dfcbce;
+    background:#fff;
+    color:#765c62;
+    border-radius:12px;
+    padding:9px 14px;
+    font-family:inherit;
+    cursor:pointer;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.container{
+    width:100%;
+    max-width:1200px;
+    margin:auto;
+    padding:20px 15px 50px;
+}
+
+/* =========================
+   NEW BOOKING ALERT
+========================= */
+
+.new-booking-alert{
+    display:none;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    padding:14px 17px;
+    margin-bottom:18px;
+    border-radius:18px;
+    background:rgba(255,255,255,.9);
+    border:1.5px solid rgba(190,42,42,.25);
+    box-shadow:0 8px 25px rgba(150,50,50,.08);
+}
+
+.new-booking-alert.show{
+    display:flex;
+}
+
+.alert-right{
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.alert-dot{
+    width:13px;
+    height:13px;
+    border-radius:50%;
+    background:#e53935;
+    box-shadow:0 0 0 5px rgba(229,57,53,.12);
+    animation:pulseRed 1.5s infinite;
+    flex-shrink:0;
+}
+
+@keyframes pulseRed{
+    0%,100%{
+        box-shadow:0 0 0 4px rgba(229,57,53,.10);
+    }
+    50%{
+        box-shadow:0 0 0 8px rgba(229,57,53,.20);
+    }
+}
+
+.alert-title{
+    font-weight:700;
+    font-size:14px;
+}
+
+.alert-count{
+    color:#b32626;
     font-size:12px;
-    color:#927a7e;
+    margin-top:2px;
 }
 
+.alert-button{
+    border:0;
+    background:#b32626;
+    color:#fff;
+    border-radius:11px;
+    padding:8px 13px;
+    font-family:inherit;
+    cursor:pointer;
+    white-space:nowrap;
+}
 
-/* =========================================
+/* =========================
    STATS
-========================================= */
+========================= */
 
-.stats-grid{
+.stats{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:10px;
-
+    gap:12px;
     margin-bottom:18px;
 }
 
 .stat-card{
-    background:#fff;
-
-    border:1px solid rgba(183,123,127,.18);
-
-    border-radius:17px;
-
-    padding:15px;
-
-    box-shadow:0 7px 25px rgba(70,40,45,.05);
+    background:rgba(255,255,255,.78);
+    border:1px solid rgba(79,108,84,.16);
+    border-radius:20px;
+    padding:18px;
 }
 
 .stat-label{
-    font-size:11px;
-    color:#927a7e;
-    margin-bottom:5px;
+    font-size:12px;
+    color:#8c777c;
+    margin-bottom:7px;
 }
 
 .stat-number{
-    font-size:23px;
-    font-weight:900;
+    font-size:25px;
+    font-weight:800;
     color:#4f6c54;
 }
 
-
-/* =========================================
+/* =========================
    FILTERS
-========================================= */
+========================= */
 
-.filters-card{
+.filter-box{
+    background:rgba(255,255,255,.76);
+    border:1px solid rgba(79,108,84,.16);
+    border-radius:22px;
+    padding:15px;
+    margin-bottom:20px;
+}
+
+.search-row{
+    display:flex;
+    gap:10px;
+    margin-bottom:12px;
+}
+
+.search-input{
+    flex:1;
+    height:46px;
+    border:1px solid #dfced1;
+    border-radius:13px;
+    padding:0 14px;
+    font-family:inherit;
+    outline:none;
     background:#fff;
+}
 
-    border:1px solid rgba(183,123,127,.18);
+.search-input:focus{
+    border-color:#b77b7f;
+}
 
-    border-radius:18px;
-
-    padding:14px;
-
-    margin-bottom:18px;
-
-    box-shadow:0 7px 25px rgba(70,40,45,.05);
+.date-input{
+    height:46px;
+    border:1px solid #dfced1;
+    border-radius:13px;
+    padding:0 12px;
+    font-family:inherit;
+    outline:none;
+    background:#fff;
 }
 
 .filter-row{
     display:flex;
-    flex-wrap:wrap;
     gap:8px;
-}
-
-.filter-input,
-.filter-select{
-    height:43px;
-
-    border:1px solid rgba(183,123,127,.22);
-
-    border-radius:12px;
-
-    background:#fff;
-
-    padding:0 11px;
-
-    font-family:inherit;
-    font-size:12px;
-
-    color:#5c464a;
-
-    outline:none;
-}
-
-.filter-input{
-    flex:1;
-    min-width:180px;
-}
-
-.filter-select{
-    min-width:150px;
-}
-
-.filter-input:focus,
-.filter-select:focus{
-    border-color:#6fa982;
-}
-
-.filter-buttons{
-    display:flex;
-    gap:7px;
-    margin-top:9px;
+    overflow-x:auto;
+    padding-bottom:2px;
 }
 
 .filter-button{
-    height:38px;
-
-    border:1px solid rgba(79,108,84,.22);
-
-    background:#edf6ef;
-    color:#356b48;
-
-    border-radius:11px;
-
-    padding:0 14px;
-
+    border:1px solid #ddced0;
+    background:#fff;
+    color:#705a60;
+    border-radius:12px;
+    padding:9px 13px;
     font-family:inherit;
-    font-size:11px;
-    font-weight:700;
-
     cursor:pointer;
+    white-space:nowrap;
 }
 
 .filter-button.active{
     background:#4f6c54;
     color:#fff;
+    border-color:#4f6c54;
 }
 
-
-/* =========================================
+/* =========================
    SERVICE TABS
-========================================= */
+========================= */
 
 .service-tabs{
     display:flex;
-    gap:7px;
-
+    gap:8px;
     overflow-x:auto;
-
-    padding-bottom:4px;
-
-    margin-bottom:18px;
-
-    scrollbar-width:none;
-}
-
-.service-tabs::-webkit-scrollbar{
-    display:none;
+    padding:3px 1px 12px;
+    margin-bottom:4px;
 }
 
 .service-tab{
-    flex:0 0 auto;
-
-    border:1px solid rgba(183,123,127,.2);
-
-    background:#fff;
-
-    color:#7d666a;
-
-    border-radius:12px;
-
-    padding:9px 13px;
-
+    position:relative;
+    border:1.5px solid rgba(79,108,84,.35);
+    background:rgba(255,255,255,.75);
+    color:#5d494e;
+    border-radius:14px;
+    padding:10px 16px;
     font-family:inherit;
-    font-size:11px;
-    font-weight:700;
-
     cursor:pointer;
+    white-space:nowrap;
+    transition:.2s;
 }
 
 .service-tab.active{
     background:#4f6c54;
     color:#fff;
-
     border-color:#4f6c54;
 }
 
-
-/* =========================================
-   DAY GROUP
-========================================= */
-
-.day-group{
-    margin-bottom:22px;
+.service-tab.has-new{
+    border-color:#e53935;
 }
 
-.day-group-title{
+.new-badge{
+    position:absolute;
+    top:-7px;
+    left:-7px;
+    min-width:21px;
+    height:21px;
+    padding:0 5px;
+    border-radius:50px;
+    background:#e53935;
+    color:#fff;
+    border:2px solid #fff8f6;
     display:flex;
     align-items:center;
-    justify-content:space-between;
+    justify-content:center;
+    font-size:10px;
+    font-weight:800;
+    box-shadow:0 2px 8px rgba(229,57,53,.25);
+    animation:badgePulse 1.5s infinite;
+}
+
+@keyframes badgePulse{
+    0%,100%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.08);
+    }
+}
+
+/* =========================
+   DATE GROUP
+========================= */
+
+.date-group{
+    margin-bottom:20px;
+}
+
+.date-title{
+    display:flex;
+    align-items:center;
     gap:10px;
-
     margin-bottom:10px;
-
-    padding:13px 15px;
-
-    border-radius:14px;
-
-    background:#e8f5ec;
-
-    color:#356b48;
-
-    font-size:14px;
-    font-weight:700;
-
-    border-right:4px solid #6fa982;
+    font-size:15px;
+    font-weight:800;
+    color:#4f6c54;
 }
 
-.day-count{
-    font-size:11px;
-
-    background:rgba(255,255,255,.7);
-
-    padding:4px 8px;
-
-    border-radius:9px;
+.date-line{
+    flex:1;
+    height:1px;
+    background:rgba(79,108,84,.16);
 }
 
-
-/* =========================================
+/* =========================
    APPOINTMENT CARD
-========================================= */
+========================= */
 
 .appointment-card{
-    background:#fff;
-
-    border:1px solid rgba(183,123,127,.16);
-
-    border-radius:18px;
-
-    padding:15px;
-
-    margin-bottom:10px;
-
-    box-shadow:0 6px 22px rgba(70,40,45,.05);
-
-    transition:.2s ease;
+    background:rgba(255,255,255,.88);
+    border:1px solid rgba(79,108,84,.15);
+    border-radius:20px;
+    padding:16px;
+    margin-bottom:11px;
+    box-shadow:0 7px 25px rgba(78,54,59,.055);
+    position:relative;
+    overflow:hidden;
 }
 
-.appointment-card:hover{
-    transform:translateY(-1px);
-
-    box-shadow:
-        0 10px 28px rgba(70,40,45,.08);
+.appointment-card.is-new{
+    border-right:4px solid #e53935;
 }
 
-.appointment-card.confirmed-card{
-    border-color:rgba(79,108,84,.35);
-
-    background:
-        linear-gradient(
-            135deg,
-            #fff,
-            #f7fcf8
-        );
+.new-label{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    color:#b32626;
+    font-size:11px;
+    font-weight:700;
+    margin-bottom:7px;
 }
 
+.new-label::before{
+    content:"";
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#e53935;
+}
 
-/* top */
-
-.appointment-top{
+.card-top{
     display:flex;
-
     align-items:flex-start;
-
     justify-content:space-between;
-
     gap:10px;
-
-    margin-bottom:12px;
-}
-
-.customer-info{
-    min-width:0;
 }
 
 .customer-name{
     font-size:16px;
-    font-weight:900;
-    color:#4b3035;
-
-    word-break:break-word;
+    font-weight:800;
 }
 
 .customer-phone{
+    font-size:12px;
+    color:#806c72;
+    margin-top:4px;
     direction:ltr;
     text-align:right;
+}
 
-    margin-top:4px;
-
+.service-name{
+    display:inline-block;
+    margin-top:9px;
+    padding:5px 9px;
+    border-radius:9px;
+    background:#fff3f1;
+    color:#9c646a;
     font-size:11px;
-    color:#8d7579;
 }
 
-.appointment-status{
-    flex:0 0 auto;
-
-    border-radius:10px;
-
-    padding:6px 9px;
-
-    font-size:10px;
-    font-weight:800;
-
-    white-space:nowrap;
-}
-
-.appointment-status.pending{
-    background:#fff4df;
-    color:#9a6b1c;
-}
-
-.appointment-status.confirmed{
-    background:#e8f5ec;
-    color:#356b48;
-}
-
-
-/* details */
-
-.appointment-details{
+.card-info{
     display:grid;
-
     grid-template-columns:repeat(2,1fr);
-
     gap:8px;
-
-    margin-bottom:12px;
+    margin-top:13px;
 }
 
-.detail-box{
-    background:#faf6f5;
-
-    border-radius:12px;
-
+.info-item{
+    background:#fffaf9;
+    border-radius:11px;
     padding:9px 10px;
 }
 
-.detail-label{
-    font-size:9px;
-    color:#9b8588;
-
+.info-label{
+    display:block;
+    font-size:10px;
+    color:#a18b90;
     margin-bottom:3px;
 }
 
-.detail-value{
+.info-value{
     font-size:12px;
-    font-weight:700;
-    color:#594247;
-
-    word-break:break-word;
+    font-weight:600;
 }
 
-.detail-value.time-value{
-    color:#356b48;
-    font-size:14px;
+.confirmed-box{
+    margin-top:12px;
+    padding:11px 12px;
+    border-radius:13px;
+    background:rgba(79,108,84,.08);
+    border:1px solid rgba(79,108,84,.20);
 }
 
-
-/* description */
-
-.description-box{
-    background:#fcf8f7;
-
-    border-radius:12px;
-
-    padding:10px;
-
-    margin-bottom:12px;
-}
-
-.description-label{
-    font-size:9px;
-    color:#9b8588;
-
-    margin-bottom:4px;
-}
-
-.description-text{
+.confirmed-title{
+    color:#4f6c54;
     font-size:11px;
-    line-height:1.8;
-    color:#644f53;
-    white-space:pre-wrap;
-    word-break:break-word;
+    font-weight:700;
 }
 
+.confirmed-time{
+    color:#4f6c54;
+    font-size:20px;
+    font-weight:800;
+    margin-top:2px;
+    direction:ltr;
+    text-align:right;
+}
 
-/* actions */
+.description{
+    margin-top:12px;
+    padding:11px 12px;
+    background:#fffaf9;
+    border-radius:12px;
+    font-size:12px;
+    line-height:1.9;
+    color:#69555a;
+}
 
-.appointment-actions{
-    display:grid;
-
-    grid-template-columns:1fr 1fr 1fr;
-
+.card-actions{
+    display:flex;
     gap:7px;
+    margin-top:13px;
 }
 
 .action-button{
+    flex:1;
     min-height:40px;
-
     border-radius:11px;
-
+    border:1px solid #dfced1;
+    background:#fff;
     font-family:inherit;
-
-    font-size:10px;
-
-    font-weight:700;
-
+    font-size:11px;
+    font-weight:600;
     cursor:pointer;
-
-    border:1px solid transparent;
 }
 
 .call-button{
-    background:#edf6ef;
-    color:#356b48;
-
-    border-color:rgba(79,108,84,.18);
+    color:#4f6c54;
+    border-color:rgba(79,108,84,.30);
 }
 
 .confirm-button{
-    background:#f7eceb;
-    color:#9a6268;
-
-    border-color:rgba(183,123,127,.2);
-}
-
-.confirmed-action{
-    background:#e8f5ec;
-    color:#356b48;
-
-    border-color:rgba(79,108,84,.2);
+    color:#4f6c54;
+    border-color:rgba(79,108,84,.40);
+    background:rgba(79,108,84,.06);
 }
 
 .delete-button{
-    background:#fff2f2;
-    color:#b34d4d;
-
-    border-color:rgba(179,77,77,.14);
+    color:#b32626;
+    border-color:rgba(179,38,38,.20);
 }
 
-.action-button:active{
-    transform:scale(.98);
-}
+/* =========================
+   EMPTY
+========================= */
 
-
-/* =========================================
-   EMPTY / LOADING
-========================================= */
-
-.loading-box,
-.empty-box{
-    background:#fff;
-
-    border:1px solid rgba(183,123,127,.16);
-
-    border-radius:18px;
-
-    padding:35px 20px;
-
+.empty-state{
     text-align:center;
-
-    color:#90777b;
-
-    font-size:13px;
+    padding:45px 20px;
+    color:#927d82;
+    background:rgba(255,255,255,.55);
+    border-radius:20px;
+    border:1px dashed #decfd1;
 }
 
-.loading-box{
-    color:#4f6c54;
+.empty-state strong{
+    display:block;
+    color:#68545a;
+    margin-bottom:5px;
 }
 
-
-/* =========================================
-   MODAL OVERLAY
-========================================= */
+/* =========================
+   MODALS
+========================= */
 
 .modal-overlay{
     position:fixed;
-
     inset:0;
-
-    z-index:200;
-
+    z-index:100;
+    background:rgba(50,35,39,.48);
+    backdrop-filter:blur(6px);
     display:none;
-
     align-items:center;
     justify-content:center;
-
     padding:18px;
-
-    background:rgba(53,38,40,.48);
-
-    backdrop-filter:blur(7px);
 }
 
-.modal-overlay.active{
+.modal-overlay.show{
     display:flex;
 }
 
-
-/* =========================================
-   CONFIRM MODAL
-========================================= */
-
-.confirm-modal{
-    width:min(420px,92vw);
-
-    background:#fffdfc;
-
-    border-radius:24px;
-
-    padding:24px 20px 20px;
-
-    box-shadow:
-        0 25px 70px rgba(60,35,35,.22);
-
-    border:1px solid rgba(183,123,127,.22);
-
-    animation:confirmModalIn .25s ease;
+.modal{
+    width:100%;
+    max-width:430px;
+    background:#fffaf9;
+    border-radius:26px;
+    padding:22px;
+    box-shadow:0 25px 70px rgba(0,0,0,.18);
+    max-height:90vh;
+    overflow-y:auto;
 }
 
-@keyframes confirmModalIn{
-
-    from{
-        opacity:0;
-        transform:translateY(15px) scale(.97);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0) scale(1);
-    }
-
-}
-
-.modal-title{
-    text-align:center;
-
-    font-size:20px;
-    font-weight:800;
-
-    color:#51363a;
-
+.modal h2{
+    font-size:18px;
     margin-bottom:7px;
 }
 
 .modal-subtitle{
-    text-align:center;
-
-    font-size:13px;
-
-    color:#8b7275;
-
+    font-size:12px;
+    color:#8c777c;
     margin-bottom:20px;
 }
 
-.modal-customer{
-    text-align:center;
-
-    background:#f8f0ee;
-
-    border-radius:14px;
-
-    padding:11px 12px;
-
-    color:#5a4145;
-
-    font-size:14px;
-
-    font-weight:700;
-
-    margin-bottom:20px;
-}
-
-
-/* =========================================
+/* =========================
    TIME PICKER
-========================================= */
-
-.time-picker-title{
-    text-align:center;
-
-    font-size:13px;
-
-    color:#80696d;
-
-    margin-bottom:12px;
-}
+========================= */
 
 .time-picker{
     display:flex;
-
-    justify-content:center;
-
     align-items:center;
-
-    gap:12px;
-
+    justify-content:center;
+    gap:13px;
     direction:ltr;
+    margin:5px 0 15px;
 }
 
 .time-column{
-    width:92px;
-
-    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 
 .time-label{
-    font-size:12px;
-
-    color:#8a7276;
-
-    margin-bottom:7px;
-
-    direction:rtl;
+    font-size:11px;
+    color:#927c82;
+    margin-bottom:6px;
 }
 
 .wheel-wrapper{
+    width:105px;
+    height:155px;
     position:relative;
-
-    height:150px;
-
     overflow:hidden;
-
     border-radius:18px;
-
-    background:#faf5f3;
-
-    border:1px solid rgba(183,123,127,.18);
+    background:#fff;
+    border:1px solid #e4d5d7;
 }
 
 .time-wheel{
+    width:100%;
     height:100%;
-
     overflow-y:auto;
-
-    overscroll-behavior:contain;
-
     scroll-snap-type:y mandatory;
-
     scrollbar-width:none;
-
-    -webkit-overflow-scrolling:touch;
-
-    padding:50px 0;
+    padding:52px 0;
+    direction:ltr;
 }
 
 .time-wheel::-webkit-scrollbar{
@@ -895,407 +710,244 @@ body{
 
 .time-option{
     height:50px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
-    font-size:19px;
-
-    font-weight:700;
-
-    color:#b7a3a5;
-
     scroll-snap-align:center;
-
+    font-size:21px;
+    font-weight:500;
+    color:#b8a5aa;
+    transition:.15s;
+    cursor:pointer;
     user-select:none;
-
-    -webkit-user-select:none;
-
-    transition:
-        color .15s ease,
-        transform .15s ease,
-        opacity .15s ease;
 }
 
 .time-option.selected{
     color:#4f6c54;
-
-    font-size:24px;
-
-    font-weight:900;
+    font-weight:800;
 }
 
 .wheel-selected{
     pointer-events:none;
-
     position:absolute;
-
     left:7px;
     right:7px;
-
-    top:50%;
-
+    top:52px;
     height:50px;
-
-    transform:translateY(-50%);
-
-    border-top:1px solid rgba(79,108,84,.32);
-
-    border-bottom:1px solid rgba(79,108,84,.32);
-
+    border-top:1px solid rgba(79,108,84,.25);
+    border-bottom:1px solid rgba(79,108,84,.25);
     border-radius:10px;
 }
 
 .wheel-fade{
     pointer-events:none;
-
     position:absolute;
-
     left:0;
     right:0;
-
-    height:45px;
-
-    z-index:5;
+    height:52px;
+    z-index:2;
 }
 
 .wheel-fade.top{
     top:0;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #faf5f3 20%,
-            rgba(250,245,243,0)
-        );
+    background:linear-gradient(to bottom,#fff 15%,rgba(255,255,255,0));
 }
 
 .wheel-fade.bottom{
     bottom:0;
-
-    background:
-        linear-gradient(
-            to top,
-            #faf5f3 20%,
-            rgba(250,245,243,0)
-        );
+    background:linear-gradient(to top,#fff 15%,rgba(255,255,255,0));
 }
 
 .time-colon{
-    font-size:27px;
-
-    font-weight:900;
-
+    font-size:25px;
+    font-weight:800;
     color:#4f6c54;
-
-    margin-top:23px;
+    margin-top:20px;
 }
 
-
-/* =========================================
-   SELECTED TIME
-========================================= */
-
 .selected-time-box{
-    margin:18px auto 14px;
-
-    width:max-content;
-
-    min-width:150px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:10px;
-
-    padding:9px 16px;
-
-    border-radius:13px;
-
-    background:#edf6ef;
-
+    text-align:center;
+    padding:12px;
+    background:rgba(79,108,84,.07);
     border:1px solid rgba(79,108,84,.18);
+    border-radius:15px;
+    margin-bottom:17px;
+}
 
-    color:#6c5a5d;
-
-    font-size:12px;
+.selected-time-box span{
+    display:block;
+    font-size:10px;
+    color:#8b777c;
+    margin-bottom:2px;
 }
 
 .selected-time-box strong{
-    color:#356b48;
-
-    font-size:21px;
-
-    letter-spacing:1px;
-
+    font-size:23px;
+    color:#4f6c54;
     direction:ltr;
+    display:block;
 }
 
-.modal-error{
-    min-height:20px;
-
-    text-align:center;
-
-    color:#b34d4d;
-
-    font-size:12px;
-
-    margin-bottom:4px;
-}
-
-
-/* =========================================
+/* =========================
    MODAL BUTTONS
-========================================= */
+========================= */
 
 .modal-actions{
     display:flex;
-
     gap:9px;
-
-    margin-top:10px;
 }
 
-.modal-actions button{
+.modal-button{
     flex:1;
-
-    border:0;
-
+    height:45px;
     border-radius:13px;
-
-    min-height:45px;
-
     font-family:inherit;
-
-    font-size:13px;
-
     font-weight:700;
-
     cursor:pointer;
 }
 
 .modal-cancel{
-    background:#f2eeee;
-
-    color:#715b5f;
+    background:#fff;
+    color:#725d62;
+    border:1px solid #dfced1;
 }
 
 .modal-confirm{
     background:#4f6c54;
-
     color:#fff;
-
-    box-shadow:
-        0 8px 20px rgba(79,108,84,.18);
+    border:1px solid #4f6c54;
 }
 
-.modal-confirm:disabled{
-    opacity:.65;
-
-    cursor:wait;
-}
-
-.modal-confirm:active,
-.modal-cancel:active{
-    transform:scale(.98);
-}
-
-
-/* =========================================
-   DELETE CONFIRM MODAL
-========================================= */
-
-.delete-modal{
-    width:min(380px,92vw);
-
-    background:#fff;
-
-    border-radius:22px;
-
-    padding:24px 20px;
-
-    text-align:center;
-
-    box-shadow:0 25px 70px rgba(60,35,35,.22);
-}
-
-.delete-modal h3{
-    font-size:18px;
-
-    color:#553d41;
-
-    margin-bottom:8px;
-}
-
-.delete-modal p{
-    font-size:12px;
-
-    line-height:1.8;
-
-    color:#8d767a;
-
-    margin-bottom:18px;
-}
-
-.delete-actions{
-    display:flex;
-
-    gap:8px;
-}
-
-.delete-actions button{
-    flex:1;
-
-    height:44px;
-
+.modal-delete{
+    background:#b32626;
+    color:#fff;
     border:0;
-
-    border-radius:12px;
-
-    font-family:inherit;
-
-    font-size:12px;
-
-    font-weight:700;
-
-    cursor:pointer;
 }
 
-.delete-cancel{
-    background:#f2eeee;
+/* =========================
+   TOAST
+========================= */
 
-    color:#715b5f;
-}
-
-.delete-confirm{
-    background:#b34d4d;
-
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:20px;
+    transform:translate(-50%,120px);
+    z-index:300;
+    background:#432f34;
     color:#fff;
+    padding:12px 18px;
+    border-radius:13px;
+    font-size:12px;
+    opacity:0;
+    transition:.3s;
+    pointer-events:none;
 }
 
+.toast.show{
+    transform:translate(-50%,0);
+    opacity:1;
+}
 
-/* =========================================
+/* =========================
    RESPONSIVE
-========================================= */
+========================= */
 
-@media(max-width:700px){
+@media(max-width:650px){
 
-    .stats-grid{
+    .topbar-inner{
+        min-height:65px;
+    }
+
+    .brand h1{
+        font-size:16px;
+    }
+
+    .stats{
         grid-template-columns:repeat(3,1fr);
+        gap:7px;
     }
 
     .stat-card{
-        padding:12px 9px;
+        padding:13px 9px;
     }
 
     .stat-label{
-        font-size:9px;
+        font-size:10px;
     }
 
     .stat-number{
         font-size:20px;
     }
 
-}
-
-@media(max-width:480px){
-
-    .container{
-        padding:17px 10px 35px;
+    .search-row{
+        flex-direction:column;
     }
 
-    .appointment-actions{
-        grid-template-columns:1fr 1fr 1fr;
+    .date-input{
+        width:100%;
     }
 
-    .action-button{
-        font-size:9px;
-        padding:0 3px;
-    }
-
-    .appointment-details{
+    .card-info{
         grid-template-columns:1fr 1fr;
     }
 
-    .confirm-modal{
-        padding:22px 16px 17px;
-
-        border-radius:22px;
+    .card-actions{
+        flex-wrap:wrap;
     }
 
-    .time-column{
-        width:86px;
+    .action-button{
+        min-width:calc(50% - 4px);
     }
 
-    .wheel-wrapper{
-        height:150px;
+    .new-booking-alert{
+        align-items:flex-start;
     }
 
+    .alert-button{
+        padding:7px 10px;
+        font-size:10px;
+    }
 }
 
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =========================================
+<!-- =========================
      LOGIN
-========================================= -->
+========================= -->
 
-<div
-    class="login-screen"
-    id="loginScreen"
->
+<div class="login-screen" id="loginScreen">
 
-    <div class="login-card">
+    <div class="login-box">
 
-        <div class="login-title">
-            HOBAB BEAUTY
-        </div>
+        <img
+            src="HOBAB_logo_cropped.png"
+            class="login-logo"
+            alt="HOBAB BEAUTY"
+        >
 
-        <div class="login-subtitle">
-            پنل مدیریت نوبت‌ها
-        </div>
+        <h1>HOBAB BEAUTY</h1>
 
+        <p>پنل مدیریت رزروها</p>
 
-        <div class="form-group">
+        <input
+            type="email"
+            id="loginEmail"
+            class="login-input"
+            placeholder="ایمیل"
+            autocomplete="email"
+        >
 
-            <label for="email">
-                ایمیل
-            </label>
-
-            <input
-                type="email"
-                id="email"
-                autocomplete="email"
-            >
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="password">
-                رمز عبور
-            </label>
-
-            <input
-                type="password"
-                id="password"
-                autocomplete="current-password"
-            >
-
-        </div>
-
+        <input
+            type="password"
+            id="loginPassword"
+            class="login-input"
+            placeholder="رمز عبور"
+            autocomplete="current-password"
+        >
 
         <button
             class="login-button"
@@ -1304,43 +956,38 @@ body{
             ورود به پنل
         </button>
 
-
         <div
             class="login-error"
             id="loginError"
-        ></div>
+        >
+            ایمیل یا رمز عبور صحیح نیست.
+        </div>
 
     </div>
 
 </div>
 
 
+<!-- =========================
+     ADMIN APP
+========================= -->
 
-<!-- =========================================
-     DASHBOARD
-========================================= -->
+<div class="admin-app" id="adminApp">
 
-<div id="dashboard">
+    <header class="topbar">
 
+        <div class="topbar-inner">
 
-    <!-- HEADER -->
+            <div class="brand">
 
-    <header class="admin-header">
+                <div class="brand-dot"></div>
 
-        <div class="header-inner">
-
-            <div class="logo-area">
-
-                <div class="logo-title">
-                    HOBAB BEAUTY
-                </div>
-
-                <div class="logo-subtitle">
-                    مدیریت نوبت‌ها
+                <div>
+                    <h1>HOBAB BEAUTY</h1>
+                    <span>مدیریت رزروها</span>
                 </div>
 
             </div>
-
 
             <button
                 class="logout-button"
@@ -1354,34 +1001,59 @@ body{
     </header>
 
 
-
     <main class="container">
 
 
-        <!-- TITLE -->
+        <!-- =========================
+             NEW BOOKING ALERT
+        ========================= -->
 
-        <div class="dashboard-title">
+        <div
+            class="new-booking-alert"
+            id="newBookingAlert"
+        >
 
-            <h1>
-                نوبت‌ها
-            </h1>
+            <div class="alert-right">
 
-            <p>
-                مدیریت و تأیید درخواست‌های رزرو
-            </p>
+                <div class="alert-dot"></div>
+
+                <div>
+
+                    <div class="alert-title">
+                        رزرو جدید دارید
+                    </div>
+
+                    <div
+                        class="alert-count"
+                        id="alertCount"
+                    >
+                        ۰ رزرو جدید
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button
+                class="alert-button"
+                id="alertButton"
+            >
+                مشاهده
+            </button>
 
         </div>
 
 
+        <!-- =========================
+             STATS
+        ========================= -->
 
-        <!-- STATS -->
-
-        <div class="stats-grid">
+        <div class="stats">
 
             <div class="stat-card">
 
                 <div class="stat-label">
-                    کل نوبت‌ها
+                    کل رزروها
                 </div>
 
                 <div
@@ -1428,36 +1100,32 @@ body{
         </div>
 
 
+        <!-- =========================
+             FILTERS
+        ========================= -->
 
-        <!-- FILTERS -->
+        <div class="filter-box">
 
-        <div class="filters-card">
-
-            <div class="filter-row">
+            <div class="search-row">
 
                 <input
-                    type="search"
+                    type="text"
                     id="searchInput"
-                    class="filter-input"
-                    placeholder="جستجو نام یا شماره تلفن..."
+                    class="search-input"
+                    placeholder="جستجو بر اساس نام یا شماره موبایل..."
                 >
 
-
-                <select
+                <input
+                    type="text"
                     id="dateFilter"
-                    class="filter-select"
+                    class="date-input"
+                    placeholder="تاریخ"
                 >
-
-                    <option value="all">
-                        همه تاریخ‌ها
-                    </option>
-
-                </select>
 
             </div>
 
 
-            <div class="filter-buttons">
+            <div class="filter-row">
 
                 <button
                     class="filter-button active"
@@ -1470,7 +1138,7 @@ body{
                     class="filter-button"
                     data-status="pending"
                 >
-                    در انتظار
+                    در انتظار تأیید
                 </button>
 
                 <button
@@ -1485,8 +1153,9 @@ body{
         </div>
 
 
-
-        <!-- SERVICE TABS -->
+        <!-- =========================
+             SERVICE TABS
+        ========================= -->
 
         <div
             class="service-tabs"
@@ -1497,7 +1166,7 @@ body{
                 class="service-tab active"
                 data-service="all"
             >
-                همه خدمات
+                همه
             </button>
 
             <button
@@ -1552,61 +1221,40 @@ body{
         </div>
 
 
+        <!-- =========================
+             APPOINTMENTS
+        ========================= -->
 
-        <!-- APPOINTMENTS -->
-
-        <div id="appointmentsContainer">
-
-            <div class="loading-box">
-                در حال دریافت نوبت‌ها...
-            </div>
-
-        </div>
-
+        <div id="appointmentsContainer"></div>
 
     </main>
 
 </div>
 
 
-
-<!-- =========================================
+<!-- =========================
      CONFIRM TIME MODAL
-========================================= -->
+========================= -->
 
 <div
     class="modal-overlay"
     id="confirmModal"
 >
 
-    <div class="confirm-modal">
+    <div class="modal">
 
-
-        <div class="modal-title">
+        <h2 id="confirmModalTitle">
             تأیید نوبت
-        </div>
-
+        </h2>
 
         <div class="modal-subtitle">
             ساعت دقیق نوبت را انتخاب کنید.
         </div>
 
 
-        <div
-            class="modal-customer"
-            id="modalCustomer"
-        ></div>
-
-
-        <div class="time-picker-title">
-            ساعت دقیق نوبت
-        </div>
-
-
         <div class="time-picker">
 
-
-            <!-- HOURS -->
+            <!-- HOUR -->
 
             <div class="time-column">
 
@@ -1637,7 +1285,7 @@ body{
             </div>
 
 
-            <!-- MINUTES -->
+            <!-- MINUTE -->
 
             <div class="time-column">
 
@@ -1678,29 +1326,20 @@ body{
         </div>
 
 
-        <div
-            class="modal-error"
-            id="modalError"
-        ></div>
-
-
         <div class="modal-actions">
 
             <button
-                type="button"
-                class="modal-cancel"
-                id="modalCancel"
+                class="modal-button modal-cancel"
+                id="confirmCancel"
             >
                 انصراف
             </button>
 
-
             <button
-                type="button"
-                class="modal-confirm"
+                class="modal-button modal-confirm"
                 id="modalConfirm"
             >
-                تأیید و ثبت ساعت
+                تأیید نوبت
             </button>
 
         </div>
@@ -1710,38 +1349,36 @@ body{
 </div>
 
 
-
-<!-- =========================================
+<!-- =========================
      DELETE MODAL
-========================================= -->
+========================= -->
 
 <div
     class="modal-overlay"
     id="deleteModal"
 >
 
-    <div class="delete-modal">
+    <div class="modal">
 
-        <h3>
-            حذف نوبت؟
-        </h3>
+        <h2>
+            حذف نوبت
+        </h2>
 
-        <p>
-            این نوبت برای همیشه از لیست حذف خواهد شد.
-            آیا مطمئن هستید؟
-        </p>
+        <div class="modal-subtitle">
+            آیا از حذف این رزرو مطمئن هستید؟
+        </div>
 
-        <div class="delete-actions">
+        <div class="modal-actions">
 
             <button
-                class="delete-cancel"
+                class="modal-button modal-cancel"
                 id="deleteCancel"
             >
                 انصراف
             </button>
 
             <button
-                class="delete-confirm"
+                class="modal-button modal-delete"
                 id="deleteConfirm"
             >
                 حذف نوبت
@@ -1754,19 +1391,27 @@ body{
 </div>
 
 
+<!-- =========================
+     TOAST
+========================= -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
 
 <script>
 
-/* =========================================
+/* =========================================================
    SUPABASE
-========================================= */
+========================================================= */
 
 const SUPABASE_URL =
     "https://oeadtawmcbzblkmfqmbd.supabase.co";
 
 const SUPABASE_KEY =
     "sb_publishable_1t6kJsgr3IwQkWptFgJ1Iw_Fj1FB4U2";
-
 
 const supabaseClient =
     window.supabase.createClient(
@@ -1775,26 +1420,9 @@ const supabaseClient =
     );
 
 
-
-/* =========================================
-   GLOBAL VARIABLES
-========================================= */
-
-let appointments = [];
-
-let selectedAppointment = null;
-
-let deleteAppointmentId = null;
-
-let activeStatus = "all";
-
-let activeService = "all";
-
-
-
-/* =========================================
-   SERVICE NAMES
-========================================= */
+/* =========================================================
+   SERVICES
+========================================================= */
 
 const serviceNames = {
 
@@ -1815,240 +1443,467 @@ const serviceNames = {
 };
 
 
+/* =========================================================
+   VARIABLES
+========================================================= */
 
-/* =========================================
-   PERSIAN DIGITS
-========================================= */
+let appointments = [];
 
-function toPersianDigits(value){
+let selectedAppointment = null;
 
-    if(value === null || value === undefined){
-        return "";
-    }
+let selectedDeleteAppointment = null;
 
-    return String(value)
-        .replace(/\d/g, d =>
-            "۰۱۲۳۴۵۶۷۸۹"[d]
-        );
+let selectedHour = "09";
 
+let selectedMinute = "00";
+
+let currentStatusFilter = "all";
+
+let currentServiceFilter = "all";
+
+let refreshTimer = null;
+
+let previousNewAppointmentIds = new Set();
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const loginScreen =
+    document.getElementById("loginScreen");
+
+const adminApp =
+    document.getElementById("adminApp");
+
+const loginButton =
+    document.getElementById("loginButton");
+
+const loginError =
+    document.getElementById("loginError");
+
+const logoutButton =
+    document.getElementById("logoutButton");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const dateFilter =
+    document.getElementById("dateFilter");
+
+const appointmentsContainer =
+    document.getElementById("appointmentsContainer");
+
+const totalCount =
+    document.getElementById("totalCount");
+
+const pendingCount =
+    document.getElementById("pendingCount");
+
+const confirmedCount =
+    document.getElementById("confirmedCount");
+
+const newBookingAlert =
+    document.getElementById("newBookingAlert");
+
+const alertCount =
+    document.getElementById("alertCount");
+
+const alertButton =
+    document.getElementById("alertButton");
+
+const confirmModal =
+    document.getElementById("confirmModal");
+
+const deleteModal =
+    document.getElementById("deleteModal");
+
+const hourWheel =
+    document.getElementById("hourWheel");
+
+const minuteWheel =
+    document.getElementById("minuteWheel");
+
+const selectedTimePreview =
+    document.getElementById("selectedTimePreview");
+
+const modalConfirm =
+    document.getElementById("modalConfirm");
+
+const confirmModalTitle =
+    document.getElementById("confirmModalTitle");
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(function(){
+
+        toast.classList.remove("show");
+
+    },3000);
 }
 
 
-
-/* =========================================
+/* =========================================================
    LOGIN
-========================================= */
+========================================================= */
 
-document
-    .getElementById("loginButton")
-    .addEventListener("click", login);
+async function checkSession(){
 
+    const {
+        data
+    } = await supabaseClient.auth.getSession();
 
-async function login(){
+    if(data.session){
 
-    const email =
-        document
-            .getElementById("email")
-            .value
-            .trim();
+        showAdmin();
 
-    const password =
-        document
-            .getElementById("password")
-            .value;
+    }else{
 
-
-    const errorBox =
-        document.getElementById("loginError");
-
-
-    errorBox.textContent = "";
-
-
-    if(!email || !password){
-
-        errorBox.textContent =
-            "ایمیل و رمز عبور را وارد کنید.";
-
-        return;
+        showLogin();
 
     }
-
-
-    const button =
-        document.getElementById("loginButton");
-
-
-    button.disabled = true;
-
-    button.textContent = "در حال ورود...";
-
-
-    const { error } =
-        await supabaseClient.auth
-            .signInWithPassword({
-                email,
-                password
-            });
-
-
-    button.disabled = false;
-
-    button.textContent = "ورود به پنل";
-
-
-    if(error){
-
-        console.error(error);
-
-        errorBox.textContent =
-            "ایمیل یا رمز عبور اشتباه است.";
-
-        return;
-
-    }
-
-
-    showDashboard();
 
 }
 
 
+function showLogin(){
 
-/* =========================================
-   ENTER KEY LOGIN
-========================================= */
+    loginScreen.style.display =
+        "flex";
 
-document
-    .getElementById("password")
-    .addEventListener("keydown", function(e){
+    adminApp.style.display =
+        "none";
 
-        if(e.key === "Enter"){
-            login();
-        }
+    if(refreshTimer){
 
-    });
+        clearInterval(refreshTimer);
 
+        refreshTimer = null;
 
+    }
 
-/* =========================================
-   AUTH STATE
-========================================= */
-
-supabaseClient.auth
-    .getSession()
-    .then(({data}) => {
-
-        if(data.session){
-
-            showDashboard();
-
-        }
-
-    });
+}
 
 
+function showAdmin(){
 
-/* =========================================
-   SHOW DASHBOARD
-========================================= */
+    loginScreen.style.display =
+        "none";
 
-function showDashboard(){
-
-    document
-        .getElementById("loginScreen")
-        .style.display = "none";
-
-
-    document
-        .getElementById("dashboard")
-        .style.display = "block";
-
+    adminApp.style.display =
+        "block";
 
     loadAppointments();
 
+    if(refreshTimer){
+
+        clearInterval(refreshTimer);
+
+    }
+
+    refreshTimer =
+        setInterval(
+            silentRefresh,
+            10000
+        );
+
 }
 
 
+/* =========================================================
+   LOGIN BUTTON
+========================================================= */
 
-/* =========================================
-   LOGOUT
-========================================= */
+loginButton.addEventListener(
+    "click",
+    async function(){
+
+        const email =
+            document.getElementById("loginEmail").value.trim();
+
+        const password =
+            document.getElementById("loginPassword").value;
+
+        loginError.style.display =
+            "none";
+
+        if(!email || !password){
+
+            loginError.textContent =
+                "ایمیل و رمز عبور را وارد کنید.";
+
+            loginError.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        loginButton.disabled =
+            true;
+
+        loginButton.textContent =
+            "در حال ورود...";
+
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient.auth.signInWithPassword({
+
+            email:email,
+
+            password:password
+
+        });
+
+
+        loginButton.disabled =
+            false;
+
+        loginButton.textContent =
+            "ورود به پنل";
+
+
+        if(error){
+
+            loginError.textContent =
+                "ایمیل یا رمز عبور صحیح نیست.";
+
+            loginError.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        if(data.session){
+
+            showAdmin();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   ENTER LOGIN
+========================================================= */
 
 document
-    .getElementById("logoutButton")
-    .addEventListener("click", async function(){
+    .getElementById("loginPassword")
+    .addEventListener(
+        "keydown",
+        function(e){
+
+            if(e.key === "Enter"){
+
+                loginButton.click();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+logoutButton.addEventListener(
+    "click",
+    async function(){
 
         await supabaseClient.auth.signOut();
 
-        location.reload();
+        showLogin();
 
-    });
+    }
+);
 
 
-
-/* =========================================
+/* =========================================================
    LOAD APPOINTMENTS
-========================================= */
+========================================================= */
 
 async function loadAppointments(){
 
-    const container =
-        document.getElementById(
-            "appointmentsContainer"
-        );
-
-
-    container.innerHTML = `
-        <div class="loading-box">
-            در حال دریافت نوبت‌ها...
-        </div>
-    `;
-
-
-    const { data, error } =
-        await supabaseClient
-            .from("appointments")
-            .select("*")
-            .order("date", {
-                ascending:true
-            })
-            .order("time", {
-                ascending:true
-            });
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+        .from("appointments")
+        .select("*")
+        .order("date",{
+            ascending:true
+        })
+        .order("time",{
+            ascending:true
+        });
 
 
     if(error){
 
         console.error(error);
 
-        container.innerHTML = `
-            <div class="empty-box">
-                دریافت نوبت‌ها انجام نشد.
-            </div>
-        `;
+        showToast(
+            "خطا در دریافت رزروها"
+        );
 
         return;
 
     }
 
 
-    appointments = data || [];
+    appointments =
+        data || [];
 
 
     updateStats();
 
-    buildDateFilter();
+    updateNewNotifications();
 
     renderAppointments();
 
 }
 
 
+/* =========================================================
+   SILENT REFRESH
+========================================================= */
 
-/* =========================================
+async function silentRefresh(){
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+        .from("appointments")
+        .select("*")
+        .order("date",{
+            ascending:true
+        })
+        .order("time",{
+            ascending:true
+        });
+
+
+    if(error){
+
+        console.error(error);
+
+        return;
+
+    }
+
+
+    const oldNewIds =
+        new Set(
+            appointments
+                .filter(a => !a.confirmed)
+                .map(a => String(a.id))
+        );
+
+
+    appointments =
+        data || [];
+
+
+    const currentNewAppointments =
+        appointments.filter(
+            a => !a.confirmed
+        );
+
+
+    const currentNewIds =
+        new Set(
+            currentNewAppointments
+                .map(a => String(a.id))
+        );
+
+
+    /*
+       اگر رزرو جدیدی اضافه شده باشد،
+       اعلان را نمایش می‌دهیم.
+    */
+
+    let brandNewFound = false;
+
+
+    currentNewIds.forEach(function(id){
+
+        if(!oldNewIds.has(id)){
+
+            brandNewFound = true;
+
+        }
+
+    });
+
+
+    updateStats();
+
+    updateNewNotifications();
+
+    renderAppointments();
+
+
+    if(brandNewFound){
+
+        showToast(
+            "یک رزرو جدید ثبت شد"
+        );
+
+        /*
+           صدای کوتاه مرورگر
+           در صورت اجازه مرورگر
+        */
+
+        try{
+
+            if(
+                "Notification" in window &&
+                Notification.permission === "granted"
+            ){
+
+                new Notification(
+                    "HOBAB BEAUTY",
+                    {
+                        body:
+                        "یک رزرو جدید ثبت شده است."
+                    }
+                );
+
+            }
+
+        }catch(e){}
+
+    }
+
+}
+
+
+/* =========================================================
    UPDATE STATS
-========================================= */
+========================================================= */
 
 function updateStats(){
 
@@ -2058,227 +1913,427 @@ function updateStats(){
 
     const pending =
         appointments.filter(
-            item => !item.confirmed
+            a => !a.confirmed
         ).length;
 
 
     const confirmed =
         appointments.filter(
-            item => item.confirmed
+            a => a.confirmed
         ).length;
 
 
-    document.getElementById("totalCount")
-        .textContent =
-        toPersianDigits(total);
+    totalCount.textContent =
+        toPersianNumber(total);
 
 
-    document.getElementById("pendingCount")
-        .textContent =
-        toPersianDigits(pending);
+    pendingCount.textContent =
+        toPersianNumber(pending);
 
 
-    document.getElementById("confirmedCount")
-        .textContent =
-        toPersianDigits(confirmed);
+    confirmedCount.textContent =
+        toPersianNumber(confirmed);
 
 }
 
 
+/* =========================================================
+   NEW NOTIFICATIONS
+========================================================= */
 
-/* =========================================
-   DATE SORT
-========================================= */
+function updateNewNotifications(){
 
-function normalizeDateForSort(date){
+    /*
+       هر رزروی که confirmed=false باشد
+       به عنوان رزرو جدید/در انتظار در نظر گرفته می‌شود.
+    */
 
-    if(!date){
-        return "";
+    const newAppointments =
+        appointments.filter(
+            a => !a.confirmed
+        );
+
+
+    const newCount =
+        newAppointments.length;
+
+
+    if(newCount > 0){
+
+        newBookingAlert.classList.add(
+            "show"
+        );
+
+        alertCount.textContent =
+            `${toPersianNumber(newCount)} رزرو جدید`;
+
+    }else{
+
+        newBookingAlert.classList.remove(
+            "show"
+        );
+
     }
 
-    const numbers =
-        String(date)
-            .replace(/[۰-۹]/g, d =>
-                "۰۱۲۳۴۵۶۷۸۹".indexOf(d)
+
+    /*
+       تعداد رزروهای جدید هر خدمت
+    */
+
+    document
+        .querySelectorAll(".service-tab")
+        .forEach(function(tab){
+
+            const oldBadge =
+                tab.querySelector(
+                    ".new-badge"
+                );
+
+            if(oldBadge){
+
+                oldBadge.remove();
+
+            }
+
+
+            tab.classList.remove(
+                "has-new"
             );
 
-    const parts =
-        numbers.split("/");
 
-    if(parts.length !== 3){
-        return numbers;
-    }
+            const service =
+                tab.dataset.service;
 
-    return parts
-        .map(x => x.padStart(2,"0"))
-        .join("");
+
+            if(service === "all"){
+
+                return;
+
+            }
+
+
+            const count =
+                newAppointments.filter(
+                    a =>
+                    a.service === service
+                ).length;
+
+
+            if(count > 0){
+
+                tab.classList.add(
+                    "has-new"
+                );
+
+
+                const badge =
+                    document.createElement(
+                        "span"
+                    );
+
+                badge.className =
+                    "new-badge";
+
+                badge.textContent =
+                    toPersianNumber(count);
+
+                tab.appendChild(
+                    badge
+                );
+
+            }
+
+        });
 
 }
 
 
+/* =========================================================
+   ALERT BUTTON
+========================================================= */
 
-/* =========================================
-   BUILD DATE FILTER
-========================================= */
+alertButton.addEventListener(
+    "click",
+    function(){
 
-function buildDateFilter(){
+        currentStatusFilter =
+            "pending";
 
-    const select =
-        document.getElementById("dateFilter");
-
-
-    const current =
-        select.value;
-
-
-    const dates = [
-        ...new Set(
-            appointments
-                .map(item => item.date)
-                .filter(Boolean)
-        )
-    ];
-
-
-    dates.sort((a,b) =>
-        normalizeDateForSort(a)
-            .localeCompare(
-                normalizeDateForSort(b)
+        document
+            .querySelectorAll(
+                ".filter-button"
             )
-    );
+            .forEach(function(button){
+
+                button.classList.remove(
+                    "active"
+                );
+
+            });
 
 
-    select.innerHTML = `
-        <option value="all">
-            همه تاریخ‌ها
-        </option>
-    `;
+        const pendingButton =
+            document.querySelector(
+                '[data-status="pending"]'
+            );
 
 
-    dates.forEach(date => {
+        if(pendingButton){
 
-        const option =
-            document.createElement("option");
+            pendingButton.classList.add(
+                "active"
+            );
 
-        option.value = date;
+        }
 
-        option.textContent =
-            toPersianDigits(date);
 
-        select.appendChild(option);
+        renderAppointments();
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+    }
+);
+
+
+/* =========================================================
+   SERVICE TABS
+========================================================= */
+
+document
+    .querySelectorAll(".service-tab")
+    .forEach(function(button){
+
+        button.addEventListener(
+            "click",
+            function(){
+
+                document
+                    .querySelectorAll(
+                        ".service-tab"
+                    )
+                    .forEach(function(btn){
+
+                        btn.classList.remove(
+                            "active"
+                        );
+
+                    });
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                currentServiceFilter =
+                    button.dataset.service;
+
+
+                renderAppointments();
+
+            }
+        );
 
     });
 
 
-    if(
-        current &&
-        [...select.options]
-            .some(option =>
-                option.value === current
-            )
-    ){
+/* =========================================================
+   STATUS FILTER
+========================================================= */
 
-        select.value = current;
+document
+    .querySelectorAll(".filter-button")
+    .forEach(function(button){
 
-    }
+        button.addEventListener(
+            "click",
+            function(){
 
-}
+                document
+                    .querySelectorAll(
+                        ".filter-button"
+                    )
+                    .forEach(function(btn){
+
+                        btn.classList.remove(
+                            "active"
+                        );
+
+                    });
 
 
+                button.classList.add(
+                    "active"
+                );
 
-/* =========================================
+
+                currentStatusFilter =
+                    button.dataset.status;
+
+
+                renderAppointments();
+
+            }
+        );
+
+    });
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+searchInput.addEventListener(
+    "input",
+    renderAppointments
+);
+
+
+/* =========================================================
+   DATE FILTER
+========================================================= */
+
+dateFilter.addEventListener(
+    "input",
+    renderAppointments
+);
+
+
+/* =========================================================
    RENDER APPOINTMENTS
-========================================= */
+========================================================= */
 
 function renderAppointments(){
 
-    const container =
-        document.getElementById(
-            "appointmentsContainer"
-        );
+    let filtered =
+        [...appointments];
 
+
+    /*
+       SERVICE
+    */
+
+    if(
+        currentServiceFilter !==
+        "all"
+    ){
+
+        filtered =
+            filtered.filter(
+                a =>
+                a.service ===
+                currentServiceFilter
+            );
+
+    }
+
+
+    /*
+       STATUS
+    */
+
+    if(
+        currentStatusFilter ===
+        "pending"
+    ){
+
+        filtered =
+            filtered.filter(
+                a => !a.confirmed
+            );
+
+    }
+
+
+    if(
+        currentStatusFilter ===
+        "confirmed"
+    ){
+
+        filtered =
+            filtered.filter(
+                a => a.confirmed
+            );
+
+    }
+
+
+    /*
+       SEARCH
+    */
 
     const search =
-        document
-            .getElementById("searchInput")
-            .value
+        searchInput.value
             .trim()
             .toLowerCase();
 
 
-    const selectedDate =
-        document
-            .getElementById("dateFilter")
-            .value;
+    if(search){
 
-
-    let filtered =
-        appointments.filter(appointment => {
-
-
-            /* SEARCH */
-
-            const matchesSearch =
-                !search ||
-                String(
-                    appointment.name || ""
-                )
-                    .toLowerCase()
-                    .includes(search) ||
+        filtered =
+            filtered.filter(
+                a =>
 
                 String(
-                    appointment.phone || ""
+                    a.name || ""
                 )
-                    .toLowerCase()
-                    .includes(search);
+                .toLowerCase()
+                .includes(search)
 
+                ||
 
-            /* DATE */
+                String(
+                    a.phone || ""
+                )
+                .toLowerCase()
+                .includes(search)
 
-            const matchesDate =
-                selectedDate === "all" ||
-                appointment.date === selectedDate;
-
-
-            /* STATUS */
-
-            const matchesStatus =
-                activeStatus === "all" ||
-
-                (
-                    activeStatus === "pending" &&
-                    !appointment.confirmed
-                ) ||
-
-                (
-                    activeStatus === "confirmed" &&
-                    appointment.confirmed
-                );
-
-
-            /* SERVICE */
-
-            const matchesService =
-                activeService === "all" ||
-                appointment.service === activeService;
-
-
-            return (
-                matchesSearch &&
-                matchesDate &&
-                matchesStatus &&
-                matchesService
             );
 
-        });
+    }
 
 
-    if(!filtered.length){
+    /*
+       DATE
+    */
 
-        container.innerHTML = `
-            <div class="empty-box">
-                نوبتی برای نمایش وجود ندارد.
+    const dateSearch =
+        dateFilter.value
+            .trim();
+
+
+    if(dateSearch){
+
+        filtered =
+            filtered.filter(
+                a =>
+                String(
+                    a.date || ""
+                ).includes(
+                    dateSearch
+                )
+            );
+
+    }
+
+
+    if(filtered.length === 0){
+
+        appointmentsContainer.innerHTML = `
+
+            <div class="empty-state">
+
+                <strong>
+                    رزروی پیدا نشد
+                </strong>
+
+                رزرو متناسب با فیلترهای انتخاب‌شده وجود ندارد.
+
             </div>
+
         `;
 
         return;
@@ -2286,49 +2341,27 @@ function renderAppointments(){
     }
 
 
-    filtered.sort((a,b) => {
-
-        const dateCompare =
-            normalizeDateForSort(a.date)
-                .localeCompare(
-                    normalizeDateForSort(b.date)
-                );
-
-
-        if(dateCompare !== 0){
-            return dateCompare;
-        }
-
-
-        const timeOrder = {
-            morning:1,
-            afternoon:2
-        };
-
-
-        return (
-            (timeOrder[a.time] || 9) -
-            (timeOrder[b.time] || 9)
-        );
-
-    });
-
+    /*
+       GROUP BY DATE
+    */
 
     const groups = {};
 
 
-    filtered.forEach(appointment => {
+    filtered.forEach(function(item){
 
         const date =
-            appointment.date || "بدون تاریخ";
+            item.date || "بدون تاریخ";
 
 
         if(!groups[date]){
+
             groups[date] = [];
+
         }
 
 
-        groups[date].push(appointment);
+        groups[date].push(item);
 
     });
 
@@ -2337,314 +2370,352 @@ function renderAppointments(){
 
 
     Object.keys(groups)
-        .sort((a,b) =>
-            normalizeDateForSort(a)
-                .localeCompare(
-                    normalizeDateForSort(b)
-                )
-        )
-        .forEach(date => {
-
-            const list =
-                groups[date];
-
+        .forEach(function(date){
 
             html += `
-                <div class="day-group">
 
-                    <div class="day-group-title">
+                <section class="date-group">
+
+                    <div class="date-title">
 
                         <span>
-                            ${toPersianDigits(date)}
+                            ${escapeHtml(
+                                formatDate(date)
+                            )}
                         </span>
 
-                        <span class="day-count">
-                            ${toPersianDigits(list.length)}
-                            نوبت
-                        </span>
+                        <div class="date-line"></div>
 
                     </div>
+
             `;
 
 
-            list.forEach(appointment => {
+            groups[date].forEach(
+                function(item){
 
-                html += renderAppointmentCard(
-                    appointment
-                );
+                    html +=
+                        createAppointmentCard(
+                            item
+                        );
 
-            });
+                }
+            );
 
 
             html += `
-                </div>
+                </section>
             `;
 
         });
 
 
-    container.innerHTML = html;
+    appointmentsContainer.innerHTML =
+        html;
 
 
-    attachAppointmentEvents();
+    attachCardEvents();
 
 }
 
 
+/* =========================================================
+   APPOINTMENT CARD
+========================================================= */
 
-/* =========================================
-   RENDER CARD
-========================================= */
+function createAppointmentCard(item){
 
-function renderAppointmentCard(appointment){
+    const isNew =
+        !item.confirmed;
+
 
     const service =
-        serviceNames[
-            appointment.service
-        ] ||
-        appointment.service ||
+        serviceNames[item.service]
+        ||
+        item.service
+        ||
         "نامشخص";
 
 
-    const isConfirmed =
-        !!appointment.confirmed;
-
-
-    const period =
-        appointment.time === "morning"
+    const timeText =
+        item.time === "morning"
             ? "صبح"
-            : appointment.time === "afternoon"
+            : item.time === "afternoon"
                 ? "عصر"
-                : appointment.time || "—";
+                : item.time || "—";
 
 
-    const exactTime =
-        appointment.confirmed_time
-            ? toPersianDigits(
-                appointment.confirmed_time
-            )
-            : null;
+    const confirmedHtml =
+        item.confirmed &&
+        item.confirmed_time
+        ?
 
+        `
 
-    const displayedTime =
-        exactTime
-            ? `ساعت ${exactTime}`
-            : period;
+            <div class="confirmed-box">
 
-
-    const statusHtml =
-        isConfirmed
-
-            ? `
-                <div class="appointment-status confirmed">
-                    ✓ نوبت تأیید شده
+                <div class="confirmed-title">
+                    نوبت تأیید شده
                 </div>
-            `
 
-            : `
-                <div class="appointment-status pending">
-                    در انتظار تأیید
+                <div class="confirmed-time">
+                    ${escapeHtml(
+                        item.confirmed_time
+                    )}
                 </div>
-            `;
 
+            </div>
 
-    const actionText =
-        isConfirmed
-            ? "ویرایش ساعت"
-            : "تأیید نوبت";
+        `
 
+        :
 
-    const actionClass =
-        isConfirmed
-            ? "confirmed-action"
-            : "confirm-button";
-
-
-    const description =
-        appointment.description ||
-        "توضیحی ثبت نشده";
-
-
-    const phone =
-        appointment.phone ||
         "";
 
 
     return `
 
-        <div
-            class="appointment-card ${isConfirmed ? "confirmed-card" : ""}"
-            data-id="${appointment.id}"
+        <article
+            class="appointment-card ${isNew ? "is-new" : ""}"
+            data-id="${escapeHtml(
+                String(item.id)
+            )}"
         >
 
-            <div class="appointment-top">
+            ${
+                isNew
+                ?
+                `
+                    <div class="new-label">
+                        رزرو جدید
+                    </div>
+                `
+                :
+                ""
+            }
 
-                <div class="customer-info">
+
+            <div class="card-top">
+
+                <div>
 
                     <div class="customer-name">
                         ${escapeHtml(
-                            appointment.name || "بدون نام"
+                            item.name || "بدون نام"
                         )}
                     </div>
 
                     <div class="customer-phone">
-                        ${escapeHtml(phone)}
+                        ${escapeHtml(
+                            item.phone || "بدون شماره"
+                        )}
                     </div>
 
-                </div>
-
-                ${statusHtml}
-
-            </div>
-
-
-            <div class="appointment-details">
-
-
-                <div class="detail-box">
-
-                    <div class="detail-label">
-                        زمان
-                    </div>
-
-                    <div class="detail-value time-value">
-                        ${displayedTime}
-                    </div>
-
-                </div>
-
-
-                <div class="detail-box">
-
-                    <div class="detail-label">
-                        خدمت
-                    </div>
-
-                    <div class="detail-value">
+                    <span class="service-name">
                         ${escapeHtml(service)}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="card-info">
+
+                <div class="info-item">
+
+                    <span class="info-label">
+                        تاریخ
+                    </span>
+
+                    <span class="info-value">
+                        ${escapeHtml(
+                            formatDate(item.date)
+                        )}
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span class="info-label">
+                        بازه پیشنهادی
+                    </span>
+
+                    <span class="info-value">
+                        ${escapeHtml(timeText)}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            ${confirmedHtml}
+
+
+            ${
+                item.description
+                ?
+
+                `
+
+                    <div class="description">
+
+                        <strong>
+                            توضیحات:
+                        </strong>
+
+                        <br>
+
+                        ${escapeHtml(
+                            item.description
+                        )}
+
                     </div>
 
-                </div>
+                `
+
+                :
+
+                ""
+            }
 
 
-            </div>
-
-
-            <div class="description-box">
-
-                <div class="description-label">
-                    توضیحات مشتری
-                </div>
-
-                <div class="description-text">
-                    ${escapeHtml(description)}
-                </div>
-
-            </div>
-
-
-            <div class="appointment-actions">
-
+            <div class="card-actions">
 
                 <button
-                    type="button"
                     class="action-button call-button"
                     data-action="call"
-                    data-id="${appointment.id}"
+                    data-id="${escapeHtml(
+                        String(item.id)
+                    )}"
                 >
                     تماس با مشتری
                 </button>
 
 
                 <button
-                    type="button"
-                    class="action-button ${actionClass}"
+                    class="action-button confirm-button"
                     data-action="confirm"
-                    data-id="${appointment.id}"
+                    data-id="${escapeHtml(
+                        String(item.id)
+                    )}"
                 >
-                    ${actionText}
+                    ${
+                        item.confirmed
+                        ?
+                        "ویرایش ساعت"
+                        :
+                        "تأیید نوبت"
+                    }
                 </button>
 
 
                 <button
-                    type="button"
                     class="action-button delete-button"
                     data-action="delete"
-                    data-id="${appointment.id}"
+                    data-id="${escapeHtml(
+                        String(item.id)
+                    )}"
                 >
                     حذف نوبت
                 </button>
 
-
             </div>
 
-        </div>
+        </article>
 
     `;
 
 }
 
 
+/* =========================================================
+   CARD EVENTS
+========================================================= */
 
-/* =========================================
-   ESCAPE HTML
-========================================= */
-
-function escapeHtml(value){
-
-    return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
-
-
-
-/* =========================================
-   APPOINTMENT EVENTS
-========================================= */
-
-function attachAppointmentEvents(){
+function attachCardEvents(){
 
     document
         .querySelectorAll(
-            ".action-button"
+            '[data-action="call"]'
         )
-        .forEach(button => {
+        .forEach(function(button){
 
             button.addEventListener(
                 "click",
                 function(){
 
-                    const id =
-                        this.dataset.id;
-
-                    const action =
-                        this.dataset.action;
-
-
-                    if(action === "call"){
-
-                        callCustomer(id);
-
-                    }
+                    const item =
+                        findAppointment(
+                            button.dataset.id
+                        );
 
 
-                    if(action === "confirm"){
+                    if(!item || !item.phone){
 
-                        openConfirmModal(id);
+                        showToast(
+                            "شماره مشتری موجود نیست."
+                        );
+
+                        return;
 
                     }
 
 
-                    if(action === "delete"){
+                    const phone =
+                        String(
+                            item.phone
+                        ).replace(
+                            /[^0-9+]/g,
+                            ""
+                        );
 
-                        openDeleteModal(id);
 
-                    }
+                    window.location.href =
+                        `tel:${phone}`;
+
+                }
+            );
+
+        });
+
+
+    document
+        .querySelectorAll(
+            '[data-action="confirm"]'
+        )
+        .forEach(function(button){
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    openConfirmModal(
+                        button.dataset.id
+                    );
+
+                }
+            );
+
+        });
+
+
+    document
+        .querySelectorAll(
+            '[data-action="delete"]'
+        )
+        .forEach(function(button){
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    openDeleteModal(
+                        button.dataset.id
+                    );
 
                 }
             );
@@ -2654,108 +2725,49 @@ function attachAppointmentEvents(){
 }
 
 
+/* =========================================================
+   FIND APPOINTMENT
+========================================================= */
 
-/* =========================================
-   CALL CUSTOMER
-========================================= */
+function findAppointment(id){
 
-function callCustomer(id){
-
-    const appointment =
-        appointments.find(
-            item =>
-                String(item.id) === String(id)
-        );
-
-
-    if(!appointment || !appointment.phone){
-        return;
-    }
-
-
-    window.location.href =
-        `tel:${appointment.phone}`;
-
-}
-
-
-
-/* =========================================
-   TIME WHEEL
-========================================= */
-
-const hourWheel =
-    document.getElementById("hourWheel");
-
-const minuteWheel =
-    document.getElementById("minuteWheel");
-
-const selectedTimePreview =
-    document.getElementById(
-        "selectedTimePreview"
+    return appointments.find(
+        a =>
+        String(a.id) ===
+        String(id)
     );
 
-
-let selectedHour = "09";
-
-let selectedMinute = "00";
-
-
-
-/* =========================================
-   CREATE HOURS
-========================================= */
-
-function createHourWheel(){
-
-    hourWheel.innerHTML = "";
-
-
-    for(let hour = 8; hour <= 20; hour++){
-
-        const option =
-            document.createElement("div");
-
-
-        option.className =
-            "time-option";
-
-
-        option.dataset.value =
-            String(hour).padStart(2,"0");
-
-
-        option.textContent =
-            String(hour).padStart(2,"0");
-
-
-        hourWheel.appendChild(option);
-
-    }
-
 }
 
 
+/* =========================================================
+   TIME WHEEL
+========================================================= */
 
-/* =========================================
-   CREATE MINUTES
-========================================= */
+function buildTimeWheels(){
 
-function createMinuteWheel(){
+    hourWheel.innerHTML = "";
 
     minuteWheel.innerHTML = "";
 
 
-    const minutes = [
-        "00",
-        "30"
-    ];
+    for(
+        let hour = 8;
+        hour <= 20;
+        hour++
+    ){
 
+        const value =
+            String(hour).padStart(
+                2,
+                "0"
+            );
 
-    minutes.forEach(minute => {
 
         const option =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         option.className =
@@ -2763,137 +2775,339 @@ function createMinuteWheel(){
 
 
         option.dataset.value =
-            minute;
+            value;
 
 
         option.textContent =
-            minute;
+            value;
 
 
-        minuteWheel.appendChild(option);
+        hourWheel.appendChild(
+            option
+        );
 
-    });
+    }
+
+
+    ["00","30"].forEach(
+        function(minute){
+
+            const option =
+                document.createElement(
+                    "div"
+                );
+
+
+            option.className =
+                "time-option";
+
+
+            option.dataset.value =
+                minute;
+
+
+            option.textContent =
+                minute;
+
+
+            minuteWheel.appendChild(
+                option
+            );
+
+        }
+    );
+
+
+    setupWheel(
+        hourWheel,
+        "hour"
+    );
+
+
+    setupWheel(
+        minuteWheel,
+        "minute"
+    );
 
 }
 
 
+function setupWheel(
+    wheel,
+    type
+){
 
-/* =========================================
-   CENTER OPTION
-========================================= */
+    wheel.addEventListener(
+        "scroll",
+        function(){
 
-function getCenterOption(wheel){
+            updateWheelSelection(
+                wheel
+            );
 
-    const options =
-        [
-            ...wheel.querySelectorAll(
-                ".time-option"
-            )
-        ];
+            updateSelectedTime();
 
+        }
+    );
+
+
+    wheel.addEventListener(
+        "click",
+        function(e){
+
+            const option =
+                e.target.closest(
+                    ".time-option"
+                );
+
+
+            if(!option){
+
+                return;
+
+            }
+
+
+            const target =
+                option.offsetTop -
+                52;
+
+
+            wheel.scrollTo({
+
+                top:target,
+
+                behavior:"smooth"
+
+            });
+
+        }
+    );
+
+
+    let scrollTimer;
+
+
+    wheel.addEventListener(
+        "scroll",
+        function(){
+
+            clearTimeout(
+                scrollTimer
+            );
+
+
+            scrollTimer =
+                setTimeout(
+                    function(){
+
+                        snapWheel(
+                            wheel
+                        );
+
+                    },
+                    100
+                );
+
+        }
+    );
+
+}
+
+
+function snapWheel(wheel){
 
     const center =
-        wheel.scrollTop +
-        wheel.clientHeight / 2;
+        wheel.scrollTop + 77;
 
 
     let closest = null;
 
-    let closestDistance =
-        Infinity;
+    let distance = Infinity;
 
 
-    options.forEach(option => {
+    wheel
+        .querySelectorAll(
+            ".time-option"
+        )
+        .forEach(function(option){
 
-        const optionCenter =
-            option.offsetTop +
-            option.offsetHeight / 2;
-
-
-        const distance =
-            Math.abs(
-                optionCenter - center
-            );
+            const optionCenter =
+                option.offsetTop +
+                option.offsetHeight / 2;
 
 
-        if(
-            distance <
-            closestDistance
-        ){
-
-            closestDistance =
-                distance;
-
-            closest =
-                option;
-
-        }
-
-    });
+            const d =
+                Math.abs(
+                    optionCenter -
+                    center
+                );
 
 
-    return closest;
+            if(d < distance){
+
+                distance = d;
+
+                closest = option;
+
+            }
+
+        });
+
+
+    if(closest){
+
+        const target =
+            closest.offsetTop -
+            52;
+
+
+        wheel.scrollTo({
+
+            top:target,
+
+            behavior:"smooth"
+
+        });
+
+    }
 
 }
 
 
+function updateWheelSelection(
+    wheel
+){
 
-/* =========================================
-   UPDATE TIME
-========================================= */
+    const center =
+        wheel.scrollTop + 77;
+
+
+    let closest = null;
+
+    let distance = Infinity;
+
+
+    wheel
+        .querySelectorAll(
+            ".time-option"
+        )
+        .forEach(function(option){
+
+            const optionCenter =
+                option.offsetTop +
+                option.offsetHeight / 2;
+
+
+            const d =
+                Math.abs(
+                    optionCenter -
+                    center
+                );
+
+
+            option.classList.remove(
+                "selected"
+            );
+
+
+            if(d < distance){
+
+                distance = d;
+
+                closest = option;
+
+            }
+
+        });
+
+
+    if(closest){
+
+        closest.classList.add(
+            "selected"
+        );
+
+    }
+
+}
+
+
+function getCenterValue(wheel){
+
+    const center =
+        wheel.scrollTop + 77;
+
+
+    let closest = null;
+
+    let distance = Infinity;
+
+
+    wheel
+        .querySelectorAll(
+            ".time-option"
+        )
+        .forEach(function(option){
+
+            const optionCenter =
+                option.offsetTop +
+                option.offsetHeight / 2;
+
+
+            const d =
+                Math.abs(
+                    optionCenter -
+                    center
+                );
+
+
+            if(d < distance){
+
+                distance = d;
+
+                closest = option;
+
+            }
+
+        });
+
+
+    return closest
+        ? closest.dataset.value
+        : null;
+
+}
+
 
 function updateSelectedTime(){
 
-    const hourOption =
-        getCenterOption(hourWheel);
+    const hour =
+        getCenterValue(
+            hourWheel
+        );
 
 
-    const minuteOption =
-        getCenterOption(minuteWheel);
+    const minute =
+        getCenterValue(
+            minuteWheel
+        );
 
 
-    if(hourOption){
+    if(hour){
 
         selectedHour =
-            hourOption.dataset.value;
+            hour;
 
     }
 
 
-    if(minuteOption){
+    if(minute){
 
         selectedMinute =
-            minuteOption.dataset.value;
+            minute;
 
     }
-
-
-    hourWheel
-        .querySelectorAll(
-            ".time-option"
-        )
-        .forEach(option => {
-
-            option.classList.toggle(
-                "selected",
-                option === hourOption
-            );
-
-        });
-
-
-    minuteWheel
-        .querySelectorAll(
-            ".time-option"
-        )
-        .forEach(option => {
-
-            option.classList.toggle(
-                "selected",
-                option === minuteOption
-            );
-
-        });
 
 
     selectedTimePreview.textContent =
@@ -2902,201 +3116,29 @@ function updateSelectedTime(){
 }
 
 
-
-/* =========================================
-   SNAP WHEEL
-========================================= */
-
-function snapWheel(wheel){
-
-    const option =
-        getCenterOption(wheel);
-
-
-    if(!option){
-        return;
-    }
-
-
-    const target =
-        option.offsetTop -
-        (wheel.clientHeight / 2) +
-        (option.offsetHeight / 2);
-
-
-    wheel.scrollTo({
-
-        top:target,
-
-        behavior:"smooth"
-
-    });
-
-}
-
-
-
-/* =========================================
-   SCROLL EVENTS
-========================================= */
-
-let hourScrollTimer;
-
-let minuteScrollTimer;
-
-
-hourWheel.addEventListener(
-    "scroll",
-    function(){
-
-        updateSelectedTime();
-
-
-        clearTimeout(
-            hourScrollTimer
-        );
-
-
-        hourScrollTimer =
-            setTimeout(() => {
-
-                snapWheel(
-                    hourWheel
-                );
-
-            },100);
-
-    }
-);
-
-
-minuteWheel.addEventListener(
-    "scroll",
-    function(){
-
-        updateSelectedTime();
-
-
-        clearTimeout(
-            minuteScrollTimer
-        );
-
-
-        minuteScrollTimer =
-            setTimeout(() => {
-
-                snapWheel(
-                    minuteWheel
-                );
-
-            },100);
-
-    }
-);
-
-
-
-/* =========================================
-   CLICK OPTIONS
-========================================= */
-
-hourWheel.addEventListener(
-    "click",
-    function(e){
-
-        const option =
-            e.target.closest(
-                ".time-option"
-            );
-
-
-        if(!option){
-            return;
-        }
-
-
-        const target =
-            option.offsetTop -
-            (hourWheel.clientHeight / 2) +
-            (option.offsetHeight / 2);
-
-
-        hourWheel.scrollTo({
-
-            top:target,
-
-            behavior:"smooth"
-
-        });
-
-    }
-);
-
-
-minuteWheel.addEventListener(
-    "click",
-    function(e){
-
-        const option =
-            e.target.closest(
-                ".time-option"
-            );
-
-
-        if(!option){
-            return;
-        }
-
-
-        const target =
-            option.offsetTop -
-            (minuteWheel.clientHeight / 2) +
-            (option.offsetHeight / 2);
-
-
-        minuteWheel.scrollTo({
-
-            top:target,
-
-            behavior:"smooth"
-
-        });
-
-    }
-);
-
-
-
-/* =========================================
-   INITIALIZE TIME PICKER
-========================================= */
-
 function initializeTimePicker(
-    currentTime = null
+currentTime
 ){
 
-    createHourWheel();
+    let hour =
+        "09";
 
-    createMinuteWheel();
-
-
-    let hour = "09";
-
-    let minute = "00";
+    let minute =
+        "00";
 
 
     if(currentTime){
 
         const parts =
-            currentTime.split(":");
+            String(
+                currentTime
+            ).split(":");
 
 
         if(parts.length === 2){
 
             hour =
-                String(parts[0])
-                    .padStart(2,"0");
-
+                parts[0];
 
             minute =
                 parts[1];
@@ -3107,9 +3149,8 @@ function initializeTimePicker(
 
 
     /*
-      فقط 00 و 30 معتبر هستند.
-      اگر مقدار قبلی چیز دیگری بود،
-      به 00 تبدیل می‌شود.
+       اگر دقیقه غیر از 00/30 بود،
+       نزدیک‌ترین مقدار را انتخاب می‌کنیم.
     */
 
     if(
@@ -3117,69 +3158,92 @@ function initializeTimePicker(
         minute !== "30"
     ){
 
-        minute = "00";
+        const numeric =
+            parseInt(
+                minute,
+                10
+            );
+
+
+        minute =
+            numeric < 15
+                ? "00"
+                : numeric < 45
+                    ? "30"
+                    : "00";
+
+
+        if(
+            numeric >= 45
+        ){
+
+            let h =
+                parseInt(
+                    hour,
+                    10
+                );
+
+
+            h += 1;
+
+
+            hour =
+                String(h).padStart(
+                    2,
+                    "0"
+                );
+
+        }
 
     }
 
 
-    selectedHour = hour;
+    selectedHour =
+        hour;
 
-    selectedMinute = minute;
 
+    selectedMinute =
+        minute;
 
-    /* HOUR */
 
     const hourOption =
-        [
-            ...hourWheel.querySelectorAll(
-                ".time-option"
-            )
-        ]
-        .find(option =>
-            option.dataset.value === hour
+        hourWheel.querySelector(
+            `[data-value="${hour}"]`
+        );
+
+
+    const minuteOption =
+        minuteWheel.querySelector(
+            `[data-value="${minute}"]`
         );
 
 
     if(hourOption){
 
-        const target =
-            hourOption.offsetTop -
-            (hourWheel.clientHeight / 2) +
-            (hourOption.offsetHeight / 2);
-
-
         hourWheel.scrollTop =
-            target;
+            hourOption.offsetTop -
+            52;
 
     }
-
-
-
-    /* MINUTE */
-
-    const minuteOption =
-        [
-            ...minuteWheel.querySelectorAll(
-                ".time-option"
-            )
-        ]
-        .find(option =>
-            option.dataset.value === minute
-        );
 
 
     if(minuteOption){
 
-        const target =
-            minuteOption.offsetTop -
-            (minuteWheel.clientHeight / 2) +
-            (minuteOption.offsetHeight / 2);
-
-
         minuteWheel.scrollTop =
-            target;
+            minuteOption.offsetTop -
+            52;
 
     }
+
+
+    updateWheelSelection(
+        hourWheel
+    );
+
+
+    updateWheelSelection(
+        minuteWheel
+    );
 
 
     updateSelectedTime();
@@ -3187,205 +3251,208 @@ function initializeTimePicker(
 }
 
 
-
-/* =========================================
+/* =========================================================
    OPEN CONFIRM MODAL
-========================================= */
+========================================================= */
 
 function openConfirmModal(id){
 
-    selectedAppointment =
-        appointments.find(
-            appointment =>
-                String(appointment.id) ===
-                String(id)
-        );
+    const item =
+        findAppointment(id);
 
 
-    if(!selectedAppointment){
+    if(!item){
+
         return;
+
     }
 
 
-    const customerText =
-        `${selectedAppointment.name || "بدون نام"} — ${selectedAppointment.phone || ""}`;
+    selectedAppointment =
+        item;
 
 
-    document
-        .getElementById("modalCustomer")
-        .textContent =
-        customerText;
+    if(item.confirmed){
 
+        confirmModalTitle.textContent =
+            "ویرایش ساعت نوبت";
 
-    document
-        .getElementById("modalError")
-        .textContent = "";
+        modalConfirm.textContent =
+            "ذخیره ساعت جدید";
+
+    }else{
+
+        confirmModalTitle.textContent =
+            "تأیید نوبت";
+
+        modalConfirm.textContent =
+            "تأیید نوبت";
+
+    }
 
 
     initializeTimePicker(
-        selectedAppointment.confirmed_time ||
-        "09:00"
+        item.confirmed_time
     );
 
 
-    document
-        .getElementById("confirmModal")
-        .classList.add("active");
+    confirmModal.classList.add(
+        "show"
+    );
 
 }
 
 
-
-/* =========================================
-   CLOSE CONFIRM MODAL
-========================================= */
+/* =========================================================
+   CLOSE CONFIRM
+========================================================= */
 
 document
-    .getElementById("modalCancel")
+    .getElementById("confirmCancel")
     .addEventListener(
         "click",
         function(){
 
-            document
-                .getElementById("confirmModal")
-                .classList.remove("active");
+            confirmModal.classList.remove(
+                "show"
+            );
 
         }
     );
 
 
+confirmModal.addEventListener(
+    "click",
+    function(e){
 
-/* =========================================
-   CLICK OUTSIDE CONFIRM MODAL
-========================================= */
+        if(
+            e.target ===
+            confirmModal
+        ){
 
-document
-    .getElementById("confirmModal")
-    .addEventListener(
-        "click",
-        function(e){
-
-            if(
-                e.target ===
-                this
-            ){
-
-                this.classList.remove(
-                    "active"
-                );
-
-            }
+            confirmModal.classList.remove(
+                "show"
+            );
 
         }
-    );
+
+    }
+);
 
 
+/* =========================================================
+   SAVE CONFIRM TIME
+========================================================= */
 
-/* =========================================
-   CONFIRM / UPDATE TIME
-========================================= */
+modalConfirm.addEventListener(
+    "click",
+    async function(){
 
-document
-    .getElementById("modalConfirm")
-    .addEventListener(
-        "click",
-        async function(){
+        if(!selectedAppointment){
 
-            if(!selectedAppointment){
-                return;
-            }
-
-
-            const time =
-                `${selectedHour}:${selectedMinute}`;
-
-
-            const button =
-                this;
-
-
-            const errorBox =
-                document.getElementById(
-                    "modalError"
-                );
-
-
-            button.disabled = true;
-
-            button.textContent =
-                "در حال ثبت...";
-
-
-            errorBox.textContent = "";
-
-
-            const { error } =
-                await supabaseClient
-                    .from("appointments")
-                    .update({
-
-                        confirmed:true,
-
-                        confirmed_time:time
-
-                    })
-                    .eq(
-                        "id",
-                        selectedAppointment.id
-                    );
-
-
-            button.disabled = false;
-
-            button.textContent =
-                "تأیید و ثبت ساعت";
-
-
-            if(error){
-
-                console.error(error);
-
-
-                errorBox.textContent =
-                    "ثبت ساعت انجام نشد. دوباره تلاش کنید.";
-
-
-                return;
-
-            }
-
-
-            document
-                .getElementById(
-                    "confirmModal"
-                )
-                .classList.remove(
-                    "active"
-                );
-
-
-            selectedAppointment = null;
-
-
-            await loadAppointments();
+            return;
 
         }
-    );
 
 
+        updateSelectedTime();
 
-/* =========================================
+
+        const time =
+            `${selectedHour}:${selectedMinute}`;
+
+
+        modalConfirm.disabled =
+            true;
+
+        modalConfirm.textContent =
+            "در حال ذخیره...";
+
+
+        const {
+            error
+        } =
+        await supabaseClient
+            .from("appointments")
+            .update({
+
+                confirmed:true,
+
+                confirmed_time:time
+
+            })
+            .eq(
+                "id",
+                selectedAppointment.id
+            );
+
+
+        modalConfirm.disabled =
+            false;
+
+
+        if(error){
+
+            console.error(error);
+
+            showToast(
+                "خطا در ذخیره ساعت نوبت"
+            );
+
+            modalConfirm.textContent =
+                selectedAppointment.confirmed
+                    ? "ذخیره ساعت جدید"
+                    : "تأیید نوبت";
+
+            return;
+
+        }
+
+
+        confirmModal.classList.remove(
+            "show"
+        );
+
+
+        showToast(
+            "نوبت با موفقیت تأیید شد"
+        );
+
+
+        selectedAppointment =
+            null;
+
+
+        await loadAppointments();
+
+    }
+);
+
+
+/* =========================================================
    DELETE MODAL
-========================================= */
+========================================================= */
 
 function openDeleteModal(id){
 
-    deleteAppointmentId = id;
+    const item =
+        findAppointment(id);
 
 
-    document
-        .getElementById("deleteModal")
-        .classList.add("active");
+    if(!item){
+
+        return;
+
+    }
+
+
+    selectedDeleteAppointment =
+        item;
+
+
+    deleteModal.classList.add(
+        "show"
+    );
 
 }
 
@@ -3396,43 +3463,36 @@ document
         "click",
         function(){
 
-            deleteAppointmentId = null;
-
-            document
-                .getElementById("deleteModal")
-                .classList.remove(
-                    "active"
-                );
+            deleteModal.classList.remove(
+                "show"
+            );
 
         }
     );
 
 
+deleteModal.addEventListener(
+    "click",
+    function(e){
 
-document
-    .getElementById("deleteModal")
-    .addEventListener(
-        "click",
-        function(e){
+        if(
+            e.target ===
+            deleteModal
+        ){
 
-            if(e.target === this){
-
-                deleteAppointmentId = null;
-
-                this.classList.remove(
-                    "active"
-                );
-
-            }
+            deleteModal.classList.remove(
+                "show"
+            );
 
         }
-    );
+
+    }
+);
 
 
-
-/* =========================================
+/* =========================================================
    DELETE APPOINTMENT
-========================================= */
+========================================================= */
 
 document
     .getElementById("deleteConfirm")
@@ -3440,31 +3500,40 @@ document
         "click",
         async function(){
 
-            if(!deleteAppointmentId){
+            if(!selectedDeleteAppointment){
+
                 return;
+
             }
 
 
-            const button = this;
+            const button =
+                document.getElementById(
+                    "deleteConfirm"
+                );
 
 
-            button.disabled = true;
+            button.disabled =
+                true;
 
             button.textContent =
                 "در حال حذف...";
 
 
-            const { error } =
-                await supabaseClient
-                    .from("appointments")
-                    .delete()
-                    .eq(
-                        "id",
-                        deleteAppointmentId
-                    );
+            const {
+                error
+            } =
+            await supabaseClient
+                .from("appointments")
+                .delete()
+                .eq(
+                    "id",
+                    selectedDeleteAppointment.id
+                );
 
 
-            button.disabled = false;
+            button.disabled =
+                false;
 
             button.textContent =
                 "حذف نوبت";
@@ -3474,8 +3543,8 @@ document
 
                 console.error(error);
 
-                alert(
-                    "حذف نوبت انجام نشد."
+                showToast(
+                    "خطا در حذف نوبت"
                 );
 
                 return;
@@ -3483,16 +3552,18 @@ document
             }
 
 
-            deleteAppointmentId = null;
+            deleteModal.classList.remove(
+                "show"
+            );
 
 
-            document
-                .getElementById(
-                    "deleteModal"
-                )
-                .classList.remove(
-                    "active"
-                );
+            selectedDeleteAppointment =
+                null;
+
+
+            showToast(
+                "نوبت حذف شد"
+            );
 
 
             await loadAppointments();
@@ -3501,155 +3572,145 @@ document
     );
 
 
+/* =========================================================
+   DATE FORMAT
+========================================================= */
 
-/* =========================================
-   SEARCH
-========================================= */
+function formatDate(date){
 
-document
-    .getElementById("searchInput")
-    .addEventListener(
-        "input",
-        function(){
+    if(!date){
 
-            renderAppointments();
-
-        }
-    );
-
-
-
-/* =========================================
-   DATE FILTER
-========================================= */
-
-document
-    .getElementById("dateFilter")
-    .addEventListener(
-        "change",
-        function(){
-
-            renderAppointments();
-
-        }
-    );
-
-
-
-/* =========================================
-   STATUS FILTER
-========================================= */
-
-document
-    .querySelectorAll(
-        ".filter-button"
-    )
-    .forEach(button => {
-
-        button.addEventListener(
-            "click",
-            function(){
-
-                document
-                    .querySelectorAll(
-                        ".filter-button"
-                    )
-                    .forEach(item =>
-                        item.classList.remove(
-                            "active"
-                        )
-                    );
-
-
-                this.classList.add(
-                    "active"
-                );
-
-
-                activeStatus =
-                    this.dataset.status;
-
-
-                renderAppointments();
-
-            }
-        );
-
-    });
-
-
-
-/* =========================================
-   SERVICE FILTER
-========================================= */
-
-document
-    .querySelectorAll(
-        ".service-tab"
-    )
-    .forEach(button => {
-
-        button.addEventListener(
-            "click",
-            function(){
-
-                document
-                    .querySelectorAll(
-                        ".service-tab"
-                    )
-                    .forEach(item =>
-                        item.classList.remove(
-                            "active"
-                        )
-                    );
-
-
-                this.classList.add(
-                    "active"
-                );
-
-
-                activeService =
-                    this.dataset.service;
-
-
-                renderAppointments();
-
-            }
-        );
-
-    });
-
-
-
-/* =========================================
-   ESC CLOSE MODALS
-========================================= */
-
-document.addEventListener(
-    "keydown",
-    function(e){
-
-        if(e.key !== "Escape"){
-            return;
-        }
-
-
-        document
-            .getElementById("confirmModal")
-            .classList.remove(
-                "active"
-            );
-
-
-        document
-            .getElementById("deleteModal")
-            .classList.remove(
-                "active"
-            );
+        return "بدون تاریخ";
 
     }
-);
+
+
+    /*
+       اگر تاریخ از قبل فارسی باشد
+       همان را نمایش می‌دهیم.
+    */
+
+    return toPersianNumber(
+        String(date)
+    );
+
+}
+
+
+/* =========================================================
+   PERSIAN NUMBERS
+========================================================= */
+
+function toPersianNumber(value){
+
+    return String(value)
+        .replace(
+            /0/g,
+            "۰"
+        )
+        .replace(
+            /1/g,
+            "۱"
+        )
+        .replace(
+            /2/g,
+            "۲"
+        )
+        .replace(
+            /3/g,
+            "۳"
+        )
+        .replace(
+            /4/g,
+            "۴"
+        )
+        .replace(
+            /5/g,
+            "۵"
+        )
+        .replace(
+            /6/g,
+            "۶"
+        )
+        .replace(
+            /7/g,
+            "۷"
+        )
+        .replace(
+            /8/g,
+            "۸"
+        )
+        .replace(
+            /9/g,
+            "۹"
+        );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value){
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   NOTIFICATION PERMISSION
+========================================================= */
+
+function requestNotificationPermission(){
+
+    try{
+
+        if(
+            "Notification" in window &&
+            Notification.permission ===
+            "default"
+        ){
+
+            Notification.requestPermission();
+
+        }
+
+    }catch(e){}
+
+}
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+buildTimeWheels();
+
+checkSession();
 
 </script>
 
