@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HOBAB BEAUTY | مدیریت</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>HOBAB BEAUTY | مدیریت رزروها</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 
 *{
-    margin:0;
-    padding:0;
     box-sizing:border-box;
 }
 
@@ -25,233 +20,193 @@ html{
 }
 
 body{
-    font-family:'Vazirmatn',sans-serif;
-    background:#fff8f6;
-    color:#432f34;
-    min-height:100vh;
+    margin:0;
+    font-family:Tahoma, Arial, sans-serif;
+    background:
+        radial-gradient(circle at top right, rgba(183,123,127,.10), transparent 35%),
+        #fff8f6;
+    color:#4b3035;
+}
+
+button,
+input,
+select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
 }
 
 /* =========================
    LOGIN
 ========================= */
 
-.login-screen{
+.login-page{
     min-height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
     padding:20px;
-    background:
-        radial-gradient(circle at top right,rgba(183,123,127,.16),transparent 35%),
-        #fff8f6;
 }
 
 .login-box{
     width:100%;
-    max-width:400px;
-    padding:32px 24px;
-    border-radius:28px;
+    max-width:410px;
     background:rgba(255,255,255,.72);
-    border:1px solid rgba(79,108,84,.25);
-    box-shadow:0 20px 60px rgba(85,55,60,.12);
     backdrop-filter:blur(18px);
-    text-align:center;
+    border:1px solid rgba(79,108,84,.35);
+    border-radius:24px;
+    padding:30px 24px;
+    box-shadow:0 18px 55px rgba(75,48,53,.12);
 }
 
 .login-logo{
-    width:95px;
-    height:95px;
-    object-fit:contain;
-    margin-bottom:15px;
+    text-align:center;
+    margin-bottom:22px;
 }
 
-.login-box h1{
-    font-size:22px;
-    margin-bottom:7px;
+.login-logo strong{
+    display:block;
+    font-size:28px;
+    letter-spacing:3px;
+    color:#8e5e63;
 }
 
-.login-box p{
-    font-size:13px;
-    color:#856f74;
-    margin-bottom:25px;
+.login-logo span{
+    display:block;
+    margin-top:5px;
+    font-size:12px;
+    letter-spacing:4px;
+    color:#8d7a7d;
+}
+
+.login-box h2{
+    text-align:center;
+    margin:0 0 25px;
+    font-size:20px;
 }
 
 .login-input{
     width:100%;
-    height:48px;
-    border:1px solid #e4d5d7;
-    border-radius:14px;
-    padding:0 15px;
-    margin-bottom:12px;
-    font-family:inherit;
-    outline:none;
+    border:1px solid rgba(79,108,84,.28);
     background:#fff;
-    color:#432f34;
+    border-radius:13px;
+    padding:14px;
+    margin-bottom:12px;
+    outline:none;
+    color:#4b3035;
+    font-size:14px;
 }
 
 .login-input:focus{
-    border-color:#b77b7f;
+    border-color:#4f6c54;
 }
 
 .login-button{
     width:100%;
-    height:48px;
     border:0;
-    border-radius:14px;
+    border-radius:13px;
+    padding:14px;
     background:#4f6c54;
-    color:#fff;
-    font-family:inherit;
-    font-weight:700;
-    cursor:pointer;
+    color:white;
+    font-size:15px;
+    font-weight:bold;
 }
 
 .login-error{
-    color:#b32626;
+    color:#b44b56;
     font-size:13px;
+    text-align:center;
     margin-top:12px;
-    display:none;
+    min-height:18px;
 }
 
 /* =========================
-   ADMIN
+   DASHBOARD
 ========================= */
 
-.admin-app{
+.dashboard{
     display:none;
-    min-height:100vh;
+    max-width:1200px;
+    margin:auto;
+    padding:20px 15px 50px;
 }
 
 .topbar{
-    position:sticky;
-    top:0;
-    z-index:50;
-    background:rgba(255,248,246,.92);
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid rgba(79,108,84,.16);
-}
-
-.topbar-inner{
-    max-width:1200px;
-    margin:auto;
-    min-height:72px;
-    padding:12px 18px;
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:15px;
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.brand-dot{
-    width:12px;
-    height:12px;
-    border-radius:50%;
-    background:#4f6c54;
+    margin-bottom:18px;
 }
 
 .brand h1{
-    font-size:18px;
+    margin:0;
+    font-size:24px;
+    letter-spacing:2px;
+    color:#8e5e63;
 }
 
-.brand span{
-    display:block;
-    font-size:11px;
-    color:#917b80;
-    margin-top:2px;
+.brand p{
+    margin:5px 0 0;
+    color:#8d7a7d;
+    font-size:12px;
 }
 
-.logout-button{
-    border:1px solid #dfcbce;
-    background:#fff;
-    color:#765c62;
-    border-radius:12px;
+.logout{
+    border:1px solid rgba(183,123,127,.45);
+    background:white;
+    color:#8e5e63;
     padding:9px 14px;
-    font-family:inherit;
-    cursor:pointer;
-}
-
-/* =========================
-   MAIN
-========================= */
-
-.container{
-    width:100%;
-    max-width:1200px;
-    margin:auto;
-    padding:20px 15px 50px;
+    border-radius:11px;
+    font-size:13px;
 }
 
 /* =========================
    NEW BOOKING ALERT
 ========================= */
 
-.new-booking-alert{
+.new-alert{
     display:none;
     align-items:center;
     justify-content:space-between;
-    gap:15px;
-    padding:14px 17px;
-    margin-bottom:18px;
-    border-radius:18px;
-    background:rgba(255,255,255,.9);
-    border:1.5px solid rgba(190,42,42,.25);
-    box-shadow:0 8px 25px rgba(150,50,50,.08);
+    gap:12px;
+    background:#fff;
+    border:2px solid #b44b56;
+    border-radius:16px;
+    padding:13px 15px;
+    margin-bottom:15px;
+    box-shadow:0 7px 25px rgba(180,75,86,.12);
 }
 
-.new-booking-alert.show{
+.new-alert.show{
     display:flex;
 }
 
-.alert-right{
+.new-alert-text{
     display:flex;
     align-items:center;
-    gap:11px;
+    gap:9px;
+    font-weight:bold;
+    color:#9e3e49;
 }
 
 .alert-dot{
-    width:13px;
-    height:13px;
+    width:10px;
+    height:10px;
     border-radius:50%;
-    background:#e53935;
-    box-shadow:0 0 0 5px rgba(229,57,53,.12);
-    animation:pulseRed 1.5s infinite;
-    flex-shrink:0;
+    background:#b44b56;
+    box-shadow:0 0 0 5px rgba(180,75,86,.12);
 }
 
-@keyframes pulseRed{
-    0%,100%{
-        box-shadow:0 0 0 4px rgba(229,57,53,.10);
-    }
-    50%{
-        box-shadow:0 0 0 8px rgba(229,57,53,.20);
-    }
-}
-
-.alert-title{
-    font-weight:700;
-    font-size:14px;
-}
-
-.alert-count{
-    color:#b32626;
-    font-size:12px;
-    margin-top:2px;
-}
-
-.alert-button{
+.new-alert button{
     border:0;
-    background:#b32626;
-    color:#fff;
-    border-radius:11px;
-    padding:8px 13px;
-    font-family:inherit;
-    cursor:pointer;
-    white-space:nowrap;
+    background:#b44b56;
+    color:white;
+    border-radius:10px;
+    padding:9px 13px;
+    font-size:12px;
 }
 
 /* =========================
@@ -265,90 +220,112 @@ body{
     margin-bottom:18px;
 }
 
-.stat-card{
-    background:rgba(255,255,255,.78);
-    border:1px solid rgba(79,108,84,.16);
-    border-radius:20px;
-    padding:18px;
-}
-
-.stat-label{
-    font-size:12px;
-    color:#8c777c;
-    margin-bottom:7px;
+.stat{
+    background:rgba(255,255,255,.75);
+    border:1px solid rgba(79,108,84,.22);
+    border-radius:16px;
+    padding:15px;
+    text-align:center;
 }
 
 .stat-number{
     font-size:25px;
-    font-weight:800;
-    color:#4f6c54;
+    font-weight:bold;
+    color:#8e5e63;
+}
+
+.stat-label{
+    font-size:12px;
+    color:#806e71;
+    margin-top:5px;
 }
 
 /* =========================
-   FILTERS
+   DAY FILTER
 ========================= */
 
-.filter-box{
-    background:rgba(255,255,255,.76);
-    border:1px solid rgba(79,108,84,.16);
-    border-radius:22px;
-    padding:15px;
-    margin-bottom:20px;
+.section-title{
+    font-size:14px;
+    font-weight:bold;
+    margin:0 0 10px;
 }
 
-.search-row{
-    display:flex;
-    gap:10px;
-    margin-bottom:12px;
-}
-
-.search-input{
-    flex:1;
-    height:46px;
-    border:1px solid #dfced1;
-    border-radius:13px;
-    padding:0 14px;
-    font-family:inherit;
-    outline:none;
-    background:#fff;
-}
-
-.search-input:focus{
-    border-color:#b77b7f;
-}
-
-.date-input{
-    height:46px;
-    border:1px solid #dfced1;
-    border-radius:13px;
-    padding:0 12px;
-    font-family:inherit;
-    outline:none;
-    background:#fff;
-}
-
-.filter-row{
+.day-scroller{
     display:flex;
     gap:8px;
     overflow-x:auto;
-    padding-bottom:2px;
+    padding:3px 2px 10px;
+    margin-bottom:15px;
+    scrollbar-width:none;
 }
 
-.filter-button{
-    border:1px solid #ddced0;
+.day-scroller::-webkit-scrollbar{
+    display:none;
+}
+
+.day-button{
+    flex:0 0 auto;
+    border:1px solid rgba(79,108,84,.28);
     background:#fff;
-    color:#705a60;
+    color:#5e4a4d;
     border-radius:12px;
-    padding:9px 13px;
-    font-family:inherit;
-    cursor:pointer;
-    white-space:nowrap;
+    padding:10px 14px;
+    min-width:82px;
+    font-size:12px;
+    transition:.2s;
 }
 
-.filter-button.active{
+.day-button small{
+    display:block;
+    margin-top:4px;
+    color:#9a888a;
+    font-size:10px;
+}
+
+.day-button.active{
     background:#4f6c54;
-    color:#fff;
     border-color:#4f6c54;
+    color:white;
+}
+
+.day-button.active small{
+    color:rgba(255,255,255,.8);
+}
+
+.day-button.today{
+    border-color:#b77b7f;
+}
+
+/* =========================
+   STATUS FILTER
+========================= */
+
+.status-filter{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    scrollbar-width:none;
+    margin-bottom:14px;
+}
+
+.status-filter::-webkit-scrollbar{
+    display:none;
+}
+
+.status-button{
+    flex:0 0 auto;
+    border:1px solid rgba(183,123,127,.28);
+    background:white;
+    color:#6f5c60;
+    padding:9px 14px;
+    border-radius:10px;
+    font-size:12px;
+}
+
+.status-button.active{
+    background:#b77b7f;
+    color:white;
+    border-color:#b77b7f;
 }
 
 /* =========================
@@ -359,60 +336,51 @@ body{
     display:flex;
     gap:8px;
     overflow-x:auto;
-    padding:3px 1px 12px;
-    margin-bottom:4px;
+    scrollbar-width:none;
+    padding-bottom:8px;
+    margin-bottom:18px;
+}
+
+.service-tabs::-webkit-scrollbar{
+    display:none;
 }
 
 .service-tab{
     position:relative;
-    border:1.5px solid rgba(79,108,84,.35);
-    background:rgba(255,255,255,.75);
-    color:#5d494e;
-    border-radius:14px;
-    padding:10px 16px;
-    font-family:inherit;
-    cursor:pointer;
-    white-space:nowrap;
-    transition:.2s;
+    flex:0 0 auto;
+    border:1px solid rgba(79,108,84,.28);
+    background:#fff;
+    color:#5e4a4d;
+    border-radius:11px;
+    padding:10px 15px;
+    font-size:12px;
 }
 
 .service-tab.active{
     background:#4f6c54;
-    color:#fff;
     border-color:#4f6c54;
+    color:white;
 }
 
-.service-tab.has-new{
-    border-color:#e53935;
-}
-
-.new-badge{
+.service-badge{
+    display:none;
     position:absolute;
-    top:-7px;
-    left:-7px;
-    min-width:21px;
-    height:21px;
-    padding:0 5px;
-    border-radius:50px;
-    background:#e53935;
+    top:-6px;
+    left:-6px;
+    min-width:19px;
+    height:19px;
+    border-radius:50%;
+    background:#b44b56;
     color:#fff;
-    border:2px solid #fff8f6;
-    display:flex;
-    align-items:center;
-    justify-content:center;
     font-size:10px;
-    font-weight:800;
-    box-shadow:0 2px 8px rgba(229,57,53,.25);
-    animation:badgePulse 1.5s infinite;
+    line-height:19px;
+    text-align:center;
+    font-weight:bold;
+    border:2px solid #fff8f6;
 }
 
-@keyframes badgePulse{
-    0%,100%{
-        transform:scale(1);
-    }
-    50%{
-        transform:scale(1.08);
-    }
+.service-badge.show{
+    display:block;
 }
 
 /* =========================
@@ -420,23 +388,34 @@ body{
 ========================= */
 
 .date-group{
-    margin-bottom:20px;
+    margin-bottom:22px;
 }
 
 .date-title{
     display:flex;
     align-items:center;
+    justify-content:space-between;
     gap:10px;
+    background:rgba(79,108,84,.07);
+    border-right:3px solid #4f6c54;
+    border-radius:12px;
+    padding:12px 14px;
     margin-bottom:10px;
-    font-size:15px;
-    font-weight:800;
+}
+
+.date-title-main{
+    font-weight:bold;
+    font-size:14px;
     color:#4f6c54;
 }
 
-.date-line{
-    flex:1;
-    height:1px;
-    background:rgba(79,108,84,.16);
+.date-count{
+    background:white;
+    border:1px solid rgba(79,108,84,.18);
+    border-radius:20px;
+    padding:4px 9px;
+    font-size:10px;
+    color:#6d5b5f;
 }
 
 /* =========================
@@ -444,69 +423,54 @@ body{
 ========================= */
 
 .appointment-card{
-    background:rgba(255,255,255,.88);
-    border:1px solid rgba(79,108,84,.15);
-    border-radius:20px;
-    padding:16px;
-    margin-bottom:11px;
-    box-shadow:0 7px 25px rgba(78,54,59,.055);
-    position:relative;
-    overflow:hidden;
+    background:rgba(255,255,255,.82);
+    border:1px solid rgba(79,108,84,.18);
+    border-right:3px solid #b77b7f;
+    border-radius:16px;
+    padding:15px;
+    margin-bottom:10px;
+    box-shadow:0 5px 20px rgba(75,48,53,.05);
 }
 
-.appointment-card.is-new{
-    border-right:4px solid #e53935;
-}
-
-.new-label{
-    display:inline-flex;
-    align-items:center;
-    gap:5px;
-    color:#b32626;
-    font-size:11px;
-    font-weight:700;
-    margin-bottom:7px;
-}
-
-.new-label::before{
-    content:"";
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#e53935;
+.appointment-card.new{
+    border-right-color:#b44b56;
+    box-shadow:0 5px 20px rgba(180,75,86,.10);
 }
 
 .card-top{
     display:flex;
     align-items:flex-start;
     justify-content:space-between;
-    gap:10px;
+    gap:12px;
 }
 
 .customer-name{
     font-size:16px;
-    font-weight:800;
-}
-
-.customer-phone{
-    font-size:12px;
-    color:#806c72;
-    margin-top:4px;
-    direction:ltr;
-    text-align:right;
+    font-weight:bold;
+    color:#4b3035;
 }
 
 .service-name{
-    display:inline-block;
-    margin-top:9px;
-    padding:5px 9px;
-    border-radius:9px;
-    background:#fff3f1;
-    color:#9c646a;
-    font-size:11px;
+    font-size:12px;
+    color:#8e5e63;
+    margin-top:5px;
 }
 
-.card-info{
+.new-label{
+    display:none;
+    font-size:10px;
+    background:#b44b56;
+    color:white;
+    border-radius:20px;
+    padding:4px 8px;
+    white-space:nowrap;
+}
+
+.appointment-card.new .new-label{
+    display:inline-block;
+}
+
+.info-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:8px;
@@ -515,122 +479,128 @@ body{
 
 .info-item{
     background:#fffaf9;
-    border-radius:11px;
-    padding:9px 10px;
+    border:1px solid rgba(183,123,127,.13);
+    border-radius:10px;
+    padding:9px;
 }
 
 .info-label{
-    display:block;
-    font-size:10px;
-    color:#a18b90;
-    margin-bottom:3px;
+    font-size:9px;
+    color:#9b898c;
+    margin-bottom:4px;
 }
 
 .info-value{
     font-size:12px;
-    font-weight:600;
+    color:#554144;
+    word-break:break-word;
 }
 
-.confirmed-box{
+.status-line{
     margin-top:12px;
-    padding:11px 12px;
-    border-radius:13px;
-    background:rgba(79,108,84,.08);
-    border:1px solid rgba(79,108,84,.20);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
 }
 
-.confirmed-title{
-    color:#4f6c54;
+.status-text{
     font-size:11px;
-    font-weight:700;
+}
+
+.status-pending{
+    color:#b44b56;
+}
+
+.status-confirmed{
+    color:#4f6c54;
+    font-weight:bold;
 }
 
 .confirmed-time{
-    color:#4f6c54;
-    font-size:20px;
-    font-weight:800;
-    margin-top:2px;
-    direction:ltr;
-    text-align:right;
-}
-
-.description{
-    margin-top:12px;
-    padding:11px 12px;
-    background:#fffaf9;
-    border-radius:12px;
     font-size:12px;
-    line-height:1.9;
-    color:#69555a;
+    color:#4f6c54;
+    font-weight:bold;
 }
 
-.card-actions{
-    display:flex;
+/* =========================
+   ACTIONS
+========================= */
+
+.actions{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
     gap:7px;
     margin-top:13px;
 }
 
 .action-button{
-    flex:1;
-    min-height:40px;
-    border-radius:11px;
-    border:1px solid #dfced1;
-    background:#fff;
-    font-family:inherit;
+    border:0;
+    border-radius:10px;
+    padding:10px 6px;
     font-size:11px;
-    font-weight:600;
-    cursor:pointer;
 }
 
 .call-button{
+    background:#eef5ef;
     color:#4f6c54;
-    border-color:rgba(79,108,84,.30);
 }
 
 .confirm-button{
-    color:#4f6c54;
-    border-color:rgba(79,108,84,.40);
-    background:rgba(79,108,84,.06);
+    background:#b77b7f;
+    color:white;
 }
 
 .delete-button{
-    color:#b32626;
-    border-color:rgba(179,38,38,.20);
+    background:#f7e9e9;
+    color:#a44852;
 }
 
 /* =========================
    EMPTY
 ========================= */
 
-.empty-state{
+.empty{
     text-align:center;
-    padding:45px 20px;
-    color:#927d82;
-    background:rgba(255,255,255,.55);
-    border-radius:20px;
-    border:1px dashed #decfd1;
+    background:rgba(255,255,255,.7);
+    border:1px dashed rgba(79,108,84,.25);
+    border-radius:17px;
+    padding:35px 20px;
+    color:#8c7a7d;
+    font-size:13px;
 }
 
-.empty-state strong{
+.empty strong{
     display:block;
-    color:#68545a;
-    margin-bottom:5px;
+    color:#6d595d;
+    margin-bottom:7px;
 }
 
 /* =========================
-   MODALS
+   LOADING
+========================= */
+
+.loading{
+    text-align:center;
+    padding:30px;
+    color:#8c7a7d;
+    font-size:13px;
+}
+
+/* =========================
+   MODAL
 ========================= */
 
 .modal-overlay{
     position:fixed;
     inset:0;
-    z-index:100;
-    background:rgba(50,35,39,.48);
-    backdrop-filter:blur(6px);
+    background:rgba(35,24,26,.55);
+    backdrop-filter:blur(7px);
     display:none;
     align-items:center;
     justify-content:center;
     padding:18px;
+    z-index:9999;
 }
 
 .modal-overlay.show{
@@ -639,189 +609,92 @@ body{
 
 .modal{
     width:100%;
-    max-width:430px;
+    max-width:390px;
     background:#fffaf9;
-    border-radius:26px;
+    border-radius:22px;
     padding:22px;
-    box-shadow:0 25px 70px rgba(0,0,0,.18);
-    max-height:90vh;
-    overflow-y:auto;
+    box-shadow:0 20px 70px rgba(0,0,0,.22);
 }
 
-.modal h2{
+.modal h3{
+    margin:0 0 6px;
     font-size:18px;
-    margin-bottom:7px;
+    color:#4b3035;
 }
 
 .modal-subtitle{
     font-size:12px;
-    color:#8c777c;
+    color:#8c7a7d;
     margin-bottom:20px;
 }
 
-/* =========================
-   TIME PICKER
-========================= */
-
-.time-picker{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:13px;
-    direction:ltr;
-    margin:5px 0 15px;
+.time-selectors{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
 }
 
-.time-column{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+.time-selector-box{
+    text-align:center;
 }
 
-.time-label{
+.time-selector-box label{
+    display:block;
     font-size:11px;
-    color:#927c82;
-    margin-bottom:6px;
+    color:#806e71;
+    margin-bottom:7px;
 }
 
-.wheel-wrapper{
-    width:105px;
-    height:155px;
-    position:relative;
-    overflow:hidden;
-    border-radius:18px;
-    background:#fff;
-    border:1px solid #e4d5d7;
-}
-
-.time-wheel{
+.time-selector{
     width:100%;
-    height:100%;
+    height:145px;
     overflow-y:auto;
-    scroll-snap-type:y mandatory;
+    border:1px solid rgba(79,108,84,.25);
+    border-radius:14px;
+    background:white;
     scrollbar-width:none;
-    padding:52px 0;
-    direction:ltr;
 }
 
-.time-wheel::-webkit-scrollbar{
+.time-selector::-webkit-scrollbar{
     display:none;
 }
 
 .time-option{
-    height:50px;
+    height:45px;
     display:flex;
     align-items:center;
     justify-content:center;
-    scroll-snap-align:center;
-    font-size:21px;
-    font-weight:500;
-    color:#b8a5aa;
-    transition:.15s;
-    cursor:pointer;
-    user-select:none;
+    color:#806e71;
+    font-size:14px;
 }
 
 .time-option.selected{
-    color:#4f6c54;
-    font-weight:800;
+    background:#4f6c54;
+    color:white;
+    font-weight:bold;
 }
 
-.wheel-selected{
-    pointer-events:none;
-    position:absolute;
-    left:7px;
-    right:7px;
-    top:52px;
-    height:50px;
-    border-top:1px solid rgba(79,108,84,.25);
-    border-bottom:1px solid rgba(79,108,84,.25);
-    border-radius:10px;
-}
-
-.wheel-fade{
-    pointer-events:none;
-    position:absolute;
-    left:0;
-    right:0;
-    height:52px;
-    z-index:2;
-}
-
-.wheel-fade.top{
-    top:0;
-    background:linear-gradient(to bottom,#fff 15%,rgba(255,255,255,0));
-}
-
-.wheel-fade.bottom{
-    bottom:0;
-    background:linear-gradient(to top,#fff 15%,rgba(255,255,255,0));
-}
-
-.time-colon{
-    font-size:25px;
-    font-weight:800;
-    color:#4f6c54;
+.modal-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
     margin-top:20px;
 }
 
-.selected-time-box{
-    text-align:center;
+.modal-save{
+    border:0;
+    border-radius:12px;
     padding:12px;
-    background:rgba(79,108,84,.07);
-    border:1px solid rgba(79,108,84,.18);
-    border-radius:15px;
-    margin-bottom:17px;
-}
-
-.selected-time-box span{
-    display:block;
-    font-size:10px;
-    color:#8b777c;
-    margin-bottom:2px;
-}
-
-.selected-time-box strong{
-    font-size:23px;
-    color:#4f6c54;
-    direction:ltr;
-    display:block;
-}
-
-/* =========================
-   MODAL BUTTONS
-========================= */
-
-.modal-actions{
-    display:flex;
-    gap:9px;
-}
-
-.modal-button{
-    flex:1;
-    height:45px;
-    border-radius:13px;
-    font-family:inherit;
-    font-weight:700;
-    cursor:pointer;
+    background:#4f6c54;
+    color:white;
 }
 
 .modal-cancel{
-    background:#fff;
-    color:#725d62;
-    border:1px solid #dfced1;
-}
-
-.modal-confirm{
-    background:#4f6c54;
-    color:#fff;
-    border:1px solid #4f6c54;
-}
-
-.modal-delete{
-    background:#b32626;
-    color:#fff;
-    border:0;
+    border:1px solid rgba(183,123,127,.35);
+    border-radius:12px;
+    padding:12px;
+    background:white;
+    color:#8e5e63;
 }
 
 /* =========================
@@ -830,23 +703,24 @@ body{
 
 .toast{
     position:fixed;
-    left:50%;
-    bottom:20px;
-    transform:translate(-50%,120px);
-    z-index:300;
-    background:#432f34;
-    color:#fff;
-    padding:12px 18px;
+    left:18px;
+    bottom:18px;
+    max-width:330px;
+    background:#4b3035;
+    color:white;
+    padding:13px 16px;
     border-radius:13px;
     font-size:12px;
     opacity:0;
-    transition:.3s;
+    transform:translateY(20px);
     pointer-events:none;
+    transition:.3s;
+    z-index:10000;
 }
 
 .toast.show{
-    transform:translate(-50%,0);
     opacity:1;
+    transform:translateY(0);
 }
 
 /* =========================
@@ -855,112 +729,87 @@ body{
 
 @media(max-width:650px){
 
-    .topbar-inner{
-        min-height:65px;
+    .dashboard{
+        padding:15px 11px 40px;
+    }
+
+    .topbar{
+        align-items:flex-start;
     }
 
     .brand h1{
-        font-size:16px;
+        font-size:21px;
     }
 
     .stats{
-        grid-template-columns:repeat(3,1fr);
-        gap:7px;
+        gap:8px;
     }
 
-    .stat-card{
-        padding:13px 9px;
+    .stat{
+        padding:12px 7px;
+    }
+
+    .stat-number{
+        font-size:21px;
     }
 
     .stat-label{
         font-size:10px;
     }
 
-    .stat-number{
-        font-size:20px;
-    }
-
-    .search-row{
-        flex-direction:column;
-    }
-
-    .date-input{
-        width:100%;
-    }
-
-    .card-info{
+    .info-grid{
         grid-template-columns:1fr 1fr;
     }
 
-    .card-actions{
-        flex-wrap:wrap;
+    .actions{
+        grid-template-columns:1fr 1fr 1fr;
     }
 
-    .action-button{
-        min-width:calc(50% - 4px);
-    }
-
-    .new-booking-alert{
-        align-items:flex-start;
-    }
-
-    .alert-button{
-        padding:7px 10px;
-        font-size:10px;
-    }
 }
 
 </style>
 </head>
 
+
 <body>
+
 
 <!-- =========================
      LOGIN
 ========================= -->
 
-<div class="login-screen" id="loginScreen">
+<div class="login-page" id="loginPage">
 
     <div class="login-box">
 
-        <img
-            src="HOBAB_logo_cropped.png"
-            class="login-logo"
-            alt="HOBAB BEAUTY"
-        >
+        <div class="login-logo">
+            <strong>HOBAB</strong>
+            <span>BEAUTY</span>
+        </div>
 
-        <h1>HOBAB BEAUTY</h1>
-
-        <p>پنل مدیریت رزروها</p>
+        <h2>مدیریت رزروها</h2>
 
         <input
             type="email"
             id="loginEmail"
             class="login-input"
-            placeholder="ایمیل"
-            autocomplete="email"
-        >
+            placeholder="ایمیل">
 
         <input
             type="password"
             id="loginPassword"
             class="login-input"
-            placeholder="رمز عبور"
-            autocomplete="current-password"
-        >
+            placeholder="رمز عبور">
 
         <button
             class="login-button"
-            id="loginButton"
-        >
+            onclick="login()">
             ورود به پنل
         </button>
 
         <div
             class="login-error"
-            id="loginError"
-        >
-            ایمیل یا رمز عبور صحیح نیست.
+            id="loginError">
         </div>
 
     </div>
@@ -968,420 +817,307 @@ body{
 </div>
 
 
-<!-- =========================
-     ADMIN APP
-========================= -->
-
-<div class="admin-app" id="adminApp">
-
-    <header class="topbar">
-
-        <div class="topbar-inner">
-
-            <div class="brand">
-
-                <div class="brand-dot"></div>
-
-                <div>
-                    <h1>HOBAB BEAUTY</h1>
-                    <span>مدیریت رزروها</span>
-                </div>
-
-            </div>
-
-            <button
-                class="logout-button"
-                id="logoutButton"
-            >
-                خروج
-            </button>
-
-        </div>
-
-    </header>
-
-
-    <main class="container">
-
-
-        <!-- =========================
-             NEW BOOKING ALERT
-        ========================= -->
-
-        <div
-            class="new-booking-alert"
-            id="newBookingAlert"
-        >
-
-            <div class="alert-right">
-
-                <div class="alert-dot"></div>
-
-                <div>
-
-                    <div class="alert-title">
-                        رزرو جدید دارید
-                    </div>
-
-                    <div
-                        class="alert-count"
-                        id="alertCount"
-                    >
-                        ۰ رزرو جدید
-                    </div>
-
-                </div>
-
-            </div>
-
-            <button
-                class="alert-button"
-                id="alertButton"
-            >
-                مشاهده
-            </button>
-
-        </div>
-
-
-        <!-- =========================
-             STATS
-        ========================= -->
-
-        <div class="stats">
-
-            <div class="stat-card">
-
-                <div class="stat-label">
-                    کل رزروها
-                </div>
-
-                <div
-                    class="stat-number"
-                    id="totalCount"
-                >
-                    ۰
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-label">
-                    در انتظار تأیید
-                </div>
-
-                <div
-                    class="stat-number"
-                    id="pendingCount"
-                >
-                    ۰
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-label">
-                    تأیید شده
-                </div>
-
-                <div
-                    class="stat-number"
-                    id="confirmedCount"
-                >
-                    ۰
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- =========================
-             FILTERS
-        ========================= -->
-
-        <div class="filter-box">
-
-            <div class="search-row">
-
-                <input
-                    type="text"
-                    id="searchInput"
-                    class="search-input"
-                    placeholder="جستجو بر اساس نام یا شماره موبایل..."
-                >
-
-                <input
-                    type="text"
-                    id="dateFilter"
-                    class="date-input"
-                    placeholder="تاریخ"
-                >
-
-            </div>
-
-
-            <div class="filter-row">
-
-                <button
-                    class="filter-button active"
-                    data-status="all"
-                >
-                    همه
-                </button>
-
-                <button
-                    class="filter-button"
-                    data-status="pending"
-                >
-                    در انتظار تأیید
-                </button>
-
-                <button
-                    class="filter-button"
-                    data-status="confirmed"
-                >
-                    تأیید شده
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- =========================
-             SERVICE TABS
-        ========================= -->
-
-        <div
-            class="service-tabs"
-            id="serviceTabs"
-        >
-
-            <button
-                class="service-tab active"
-                data-service="all"
-            >
-                همه
-            </button>
-
-            <button
-                class="service-tab"
-                data-service="hair"
-            >
-                مو
-            </button>
-
-            <button
-                class="service-tab"
-                data-service="makeup"
-            >
-                میکاپ
-            </button>
-
-            <button
-                class="service-tab"
-                data-service="nail"
-            >
-                ناخن
-            </button>
-
-            <button
-                class="service-tab"
-                data-service="lash"
-            >
-                مژه
-            </button>
-
-            <button
-                class="service-tab"
-                data-service="brow"
-            >
-                ابرو
-            </button>
-
-            <button
-                class="service-tab"
-                data-service="skin"
-            >
-                پوست
-            </button>
-
-            <button
-                class="service-tab"
-                data-service="bridal"
-            >
-                عروس
-            </button>
-
-        </div>
-
-
-        <!-- =========================
-             APPOINTMENTS
-        ========================= -->
-
-        <div id="appointmentsContainer"></div>
-
-    </main>
-
-</div>
-
 
 <!-- =========================
-     CONFIRM TIME MODAL
+     DASHBOARD
 ========================= -->
 
-<div
-    class="modal-overlay"
-    id="confirmModal"
->
+<div class="dashboard" id="dashboard">
 
-    <div class="modal">
+    <div class="topbar">
 
-        <h2 id="confirmModalTitle">
-            تأیید نوبت
-        </h2>
-
-        <div class="modal-subtitle">
-            ساعت دقیق نوبت را انتخاب کنید.
+        <div class="brand">
+            <h1>HOBAB BEAUTY</h1>
+            <p>مدیریت رزروها</p>
         </div>
 
+        <button
+            class="logout"
+            onclick="logout()">
+            خروج
+        </button>
 
-        <div class="time-picker">
-
-            <!-- HOUR -->
-
-            <div class="time-column">
-
-                <div class="time-label">
-                    ساعت
-                </div>
-
-                <div class="wheel-wrapper">
-
-                    <div class="wheel-fade top"></div>
-
-                    <div
-                        class="time-wheel"
-                        id="hourWheel"
-                    ></div>
-
-                    <div class="wheel-fade bottom"></div>
-
-                    <div class="wheel-selected"></div>
-
-                </div>
-
-            </div>
+    </div>
 
 
-            <div class="time-colon">
-                :
-            </div>
+    <!-- NEW ALERT -->
 
+    <div
+        class="new-alert"
+        id="newAlert">
 
-            <!-- MINUTE -->
+        <div class="new-alert-text">
 
-            <div class="time-column">
-
-                <div class="time-label">
-                    دقیقه
-                </div>
-
-                <div class="wheel-wrapper">
-
-                    <div class="wheel-fade top"></div>
-
-                    <div
-                        class="time-wheel"
-                        id="minuteWheel"
-                    ></div>
-
-                    <div class="wheel-fade bottom"></div>
-
-                    <div class="wheel-selected"></div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="selected-time-box">
+            <span class="alert-dot"></span>
 
             <span>
-                ساعت انتخاب‌شده
+                رزرو جدید دارید
+                <span id="newCountText"></span>
             </span>
 
-            <strong id="selectedTimePreview">
-                09:00
-            </strong>
+        </div>
 
+        <button onclick="showPending()">
+            مشاهده
+        </button>
+
+    </div>
+
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+        <div class="stat">
+            <div
+                class="stat-number"
+                id="totalCount">
+                0
+            </div>
+
+            <div class="stat-label">
+                کل نوبت‌ها
+            </div>
         </div>
 
 
-        <div class="modal-actions">
+        <div class="stat">
+            <div
+                class="stat-number"
+                id="pendingCount">
+                0
+            </div>
 
-            <button
-                class="modal-button modal-cancel"
-                id="confirmCancel"
-            >
-                انصراف
-            </button>
-
-            <button
-                class="modal-button modal-confirm"
-                id="modalConfirm"
-            >
-                تأیید نوبت
-            </button>
-
+            <div class="stat-label">
+                در انتظار تأیید
+            </div>
         </div>
 
+
+        <div class="stat">
+            <div
+                class="stat-number"
+                id="confirmedCount">
+                0
+            </div>
+
+            <div class="stat-label">
+                تأیید شده
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- DAYS -->
+
+    <div class="section-title">
+        نمایش نوبت‌ها
+    </div>
+
+    <div
+        class="day-scroller"
+        id="dayScroller">
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div class="status-filter">
+
+        <button
+            class="status-button active"
+            data-status="all"
+            onclick="setStatus('all',this)">
+            همه
+        </button>
+
+        <button
+            class="status-button"
+            data-status="pending"
+            onclick="setStatus('pending',this)">
+            در انتظار
+        </button>
+
+        <button
+            class="status-button"
+            data-status="confirmed"
+            onclick="setStatus('confirmed',this)">
+            تأیید شده
+        </button>
+
+    </div>
+
+
+    <!-- SERVICES -->
+
+    <div class="service-tabs">
+
+        <button
+            class="service-tab active"
+            data-service="all"
+            onclick="setService('all',this)">
+            همه
+            <span class="service-badge"></span>
+        </button>
+
+
+        <button
+            class="service-tab"
+            data-service="مو"
+            onclick="setService('مو',this)">
+            مو
+            <span class="service-badge"></span>
+        </button>
+
+
+        <button
+            class="service-tab"
+            data-service="میکاپ"
+            onclick="setService('میکاپ',this)">
+            میکاپ
+            <span class="service-badge"></span>
+        </button>
+
+
+        <button
+            class="service-tab"
+            data-service="ناخن"
+            onclick="setService('ناخن',this)">
+            ناخن
+            <span class="service-badge"></span>
+        </button>
+
+
+        <button
+            class="service-tab"
+            data-service="مژه"
+            onclick="setService('مژه',this)">
+            مژه
+            <span class="service-badge"></span>
+        </button>
+
+
+        <button
+            class="service-tab"
+            data-service="ابرو"
+            onclick="setService('ابرو',this)">
+            ابرو
+            <span class="service-badge"></span>
+        </button>
+
+
+        <button
+            class="service-tab"
+            data-service="پوست"
+            onclick="setService('پوست',this)">
+            پوست
+            <span class="service-badge"></span>
+        </button>
+
+
+        <button
+            class="service-tab"
+            data-service="عروس"
+            onclick="setService('عروس',this)">
+            عروس
+            <span class="service-badge"></span>
+        </button>
+
+    </div>
+
+
+    <!-- APPOINTMENTS -->
+
+    <div id="appointmentsContainer">
+        <div class="loading">
+            در حال دریافت نوبت‌ها...
+        </div>
     </div>
 
 </div>
 
 
+
 <!-- =========================
-     DELETE MODAL
+     TIME MODAL
 ========================= -->
 
 <div
     class="modal-overlay"
-    id="deleteModal"
->
+    id="timeModal">
 
     <div class="modal">
 
-        <h2>
-            حذف نوبت
-        </h2>
+        <h3>
+            تعیین ساعت دقیق نوبت
+        </h3>
 
-        <div class="modal-subtitle">
-            آیا از حذف این رزرو مطمئن هستید؟
+        <div
+            class="modal-subtitle"
+            id="modalCustomer">
         </div>
+
+
+        <div class="time-selectors">
+
+            <div class="time-selector-box">
+
+                <label>
+                    ساعت
+                </label>
+
+                <div
+                    class="time-selector"
+                    id="hourSelector">
+                </div>
+
+            </div>
+
+
+            <div class="time-selector-box">
+
+                <label>
+                    دقیقه
+                </label>
+
+                <div
+                    class="time-selector"
+                    id="minuteSelector">
+
+                    <div
+                        class="time-option selected"
+                        data-value="00"
+                        onclick="selectMinute(this)">
+                        00
+                    </div>
+
+                    <div
+                        class="time-option"
+                        data-value="30"
+                        onclick="selectMinute(this)">
+                        30
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
 
         <div class="modal-actions">
 
             <button
-                class="modal-button modal-cancel"
-                id="deleteCancel"
-            >
-                انصراف
+                class="modal-save"
+                onclick="saveConfirmedTime()">
+                ثبت ساعت
             </button>
 
             <button
-                class="modal-button modal-delete"
-                id="deleteConfirm"
-            >
-                حذف نوبت
+                class="modal-cancel"
+                onclick="closeTimeModal()">
+                انصراف
             </button>
 
         </div>
@@ -1390,22 +1126,15 @@ body{
 
 </div>
 
-
-<!-- =========================
-     TOAST
-========================= -->
 
 <div
     class="toast"
-    id="toast"
-></div>
+    id="toast">
+</div>
+
 
 
 <script>
-
-/* =========================================================
-   SUPABASE
-========================================================= */
 
 const SUPABASE_URL =
     "https://oeadtawmcbzblkmfqmbd.supabase.co";
@@ -1420,479 +1149,1852 @@ const supabaseClient =
     );
 
 
-/* =========================================================
-   SERVICES
-========================================================= */
-
-const serviceNames = {
-
-    hair:"مو",
-
-    makeup:"میکاپ",
-
-    nail:"ناخن",
-
-    lash:"مژه",
-
-    brow:"ابرو",
-
-    skin:"پوست",
-
-    bridal:"عروس"
-
-};
-
-
-/* =========================================================
-   VARIABLES
-========================================================= */
+/* =========================
+   STATE
+========================= */
 
 let appointments = [];
 
-let selectedAppointment = null;
+let selectedDay = "today";
 
-let selectedDeleteAppointment = null;
+let selectedStatus = "all";
+
+let selectedService = "all";
+
+let currentAppointmentId = null;
 
 let selectedHour = "09";
 
 let selectedMinute = "00";
 
-let currentStatusFilter = "all";
-
-let currentServiceFilter = "all";
-
 let refreshTimer = null;
 
-let previousNewAppointmentIds = new Set();
+let knownPendingIds = new Set();
+
+let firstLoad = true;
 
 
-/* =========================================================
-   ELEMENTS
-========================================================= */
+/* =========================
+   SERVICE GROUPS
+========================= */
 
-const loginScreen =
-    document.getElementById("loginScreen");
+const serviceGroups = {
 
-const adminApp =
-    document.getElementById("adminApp");
+    "مو":[
+        "مو",
+        "کوتاهی مو",
+        "رنگ مو",
+        "کراتین",
+        "شینیون",
+        "براشینگ",
+        "احیا مو"
+    ],
 
-const loginButton =
-    document.getElementById("loginButton");
+    "میکاپ":[
+        "میکاپ",
+        "میکاپ صورت",
+        "آرایش"
+    ],
 
-const loginError =
-    document.getElementById("loginError");
+    "ناخن":[
+        "ناخن",
+        "کاشت ناخن",
+        "ژل",
+        "ترمیم ناخن"
+    ],
 
-const logoutButton =
-    document.getElementById("logoutButton");
+    "مژه":[
+        "مژه",
+        "اکستنشن مژه",
+        "لیفت مژه"
+    ],
 
-const searchInput =
-    document.getElementById("searchInput");
+    "ابرو":[
+        "ابرو",
+        "لیفت ابرو",
+        "اصلاح ابرو"
+    ],
 
-const dateFilter =
-    document.getElementById("dateFilter");
+    "پوست":[
+        "پوست",
+        "پاکسازی پوست",
+        "فیشیال"
+    ],
 
-const appointmentsContainer =
-    document.getElementById("appointmentsContainer");
+    "عروس":[
+        "عروس",
+        "پکیج عروس",
+        "میکاپ عروس"
+    ]
 
-const totalCount =
-    document.getElementById("totalCount");
-
-const pendingCount =
-    document.getElementById("pendingCount");
-
-const confirmedCount =
-    document.getElementById("confirmedCount");
-
-const newBookingAlert =
-    document.getElementById("newBookingAlert");
-
-const alertCount =
-    document.getElementById("alertCount");
-
-const alertButton =
-    document.getElementById("alertButton");
-
-const confirmModal =
-    document.getElementById("confirmModal");
-
-const deleteModal =
-    document.getElementById("deleteModal");
-
-const hourWheel =
-    document.getElementById("hourWheel");
-
-const minuteWheel =
-    document.getElementById("minuteWheel");
-
-const selectedTimePreview =
-    document.getElementById("selectedTimePreview");
-
-const modalConfirm =
-    document.getElementById("modalConfirm");
-
-const confirmModalTitle =
-    document.getElementById("confirmModalTitle");
+};
 
 
-/* =========================================================
-   TOAST
-========================================================= */
+/* =========================
+   PERSIAN NUMBERS
+========================= */
 
-function showToast(message){
+function toPersianNumber(value){
 
-    const toast =
-        document.getElementById("toast");
+    return String(value)
+        .replace(/0/g,"۰")
+        .replace(/1/g,"۱")
+        .replace(/2/g,"۲")
+        .replace(/3/g,"۳")
+        .replace(/4/g,"۴")
+        .replace(/5/g,"۵")
+        .replace(/6/g,"۶")
+        .replace(/7/g,"۷")
+        .replace(/8/g,"۸")
+        .replace(/9/g,"۹");
 
-    toast.textContent = message;
-
-    toast.classList.add("show");
-
-    setTimeout(function(){
-
-        toast.classList.remove("show");
-
-    },3000);
 }
 
 
-/* =========================================================
-   LOGIN
-========================================================= */
+/* =========================
+   JALALI DATE
+========================= */
 
-async function checkSession(){
+function getJalaliDate(offset = 0){
 
-    const {
-        data
-    } = await supabaseClient.auth.getSession();
+    const date = new Date();
 
-    if(data.session){
+    date.setDate(
+        date.getDate() + offset
+    );
 
-        showAdmin();
+    const formatter =
+        new Intl.DateTimeFormat(
+            "fa-IR-u-ca-persian",
+            {
+                year:"numeric",
+                month:"long",
+                day:"numeric"
+            }
+        );
 
-    }else{
+    const parts =
+        formatter.formatToParts(date);
 
-        showLogin();
+    let year = "";
+    let month = "";
+    let day = "";
+
+    parts.forEach(part => {
+
+        if(part.type === "year"){
+            year = part.value;
+        }
+
+        if(part.type === "month"){
+            month = part.value;
+        }
+
+        if(part.type === "day"){
+            day = part.value;
+        }
+
+    });
+
+    return {
+        year,
+        month,
+        day,
+        text:
+            `${day} ${month} ${year}`
+    };
+
+}
+
+
+/* =========================
+   BUILD DAY FILTER
+========================= */
+
+function buildDayFilter(){
+
+    const container =
+        document.getElementById(
+            "dayScroller"
+        );
+
+    container.innerHTML = "";
+
+    const dayNames = [
+        "امروز",
+        "فردا",
+        "پس‌فردا",
+        "۳ روز بعد",
+        "۴ روز بعد",
+        "۵ روز بعد",
+        "۶ روز بعد",
+        "۷ روز بعد"
+    ];
+
+    for(
+        let i = 0;
+        i <= 7;
+        i++
+    ){
+
+        const date =
+            getJalaliDate(i);
+
+        const button =
+            document.createElement("button");
+
+        button.className =
+            "day-button";
+
+        if(i === 0){
+
+            button.classList.add(
+                "today"
+            );
+
+        }
+
+        if(
+            selectedDay ===
+            String(i)
+        ){
+
+            button.classList.add(
+                "active"
+            );
+
+        }
+
+        button.innerHTML = `
+            ${dayNames[i]}
+            <small>
+                ${date.day} ${date.month}
+            </small>
+        `;
+
+        button.onclick =
+            function(){
+
+                selectedDay =
+                    String(i);
+
+                buildDayFilter();
+
+                renderAppointments();
+
+            };
+
+        container.appendChild(button);
 
     }
 
+
+    const allButton =
+        document.createElement("button");
+
+    allButton.className =
+        "day-button";
+
+    if(selectedDay === "all"){
+
+        allButton.classList.add(
+            "active"
+        );
+
+    }
+
+    allButton.innerHTML = `
+        همه
+        <small>
+            تمام نوبت‌ها
+        </small>
+    `;
+
+    allButton.onclick =
+        function(){
+
+            selectedDay = "all";
+
+            buildDayFilter();
+
+            renderAppointments();
+
+        };
+
+    container.appendChild(allButton);
+
 }
 
 
-function showLogin(){
+/* =========================
+   LOGIN
+========================= */
 
-    loginScreen.style.display =
-        "flex";
+async function login(){
 
-    adminApp.style.display =
-        "none";
+    const email =
+        document
+        .getElementById("loginEmail")
+        .value
+        .trim();
+
+    const password =
+        document
+        .getElementById("loginPassword")
+        .value;
+
+    const error =
+        document
+        .getElementById("loginError");
+
+    error.textContent = "";
+
+    if(!email || !password){
+
+        error.textContent =
+            "ایمیل و رمز عبور را وارد کنید.";
+
+        return;
+
+    }
+
+    const {
+        data,
+        error:loginError
+    } =
+        await supabaseClient.auth
+        .signInWithPassword({
+            email,
+            password
+        });
+
+    if(loginError){
+
+        error.textContent =
+            "ایمیل یا رمز عبور صحیح نیست.";
+
+        return;
+
+    }
+
+    showDashboard();
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+async function logout(){
+
+    await supabaseClient.auth.signOut();
 
     if(refreshTimer){
 
-        clearInterval(refreshTimer);
+        clearInterval(
+            refreshTimer
+        );
 
         refreshTimer = null;
 
     }
 
+    document
+        .getElementById("dashboard")
+        .style.display = "none";
+
+    document
+        .getElementById("loginPage")
+        .style.display = "flex";
+
 }
 
 
-function showAdmin(){
+/* =========================
+   SHOW DASHBOARD
+========================= */
 
-    loginScreen.style.display =
-        "none";
+async function showDashboard(){
 
-    adminApp.style.display =
-        "block";
+    document
+        .getElementById("loginPage")
+        .style.display = "none";
 
-    loadAppointments();
+    document
+        .getElementById("dashboard")
+        .style.display = "block";
+
+    buildDayFilter();
+
+    await loadAppointments();
+
+    startAutoRefresh();
+
+}
+
+
+/* =========================
+   LOAD APPOINTMENTS
+========================= */
+
+async function loadAppointments(
+    silent = false
+){
+
+    if(!silent){
+
+        document
+            .getElementById(
+                "appointmentsContainer"
+            )
+            .innerHTML = `
+                <div class="loading">
+                    در حال دریافت نوبت‌ها...
+                </div>
+            `;
+
+    }
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+        .from("appointments")
+        .select("*")
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        );
+
+    if(error){
+
+        document
+            .getElementById(
+                "appointmentsContainer"
+            )
+            .innerHTML = `
+                <div class="empty">
+                    <strong>
+                        خطا در دریافت نوبت‌ها
+                    </strong>
+                    دوباره تلاش کنید.
+                </div>
+            `;
+
+        return;
+
+    }
+
+    const oldPendingIds =
+        new Set(
+            appointments
+                .filter(a => !a.confirmed)
+                .map(a => a.id)
+        );
+
+    appointments =
+        data || [];
+
+    const newPending =
+        appointments.filter(
+            a => !a.confirmed
+        );
+
+    updateStats();
+
+    updateServiceBadges();
+
+    if(!firstLoad){
+
+        const reallyNew =
+            newPending.filter(
+                a =>
+                    !oldPendingIds.has(a.id) &&
+                    !knownPendingIds.has(a.id)
+            );
+
+        if(reallyNew.length){
+
+            showToast(
+                "یک رزرو جدید ثبت شد"
+            );
+
+            browserNotification(
+                "رزرو جدید HOBAB BEAUTY",
+                "یک رزرو جدید ثبت شده است."
+            );
+
+        }
+
+    }
+
+    knownPendingIds =
+        new Set(
+            newPending.map(
+                a => a.id
+            )
+        );
+
+    firstLoad = false;
+
+    renderAppointments();
+
+}
+
+
+/* =========================
+   AUTO REFRESH
+========================= */
+
+function startAutoRefresh(){
 
     if(refreshTimer){
 
-        clearInterval(refreshTimer);
+        clearInterval(
+            refreshTimer
+        );
 
     }
 
     refreshTimer =
         setInterval(
-            silentRefresh,
+            function(){
+
+                loadAppointments(true);
+
+            },
             10000
         );
 
 }
 
 
-/* =========================================================
-   LOGIN BUTTON
-========================================================= */
+/* =========================
+   STATS
+========================= */
 
-loginButton.addEventListener(
-    "click",
-    async function(){
+function updateStats(){
 
-        const email =
-            document.getElementById("loginEmail").value.trim();
+    const total =
+        appointments.length;
 
-        const password =
-            document.getElementById("loginPassword").value;
+    const pending =
+        appointments.filter(
+            a => !a.confirmed
+        ).length;
 
-        loginError.style.display =
-            "none";
+    const confirmed =
+        appointments.filter(
+            a => a.confirmed
+        ).length;
 
-        if(!email || !password){
+    document
+        .getElementById("totalCount")
+        .textContent =
+        toPersianNumber(total);
 
-            loginError.textContent =
-                "ایمیل و رمز عبور را وارد کنید.";
+    document
+        .getElementById("pendingCount")
+        .textContent =
+        toPersianNumber(pending);
 
-            loginError.style.display =
-                "block";
-
-            return;
-
-        }
-
-
-        loginButton.disabled =
-            true;
-
-        loginButton.textContent =
-            "در حال ورود...";
+    document
+        .getElementById("confirmedCount")
+        .textContent =
+        toPersianNumber(confirmed);
 
 
-        const {
-            data,
-            error
-        } =
-        await supabaseClient.auth.signInWithPassword({
+    const alert =
+        document.getElementById(
+            "newAlert"
+        );
 
-            email:email,
+    const countText =
+        document.getElementById(
+            "newCountText"
+        );
 
-            password:password
+    if(pending > 0){
 
-        });
+        alert.classList.add(
+            "show"
+        );
 
+        countText.textContent =
+            `(${toPersianNumber(pending)})`;
 
-        loginButton.disabled =
-            false;
+    }else{
 
-        loginButton.textContent =
-            "ورود به پنل";
+        alert.classList.remove(
+            "show"
+        );
 
-
-        if(error){
-
-            loginError.textContent =
-                "ایمیل یا رمز عبور صحیح نیست.";
-
-            loginError.style.display =
-                "block";
-
-            return;
-
-        }
-
-
-        if(data.session){
-
-            showAdmin();
-
-        }
+        countText.textContent = "";
 
     }
-);
+
+}
 
 
-/* =========================================================
-   ENTER LOGIN
-========================================================= */
+/* =========================
+   SERVICE BADGES
+========================= */
 
-document
-    .getElementById("loginPassword")
-    .addEventListener(
-        "keydown",
-        function(e){
+function updateServiceBadges(){
 
-            if(e.key === "Enter"){
+    document
+        .querySelectorAll(
+            ".service-tab"
+        )
+        .forEach(tab => {
 
-                loginButton.click();
+            const service =
+                tab.dataset.service;
+
+            const badge =
+                tab.querySelector(
+                    ".service-badge"
+                );
+
+            if(service === "all"){
+
+                const count =
+                    appointments.filter(
+                        a => !a.confirmed
+                    ).length;
+
+                if(count){
+
+                    badge.textContent =
+                        toPersianNumber(count);
+
+                    badge.classList.add(
+                        "show"
+                    );
+
+                }else{
+
+                    badge.classList.remove(
+                        "show"
+                    );
+
+                }
+
+                return;
 
             }
 
-        }
-    );
+            const count =
+                appointments.filter(
+                    a =>
+                        !a.confirmed &&
+                        belongsToService(
+                            a.service,
+                            service
+                        )
+                ).length;
 
+            if(count){
 
-/* =========================================================
-   LOGOUT
-========================================================= */
+                badge.textContent =
+                    toPersianNumber(count);
 
-logoutButton.addEventListener(
-    "click",
-    async function(){
+                badge.classList.add(
+                    "show"
+                );
 
-        await supabaseClient.auth.signOut();
+            }else{
 
-        showLogin();
+                badge.classList.remove(
+                    "show"
+                );
 
-    }
-);
+            }
 
-
-/* =========================================================
-   LOAD APPOINTMENTS
-========================================================= */
-
-async function loadAppointments(){
-
-    const {
-        data,
-        error
-    } =
-    await supabaseClient
-        .from("appointments")
-        .select("*")
-        .order("date",{
-            ascending:true
-        })
-        .order("time",{
-            ascending:true
         });
 
+}
 
-    if(error){
 
-        console.error(error);
+/* =========================
+   SERVICE MATCH
+========================= */
 
-        showToast(
-            "خطا در دریافت رزروها"
-        );
+function belongsToService(
+    appointmentService,
+    group
+){
 
-        return;
+    if(!appointmentService){
+
+        return false;
 
     }
 
+    if(
+        appointmentService === group
+    ){
 
-    appointments =
-        data || [];
+        return true;
+
+    }
+
+    const list =
+        serviceGroups[group] || [];
+
+    return list.includes(
+        appointmentService
+    );
+
+}
 
 
-    updateStats();
+/* =========================
+   SET STATUS
+========================= */
 
-    updateNewNotifications();
+function setStatus(
+    status,
+    button
+){
+
+    selectedStatus =
+        status;
+
+    document
+        .querySelectorAll(
+            ".status-button"
+        )
+        .forEach(
+            b =>
+                b.classList.remove(
+                    "active"
+                )
+        );
+
+    button.classList.add(
+        "active"
+    );
 
     renderAppointments();
 
 }
 
 
-/* =========================================================
-   SILENT REFRESH
-========================================================= */
+/* =========================
+   SET SERVICE
+========================= */
 
-async function silentRefresh(){
+function setService(
+    service,
+    button
+){
 
-    const {
-        data,
-        error
-    } =
-    await supabaseClient
-        .from("appointments")
-        .select("*")
-        .order("date",{
-            ascending:true
-        })
-        .order("time",{
-            ascending:true
-        });
+    selectedService =
+        service;
+
+    document
+        .querySelectorAll(
+            ".service-tab"
+        )
+        .forEach(
+            b =>
+                b.classList.remove(
+                    "active"
+                )
+        );
+
+    button.classList.add(
+        "active"
+    );
+
+    renderAppointments();
+
+}
 
 
-    if(error){
+/* =========================
+   SHOW PENDING
+========================= */
 
-        console.error(error);
+function showPending(){
+
+    selectedStatus =
+        "pending";
+
+    document
+        .querySelectorAll(
+            ".status-button"
+        )
+        .forEach(
+            b => {
+
+                b.classList.remove(
+                    "active"
+                );
+
+                if(
+                    b.dataset.status ===
+                    "pending"
+                ){
+
+                    b.classList.add(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+    renderAppointments();
+
+    window.scrollTo({
+        top:300,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   FILTER DATE
+========================= */
+
+function appointmentMatchesDay(
+    appointment
+){
+
+    if(selectedDay === "all"){
+
+        return true;
+
+    }
+
+    const target =
+        getJalaliDate(
+            Number(selectedDay)
+        );
+
+    return normalizeText(
+        appointment.date
+    ) === normalizeText(
+        target.text
+    );
+
+}
+
+
+/* =========================
+   NORMALIZE
+========================= */
+
+function normalizeText(text){
+
+    if(!text){
+
+        return "";
+
+    }
+
+    return String(text)
+        .replace(/ي/g,"ی")
+        .replace(/ك/g,"ک")
+        .replace(/[۰-۹]/g,
+            d =>
+                "0123456789"[
+                    "۰۱۲۳۴۵۶۷۸۹"
+                    .indexOf(d)
+                ]
+        )
+        .trim();
+
+}
+
+
+/* =========================
+   RENDER
+========================= */
+
+function renderAppointments(){
+
+    let filtered =
+        appointments.filter(
+            appointment => {
+
+                if(
+                    !appointmentMatchesDay(
+                        appointment
+                    )
+                ){
+
+                    return false;
+
+                }
+
+                if(
+                    selectedStatus ===
+                    "pending" &&
+                    appointment.confirmed
+                ){
+
+                    return false;
+
+                }
+
+                if(
+                    selectedStatus ===
+                    "confirmed" &&
+                    !appointment.confirmed
+                ){
+
+                    return false;
+
+                }
+
+                if(
+                    selectedService !==
+                    "all" &&
+                    !belongsToService(
+                        appointment.service,
+                        selectedService
+                    )
+                ){
+
+                    return false;
+
+                }
+
+                return true;
+
+            }
+        );
+
+
+    /* SORT */
+
+    filtered.sort(
+        function(a,b){
+
+            const da =
+                normalizeText(
+                    a.date
+                );
+
+            const db =
+                normalizeText(
+                    b.date
+                );
+
+            if(da < db){
+
+                return -1;
+
+            }
+
+            if(da > db){
+
+                return 1;
+
+            }
+
+            const ta =
+                a.confirmed_time ||
+                a.time ||
+                "";
+
+            const tb =
+                b.confirmed_time ||
+                b.time ||
+                "";
+
+            return String(ta)
+                .localeCompare(
+                    String(tb)
+                );
+
+        }
+    );
+
+
+    const container =
+        document.getElementById(
+            "appointmentsContainer"
+        );
+
+
+    if(!filtered.length){
+
+        let title =
+            "نوبتی وجود ندارد";
+
+        if(selectedDay !== "all"){
+
+            const target =
+                getJalaliDate(
+                    Number(selectedDay)
+                );
+
+            title =
+                `برای ${target.text} نوبتی ثبت نشده است`;
+
+        }
+
+        container.innerHTML = `
+            <div class="empty">
+                <strong>
+                    ${title}
+                </strong>
+                نوبت دیگری برای نمایش وجود ندارد.
+            </div>
+        `;
 
         return;
 
     }
 
 
-    const oldNewIds =
-        new Set(
-            appointments
-                .filter(a => !a.confirmed)
-                .map(a => String(a.id))
-        );
+    /* GROUP BY DATE */
 
+    const groups = {};
 
-    appointments =
-        data || [];
+    filtered.forEach(
+        appointment => {
 
+            const key =
+                appointment.date ||
+                "بدون تاریخ";
 
-    const currentNewAppointments =
-        appointments.filter(
-            a => !a.confirmed
-        );
+            if(!groups[key]){
 
+                groups[key] = [];
 
-    const currentNewIds =
-        new Set(
-            currentNewAppointments
-                .map(a => String(a.id))
-        );
+            }
 
-
-    /*
-       اگر رزرو جدیدی اضافه شده باشد،
-       اعلان را نمایش می‌دهیم.
-    */
-
-    let brandNewFound = false;
-
-
-    currentNewIds.forEach(function(id){
-
-        if(!oldNewIds.has(id)){
-
-            brandNewFound = true;
+            groups[key].push(
+                appointment
+            );
 
         }
-
-    });
-
-
-    updateStats();
-
-    updateNewNotifications();
-
-    renderAppointments();
+    );
 
 
-    if(brandNewFound){
+    let html = "";
 
-        showToast(
-            "یک رزرو جدید ثبت شد"
-        );
+    Object.keys(groups)
+        .forEach(
+            date => {
 
-        /*
-           صدای کوتاه مرورگر
-           در صورت اجازه مرورگر
-        */
+                const items =
+                    groups[date];
 
-        try{
+                html += `
+                    <div class="date-group">
 
-            if(
-                "Notification" in window &&
-                Notification.permission === "granted"
-            ){
+                        <div class="date-title">
 
-                new Notification(
-                    "HOBAB BEAUTY",
-                    {
-                        body:
-                        "یک رزرو جدید ثبت شده است."
+                            <div class="date-title-main">
+                                ${date}
+                            </div>
+
+                            <div class="date-count">
+                                ${toPersianNumber(items.length)}
+                                نوبت
+                            </div>
+
+                        </div>
+                `;
+
+
+                items.forEach(
+                    appointment => {
+
+                        html +=
+                            appointmentCard(
+                                appointment
+                            );
+
                     }
                 );
 
+
+                html += `
+                    </div>
+                `;
+
             }
+        );
+
+
+    container.innerHTML =
+        html;
+
+}
+
+
+/* =========================
+   APPOINTMENT CARD
+========================= */
+
+function appointmentCard(
+    appointment
+){
+
+    const isNew =
+        !appointment.confirmed;
+
+    const statusText =
+        appointment.confirmed
+            ? "نوبت تأیید شده"
+            : "در انتظار تأیید";
+
+
+    let timeText =
+        "صبح / بعدازظهر";
+
+    if(
+        appointment.confirmed &&
+        appointment.confirmed_time
+    ){
+
+        timeText =
+            appointment.confirmed_time;
+
+    }else if(
+        appointment.time ===
+        "morning"
+    ){
+
+        timeText =
+            "صبح";
+
+    }else if(
+        appointment.time ===
+        "afternoon"
+    ){
+
+        timeText =
+            "بعدازظهر";
+
+    }else if(
+        appointment.time
+    ){
+
+        timeText =
+            appointment.time;
+
+    }
+
+
+    const phone =
+        appointment.phone ||
+        "ثبت نشده";
+
+
+    const name =
+        appointment.name ||
+        "بدون نام";
+
+
+    const service =
+        appointment.service ||
+        "نامشخص";
+
+
+    const description =
+        appointment.description ||
+        "—";
+
+
+    return `
+
+        <div
+            class="appointment-card ${isNew ? "new" : ""}"
+            data-id="${appointment.id}">
+
+            <div class="card-top">
+
+                <div>
+
+                    <div class="customer-name">
+                        ${escapeHtml(name)}
+                    </div>
+
+                    <div class="service-name">
+                        ${escapeHtml(service)}
+                    </div>
+
+                </div>
+
+                <span class="new-label">
+                    رزرو جدید
+                </span>
+
+            </div>
+
+
+            <div class="info-grid">
+
+                <div class="info-item">
+
+                    <div class="info-label">
+                        شماره تماس
+                    </div>
+
+                    <div class="info-value">
+                        ${escapeHtml(phone)}
+                    </div>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <div class="info-label">
+                        بازه درخواستی
+                    </div>
+
+                    <div class="info-value">
+                        ${escapeHtml(timeText)}
+                    </div>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <div class="info-label">
+                        تاریخ
+                    </div>
+
+                    <div class="info-value">
+                        ${escapeHtml(
+                            appointment.date ||
+                            "—"
+                        )}
+                    </div>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <div class="info-label">
+                        توضیحات
+                    </div>
+
+                    <div class="info-value">
+                        ${escapeHtml(
+                            description
+                        )}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="status-line">
+
+                <div
+                    class="status-text ${
+                        appointment.confirmed
+                            ? "status-confirmed"
+                            : "status-pending"
+                    }">
+
+                    ${statusText}
+
+                </div>
+
+
+                ${
+                    appointment.confirmed &&
+                    appointment.confirmed_time
+
+                    ?
+
+                    `<div class="confirmed-time">
+                        ساعت ${escapeHtml(
+                            appointment.confirmed_time
+                        )}
+                    </div>`
+
+                    :
+
+                    ""
+                }
+
+            </div>
+
+
+            <div class="actions">
+
+                <button
+                    class="action-button call-button"
+                    onclick="callCustomer('${escapeAttribute(phone)}')">
+                    تماس با مشتری
+                </button>
+
+
+                <button
+                    class="action-button confirm-button"
+                    onclick="openTimeModal('${escapeAttribute(appointment.id)}')">
+
+                    ${
+                        appointment.confirmed
+                            ? "ویرایش ساعت"
+                            : "تأیید نوبت"
+                    }
+
+                </button>
+
+
+                <button
+                    class="action-button delete-button"
+                    onclick="deleteAppointment('${escapeAttribute(appointment.id)}')">
+                    حذف نوبت
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================
+   ESCAPE
+========================= */
+
+function escapeHtml(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeAttribute(value){
+
+    return String(value ?? "")
+        .replace(/\\/g,"\\\\")
+        .replace(/'/g,"\\'");
+}
+
+
+/* =========================
+   CALL
+========================= */
+
+function callCustomer(phone){
+
+    if(!phone){
+
+        return;
+
+    }
+
+    window.location.href =
+        "tel:" +
+        phone;
+
+}
+
+
+/* =========================
+   TIME MODAL
+========================= */
+
+function openTimeModal(
+    id
+){
+
+    const appointment =
+        appointments.find(
+            a => String(a.id) ===
+            String(id)
+        );
+
+    if(!appointment){
+
+        return;
+
+    }
+
+    currentAppointmentId =
+        id;
+
+
+    document
+        .getElementById(
+            "modalCustomer"
+        )
+        .textContent =
+        `${appointment.name || "مشتری"} — ${appointment.date || ""}`;
+
+
+    buildHourSelector(
+        appointment.confirmed_time
+    );
+
+
+    document
+        .getElementById(
+            "minuteSelector"
+        )
+        .querySelectorAll(
+            ".time-option"
+        )
+        .forEach(
+            option =>
+                option.classList.remove(
+                    "selected"
+                )
+        );
+
+
+    let minute =
+        "00";
+
+    if(
+        appointment.confirmed_time &&
+        appointment.confirmed_time.includes(":")
+    ){
+
+        minute =
+            appointment
+                .confirmed_time
+                .split(":")[1];
+
+    }
+
+    if(
+        minute !== "30"
+    ){
+
+        minute = "00";
+
+    }
+
+    selectedMinute =
+        minute;
+
+
+    const minuteOption =
+        document
+            .getElementById(
+                "minuteSelector"
+            )
+            .querySelector(
+                `[data-value="${minute}"]`
+            );
+
+    if(minuteOption){
+
+        minuteOption.classList.add(
+            "selected"
+        );
+
+    }
+
+
+    document
+        .getElementById(
+            "timeModal"
+        )
+        .classList.add(
+            "show"
+        );
+
+}
+
+
+/* =========================
+   HOURS
+========================= */
+
+function buildHourSelector(
+    existingTime
+){
+
+    const container =
+        document.getElementById(
+            "hourSelector"
+        );
+
+    container.innerHTML = "";
+
+    let existingHour =
+        "09";
+
+    if(
+        existingTime &&
+        existingTime.includes(":")
+    ){
+
+        existingHour =
+            existingTime
+                .split(":")[0];
+
+    }
+
+    selectedHour =
+        existingHour;
+
+
+    for(
+        let h = 8;
+        h <= 20;
+        h++
+    ){
+
+        const hour =
+            String(h)
+            .padStart(2,"0");
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+        div.className =
+            "time-option";
+
+        if(
+            hour === existingHour
+        ){
+
+            div.classList.add(
+                "selected"
+            );
+
+        }
+
+        div.dataset.value =
+            hour;
+
+        div.textContent =
+            toPersianNumber(hour);
+
+        div.onclick =
+            function(){
+
+                document
+                    .querySelectorAll(
+                        "#hourSelector .time-option"
+                    )
+                    .forEach(
+                        option =>
+                            option.classList.remove(
+                                "selected"
+                            )
+                    );
+
+                div.classList.add(
+                    "selected"
+                );
+
+                selectedHour =
+                    hour;
+
+            };
+
+        container.appendChild(
+            div
+        );
+
+    }
+
+}
+
+
+/* =========================
+   MINUTE
+========================= */
+
+function selectMinute(
+    element
+){
+
+    document
+        .querySelectorAll(
+            "#minuteSelector .time-option"
+        )
+        .forEach(
+            option =>
+                option.classList.remove(
+                    "selected"
+                )
+        );
+
+    element.classList.add(
+        "selected"
+    );
+
+    selectedMinute =
+        element.dataset.value;
+
+}
+
+
+/* =========================
+   SAVE CONFIRMED TIME
+========================= */
+
+async function saveConfirmedTime(){
+
+    if(!currentAppointmentId){
+
+        return;
+
+    }
+
+    const exactTime =
+        `${selectedHour}:${selectedMinute}`;
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+        .from("appointments")
+        .update({
+
+            confirmed:true,
+
+            confirmed_time:
+                exactTime
+
+        })
+        .eq(
+            "id",
+            currentAppointmentId
+        );
+
+
+    if(error){
+
+        showToast(
+            "ثبت ساعت انجام نشد"
+        );
+
+        return;
+
+    }
+
+
+    closeTimeModal();
+
+    showToast(
+        "ساعت نوبت با موفقیت ثبت شد"
+    );
+
+    await loadAppointments(true);
+
+}
+
+
+/* =========================
+   CLOSE MODAL
+========================= */
+
+function closeTimeModal(){
+
+    document
+        .getElementById(
+            "timeModal"
+        )
+        .classList.remove(
+            "show"
+        );
+
+    currentAppointmentId =
+        null;
+
+}
+
+
+/* =========================
+   DELETE
+========================= */
+
+async function deleteAppointment(
+    id
+){
+
+    const appointment =
+        appointments.find(
+            a =>
+                String(a.id) ===
+                String(id)
+        );
+
+
+    const customer =
+        appointment &&
+        appointment.name
+            ? appointment.name
+            : "این نوبت";
+
+
+    const ok =
+        confirm(
+            `آیا از حذف نوبت ${customer} مطمئن هستید؟`
+        );
+
+
+    if(!ok){
+
+        return;
+
+    }
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+        .from("appointments")
+        .delete()
+        .eq(
+            "id",
+            id
+        );
+
+
+    if(error){
+
+        showToast(
+            "حذف نوبت انجام نشد"
+        );
+
+        return;
+
+    }
+
+
+    showToast(
+        "نوبت حذف شد"
+    );
+
+
+    await loadAppointments(true);
+
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+let toastTimer = null;
+
+function showToast(
+    message
+){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+    toast.textContent =
+        message;
+
+    toast.classList.add(
+        "show"
+    );
+
+    if(toastTimer){
+
+        clearTimeout(
+            toastTimer
+        );
+
+    }
+
+    toastTimer =
+        setTimeout(
+            function(){
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            3500
+        );
+
+}
+
+
+/* =========================
+   BROWSER NOTIFICATION
+========================= */
+
+function browserNotification(
+    title,
+    body
+){
+
+    if(
+        !("Notification" in window)
+    ){
+
+        return;
+
+    }
+
+    if(
+        Notification.permission ===
+        "granted"
+    ){
+
+        new Notification(
+            title,
+            {
+                body:body
+            }
+        );
+
+    }
+
+}
+
+
+/* =========================
+   REQUEST NOTIFICATION
+========================= */
+
+async function requestNotificationPermission(){
+
+    if(
+        !("Notification" in window)
+    ){
+
+        return;
+
+    }
+
+    if(
+        Notification.permission ===
+        "default"
+    ){
+
+        try{
+
+            await Notification.requestPermission();
 
         }catch(e){}
 
@@ -1901,1816 +3003,102 @@ async function silentRefresh(){
 }
 
 
-/* =========================================================
-   UPDATE STATS
-========================================================= */
+/* =========================
+   INIT
+========================= */
 
-function updateStats(){
+async function init(){
 
-    const total =
-        appointments.length;
+    buildDayFilter();
 
-
-    const pending =
-        appointments.filter(
-            a => !a.confirmed
-        ).length;
-
-
-    const confirmed =
-        appointments.filter(
-            a => a.confirmed
-        ).length;
+    const {
+        data
+    } =
+        await supabaseClient
+        .auth
+        .getSession();
 
 
-    totalCount.textContent =
-        toPersianNumber(total);
+    if(
+        data &&
+        data.session
+    ){
 
-
-    pendingCount.textContent =
-        toPersianNumber(pending);
-
-
-    confirmedCount.textContent =
-        toPersianNumber(confirmed);
-
-}
-
-
-/* =========================================================
-   NEW NOTIFICATIONS
-========================================================= */
-
-function updateNewNotifications(){
-
-    /*
-       هر رزروی که confirmed=false باشد
-       به عنوان رزرو جدید/در انتظار در نظر گرفته می‌شود.
-    */
-
-    const newAppointments =
-        appointments.filter(
-            a => !a.confirmed
-        );
-
-
-    const newCount =
-        newAppointments.length;
-
-
-    if(newCount > 0){
-
-        newBookingAlert.classList.add(
-            "show"
-        );
-
-        alertCount.textContent =
-            `${toPersianNumber(newCount)} رزرو جدید`;
+        showDashboard();
 
     }else{
 
-        newBookingAlert.classList.remove(
-            "show"
-        );
-
-    }
-
-
-    /*
-       تعداد رزروهای جدید هر خدمت
-    */
-
-    document
-        .querySelectorAll(".service-tab")
-        .forEach(function(tab){
-
-            const oldBadge =
-                tab.querySelector(
-                    ".new-badge"
-                );
-
-            if(oldBadge){
-
-                oldBadge.remove();
-
-            }
-
-
-            tab.classList.remove(
-                "has-new"
-            );
-
-
-            const service =
-                tab.dataset.service;
-
-
-            if(service === "all"){
-
-                return;
-
-            }
-
-
-            const count =
-                newAppointments.filter(
-                    a =>
-                    a.service === service
-                ).length;
-
-
-            if(count > 0){
-
-                tab.classList.add(
-                    "has-new"
-                );
-
-
-                const badge =
-                    document.createElement(
-                        "span"
-                    );
-
-                badge.className =
-                    "new-badge";
-
-                badge.textContent =
-                    toPersianNumber(count);
-
-                tab.appendChild(
-                    badge
-                );
-
-            }
-
-        });
-
-}
-
-
-/* =========================================================
-   ALERT BUTTON
-========================================================= */
-
-alertButton.addEventListener(
-    "click",
-    function(){
-
-        currentStatusFilter =
-            "pending";
-
         document
-            .querySelectorAll(
-                ".filter-button"
+            .getElementById(
+                "loginPage"
             )
-            .forEach(function(button){
-
-                button.classList.remove(
-                    "active"
-                );
-
-            });
-
-
-        const pendingButton =
-            document.querySelector(
-                '[data-status="pending"]'
-            );
-
-
-        if(pendingButton){
-
-            pendingButton.classList.add(
-                "active"
-            );
-
-        }
-
-
-        renderAppointments();
-
-        window.scrollTo({
-            top:0,
-            behavior:"smooth"
-        });
+            .style.display =
+            "flex";
 
     }
-);
 
 
-/* =========================================================
-   SERVICE TABS
-========================================================= */
+    requestNotificationPermission();
+
+}
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+supabaseClient
+    .auth
+    .onAuthStateChange(
+        function(
+            event,
+            session
+        ){
+
+            if(
+                session &&
+                event ===
+                "SIGNED_IN"
+            ){
+
+                showDashboard();
+
+            }
+
+        }
+    );
+
+
+/* =========================
+   CLOSE MODAL BY BACKDROP
+========================= */
 
 document
-    .querySelectorAll(".service-tab")
-    .forEach(function(button){
-
-        button.addEventListener(
-            "click",
-            function(){
-
-                document
-                    .querySelectorAll(
-                        ".service-tab"
-                    )
-                    .forEach(function(btn){
-
-                        btn.classList.remove(
-                            "active"
-                        );
-
-                    });
-
-
-                button.classList.add(
-                    "active"
-                );
-
-
-                currentServiceFilter =
-                    button.dataset.service;
-
-
-                renderAppointments();
-
-            }
-        );
-
-    });
-
-
-/* =========================================================
-   STATUS FILTER
-========================================================= */
-
-document
-    .querySelectorAll(".filter-button")
-    .forEach(function(button){
-
-        button.addEventListener(
-            "click",
-            function(){
-
-                document
-                    .querySelectorAll(
-                        ".filter-button"
-                    )
-                    .forEach(function(btn){
-
-                        btn.classList.remove(
-                            "active"
-                        );
-
-                    });
-
-
-                button.classList.add(
-                    "active"
-                );
-
-
-                currentStatusFilter =
-                    button.dataset.status;
-
-
-                renderAppointments();
-
-            }
-        );
-
-    });
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-searchInput.addEventListener(
-    "input",
-    renderAppointments
-);
-
-
-/* =========================================================
-   DATE FILTER
-========================================================= */
-
-dateFilter.addEventListener(
-    "input",
-    renderAppointments
-);
-
-
-/* =========================================================
-   RENDER APPOINTMENTS
-========================================================= */
-
-function renderAppointments(){
-
-    let filtered =
-        [...appointments];
-
-
-    /*
-       SERVICE
-    */
-
-    if(
-        currentServiceFilter !==
-        "all"
-    ){
-
-        filtered =
-            filtered.filter(
-                a =>
-                a.service ===
-                currentServiceFilter
-            );
-
-    }
-
-
-    /*
-       STATUS
-    */
-
-    if(
-        currentStatusFilter ===
-        "pending"
-    ){
-
-        filtered =
-            filtered.filter(
-                a => !a.confirmed
-            );
-
-    }
-
-
-    if(
-        currentStatusFilter ===
-        "confirmed"
-    ){
-
-        filtered =
-            filtered.filter(
-                a => a.confirmed
-            );
-
-    }
-
-
-    /*
-       SEARCH
-    */
-
-    const search =
-        searchInput.value
-            .trim()
-            .toLowerCase();
-
-
-    if(search){
-
-        filtered =
-            filtered.filter(
-                a =>
-
-                String(
-                    a.name || ""
-                )
-                .toLowerCase()
-                .includes(search)
-
-                ||
-
-                String(
-                    a.phone || ""
-                )
-                .toLowerCase()
-                .includes(search)
-
-            );
-
-    }
-
-
-    /*
-       DATE
-    */
-
-    const dateSearch =
-        dateFilter.value
-            .trim();
-
-
-    if(dateSearch){
-
-        filtered =
-            filtered.filter(
-                a =>
-                String(
-                    a.date || ""
-                ).includes(
-                    dateSearch
-                )
-            );
-
-    }
-
-
-    if(filtered.length === 0){
-
-        appointmentsContainer.innerHTML = `
-
-            <div class="empty-state">
-
-                <strong>
-                    رزروی پیدا نشد
-                </strong>
-
-                رزرو متناسب با فیلترهای انتخاب‌شده وجود ندارد.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    /*
-       GROUP BY DATE
-    */
-
-    const groups = {};
-
-
-    filtered.forEach(function(item){
-
-        const date =
-            item.date || "بدون تاریخ";
-
-
-        if(!groups[date]){
-
-            groups[date] = [];
-
-        }
-
-
-        groups[date].push(item);
-
-    });
-
-
-    let html = "";
-
-
-    Object.keys(groups)
-        .forEach(function(date){
-
-            html += `
-
-                <section class="date-group">
-
-                    <div class="date-title">
-
-                        <span>
-                            ${escapeHtml(
-                                formatDate(date)
-                            )}
-                        </span>
-
-                        <div class="date-line"></div>
-
-                    </div>
-
-            `;
-
-
-            groups[date].forEach(
-                function(item){
-
-                    html +=
-                        createAppointmentCard(
-                            item
-                        );
-
-                }
-            );
-
-
-            html += `
-                </section>
-            `;
-
-        });
-
-
-    appointmentsContainer.innerHTML =
-        html;
-
-
-    attachCardEvents();
-
-}
-
-
-/* =========================================================
-   APPOINTMENT CARD
-========================================================= */
-
-function createAppointmentCard(item){
-
-    const isNew =
-        !item.confirmed;
-
-
-    const service =
-        serviceNames[item.service]
-        ||
-        item.service
-        ||
-        "نامشخص";
-
-
-    const timeText =
-        item.time === "morning"
-            ? "صبح"
-            : item.time === "afternoon"
-                ? "عصر"
-                : item.time || "—";
-
-
-    const confirmedHtml =
-        item.confirmed &&
-        item.confirmed_time
-        ?
-
-        `
-
-            <div class="confirmed-box">
-
-                <div class="confirmed-title">
-                    نوبت تأیید شده
-                </div>
-
-                <div class="confirmed-time">
-                    ${escapeHtml(
-                        item.confirmed_time
-                    )}
-                </div>
-
-            </div>
-
-        `
-
-        :
-
-        "";
-
-
-    return `
-
-        <article
-            class="appointment-card ${isNew ? "is-new" : ""}"
-            data-id="${escapeHtml(
-                String(item.id)
-            )}"
-        >
-
-            ${
-                isNew
-                ?
-                `
-                    <div class="new-label">
-                        رزرو جدید
-                    </div>
-                `
-                :
-                ""
-            }
-
-
-            <div class="card-top">
-
-                <div>
-
-                    <div class="customer-name">
-                        ${escapeHtml(
-                            item.name || "بدون نام"
-                        )}
-                    </div>
-
-                    <div class="customer-phone">
-                        ${escapeHtml(
-                            item.phone || "بدون شماره"
-                        )}
-                    </div>
-
-                    <span class="service-name">
-                        ${escapeHtml(service)}
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="card-info">
-
-                <div class="info-item">
-
-                    <span class="info-label">
-                        تاریخ
-                    </span>
-
-                    <span class="info-value">
-                        ${escapeHtml(
-                            formatDate(item.date)
-                        )}
-                    </span>
-
-                </div>
-
-
-                <div class="info-item">
-
-                    <span class="info-label">
-                        بازه پیشنهادی
-                    </span>
-
-                    <span class="info-value">
-                        ${escapeHtml(timeText)}
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            ${confirmedHtml}
-
-
-            ${
-                item.description
-                ?
-
-                `
-
-                    <div class="description">
-
-                        <strong>
-                            توضیحات:
-                        </strong>
-
-                        <br>
-
-                        ${escapeHtml(
-                            item.description
-                        )}
-
-                    </div>
-
-                `
-
-                :
-
-                ""
-            }
-
-
-            <div class="card-actions">
-
-                <button
-                    class="action-button call-button"
-                    data-action="call"
-                    data-id="${escapeHtml(
-                        String(item.id)
-                    )}"
-                >
-                    تماس با مشتری
-                </button>
-
-
-                <button
-                    class="action-button confirm-button"
-                    data-action="confirm"
-                    data-id="${escapeHtml(
-                        String(item.id)
-                    )}"
-                >
-                    ${
-                        item.confirmed
-                        ?
-                        "ویرایش ساعت"
-                        :
-                        "تأیید نوبت"
-                    }
-                </button>
-
-
-                <button
-                    class="action-button delete-button"
-                    data-action="delete"
-                    data-id="${escapeHtml(
-                        String(item.id)
-                    )}"
-                >
-                    حذف نوبت
-                </button>
-
-            </div>
-
-        </article>
-
-    `;
-
-}
-
-
-/* =========================================================
-   CARD EVENTS
-========================================================= */
-
-function attachCardEvents(){
-
-    document
-        .querySelectorAll(
-            '[data-action="call"]'
-        )
-        .forEach(function(button){
-
-            button.addEventListener(
-                "click",
-                function(){
-
-                    const item =
-                        findAppointment(
-                            button.dataset.id
-                        );
-
-
-                    if(!item || !item.phone){
-
-                        showToast(
-                            "شماره مشتری موجود نیست."
-                        );
-
-                        return;
-
-                    }
-
-
-                    const phone =
-                        String(
-                            item.phone
-                        ).replace(
-                            /[^0-9+]/g,
-                            ""
-                        );
-
-
-                    window.location.href =
-                        `tel:${phone}`;
-
-                }
-            );
-
-        });
-
-
-    document
-        .querySelectorAll(
-            '[data-action="confirm"]'
-        )
-        .forEach(function(button){
-
-            button.addEventListener(
-                "click",
-                function(){
-
-                    openConfirmModal(
-                        button.dataset.id
-                    );
-
-                }
-            );
-
-        });
-
-
-    document
-        .querySelectorAll(
-            '[data-action="delete"]'
-        )
-        .forEach(function(button){
-
-            button.addEventListener(
-                "click",
-                function(){
-
-                    openDeleteModal(
-                        button.dataset.id
-                    );
-
-                }
-            );
-
-        });
-
-}
-
-
-/* =========================================================
-   FIND APPOINTMENT
-========================================================= */
-
-function findAppointment(id){
-
-    return appointments.find(
-        a =>
-        String(a.id) ===
-        String(id)
-    );
-
-}
-
-
-/* =========================================================
-   TIME WHEEL
-========================================================= */
-
-function buildTimeWheels(){
-
-    hourWheel.innerHTML = "";
-
-    minuteWheel.innerHTML = "";
-
-
-    for(
-        let hour = 8;
-        hour <= 20;
-        hour++
-    ){
-
-        const value =
-            String(hour).padStart(
-                2,
-                "0"
-            );
-
-
-        const option =
-            document.createElement(
-                "div"
-            );
-
-
-        option.className =
-            "time-option";
-
-
-        option.dataset.value =
-            value;
-
-
-        option.textContent =
-            value;
-
-
-        hourWheel.appendChild(
-            option
-        );
-
-    }
-
-
-    ["00","30"].forEach(
-        function(minute){
-
-            const option =
-                document.createElement(
-                    "div"
-                );
-
-
-            option.className =
-                "time-option";
-
-
-            option.dataset.value =
-                minute;
-
-
-            option.textContent =
-                minute;
-
-
-            minuteWheel.appendChild(
-                option
-            );
-
-        }
-    );
-
-
-    setupWheel(
-        hourWheel,
-        "hour"
-    );
-
-
-    setupWheel(
-        minuteWheel,
-        "minute"
-    );
-
-}
-
-
-function setupWheel(
-    wheel,
-    type
-){
-
-    wheel.addEventListener(
-        "scroll",
-        function(){
-
-            updateWheelSelection(
-                wheel
-            );
-
-            updateSelectedTime();
-
-        }
-    );
-
-
-    wheel.addEventListener(
+    .getElementById(
+        "timeModal"
+    )
+    .addEventListener(
         "click",
         function(e){
 
-            const option =
-                e.target.closest(
-                    ".time-option"
-                );
+            if(
+                e.target ===
+                this
+            ){
 
-
-            if(!option){
-
-                return;
+                closeTimeModal();
 
             }
 
-
-            const target =
-                option.offsetTop -
-                52;
-
-
-            wheel.scrollTo({
-
-                top:target,
-
-                behavior:"smooth"
-
-            });
-
         }
     );
 
 
-    let scrollTimer;
-
-
-    wheel.addEventListener(
-        "scroll",
-        function(){
-
-            clearTimeout(
-                scrollTimer
-            );
-
-
-            scrollTimer =
-                setTimeout(
-                    function(){
-
-                        snapWheel(
-                            wheel
-                        );
-
-                    },
-                    100
-                );
-
-        }
-    );
-
-}
-
-
-function snapWheel(wheel){
-
-    const center =
-        wheel.scrollTop + 77;
-
-
-    let closest = null;
-
-    let distance = Infinity;
-
-
-    wheel
-        .querySelectorAll(
-            ".time-option"
-        )
-        .forEach(function(option){
-
-            const optionCenter =
-                option.offsetTop +
-                option.offsetHeight / 2;
-
-
-            const d =
-                Math.abs(
-                    optionCenter -
-                    center
-                );
-
-
-            if(d < distance){
-
-                distance = d;
-
-                closest = option;
-
-            }
-
-        });
-
-
-    if(closest){
-
-        const target =
-            closest.offsetTop -
-            52;
-
-
-        wheel.scrollTo({
-
-            top:target,
-
-            behavior:"smooth"
-
-        });
-
-    }
-
-}
-
-
-function updateWheelSelection(
-    wheel
-){
-
-    const center =
-        wheel.scrollTop + 77;
-
-
-    let closest = null;
-
-    let distance = Infinity;
-
-
-    wheel
-        .querySelectorAll(
-            ".time-option"
-        )
-        .forEach(function(option){
-
-            const optionCenter =
-                option.offsetTop +
-                option.offsetHeight / 2;
-
-
-            const d =
-                Math.abs(
-                    optionCenter -
-                    center
-                );
-
-
-            option.classList.remove(
-                "selected"
-            );
-
-
-            if(d < distance){
-
-                distance = d;
-
-                closest = option;
-
-            }
-
-        });
-
-
-    if(closest){
-
-        closest.classList.add(
-            "selected"
-        );
-
-    }
-
-}
-
-
-function getCenterValue(wheel){
-
-    const center =
-        wheel.scrollTop + 77;
-
-
-    let closest = null;
-
-    let distance = Infinity;
-
-
-    wheel
-        .querySelectorAll(
-            ".time-option"
-        )
-        .forEach(function(option){
-
-            const optionCenter =
-                option.offsetTop +
-                option.offsetHeight / 2;
-
-
-            const d =
-                Math.abs(
-                    optionCenter -
-                    center
-                );
-
-
-            if(d < distance){
-
-                distance = d;
-
-                closest = option;
-
-            }
-
-        });
-
-
-    return closest
-        ? closest.dataset.value
-        : null;
-
-}
-
-
-function updateSelectedTime(){
-
-    const hour =
-        getCenterValue(
-            hourWheel
-        );
-
-
-    const minute =
-        getCenterValue(
-            minuteWheel
-        );
-
-
-    if(hour){
-
-        selectedHour =
-            hour;
-
-    }
-
-
-    if(minute){
-
-        selectedMinute =
-            minute;
-
-    }
-
-
-    selectedTimePreview.textContent =
-        `${selectedHour}:${selectedMinute}`;
-
-}
-
-
-function initializeTimePicker(
-currentTime
-){
-
-    let hour =
-        "09";
-
-    let minute =
-        "00";
-
-
-    if(currentTime){
-
-        const parts =
-            String(
-                currentTime
-            ).split(":");
-
-
-        if(parts.length === 2){
-
-            hour =
-                parts[0];
-
-            minute =
-                parts[1];
-
-        }
-
-    }
-
-
-    /*
-       اگر دقیقه غیر از 00/30 بود،
-       نزدیک‌ترین مقدار را انتخاب می‌کنیم.
-    */
-
-    if(
-        minute !== "00" &&
-        minute !== "30"
-    ){
-
-        const numeric =
-            parseInt(
-                minute,
-                10
-            );
-
-
-        minute =
-            numeric < 15
-                ? "00"
-                : numeric < 45
-                    ? "30"
-                    : "00";
-
-
-        if(
-            numeric >= 45
-        ){
-
-            let h =
-                parseInt(
-                    hour,
-                    10
-                );
-
-
-            h += 1;
-
-
-            hour =
-                String(h).padStart(
-                    2,
-                    "0"
-                );
-
-        }
-
-    }
-
-
-    selectedHour =
-        hour;
-
-
-    selectedMinute =
-        minute;
-
-
-    const hourOption =
-        hourWheel.querySelector(
-            `[data-value="${hour}"]`
-        );
-
-
-    const minuteOption =
-        minuteWheel.querySelector(
-            `[data-value="${minute}"]`
-        );
-
-
-    if(hourOption){
-
-        hourWheel.scrollTop =
-            hourOption.offsetTop -
-            52;
-
-    }
-
-
-    if(minuteOption){
-
-        minuteWheel.scrollTop =
-            minuteOption.offsetTop -
-            52;
-
-    }
-
-
-    updateWheelSelection(
-        hourWheel
-    );
-
-
-    updateWheelSelection(
-        minuteWheel
-    );
-
-
-    updateSelectedTime();
-
-}
-
-
-/* =========================================================
-   OPEN CONFIRM MODAL
-========================================================= */
-
-function openConfirmModal(id){
-
-    const item =
-        findAppointment(id);
-
-
-    if(!item){
-
-        return;
-
-    }
-
-
-    selectedAppointment =
-        item;
-
-
-    if(item.confirmed){
-
-        confirmModalTitle.textContent =
-            "ویرایش ساعت نوبت";
-
-        modalConfirm.textContent =
-            "ذخیره ساعت جدید";
-
-    }else{
-
-        confirmModalTitle.textContent =
-            "تأیید نوبت";
-
-        modalConfirm.textContent =
-            "تأیید نوبت";
-
-    }
-
-
-    initializeTimePicker(
-        item.confirmed_time
-    );
-
-
-    confirmModal.classList.add(
-        "show"
-    );
-
-}
-
-
-/* =========================================================
-   CLOSE CONFIRM
-========================================================= */
-
-document
-    .getElementById("confirmCancel")
-    .addEventListener(
-        "click",
-        function(){
-
-            confirmModal.classList.remove(
-                "show"
-            );
-
-        }
-    );
-
-
-confirmModal.addEventListener(
-    "click",
-    function(e){
-
-        if(
-            e.target ===
-            confirmModal
-        ){
-
-            confirmModal.classList.remove(
-                "show"
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   SAVE CONFIRM TIME
-========================================================= */
-
-modalConfirm.addEventListener(
-    "click",
-    async function(){
-
-        if(!selectedAppointment){
-
-            return;
-
-        }
-
-
-        updateSelectedTime();
-
-
-        const time =
-            `${selectedHour}:${selectedMinute}`;
-
-
-        modalConfirm.disabled =
-            true;
-
-        modalConfirm.textContent =
-            "در حال ذخیره...";
-
-
-        const {
-            error
-        } =
-        await supabaseClient
-            .from("appointments")
-            .update({
-
-                confirmed:true,
-
-                confirmed_time:time
-
-            })
-            .eq(
-                "id",
-                selectedAppointment.id
-            );
-
-
-        modalConfirm.disabled =
-            false;
-
-
-        if(error){
-
-            console.error(error);
-
-            showToast(
-                "خطا در ذخیره ساعت نوبت"
-            );
-
-            modalConfirm.textContent =
-                selectedAppointment.confirmed
-                    ? "ذخیره ساعت جدید"
-                    : "تأیید نوبت";
-
-            return;
-
-        }
-
-
-        confirmModal.classList.remove(
-            "show"
-        );
-
-
-        showToast(
-            "نوبت با موفقیت تأیید شد"
-        );
-
-
-        selectedAppointment =
-            null;
-
-
-        await loadAppointments();
-
-    }
-);
-
-
-/* =========================================================
-   DELETE MODAL
-========================================================= */
-
-function openDeleteModal(id){
-
-    const item =
-        findAppointment(id);
-
-
-    if(!item){
-
-        return;
-
-    }
-
-
-    selectedDeleteAppointment =
-        item;
-
-
-    deleteModal.classList.add(
-        "show"
-    );
-
-}
-
-
-document
-    .getElementById("deleteCancel")
-    .addEventListener(
-        "click",
-        function(){
-
-            deleteModal.classList.remove(
-                "show"
-            );
-
-        }
-    );
-
-
-deleteModal.addEventListener(
-    "click",
-    function(e){
-
-        if(
-            e.target ===
-            deleteModal
-        ){
-
-            deleteModal.classList.remove(
-                "show"
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   DELETE APPOINTMENT
-========================================================= */
-
-document
-    .getElementById("deleteConfirm")
-    .addEventListener(
-        "click",
-        async function(){
-
-            if(!selectedDeleteAppointment){
-
-                return;
-
-            }
-
-
-            const button =
-                document.getElementById(
-                    "deleteConfirm"
-                );
-
-
-            button.disabled =
-                true;
-
-            button.textContent =
-                "در حال حذف...";
-
-
-            const {
-                error
-            } =
-            await supabaseClient
-                .from("appointments")
-                .delete()
-                .eq(
-                    "id",
-                    selectedDeleteAppointment.id
-                );
-
-
-            button.disabled =
-                false;
-
-            button.textContent =
-                "حذف نوبت";
-
-
-            if(error){
-
-                console.error(error);
-
-                showToast(
-                    "خطا در حذف نوبت"
-                );
-
-                return;
-
-            }
-
-
-            deleteModal.classList.remove(
-                "show"
-            );
-
-
-            selectedDeleteAppointment =
-                null;
-
-
-            showToast(
-                "نوبت حذف شد"
-            );
-
-
-            await loadAppointments();
-
-        }
-    );
-
-
-/* =========================================================
-   DATE FORMAT
-========================================================= */
-
-function formatDate(date){
-
-    if(!date){
-
-        return "بدون تاریخ";
-
-    }
-
-
-    /*
-       اگر تاریخ از قبل فارسی باشد
-       همان را نمایش می‌دهیم.
-    */
-
-    return toPersianNumber(
-        String(date)
-    );
-
-}
-
-
-/* =========================================================
-   PERSIAN NUMBERS
-========================================================= */
-
-function toPersianNumber(value){
-
-    return String(value)
-        .replace(
-            /0/g,
-            "۰"
-        )
-        .replace(
-            /1/g,
-            "۱"
-        )
-        .replace(
-            /2/g,
-            "۲"
-        )
-        .replace(
-            /3/g,
-            "۳"
-        )
-        .replace(
-            /4/g,
-            "۴"
-        )
-        .replace(
-            /5/g,
-            "۵"
-        )
-        .replace(
-            /6/g,
-            "۶"
-        )
-        .replace(
-            /7/g,
-            "۷"
-        )
-        .replace(
-            /8/g,
-            "۸"
-        )
-        .replace(
-            /9/g,
-            "۹"
-        );
-
-}
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHtml(value){
-
-    return String(
-        value ?? ""
-    )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
-    );
-
-}
-
-
-/* =========================================================
-   NOTIFICATION PERMISSION
-========================================================= */
-
-function requestNotificationPermission(){
-
-    try{
-
-        if(
-            "Notification" in window &&
-            Notification.permission ===
-            "default"
-        ){
-
-            Notification.requestPermission();
-
-        }
-
-    }catch(e){}
-
-}
-
-
-/* =========================================================
-   INIT
-========================================================= */
-
-buildTimeWheels();
-
-checkSession();
+/* =========================
+   START
+========================= */
+
+init();
 
 </script>
 
